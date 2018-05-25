@@ -1,0 +1,635 @@
+[
+	{
+		"NAME": "Jaipur",
+		"CODE": "JAIPUR"
+	},
+	{
+		"NAME": "Kota",
+		"CODE": "KOTA"
+	},
+	{
+		"NAME": "Tonk",
+		"CODE": "TONK"
+	},
+	{
+		"NAME": "Beawar",
+		"CODE": "BEAWAR"},
+	{
+		"NAME": "Kishanwarh",
+		"CODE": "KISHANGARH"
+	},
+	{
+		"NAME": "Kekri",
+		"CODE": "KEKRI"
+	},
+	{
+		"NAME": "Pushkar",
+		"CODE": "PUSHKAR"
+	},
+	{
+		"NAME": "Sarwar",
+		"CODE": "SARWAR"
+	},
+	{
+		"NAME": "Vijaynagar",
+		"CODE": "VIJAYNAGAR "
+	},
+	{
+		"NAME": "Bhilwara",
+		"CODE": "BHILWARA "
+	},
+	{
+		"NAME": "Gulabpura",
+		"CODE": "GULABPURA "
+	},
+	{
+		"NAME": "Jahazpur",
+		"CODE": "JAHAZPUR"
+	},
+	{
+		"NAME": "Gangapur",
+		"CODE": "GANGAPUR"
+	},
+	{
+		"NAME": "Mandalgarh",
+		"CODE": "MANDALGARH"
+	},
+	{
+		"NAME": "Aasind",
+		"CODE": "AASIND"
+	},
+	{
+		"NAME": "Nagaur",
+		"CODE": "NAGAUR"
+	},
+	{
+		"NAME": "Makrana",
+		"CODE": "MAKRANA"
+	},
+	{
+		"NAME": "Mertacity",
+		"CODE": "MERTACITY"
+	},
+	{
+		"NAME": "Didwana",
+		"CODE": "DIDWANA"
+	},
+	{
+		"NAME": "Kuchamancity",
+		"CODE": "KUCHAMANCITY"
+	},
+	{
+		"NAME": "Parbatsar",
+		"CODE": "PARBATSAR"
+	},
+	{
+		"NAME": "Kuchera",
+		"CODE": "KUCHERA"
+	},
+	{
+		"NAME": "Nawa",
+		"CODE": "NAWA"
+	},
+	{
+		"NAME": "Mundwa",
+		"CODE": "MUNDWA"
+	},
+	{
+		"NAME": "Degana",
+		"CODE": "DEGANA"
+	},
+	{
+		"NAME": "Tonk",
+		"CODE": "TONK"
+	},
+	{
+		"NAME": "Deoli",
+		"CODE": "DEOLI"
+	},
+	{
+		"NAME": "Niwai",
+		"CODE": "NIWAI"
+	},
+	{
+		"NAME": "Malpura",
+		"CODE": "MALPURA"
+	},
+	{
+		"NAME": "Todaraisingh",
+		"CODE": "TODARAISINGH"
+	},
+	{
+		"NAME": "Uniara",
+		"CODE": "UNIARA"
+	},
+	{
+		"NAME": "Shahpurabhilwara",
+		"CODE": "SHAHPURABHILWARA"
+	},
+	{
+		"NAME": "Ladnu",
+		"CODE": "LADNU"
+	},
+	{
+		"NAME": "Malpura",
+		"CODE": "MALPURA"
+	},
+	{
+		"NAME": "Bharatpur",
+		"CODE": "BHARATPUR"
+	},
+	{
+		"NAME": "Bayana",
+		"CODE": "BAYANA"
+	},
+	{
+		"NAME": "Deeg",
+		"CODE": "DEEG"
+	},
+	{
+		"NAME": "Kanma",
+		"CODE": "KANMA"
+	},
+	{
+		"NAME": "Nadbai",
+		"CODE": "NADBAI"
+	},
+	{
+		"NAME": "Kanma",
+		"CODE": "KANMA"
+	},
+	{
+		"NAME": "Weir",
+		"CODE": "WEIR"
+	},
+	{
+		"NAME": "Kanma",
+		"CODE": "KANMA"
+	},
+	{
+		"NAME": "Kumher",
+		"CODE": "KUMHER"
+	},
+	{
+		"NAME": "Bhusawar",
+		"CODE": "BHUSAWAR"
+	},
+	{
+		"NAME": "Nagar",
+		"CODE": "NAGAR"
+	},
+	{
+		"NAME": "Bari",
+		"CODE": "BARI"
+	},
+	{
+		"NAME": "Rajakheda",
+		"CODE": "RAJAKHEDA"
+	},
+	{
+		"NAME": "Karauli",
+		"CODE": "KARAULI"
+	},
+	{
+		"NAME": "Hindauncity",
+		"CODE": "HINDAUNCITY"
+	},
+	{
+		"NAME": "Todabhima",
+		"CODE": "TODABHIMA"
+	},
+	{
+		"NAME": "Sawaimadhopur",
+		"CODE": "SAWAIMADHOPUR"
+	},
+	{
+		"NAME": "Gangapurcity",
+		"CODE": "GANGAPURCITY"
+	},
+	{
+		"NAME": "Dhaulpur",
+		"CODE": "DHAULPUR"
+	},
+	{
+		"NAME": "Udaipur",
+		"CODE": "UDAIPUR"
+	},
+
+	{
+		"NAME": "Fatehnagar",
+		"CODE": "FATEHNAGAR"
+	},
+	{
+		"NAME": "Salumber",
+		"CODE": "SALUMBER"
+	},
+	{
+		"NAME": "Bhinder",
+		"CODE": "BHINDER"
+	},
+	{
+		"NAME": "Kanod",
+		"CODE": "KANOD"
+	},
+	{
+		"NAME": "Banswara",
+		"CODE": "BANSWARA"
+	},
+	{
+		"NAME": "Nimbahera",
+		"CODE": "NIMBAHERA"
+	},
+	{
+		"NAME": "Badisadri",
+		"CODE": "BADISADRI"
+	},
+	{
+		"NAME": "Kapasan",
+		"CODE": "KAPASAN"
+	}, 
+    {
+		"NAME": "Begun",
+		"CODE": "BEGUN"
+	},
+	{
+		"NAME": "Rawatbhata",
+		"CODE": "RAWATBHATA"
+	},
+	{
+		"NAME": "Dungarpur",
+		"CODE": "DUNGARPUR"
+	},
+	{
+		"NAME": "Sagwara",
+		"CODE": "SAGWARA"
+	},
+    {
+		"NAME": "Rajasamand",
+		"CODE": "RAJASAMAND"
+	},
+	{
+		"NAME": "Aamet",
+		"CODE": "AAMET"
+	},
+	{
+		"NAME": "Nathdwara",
+		"CODE": "NATHDWARA"
+	},
+	{
+		"NAME": "Deograh",
+		"CODE": "DEOGARH"
+	},
+	{
+		"NAME": "Pratagarh",
+		"CODE": "PRATAPGARH"
+	},
+	{
+		"NAME": "Chotisadri",
+		"CODE": "CHOTI SADRI"
+	},
+	{
+		"NAME": "Chittorgarh",
+		"CODE": "CHITTORGRH"
+	},
+	{
+		"NAME": "Kshulgarh",
+		"CODE": "KSHULGARH"
+	},
+	{
+		"NAME": "Chomu",
+		"CODE": "CHOMU"
+	},
+	{
+		"NAME": "Sambhar",
+		"CODE": "SAMBHAR"
+	},
+	{
+		"NAME": "CHaksu",
+		"CODE": "CHAKSU"
+	},
+	{
+		"NAME": "Kothputli",
+		"CODE": "KOTHPUTALI"
+	},
+	{
+		"NAME": "Jobner",
+		"CODE": "JOBNER"
+	},
+	{
+		"NAME": "Phulera",
+		"CODE": "PHULERA"
+	},
+	{
+		"NAME": "Viratnagar",
+		"CODE": "VIRATNAGAR"
+	},
+	{
+		"NAME": "Shahpurajaipur",
+		"CODE": "SHAHPURAJAIPUR"
+	},
+	{
+		"NAME": "Kishangarhrenwal",
+		"CODE": "KISHANGARHRENWAL"
+	},
+	{
+		"NAME": "Bagru",
+		"CODE": "BAGRU"
+	},
+	{
+		"NAME": "Alwar",
+		"CODE": "ALWAR"
+	},
+	{
+		"NAME": "Bhiwadi",
+		"CODE": "BHIWADI"
+	},
+	{
+		"NAME": "Kherthal",
+		"CODE": "KHERTHAL"
+	},
+	{
+		"NAME": "Kherli",
+		"CODE": "KHERLI"
+	},
+	{
+		"NAME": "Rajagarh",
+		"CODE": "RAJAGARH"
+	},{
+		"NAME": "Tijara",
+		"CODE": "TIJARA"
+	},
+	{
+		"NAME": "Behror",
+		"CODE": "BEHROR"
+	},{
+		"NAME": "Kishangarhbas",
+		"CODE": "KISHANGARHBAS"
+	},
+	{
+		"NAME": "Dausa",
+		"CODE": "DAUSA"
+	},{
+		"NAME": "Bandikui",
+		"CODE": "BANDIKUI"
+	},
+	{
+		"NAME": "Lalsot",
+		"CODE": "LALSOT"
+	},{
+		"NAME": "Jhunjhunu",
+		"CODE": "JHUNJHUNU"
+	},
+	{
+		"NAME": "Nawalgarh",
+		"CODE": "NAVALGARH"
+	},
+	{
+		"NAME": "Chirawa",
+		"CODE": "CHIRAWA"
+	},
+	{
+		"NAME": "Bissau",
+		"CODE": "BISSAU"
+	},
+	{
+		"NAME": "Baggar",
+		"CODE": "BAGGAR"
+	},
+	{
+		"NAME": "Khetri",
+		"CODE": "KHETRI"
+	},
+	{
+		"NAME": "Mandawa",
+		"CODE": "MANDAWA"
+	},
+	{
+		"NAME": "Mukundgarh",
+		"CODE": "MUKUNDGARH"
+	},
+	{
+		"NAME": "Surajgarh",
+		"CODE": "SURAJGARH"
+	},
+	{
+		"NAME": "Pilani",
+		"CODE": "PILANI"
+	},
+	{
+		"NAME": "Udaipurvati",
+		"CODE": "UDAIPURVATI"
+	},
+	{
+		"NAME": "Vidhyavihar",
+		"CODE": "VIDHYAVIHAR"
+	},
+	{
+		"NAME": "Sikar",
+		"CODE": "SIKAR"
+	},
+	{
+		"NAME": "Fatehpur",
+		"CODE": "FATEHPUR"
+	},
+	{
+		"NAME": "laxmangarh",
+		"CODE": "LAXMANGARH"
+	},
+	{
+		"NAME": "ramgarhshekhawati",
+		"CODE": "RAMGARHSHEKHAWATI"
+	},
+
+{
+		"NAME": "Shrimadhopur",
+		"CODE": "Shrimadhopur"
+	},
+	{
+		"NAME": "Khandela",
+		"CODE": "KHANDELA"
+	},
+	{
+		"NAME": "Neemkthana",
+		"CODE": "NEEMKATHANA"
+	},
+	{
+		"NAME": "Ringus",
+		"CODE": "RINGUS"
+	},
+	{
+		"NAME": "Losal",
+		"CODE": "LOSAL"
+	},
+	{
+		"NAME": "Kota",
+		"CODE": "Kota"
+	},
+	{
+		"NAME": "Ramanjmandi",
+		"CODE": "RAMGANJMANDI"
+	},
+	{
+		"NAME": "Kaithoon",
+		"CODE": "KAITHOON"
+	},
+	{
+		"NAME": "Sangod",
+		"CODE": "SANGOD"
+	},
+	{
+		"NAME": "Itawa",
+		"CODE": "ITAWA"
+	},
+	{
+		"NAME": "Baran",
+		"CODE": "BARAN"
+	},
+	{
+		"NAME": "Anta",
+		"CODE": "ANTA"
+	},
+	{
+		"NAME": "Chhabra",
+		"CODE": "CHHABRA"
+	},
+	{
+		"NAME": "Lakheri",
+		"CODE": "LAKHERI"
+	},
+	{
+		"NAME": "Mangrol",
+		"CODE": "MANGROL"
+	},
+	{
+		"NAME": "patan",
+		"CODE": "PATAN"
+	},
+	{
+		"NAME": "Bundi",
+		"CODE": "BUNDI"
+	},
+	{
+		"NAME": "Kapren",
+		"CODE": "KAPREN"
+	},
+	{
+		"NAME": "Indragarh",
+		"CODE": "INDRAGARH"
+	},
+	{
+		"NAME": "Bhawanimandi",
+		"CODE": "BHAWANIMANDI"
+	},
+	{
+		"NAME": "Jhalarapatan",
+		"CODE": "JHALARAPATAN"
+	},
+	{
+		"NAME": "Pidava",
+		"CODE": "PIDAVA"
+	},
+	{
+		"NAME": "Aklera",
+		"CODE": "AKLERA"
+	},
+	{
+		"NAME": "Jhalawar",
+		"CODE": "JHALAWAR"
+	},
+	{
+		"NAME": "Jodhpur",
+		"CODE": "JODHPUR"
+	},
+	{
+		"NAME": "Falaudi",
+		"CODE": "FALAUDI"
+	},
+	{
+		"NAME": "Piparcity",
+		"CODE": "PIPARCITY"
+	},
+	{
+		"NAME": "Bilawara",
+		"CODE": "BILARA"
+	},
+	{
+		"NAME": "Barmer",
+		"CODE": "BARMER"
+	},
+	{
+		"NAME": "Balotra",
+		"CODE": "BALOTRA"
+	},
+	{
+		"NAME": "jaisalmer",
+		"CODE": "JAISALMER"
+	},
+	{
+		"NAME": "pokran",
+		"CODE": "POKARAN"
+	},
+	{
+		"NAME": "Bhinmal",
+		"CODE": "BHINMAL"
+	},
+	{
+		"NAME": "Sanchore",
+		"CODE": "SANCHORE"
+	},
+	{
+		"NAME": "Jalore",
+		"CODE": "JALORE"
+	},
+	{
+		"NAME": "Sumerour",
+		"CODE": "SUMERPUR"
+	},
+	{
+		"NAME": "Sojatcity",
+		"CODE": "SOJATCITY"
+	},
+	{
+		"NAME": "Jaitaran",
+		"CODE": "JAITARAN"
+	},
+	{
+		"NAME": "Bali",
+		"CODE": "BALI"
+	},
+	{
+		"NAME": "Takhatgarh",
+		"CODE": "TAKHATGARH"
+	},
+	{
+		"NAME": "Sadari",
+		"CODE": "SADRI"
+	},
+	{
+		"NAME": "Rani",
+		"CODE": "RANI"
+	},
+	{
+		"NAME": "Abu Road",
+		"CODE": "ABUROAD"
+	},
+	{
+		"NAME": "Shivganj",
+		"CODE": "SHIVGANJ"
+	},
+	{
+		"NAME": "Pindwara",
+		"CODE": "PINDWARA"
+	},
+	{
+		"NAME": "Sirohi",
+		"CODE": "SIROHI"
+	},
+	{
+		"NAME": "Mountabu",
+		"CODE": "MOUNTABU"
+	},
+	{
+		"NAME": "Pali",
+		"CODE": "PALI"
+	}
+]

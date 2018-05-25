@@ -1,0 +1,22 @@
+[
+	{
+		"NAME": "SC",
+		"CODE": "SC"
+	},
+	{
+		"NAME": "ST",
+		"CODE": "ST"
+	},
+	{
+		"NAME": "OBC",
+		"CODE": "OBC"
+	},
+	{
+		"NAME": "Special OBC",
+		"CODE": "SPECIALOBC"
+	},
+	{
+		"NAME": "General",
+		"CODE": "GENERAL"
+	}
+]

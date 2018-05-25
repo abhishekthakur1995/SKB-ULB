@@ -1,0 +1,18 @@
+[
+	{
+		"NAME": "Unmarried",
+		"CODE": "UNMARRIED"
+	},
+	{
+		"NAME": "Married",
+		"CODE": "MARRIED"
+	},
+	{
+		"NAME": "Divorcee",
+		"CODE": "DIVORCEE"
+	},
+	{
+		"NAME": "Widow",
+		"CODE": "WIDOW"
+	}
+]

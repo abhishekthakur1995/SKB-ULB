@@ -1,0 +1,108 @@
+@font-face {
+    font-family: KrutiDev;
+    src: url(../fonts/Kruti_Dev_010.ttf) format("truetype");
+}
+body { 
+	font: 14px sans-serif;
+	background-color: #eff0f3;
+}
+.form-detail {
+	padding-left: 25px;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    text-align: center;
+    margin-top: 20px;
+}
+.full-width {
+	width: 100% !important;
+}
+.no-border-radius { 
+	border-radius: 0px !important 
+}
+.no-margin-bottom { 
+	margin-bottom: 0px !important 
+}
+.text-align-center {
+	text-align: center;
+}
+.clr-white { 
+	color:white; 
+}
+.clr-green { 
+	color:green; 
+}
+.clr-red { 
+	color:red; 
+}
+.login_detail label{
+	width: 60px;
+}
+.hide {
+	visibility: hidden !important;
+}
+.display-none {
+	display: none !important;
+}
+.fs4 {
+	font-size: 20px !important;
+}
+.header-height {
+	height: 80px;
+}
+.header-font-size {
+	font-size: 35px;
+}
+
+.get_candidates_wrapper form {
+	padding: 20px;
+}
+.candidate_detail .form-group, .update_candidate_detail .form-group {
+    padding:20px;
+}
+.candidate_detail .form-group label, .update_candidate_detail .form-group label {
+    width: 101px; 
+    font-size: 16px;
+    margin-right: 10px;
+} 
+.candidate_detail .form-group input, .form-group select {
+    width: 250px !important;
+}
+.update_candidate_detail .form-group input, .form-group select {
+    width: 250px !important;
+}
+
+.margin-bottom-2x{
+	margin-bottom: 10px !important;
+}
+.margin-bottom-4x{
+	margin-bottom: 20px !important;
+}
+.margin-5x {
+	margin: 25px;
+}
+.margin-horiz-2x {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.margin-right-2x {
+	margin-right: 10px;
+}
+.info-header {
+	font-size: 22px;
+}
+.no-width {
+	width: 10px !important;
+}
+.has-error {
+	border-color: red;
+}
+.margin-left-3x{
+	margin-left: 15px;
+}
+.margin-left-6x {
+	margin-left: 30px;
+}
+label.required:after {
+    content:"*" ;
+    color:red   
+}
