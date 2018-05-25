@@ -23,8 +23,6 @@ $name_err = $gender_err = $dob_err = $phone_number_err = $permanent_address_err 
 $result = '';
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-    print_r($_POST);
-
     // Validate name
     $trimName = trim($_POST["name"]);
     if(empty($trimName)) {
