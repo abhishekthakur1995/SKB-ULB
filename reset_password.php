@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-print_r($_SESSION);
-
 require('config.php');
 require('languages/hi/lang.hi.php');
 

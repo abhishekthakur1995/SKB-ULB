@@ -9,7 +9,6 @@ $username_err = $password_err = $confirm_password_err = $region_err = $role_err 
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
     // Validate username
     $trimUserName = trim($_POST["username"]);
     if(empty($trimUserName)) {
@@ -156,6 +155,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>
             <div class="form-group">
+                <label for="role">ROLE</label>
+                    <select class="form-control" name="role">
+                        <?php 
+                            $roleListJson = file_get_contents(__DIR__ . '/data/role_list.json');
+                            $roleListArr = json_decode($roleListJson, true);
+                            foreach($roleListArr as $key => $value) {
+                                echo "<option value=".$value['NAME'].">".$value['NAME']."</option>"; 
+                            }
+                        ?>
+                    </select>
+                <span class="invalid-feedback"><?php echo $region_err; ?></span>
+            </div>
+            <div class="form-group">
                 <label for="region">ULB</label>
                     <select class="form-control <?php echo (!empty($region_err)) ? 'is-invalid' : ''; ?>"" name="region">
                         <?php 
@@ -168,19 +180,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     </select>
                 <span class="invalid-feedback"><?php echo $region_err; ?></span>
             </div>
-            <div class="form-group">
-                <label for="role">ROLE</label>
-                    <select class="form-control" name="role">
-                        <?php 
-                            $roleListJson = file_get_contents(__DIR__ . '/data/role_list.json');
-                            $roleListArr = json_decode($roleListJson, true);
-                            foreach($roleListArr as $key => $value) {
-                                echo "<option value=".$value['NAME'].">".$value['NAME']."</option>"; 
-                            }
-                        ?>
-                    </select>
-                <span class="invalid-feedback"><?php echo $region_err; ?></span>
-            </div> 
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label>Password</label>
                 <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
@@ -200,3 +199,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </div>    
 </body>
 </html>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $("[name='role']").on('change', function() {
+            $this = $(this);
+            if($this.val() == 'SUPERADMIN') {
+                $("[name='region']").attr('disabled', true);
+            } else {
+                $("[name='region']").attr('disabled', false);
+            }
+        });
+    });
+</script>
