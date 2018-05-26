@@ -5,7 +5,7 @@ CREATE TABLE candidate_list (
     permanentAddress VARCHAR(100) NOT NULL,
     temporaryAddress VARCHAR(100) DEFAULT NULL,
     phoneNumber VARCHAR(15) DEFAULT NULL,
-    birthPlace VARCHAR(20) DEFAULT NULL,
+    birthPlace VARCHAR(50) DEFAULT NULL,
     gender VARCHAR(20) NOT NULL,
     district VARCHAR(30) NOT NULL,
     ulbRegion VARCHAR(30) NOT NULL,
