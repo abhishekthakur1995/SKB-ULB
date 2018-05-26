@@ -63,9 +63,9 @@ class Common {
 		'KHANDELA'=>27,
 		'LAXMANGARH'=>24,
 		'JHUNJHUNU'=>166,
-		'PILANI'=>21
-		'VIDHYAVIHAR'=>24
-		'KHETRI'=>33
+		'PILANI'=>21,
+		'VIDHYAVIHAR'=>24,
+		'KHETRI'=>33,
 		'MUKUNDGARH'=>25,
 		'BISSAU'=>18,
 		'NAVALGARH'=>49,
