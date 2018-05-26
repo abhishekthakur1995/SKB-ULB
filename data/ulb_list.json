@@ -13,7 +13,8 @@
 	},
 	{
 		"NAME": "Beawar",
-		"CODE": "BEAWAR"},
+		"CODE": "BEAWAR"
+	},
 	{
 		"NAME": "Kishangarh",
 		"CODE": "KISHANGARH"
@@ -123,7 +124,7 @@
 		"CODE": "UNIARA"
 	},
 	{
-		"NAME": "Shahpurabhilwara",
+		"NAME": "Shahpura-Bhilwara",
 		"CODE": "SHAHPURABHILWARA"
 	},
 	{
@@ -183,7 +184,7 @@
 		"CODE": "HINDAUNCITY"
 	},
 	{
-		"NAME": "Todabhima",
+		"NAME": "Todabhim",
 		"CODE": "TODABHIMA"
 	},
 	{
@@ -202,7 +203,6 @@
 		"NAME": "Udaipur",
 		"CODE": "UDAIPUR"
 	},
-
 	{
 		"NAME": "Fatehnagar",
 		"CODE": "FATEHNAGAR"
@@ -280,7 +280,7 @@
 		"CODE": "CHITTORGRH"
 	},
 	{
-		"NAME": "Kshulgarh",
+		"NAME": "Kushalgarh",
 		"CODE": "KSHULGARH"
 	},
 	{
@@ -312,7 +312,7 @@
 		"CODE": "VIRATNAGAR"
 	},
 	{
-		"NAME": "Shahpurajaipur",
+		"NAME": "Shahpura-Jaipur",
 		"CODE": "SHAHPURAJAIPUR"
 	},
 	{
@@ -369,7 +369,7 @@
 		"CODE": "JHUNJHUNU"
 	},
 	{
-		"NAME": "Nawalgarh",
+		"NAME": "Navalgarh",
 		"CODE": "NAVALGARH"
 	},
 	{
@@ -449,7 +449,7 @@
 		"CODE": "LOSAL"
 	},	
 	{
-		"NAME": "Ramanjmandi",
+		"NAME": "Ramganjmandi",
 		"CODE": "RAMGANJMANDI"
 	},
 	{
@@ -485,7 +485,7 @@
 		"CODE": "MANGROL"
 	},
 	{
-		"NAME": "kpatan",
+		"NAME": "Kpatan",
 		"CODE": "kPATAN"
 	},
 	{
@@ -545,11 +545,11 @@
 		"CODE": "BALOTRA"
 	},
 	{
-		"NAME": "jaisalmer",
+		"NAME": "Jaisalmer",
 		"CODE": "JAISALMER"
 	},
 	{
-		"NAME": "pokran",
+		"NAME": "Pokran",
 		"CODE": "POKARAN"
 	},
 	{
