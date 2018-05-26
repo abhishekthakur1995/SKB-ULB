@@ -146,7 +146,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <div class="form-group">
                 <label class="required"><?php echo $lang['dob']; ?></label>
-                    <input type="date" name="dob" class="form-control <?php echo (!empty($dob_err)) ? 'is-invalid' : ''; ?>" min="1950-01-01" onkeydown="return false"><br>
+                    <input type="text" name="dob" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}" class="form-control <?php echo (!empty($dob_err)) ? 'is-invalid' : ''; ?>" placeholder="dd/mm/yyyy" required><br>
                 <span class="invalid-feedback text-align-center"><?php echo $dob_err; ?></span>
             </div>
             <div class="form-group">
