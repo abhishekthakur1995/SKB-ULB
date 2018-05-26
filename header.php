@@ -19,7 +19,10 @@
 <body>
 
 <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color header-height">
-    <a class="navbar-brand header-font-size" href="#"><?php echo $lang['header_title']; ?></a>
+    <a class="navbar-brand header-font-size" href="#">
+        <span><?php echo $lang['company']; ?></span>
+        <span class="full-width fs4 fleft"><?php echo $lang['header_title']; ?></span>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

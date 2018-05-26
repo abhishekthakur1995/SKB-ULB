@@ -59,6 +59,7 @@
     $lang['Buddhism'] = 'बुद्ध';
 
     //header content
+    $lang['company'] = 'स्वायत्त शासन विभाग';
     $lang['header_title'] = 'सफाई कर्मचारी भर्ती 2018';
     $lang['sign_up'] = 'साइन अप करें';
     $lang['dashboard'] = 'डैशबोर्ड';
