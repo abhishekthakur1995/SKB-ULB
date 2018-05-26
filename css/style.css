@@ -80,6 +80,9 @@ body {
 .margin-bottom-4x{
 	margin-bottom: 20px !important;
 }
+.margin-2x {
+	margin: 10px;
+}
 .margin-5x {
 	margin: 25px;
 }

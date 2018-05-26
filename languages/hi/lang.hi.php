@@ -30,6 +30,7 @@
     $lang['receipt_number'] = 'आवेदक प्राप्ति क्रमांक';
     $lang['yes'] = 'हां';
     $lang['no'] = 'ना';
+    $lang['data_saved'] = 'डेटा सफलतापूर्वक दर्ज किया गया';
 
 
     //maritial_status

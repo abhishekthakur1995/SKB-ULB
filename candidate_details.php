@@ -17,18 +17,24 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 
 // Define variables and initialize with empty values
 $name = $gender = $dob = $category = $phoneNumber = $guardian = $permanentAddress = $temporaryAddress = $birthPlace = $district = $remark = $receiptNumber = $userFormValid = "";
-$name_err = $gender_err = $dob_err = $phone_number_err = $permanent_address_err = "";
+$name_err = $gender_err = $dob_err = $phone_number_err = $permanent_address_err = $guardian_err = "";
 
 // Processing form data when form is submitted
-$result = '';
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-
     // Validate name
     $trimName = trim($_POST["name"]);
     if(empty($trimName)) {
         $name_err = "Please enter a name.";
     } else {
         $name = trim($_POST['name']);
+    }
+
+    // Validate name
+    $trimGuardianName = trim($_POST["guardian"]);
+    if(empty($trimGuardianName)) {
+        $guardian_err = "Please enter a guardian name.";
+    } else {
+        $guardian = $trimGuardianName;
     }
 
     // Validate gender
@@ -51,7 +57,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $maritialStatus = trim($_POST['maritialStatus']);
     $ulbRegion = trim($_SESSION['ulb_region']);
     $phoneNumber = isset($_POST['phoneNumber']) ? trim($_POST['phoneNumber']) : '';
-    $guardian = trim($_POST['guardian']);
     $permanentAddress = trim($_POST['permanentAddress']);
     $temporaryAddress = isset($_POST['temporaryAddress']) ? trim($_POST['temporaryAddress']) : '';
     $birthPlace = trim($_POST['birthPlace']);
@@ -62,7 +67,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $remark = isset($_POST['remark']) ? trim($_POST['remark']) : '';
 
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($dob_err)) {
+    if(empty($name_err) && empty($dob_err) && empty($guardian_err)) {
         
         // Prepare an insert statement
         $sql = "INSERT INTO candidate_list (name, gender, dob, category, maritialStatus, ulbRegion, phoneNumber, guardian, birthPlace, religion, permanentAddress, temporaryAddress , district, userFormValid, receiptNumber, remark) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -92,9 +97,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
-                $result='<div class="alert alert-success">SUCCESS</div>';
+                header('Location: '.$_SERVER['REQUEST_URI']);
             } else {
-                $result='<div class="alert alert-danger">'.mysqli_error($link).'</div>';
+                print_r(mysqli_error($link));
             }
         }
          
@@ -121,7 +126,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <h2><?php echo $lang['enter_candidate_details']?></h2>
             <p><?php echo $lang['detail_header']?></p>
         </div>
-        <?php echo $result; ?>
+        <!-- <?php //if(isset($_SESSION['msg']) && !empty($_SESSION['msg'])) { ?>
+            <div class="alert alert-success"><?php //echo $_SESSION['msg']; ?></div>
+        <?php //} ?> -->
         <form class="form-inline candidate_detail" role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" style="margin-top: 10px;" method="post">
 
             <div class="alert alert-info full-width margin-horiz-2x info-header">
@@ -138,7 +145,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="text" name="guardian" class="form-control" value="<?php echo $guardian; ?>" required>
             </div>
             <div class="form-group">
-                <label><?php echo $lang['dob']; ?></label>
+                <label class="required"><?php echo $lang['dob']; ?></label>
                     <input type="date" name="dob" class="form-control <?php echo (!empty($dob_err)) ? 'is-invalid' : ''; ?>" min="1950-01-01" onkeydown="return false"><br>
                 <span class="invalid-feedback text-align-center"><?php echo $dob_err; ?></span>
             </div>
@@ -244,7 +251,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             <div class="form-group full-width">
                 <label class="required" style="width: 148px;"><?php echo $lang['receipt_number']; ?></label>
-                <input type="number" name="receiptNumber" class="form-control" value="<?php echo $receiptNumber; ?>" required>
+                <input type="number" name="receiptNumber" class="form-control" required>
             </div>
 
             <div class="form-group full-width margin-left-3x">
@@ -259,11 +266,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <script type="text/javascript">
 $('document').ready(function() {
 
-    $('.save').on('click', function() {
-        if($('.alert-success').is(":visible")) {
-            
-        }
-    });
+    // $('.save').on('click', function() {
+    //     if($('.alert-success').is(":visible")) {
+    //         alert('hi');
+    //         window.location.href = '';
+    //     }
+    // });
 
     $('[name="userFormValid"]').on('change', function() {
         if($("input[name='userFormValid']:checked").val() == '1') {
