@@ -15,7 +15,7 @@
 		"NAME": "Beawar",
 		"CODE": "BEAWAR"},
 	{
-		"NAME": "Kishangarh",
+		"NAME": "Kishanwarh",
 		"CODE": "KISHANGARH"
 	},
 	{
@@ -131,6 +131,10 @@
 		"CODE": "LADNU"
 	},
 	{
+		"NAME": "Malpura",
+		"CODE": "MALPURA"
+	},
+	{
 		"NAME": "Bharatpur",
 		"CODE": "BHARATPUR"
 	},
@@ -151,8 +155,16 @@
 		"CODE": "NADBAI"
 	},
 	{
+		"NAME": "Kanma",
+		"CODE": "KANMA"
+	},
+	{
 		"NAME": "Weir",
 		"CODE": "WEIR"
+	},
+	{
+		"NAME": "Kanma",
+		"CODE": "KANMA"
 	},
 	{
 		"NAME": "Kumher",
@@ -273,7 +285,7 @@
 	},
 	{
 		"NAME": "Chotisadri",
-		"CODE": "CHOTISADRI"
+		"CODE": "CHOTI SADRI"
 	},
 	{
 		"NAME": "Chittorgarh",
@@ -292,11 +304,11 @@
 		"CODE": "SAMBHAR"
 	},
 	{
-		"NAME": "Chaksu",
+		"NAME": "CHaksu",
 		"CODE": "CHAKSU"
 	},
 	{
-		"NAME": "Kothputali",
+		"NAME": "Kothputli",
 		"CODE": "KOTHPUTALI"
 	},
 	{
@@ -342,8 +354,7 @@
 	{
 		"NAME": "Rajagarh",
 		"CODE": "RAJAGARH"
-	},
-	{
+	},{
 		"NAME": "Tijara",
 		"CODE": "TIJARA"
 	},
@@ -421,14 +432,15 @@
 		"CODE": "FATEHPUR"
 	},
 	{
-		"NAME": "Laxmangarh",
+		"NAME": "laxmangarh",
 		"CODE": "LAXMANGARH"
 	},
 	{
-		"NAME": "Ramgarhshekhawati",
+		"NAME": "ramgarhshekhawati",
 		"CODE": "RAMGARHSHEKHAWATI"
 	},
-	{
+
+{
 		"NAME": "Shrimadhopur",
 		"CODE": "Shrimadhopur"
 	},
@@ -448,7 +460,10 @@
 		"NAME": "Losal",
 		"CODE": "LOSAL"
 	},
-	
+	{
+		"NAME": "Kota",
+		"CODE": "Kota"
+	},
 	{
 		"NAME": "Ramanjmandi",
 		"CODE": "RAMGANJMANDI"
@@ -486,8 +501,8 @@
 		"CODE": "MANGROL"
 	},
 	{
-		"NAME": "kpatan",
-		"CODE": "kPATAN"
+		"NAME": "patan",
+		"CODE": "PATAN"
 	},
 	{
 		"NAME": "Bundi",
@@ -534,7 +549,7 @@
 		"CODE": "PIPARCITY"
 	},
 	{
-		"NAME": "Bilara",
+		"NAME": "Bilawara",
 		"CODE": "BILARA"
 	},
 	{
@@ -566,7 +581,7 @@
 		"CODE": "JALORE"
 	},
 	{
-		"NAME": "Sumerpur",
+		"NAME": "Sumerour",
 		"CODE": "SUMERPUR"
 	},
 	{
@@ -586,7 +601,7 @@
 		"CODE": "TAKHATGARH"
 	},
 	{
-		"NAME": "Sadri",
+		"NAME": "Sadari",
 		"CODE": "SADRI"
 	},
 	{
@@ -594,7 +609,7 @@
 		"CODE": "RANI"
 	},
 	{
-		"NAME": "AbuRoad",
+		"NAME": "Abu Road",
 		"CODE": "ABUROAD"
 	},
 	{
@@ -616,133 +631,5 @@
 	{
 		"NAME": "Pali",
 		"CODE": "PALI"
-	},
-	{
-		"NAME": "Ajmer",
-		"CODE": "AJMER"
-	},
-	{
-		"NAME": "Churu",
-		"CODE": "CHURU"
-	},
-	{
-		"NAME": "Sujangarh",
-		"CODE": "SUJANGARH"
-	},
-	{
-		"NAME": "Ratangarh",
-		"CODE": "RATANGARH"
-	},
-	{
-		"NAME": "Sardarsahar",
-		"CODE": "SARDARSAHAR"
-	},
-	{
-		"NAME": "Rajgarhchuru",
-		"CODE": "RAJGARHCHURU"
-	},
-	{
-		"NAME": "Chhpar",
-		"CODE": "CHHPAR"
-	},
-	{
-		"NAME": "Bidasar",
-		"CODE": "Bidasar"
-	},
-	{
-		"NAME": "RAJALDESAR",
-		"CODE": "RAJALDESAR"
-	},
-	{
-		"NAME": "Ratannagar",
-		"CODE": "RATANNAGAR"
-	},
-	{
-		"NAME": "Nohar",
-		"CODE": "NOHAR"
-	},
-	{
-		"NAME": "Sangariya",
-		"CODE": "SANGARIYA"
-	},
-	{
-		"NAME": "Bhadra",
-		"CODE": "BHADRA"
-	},
-	{
-		"NAME": "Bikaner",
-		"CODE": "BIKANER"
-	},
-	{
-		"NAME": "Nokha",
-		"CODE": "NOKHA"
-	},
-	{
-		"NAME": "Deshnok",
-		"CODE": "DESHNOK"
-	},
-	{
-		"NAME": "Shridungargarh",
-		"CODE": "SHRIDUNGARGARH"
-	},
-	{
-		"NAME": "Pilibanga",
-		"CODE": "PILIBANGA"
-	},
-	{
-		"NAME": "Rawatsar",
-		"CODE": "RAWATSAR"
-	},
-	{
-		"NAME": "ShriGanganagar",
-		"CODE": "SHRIGANGANAGAR"
-	},
-	{
-		"NAME": "Hanumangarh",
-		"CODE": "HANUMANGARH"
-	},
-	{
-		"NAME": "Nainva",
-		"CODE": "NAINVA"
-	},
-	{
-		"NAME": "Taranagar",
-		"CODE": "TARANAGAR"
-	},
-	{
-		"NAME": "Raisinghnagar",
-		"CODE": "RAISINGHNAGAR"
-	},
-	{
-		"NAME": "Anoopgarh",
-		"CODE": "ANOOPGARH"
-	},
-	{
-		"NAME": "Gajsinghpur",
-		"CODE": "GAJSINGHPUR"
-	},
-	{
-		"NAME": "Padampur",
-		"CODE": "PADAMPUR"
-	},
-	{
-		"NAME": "Kesarisinghpur",
-		"CODE": "KESARISINGHPUR"
-	},
-	{
-		"NAME": "Sadulsahar",
-		"CODE": "SADULSAHAR"
-	},
-	{
-		"NAME": "Suratgarh",
-		"CODE": "SURATGARH"
-	},
-	{
-		"NAME": "Shrikaranpur",
-		"CODE": "SHRIKARANPUR"
-	},
-	{
-		"NAME": "Shrivijaynagar",
-		"CODE": "SHRIVIJAYNAGAR"
 	}
 ]
