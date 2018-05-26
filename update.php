@@ -58,7 +58,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     $birthPlace = trim($_POST['birthPlace']);
     $religion = trim($_POST['religion']);
     $district = trim($_POST['district']);
-    $userFormValid = trim($_POST('userFormValid'));
+    $userFormValid = trim($_POST['userFormValid']);
     $receiptNumber = $_SESSION['ulb_region'].'_'.$_POST['receiptNumber'];
     $remark = isset($_POST['remark']) ? trim($_POST['remark']) : '';
 
@@ -281,7 +281,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             <div class="form-group full-width">
                 <label style="width: 230px;" class="required"><?php echo $lang['all_documents_provided']; ?></label>
                 <label style="width: 60px;">             
-                    <input type="radio" class="margin-horiz-2x" name="userFormValid" style="width: 10px !important" value="1"><?php echo $lang['yes']; ?>
+                    <input type="radio" class="margin-horiz-2x" name="userFormValid" style="width: 10px !important" value="1" required><?php echo $lang['yes']; ?>
                 </label>
                 <label style="width: 60px;">
                     <input type="radio" class="margin-horiz-2x" name="userFormValid" value="0" style="width: 10px !important"><?php echo $lang['no']; ?>
