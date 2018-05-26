@@ -93,7 +93,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
                 $result='<div class="alert alert-success">SUCCESS</div>';
-                //header("location: candidate_details.php");
             } else {
                 $result='<div class="alert alert-danger">'.mysqli_error($link).'</div>';
             }

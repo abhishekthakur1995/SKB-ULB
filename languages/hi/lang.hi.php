@@ -72,6 +72,7 @@
     $lang['dashboard_btn_2'] = 'उम्मीदवारों विवरण संपादित करें';
     $lang['dashboard_btn_3'] = 'उम्मीदवारों का चयन करें';
     $lang['dashboard_btn_4'] = 'चयनित उम्मीदवार रिपोर्ट जेनरेट करें';
+    $lang['dashboard_btn_5'] = 'यहां क्लिक करे';
 
   	//create candidate form headings
   	$lang['enter_candidate_details'] = 'उम्मीदवार विवरण दर्ज करें';

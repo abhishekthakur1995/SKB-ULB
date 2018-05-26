@@ -41,32 +41,17 @@ mysqli_close($link);
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $lang['dashboard_title']; ?></title>
-    <style type="text/css">
-        body{ font: 14px sans-serif; text-align: center; }
-    </style>
-    <style type="text/css">
-        @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}
-    </style>
 </head>
-<body>
+<body class="fleft">
     <?php include 'header.php';?>
-    <div class="page-header">
-        <h1>Welcome</h1>
-        <h1><b><?php echo htmlspecialchars($_SESSION['username']); ?></b>. <?php echo $lang['welcome_msg_2']; ?></h1>
-    </div>
-
-    <div class="records">
-        <p>Total General Candidate: <?php echo $total_general_candidate;?></p>
-        <p>Total SC Candidate: <?php echo $total_sc_candidate;?></p>
-        <p>Total ST Candidate: <?php echo $total_st_candidate;?></p>
-    </div>
     <?php include 'reservation_table.php';?>
 
-    <p>
+    <div class="fleft full-width text-align-center" >
         <a href="candidate_details.php" class="btn btn-primary btn-lg"><?php echo $lang['dashboard_btn_1']; ?></a>
         <a href="candidates_details.php" class="btn btn-primary btn-lg"><?php echo $lang['dashboard_btn_2']; ?></a>
-    </p>
+    </div>
 </body>
 </html>

@@ -13,6 +13,9 @@ body {
     text-align: center;
     margin-top: 20px;
 }
+.fleft {
+	float: left;
+}
 .full-width {
 	width: 100% !important;
 }
@@ -107,37 +110,28 @@ label.required:after {
     color:red   
 }
 /*table css */
-#customers {
+.customers {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 50%;
+    width: 40%;
+    margin: 55px;
+    float: left;
 }
 
-#customers td, #customers th {
+.customers td, .customers th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
+.customers tr:nth-child(even){background-color: #f2f2f2;}
 
-#customers tr:hover {background-color: #ddd;}
+.customers tr:hover {background-color: #ddd;}
 
-#customers th {
+.customers th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
     background-color: #36304a;
     text-align: center;
     color: white;
-}
-.tablecss {
-	position: relative;
-    float: left;
-	height: 500px;
-	width: 100%;
-}
-.table1css{
-	height: 450px;
-	width: 45%;
-	margin-right: 0px;
 }

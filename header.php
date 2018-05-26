@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/css/style.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -37,9 +37,9 @@
                     <a class="nav-link dropdown-toggle waves-effect waves-light fs4" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user"></i> <?php echo $_SESSION['username']; ?> </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                        <a class="dropdown-item waves-effect waves-light" href="dashboard.php"><?php echo $lang['dashboard']; ?></a>
-                        <a class="dropdown-item waves-effect waves-light" href="reset_password.php"><?php echo $lang['reset_password']; ?></a>
-                        <a class="dropdown-item waves-effect waves-light" href="logout.php"><?php echo $lang['logout']; ?></a>
+                        <a class="dropdown-item waves-effect waves-light" href="<?php echo BASE_URL; ?>/dashboard.php"><?php echo $lang['dashboard']; ?></a>
+                        <a class="dropdown-item waves-effect waves-light" href="<?php echo BASE_URL; ?>/reset_password.php"><?php echo $lang['reset_password']; ?></a>
+                        <a class="dropdown-item waves-effect waves-light" href="<?php echo BASE_URL; ?>/logout.php"><?php echo $lang['logout']; ?></a>
                     </div>
                 </li>
             <?php } ?>
