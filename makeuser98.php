@@ -136,7 +136,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sign Up</title>
     <style type="text/css">
         body{ font: 14px sans-serif; }
@@ -203,13 +204,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <script type="text/javascript">
     $(document).ready(function() {
 
-        $("[name='role']").on('change', function() {
-            $this = $(this);
-            if($this.val() == 'SUPERADMIN') {
-                $("[name='region']").attr('disabled', true);
-            } else {
-                $("[name='region']").attr('disabled', false);
-            }
-        });
+        // $("[name='role']").on('change', function() {
+        //     $this = $(this);
+        //     if($this.val() == 'SUPERADMIN') {
+        //         $("[name='region']").attr('disabled', true);
+        //     } else {
+        //         $("[name='region']").attr('disabled', false);
+        //     }
+        // });
     });
 </script>

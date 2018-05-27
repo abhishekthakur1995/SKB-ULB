@@ -1,5 +1,8 @@
 [
 	{
 		"NAME": "ULBADMIN"
+	},
+	{
+		"NAME": "SUPERADMIN"
 	}
 ]
