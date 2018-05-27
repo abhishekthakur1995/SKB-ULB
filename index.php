@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT username, password, region, role FROM ulb_admins WHERE username = ?";
+        $sql = "SELECT username, password, region, role, firstLogin FROM ulb_admins WHERE username = ?";
         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -46,27 +46,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){                    
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $username, $hashed_password, $ulb_region, $userRole);
+                    mysqli_stmt_bind_result($stmt, $username, $hashedPassword, $ulbRegion, $userRole, $firstLogin);
 
                     if(mysqli_stmt_fetch($stmt)){
-                        if(password_verify($password, $hashed_password)){
+                        if(password_verify($password, $hashedPassword)){
                             /* Password is correct, so start a new session and
                             save the username to the session */
                             session_start();
 
                             $_SESSION['username'] = $username;
-                            $_SESSION['ulb_region'] = $ulb_region;
+                            $_SESSION['ulb_region'] = $ulbRegion;
                             $_SESSION['user_role'] = $userRole;
-                            header("location: dashboard.php");
-
-
-                            // if($_SESSION['first_login'] != 1) {
-                            //     $_SESSION["first_login"] = 1;
-                            //     header("location: reset_password.php");
-                            // } else {
-                            //     header("location: dashboard.php");
-                            // }
                             $_SESSION['timestamp']=time();
+                            if($firstLogin === 0) {
+                                $sql = "UPDATE ulb_admins SET firstLogin = 1 WHERE username = '".$username."'";
+                                if (mysqli_query($link, $sql)) {
+                                    header("location: reset_password.php");
+                                } else {
+                                    $msg = mysqli_error($link);
+                                    header("location: error.php?err_msg=$msg");
+                                }
+                            } else {
+                                header("location: dashboard.php");
+                            }
                         } else{
                             // Display an error message if password is not valid
                             $password_err = $lang['login_password_not_valid'];

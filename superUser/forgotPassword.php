@@ -31,8 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 	if(empty($ulb_err)) {
 		$passsword = password_hash(DEFAULT_PASSWORD, PASSWORD_DEFAULT);
-		$sql = "UPDATE ulb_admins SET password = '".$passsword."' WHERE region = '".$ulb."'";
-		
+		$sql = "UPDATE ulb_admins SET firstLogin = 0, password = '".$passsword."' WHERE region = '".$ulb."'";
 		if(mysqli_query($link, $sql)){
     		echo "Password changed successfully";
 		} else {
