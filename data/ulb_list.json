@@ -144,8 +144,8 @@
 		"CODE": "DEEG"
 	},
 	{
-		"NAME": "Kanma",
-		"CODE": "KANMA"
+		"NAME": "Kaman",
+		"CODE": "KAMAN"
 	},
 	{
 		"NAME": "Nadbai",
@@ -437,7 +437,7 @@
 		"CODE": "KHANDELA"
 	},
 	{
-		"NAME": "Neemkthana",
+		"NAME": "Neemkathana",
 		"CODE": "NEEMKATHANA"
 	},
 	{
@@ -486,7 +486,7 @@
 	},
 	{
 		"NAME": "Kpatan",
-		"CODE": "kPATAN"
+		"CODE": "KPATAN"
 	},
 	{
 		"NAME": "Bundi",
@@ -637,7 +637,7 @@
 		"CODE": "SARDARSAHAR"
 	},
 	{
-		"NAME": "Rajgarhchuru",
+		"NAME": "Rajgarh-Churu",
 		"CODE": "RAJGARHCHURU"
 	},
 	{
@@ -743,5 +743,26 @@
 	{
 		"NAME": "Shrivijaynagar",
 		"CODE": "SHRIVIJAYNAGAR"
-	}
+	},
+	{
+		"NAME": "Roopwas",
+		"CODE": "ROOPWAS"
+	},
+	{
+		"NAME": "Khudlafalna",
+		"CODE": "KHUDLAFALNA"
+	},
+	{
+		"NAME": "Napasar",
+		"CODE": "NAPASAR"
+	},
+	{
+		"NAME": "Mahwa",
+		"CODE": "MAHWA"
+	},
+	{
+		"NAME": "Rajgarh-Alwar",
+		"CODE": "RAJGARHALWAR"
+	},
+
 ]
