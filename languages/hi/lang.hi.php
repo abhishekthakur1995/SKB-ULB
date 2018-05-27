@@ -77,6 +77,7 @@
     $lang['dashboard_btn_3'] = 'उम्मीदवारों का चयन करें';
     $lang['dashboard_btn_4'] = 'चयनित उम्मीदवार रिपोर्ट जेनरेट करें';
     $lang['dashboard_btn_5'] = 'यहां क्लिक करे';
+    $lang['dashboard_btn_6'] = 'यूएलबी पासवर्ड रीसेट करें';
 
   	//create candidate form headings
   	$lang['enter_candidate_details'] = 'उम्मीदवार विवरण दर्ज करें';
@@ -118,8 +119,8 @@
     $lang['update_detail_title'] = 'उम्मीदवार के विवरण अपडेट करें';
     $lang['save_success'] = 'डेटा सफलतापूर्वक दर्ज किया गया';
     $lang['update_success'] = 'डेटा सफलतापूर्वक अपडेट किया गया';
-
-    //
+    $lang['reset_password_sucess'] = 'पासवर्ड सफलतापूर्वक रीसेट कर दिया गया है। कृपया अपने नए पासवर्ड से फिर से लॉगिन करें।';
+    
     $lang['all_documents_provided'] = 'उम्मीदवार का फॉर्म पूर्ण पाया गया';
     $lang['experience_certificate'] = 'अनुभव प्रमाण पत्र';
     $lang['category_certificate'] = 'जाति प्रमाण पत्र';

@@ -1,6 +1,14 @@
 <?php
 session_start();
 
+if (isset($_SESSION['message'])) {
+    $msg = $_SESSION['message'];
+    echo '<script language="javascript">';
+    echo "alert('$msg')";
+    echo '</script>';
+    unset($_SESSION['message']);
+}
+
 if($_SESSION['user_role'] == 'SUPERADMIN') {
 	require('../config.php');
 
@@ -33,7 +41,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$passsword = password_hash(DEFAULT_PASSWORD, PASSWORD_DEFAULT);
 		$sql = "UPDATE ulb_admins SET firstLogin = 0, password = '".$passsword."' WHERE region = '".$ulb."'";
 		if(mysqli_query($link, $sql)){
-    		echo "Password changed successfully";
+    		$_SESSION['message'] = 'Password has been successfully resetted for the selected ulb';
+            header("Location: forgotPassword.php");
 		} else {
     		echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 		}
@@ -58,8 +67,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <?php include '../header.php';?>
     <div class="wrapper">
         <h2>Forgot Password</h2>
-        <form class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group">
+        <form class="form-inline" role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="form-group full-width">
                 <label>Select the ULB for which you want to reset the password</label>
                 <select class="form-control <?php echo (!empty($ulb_err)) ? 'is-invalid' : ''; ?>"" name="ulb">
                 	<option value="">Select</option>
@@ -71,9 +80,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         }
                     ?>
                 </select>
-                <span class="invalid-feedback text-align-center"><?php echo $ulb_err; ?></span>
+                <span class="invalid-feedback"><?php echo $ulb_err; ?></span>
             </div>
-            <div class="form-group">
+            <div class="form-group full-width margin-top-3x">
                 <input type="submit" class="btn btn-primary" value="Get New Password">
             </div>
         </form>

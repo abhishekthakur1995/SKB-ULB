@@ -19,7 +19,7 @@
 <body>
 
 <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color header-height">
-    <a class="navbar-brand header-font-size" href="dashboard.php">
+    <a class="navbar-brand header-font-size" href="<?php echo BASE_URL; ?>/dashboard.php">
         <span><?php echo $lang['company']; ?></span>
         <span class="full-width fs4 fleft"><?php echo $lang['header_title']; ?></span>
     </a>

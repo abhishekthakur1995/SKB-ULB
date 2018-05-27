@@ -98,14 +98,17 @@ body {
 .margin-right-2x {
 	margin-right: 10px;
 }
+.margin-right-3x {
+	margin-right: 15px;
+}
 .margin-top-6x {
 	margin-top: 30px;
 }
 .margin-left-none {
 	margin-left: 0px !important;
 }
-.margin-top-none {
-	margin-top: 0px;
+.margin-top-3x {
+	margin-top: 15px;
 }
 .info-header {
 	font-size: 22px;
