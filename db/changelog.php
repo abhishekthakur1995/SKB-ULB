@@ -27,5 +27,8 @@ CREATE TABLE ulb_admins (
     region VARCHAR(50) NOT NULL UNIQUE, 
     password VARCHAR(255) NOT NULL,
     role ENUM('ULBADMIN', 'SUPERADMIN') NOT NULL,
+    firstLogin TINYINT(1) NOT NULL DEFAULT 0,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+<sql>ALTER TABLE ulb_admins ADD COLUMN firstLogin TINYINT(1) NOT NULL DEFAULT 0 AFTER role</sql>
