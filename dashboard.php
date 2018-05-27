@@ -35,7 +35,7 @@ if (isset($_SESSION['message'])) {
 </head>
 <body>
     <?php include 'header.php';?>
-    <div class="wrapper">
+    <div class="wrapper fleft full-width margin-top-6x">
         <div class="fleft full-width text-align-center" >
             <a href="candidate_details.php" class="btn btn-primary btn-lg fs4">
                 <span class="fa fa-plus-square fs4"></span>
@@ -45,7 +45,10 @@ if (isset($_SESSION['message'])) {
                 <span class="fa fa-edit fs4"></span>
                 <?php echo $lang['dashboard_btn_2']; ?>
             </a>
-        </div>  
+        </div>
+
+        <?php include 'reservation_table.php'; ?>
+
     </div>
 </body>
 </html>

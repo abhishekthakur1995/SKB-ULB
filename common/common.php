@@ -1,44 +1,24 @@
 <?php
+define('__ROOT__', dirname(dirname(__FILE__))); 
+require_once(__ROOT__.'/config.php');
+
+function __construct() {
+	$this->myVar = $GLOBALS['link'];
+}
 
 class Common {
-
-	//Total Seats
 
 	const totalSeats = [
 		'KOTA' => 1821,
 		'JAIPUR' => 4961,
-		 'BEAWAR'=>161,
-		 'KISHANGARH'=>161,
-		 'KEKRI'=>113,
-		 'PUSHKAR'=>97,
-		 'VIJAYNAGAR'=>68,
-		 'SARWAR'=>40,
-		 'BHILWARA'=>320,
-		 'GULABPURA'=>14,
-		 'GANGAPUR'=>8,
-		 'AASIND'=>9,
-		 'MANDALGARH'=>8,
-		 'SHAHPURABHILWARA'=>20,
-		 'NAGAUR'=>50,
-		 'LADNU'=>127,
-		 'MERTACITY'=>50,
-		 'MAKRANA'=>39,
-		 'PARBATSAR'=>56,
-		 'NAWA'=>12,
-		 'KUCHERA'=>8,
-		 'MUNDWA'=>7,
-		 'KUCHAMANCITY'=>28,
-		 'TONK'=>391,
-		 'DEOLI'=>22,
-		 'NIWAI'=>29,
-		 'MALPURA'=>29,
-		 'TODARAISINGH'=>33,
-		 'UNIARA'=>19,
-		 'BIKANER'=>395,
-		 'NOKHA'=>61,
-		 'CHOMU'=>71,
+		'BEAWAR'=>161,
+		'KISHANGARH'=>161,
+		'KEKRI'=>113,
+		'BIKANER'=>395,
+		'NOKHA'=>61,
+		'CHOMU'=>71,
 		'KISHANGARH'=>54,
-		 'SHAHPURAJAIPUR'=>19,
+		'SHAHPURAJAIPUR'=>19,
 		'CHAKSU'=>20,
 		'BAGRU'=>9,
 		'JOBNER'=>31,
@@ -134,34 +114,6 @@ class Common {
 		'MARRIED' => 20,
 	];
 
-	//
-
-	// const categoryReservation = [
-	// 	'GENERAL' => 50,
-	// 	'OBC' => 21,`
-	// 	'SC' => 16,
-	// 	'ST' => 12,
-	// 	'SPECIALOBC' => 1
-	// ];
-
-	// const genderReservation = [
-	// 	'M' => 70,
-	// 	'F' => 30
-	// ];
-
-	// const femaleCategoryReservation = [
-	// 	'WIDOW' => 8,
-	// 	'DIVORCEE' => 2,
-	// 	'MARRIED' => 10,
-	// 	'SINGLE' => 10,
-	// ];
-
-
-	// public static function reservationAllocation($category, $totalSeats) {
-	// 	$arr = [];
-	// 	$arr['general']['male'] = 
-	// }
-
 	public static function getTotalSeatsForUlbByName($ulbRegion) {
 		return self::totalSeats[strtoupper($ulbRegion)];
 	}
@@ -182,6 +134,49 @@ class Common {
 		return floor(($percentage / 100) * $of);
 	}
 
+
+	//get candidates
+	public static function getTotalEnteries() {
+		$sql = "SELECT * FROM candidate_list WHERE ulbRegion = '".$_SESSION['ulb_region']."'";
+		$res = mysqli_query($GLOBALS['link'], $sql);
+		$count = mysqli_num_rows($res);
+		return $count;
+	}
+
+	public static function getTotalEnteriesByCategory($category) {
+		$sql = "SELECT * FROM candidate_list WHERE category = '".$category."' AND ulbRegion = '".$_SESSION['ulb_region']."'";
+		$res = mysqli_query($GLOBALS['link'], $sql);
+		$count = mysqli_num_rows($res);
+		return $count;
+	}
+
+	public static function getTotalEnteriesByStatus($maritialStatus) {
+		$sql = "SELECT * FROM candidate_list WHERE maritialStatus = '".$maritialStatus."' AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = 'f' ";
+		$res = mysqli_query($GLOBALS['link'], $sql);
+		$count = mysqli_num_rows($res);
+		return $count;
+	}
+
+	public static function getTotalEnteriesByGender($gender) {
+		$sql = "SELECT * FROM candidate_list WHERE gender = '".$gender."' AND ulbRegion = '".$_SESSION['ulb_region']."'";
+		$res = mysqli_query($GLOBALS['link'], $sql);
+		$count = mysqli_num_rows($res);
+		return $count;
+	}
+
+	public static function getTotalEnteriesByCatAndGender($category, $gender) {
+		$sql = "SELECT * FROM candidate_list WHERE gender = '".$gender."' AND category = '".$category."'AND ulbRegion = '".$_SESSION['ulb_region']."'";
+		$res = mysqli_query($GLOBALS['link'], $sql);
+		$count = mysqli_num_rows($res);
+		return $count;
+	}
+
+	public static function getTotalEnteriesByCatAndStatus($category, $maritialStatus) {
+		$sql = "SELECT * FROM candidate_list WHERE category = '".$category."' AND maritialStatus = '".$maritialStatus."' AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = 'f'";
+		$res = mysqli_query($GLOBALS['link'], $sql);
+		$count = mysqli_num_rows($res);
+		return $count;
+	}
 }
 
 ?>

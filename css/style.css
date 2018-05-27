@@ -49,6 +49,9 @@ body {
 .fs4 {
 	font-size: 20px !important;
 }
+.fs6 {
+	font-size: 30px !important;
+}
 .header-height {
 	height: 80px;
 }
@@ -82,9 +85,6 @@ body {
 .margin-bottom-4x{
 	margin-bottom: 20px !important;
 }
-.margin-bottom-4x{
-	margin-bottom: 20px !important;
-}
 .margin-2x {
 	margin: 10px;
 }
@@ -98,8 +98,14 @@ body {
 .margin-right-2x {
 	margin-right: 10px;
 }
-.margin-left-none{
+.margin-top-6x {
+	margin-top: 30px;
+}
+.margin-left-none {
 	margin-left: 0px !important;
+}
+.margin-top-none {
+	margin-top: 0px;
 }
 .info-header {
 	font-size: 22px;
@@ -121,24 +127,24 @@ label.required:after {
     color:red   
 }
 /*table css */
-.customers {
+.ulb-table {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 40%;
-    margin: 55px;
+    margin: 55px 55px 55px 55px;
     float: left;
 }
 
-.customers td, .customers th {
+.ulb-table td, .ulb-table th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-.customers tr:nth-child(even){background-color: #f2f2f2;}
+.ulb-table tr:nth-child(even){background-color: #f2f2f2;}
 
-.customers tr:hover {background-color: #ddd;}
+.ulb-table tr:hover {background-color: #ddd;}
 
-.customers th {
+.ulb-table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;

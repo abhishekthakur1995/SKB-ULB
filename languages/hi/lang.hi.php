@@ -31,6 +31,8 @@
     $lang['yes'] = 'हां';
     $lang['no'] = 'ना';
     $lang['data_saved'] = 'डेटा सफलतापूर्वक दर्ज किया गया';
+    $lang['tbl1_heading'] = 'आरक्षण तालिका';
+    $lang['tbl2_heading'] = 'उम्मीदवार संख्या तालिका';
 
 
     //maritial_status
