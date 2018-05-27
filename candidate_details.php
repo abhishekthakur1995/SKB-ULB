@@ -1,6 +1,14 @@
 <?php
 session_start();
 
+if (isset($_SESSION['message'])) {
+    $msg = $_SESSION['message'];
+    echo '<script language="javascript">';
+    echo "alert('$msg')";
+    echo '</script>';
+    unset($_SESSION['message']);
+}
+
 require('config.php');
 require('languages/hi/lang.hi.php');
 
@@ -17,7 +25,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 
 // Define variables and initialize with empty values
 $name = $gender = $dob = $category = $phoneNumber = $guardian = $permanentAddress = $temporaryAddress = $birthPlace = $district = $remark = $receiptNumber = $userFormValid = "";
-$name_err = $gender_err = $dob_err = $phone_number_err = $permanent_address_err = $guardian_err = "";
+$name_err = $gender_err = $dob_err = $phone_number_err = $guardian_err = $receipt_number_err = $permanent_address_err = "";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -42,7 +50,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($trimGender)) {
         $gender_err = "Please select a gender.";
     } else {
-        $gender = trim($_POST['gender']);
+        $gender = $trimGender;
     }
 
     // Validate dob
@@ -50,24 +58,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($trimDob)) {
         $dob_err = "Please select a DOB.";
     } else {
-        $dob = trim($_POST['dob']);
+        $dob = $trimDob;
+    }
+
+    //validate receipt number
+    $trimReceiptNumber = trim($_POST["receiptNumber"]);
+    if(empty($trimReceiptNumber)) {
+        $receipt_number_err = $lang['receipt_number_err'];
+    } else {
+        $receiptNumber = $_SESSION['ulb_region'].'_'.$trimReceiptNumber;
+    }
+
+    //validate permanent address
+    $trimPermanentAddress = trim($_POST["permanentAddress"]);
+    if(empty($trimPermanentAddress)) {
+        $permanent_address_err = $lang['permanent_address_err'];
+    } else {
+        $permanentAddress = $trimPermanentAddress;
     }
 
     $category = trim($_POST['category']);
     $maritialStatus = trim($_POST['maritialStatus']);
     $ulbRegion = trim($_SESSION['ulb_region']);
     $phoneNumber = isset($_POST['phoneNumber']) ? trim($_POST['phoneNumber']) : '';
-    $permanentAddress = trim($_POST['permanentAddress']);
     $temporaryAddress = isset($_POST['temporaryAddress']) ? trim($_POST['temporaryAddress']) : '';
     $birthPlace = trim($_POST['birthPlace']);
     $religion = trim($_POST['religion']);
     $district = trim($_POST['district']);
     $userFormValid = $_POST['userFormValid'];
-    $receiptNumber = $_SESSION['ulb_region'].'_'.$_POST['receiptNumber'];
     $remark = isset($_POST['remark']) ? trim($_POST['remark']) : '';
 
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($dob_err) && empty($guardian_err)) {
+    if(empty($name_err) && empty($dob_err) && empty($guardian_err) && empty($receipt_number_err) && empty($gender_err)) {
         
         // Prepare an insert statement
         $sql = "INSERT INTO candidate_list (name, gender, dob, category, maritialStatus, ulbRegion, phoneNumber, guardian, birthPlace, religion, permanentAddress, temporaryAddress , district, userFormValid, receiptNumber, remark) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -97,9 +119,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
+                $_SESSION['message'] = $lang['save_success'];
                 header('Location: '.$_SERVER['REQUEST_URI']);
             } else {
-                print_r(mysqli_error($link));
+                if(mysqli_errno($link) === 1062) {
+                    $receipt_number_err = $lang['duplicate_receipt_no'];
+                } else{
+                    print_r(mysqli_error($link));
+                }
             }
         }
          
@@ -126,9 +153,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <h2><?php echo $lang['enter_candidate_details']?></h2>
             <p><?php echo $lang['detail_header']?></p>
         </div>
-        <!-- <?php //if(isset($_SESSION['msg']) && !empty($_SESSION['msg'])) { ?>
-            <div class="alert alert-success"><?php //echo $_SESSION['msg']; ?></div>
-        <?php //} ?> -->
         <form class="form-inline candidate_detail" role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" style="margin-top: 10px;" method="post">
 
             <div class="alert alert-info full-width margin-horiz-2x info-header">
@@ -137,21 +161,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             <div class="form-group">
                 <label class="required"><?php echo $lang['name']; ?></label>
-                <input type="text" name="name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>" required>
+                <input type="text" name="name" class="form-control <?php echo(!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>" required>
                 <span class="invalid-feedback text-align-center"><?php echo $name_err; ?></span>
             </div>
             <div class="form-group">
                 <label class="required"><?php echo $lang['guardian']; ?></label>
-                <input type="text" name="guardian" class="form-control" value="<?php echo $guardian; ?>" required>
+                <input type="text" name="guardian" class="form-control <?php echo(!empty($guardian_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $guardian; ?>" required>
+                <span class="invalid-feedback text-align-center"><?php echo $guardian_err; ?></span>
             </div>
             <div class="form-group">
                 <label class="required"><?php echo $lang['dob']; ?></label>
-                    <input type="text" name="dob" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}" class="form-control <?php echo (!empty($dob_err)) ? 'is-invalid' : ''; ?>" placeholder="dd/mm/yyyy" required><br>
+                    <input type="text" name="dob" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}" class="form-control <?php echo (!empty($dob_err)) ? 'is-invalid' : ''; ?>" placeholder="dd/mm/yyyy" value="<?php echo $dob; ?>" required><br>
                 <span class="invalid-feedback text-align-center"><?php echo $dob_err; ?></span>
             </div>
             <div class="form-group">
                 <label class="required"><?php echo $lang['permanentAddress']; ?></label>
-                    <input type="text" name="permanentAddress" class="form-control" value="<?php echo $permanentAddress; ?>" required><br>
+                    <input type="text" name="permanentAddress" class="form-control <?php echo (!empty($permanent_address_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $permanentAddress; ?>" required><br>
+                    <span class="invalid-feedback text-align-center"><?php echo $permanent_address_err; ?></span>
             </div>
             <div class="form-group">
                 <label><?php echo $lang['temporaryAddress']; ?></label>
@@ -238,7 +264,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </select>
             </div>
 
-            <div class="form-group full-width">
+            <div class="form-group">
                 <label class="required" style="width: 200px;"><?php echo $lang['all_documents_provided']; ?></label>                  
                 <label style="width: 60px;">                  
                     <input type="radio" class="margin-horiz-2x" name="userFormValid" style="width: 10px !important" value="1" required><?php echo $lang['yes']; ?>
@@ -249,12 +275,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <textarea name="remark" rows="4" cols="50" class="form-control textarea margin-left-6x" maxlength="500" value="<?php echo $remark; ?>" placeholder="<?php echo $lang['remark_place_holder']; ?>" disabled required></textarea>
             </div>
 
-            <div class="form-group full-width">
+            <div class="form-group">
                 <label class="required" style="width: 148px;"><?php echo $lang['receipt_number']; ?></label>
-                <input type="number" name="receiptNumber" class="form-control" required>
+                <?php $receiptNumber = !empty($receiptNumber) ? explode('_', $receiptNumber)[1] : ""; ?>
+                <input type="number" name="receiptNumber" class="form-control <?php echo (!empty($receipt_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $receiptNumber; ?>" required>
+                <span class="invalid-feedback text-align-center"><?php echo $receipt_number_err; ?></span>
             </div>
 
-            <div class="form-group full-width margin-left-3x">
+            <div class="form-group margin-left-3x">
                 <input type="submit" name="submit" class="btn btn-primary save" value="<?php echo $lang['saveButton'] ?>">
                 <input type="reset" class="btn btn-default" value="<?php echo $lang['resetButton'] ?>">
             </div>
@@ -265,14 +293,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 <script type="text/javascript">
 $('document').ready(function() {
-
-    // $('.save').on('click', function() {
-    //     if($('.alert-success').is(":visible")) {
-    //         alert('hi');
-    //         window.location.href = '';
-    //     }
-    // });
-
     $('[name="userFormValid"]').on('change', function() {
         if($("input[name='userFormValid']:checked").val() == '1') {
             $('.textarea').attr('disabled', true);

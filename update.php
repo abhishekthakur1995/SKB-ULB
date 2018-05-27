@@ -17,7 +17,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
  
 // Define variables and initialize with empty values
 $name = $gender = $dob = $category = $phoneNumber = $guardian = $permanentAddress = $temporaryAddress = $birthPlace = $district = $receiptNumber = $remark = $userFormValid = "";
-$name_err = $gender_err = $dob_err = $phone_number_err = "";
+$name_err = $gender_err = $dob_err = $phone_number_err = $guardian_err = $receipt_number_err = $permanent_address_err = "";
  
 // Processing form data when form is submitted
 if(isset($_POST["id"]) && !empty($_POST["id"])){
@@ -48,22 +48,44 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $dob = $trimDOB;
     }
 
+    // Validate name
+    $trimGuardianName = trim($_POST["guardian"]);
+    if(empty($trimGuardianName)) {
+        $guardian_err = "Please enter a guardian name.";
+    } else {
+        $guardian = $trimGuardianName;
+    }
+
+    //validate receipt number
+    $trimReceiptNumber = trim($_POST["receiptNumber"]);
+    if(empty($trimReceiptNumber)) {
+        $receipt_number_err = $lang['receipt_number_err'];
+    } else {
+        $receiptNumber = $_SESSION['ulb_region'].'_'.$trimReceiptNumber;
+    }
+
+    //validate permanent address
+    $trimPermanentAddress = trim($_POST["permanentAddress"]);
+    if(empty($trimPermanentAddress)) {
+        $permanent_address_err = $lang['permanent_address_err'];
+    } else {
+        $permanentAddress = $trimPermanentAddress;
+    }
+
     $category = trim($_POST['category']);
     $maritialStatus = trim($_POST['maritialStatus']);
     $ulbRegion = trim($_SESSION['ulb_region']);
     $phoneNumber = isset($_POST['phoneNumber']) ? trim($_POST['phoneNumber']) : '';
     $guardian = trim($_POST['guardian']);
-    $permanentAddress = trim($_POST['permanentAddress']);
     $temporaryAddress = isset($_POST['temporaryAddress']) ? trim($_POST['temporaryAddress']) : '';
     $birthPlace = trim($_POST['birthPlace']);
     $religion = trim($_POST['religion']);
     $district = trim($_POST['district']);
     $userFormValid = trim($_POST['userFormValid']);
-    $receiptNumber = $_SESSION['ulb_region'].'_'.$_POST['receiptNumber'];
     $remark = isset($_POST['remark']) ? trim($_POST['remark']) : '';
 
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($dob_err)) {
+    if(empty($name_err) && empty($dob_err) && empty($guardian_err) && empty($receipt_number_err) && empty($gender_err)) {
         // Prepare an insert statement
         $sql = "UPDATE candidate_list SET name=?, gender=?, dob=?, category=?, maritialStatus=?, ulbRegion=?, phoneNumber=?, guardian=?, birthPlace=?, religion=?, permanentAddress=?, temporaryAddress=?, district=?, userFormValid = ?, receiptNumber=?, remark=? WHERE id=?";
          
@@ -93,10 +115,15 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Records updated successfully. Redirect to landing page
+                $_SESSION['message'] = $lang['update_success'];
                 header("location: dashboard.php");
                 exit();
             } else{
-                echo "Something went wrong. Please try again later.";
+                if(mysqli_errno($link) === 1062) {
+                    $receipt_number_err = $lang['duplicate_receipt_no'];
+                } else{
+                    print_r(mysqli_error($link));
+                }
             }
         }
          
@@ -126,9 +153,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             $permanentAddress = $row['permanentAddress'];
             $temporaryAddress = $row['temporaryAddress'];
             $birthPlace = $row['birthPlace'];
-
-            $receiptNumber = explode('_', $row['receiptNumber'])[1];
-
+            $receiptNumber = $row['receiptNumber'];
             $religion = $row['religion'];
             $district = $row['district'];
             $category = $row['category'];
@@ -179,15 +204,16 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                 <input type="text" name="guardian" class="form-control" value="<?php echo $guardian; ?>" required>
             </div>
 
-            <div class="form-group <?php echo (!empty($dob_err)) ? 'has-error' : ''; ?>">
+            <div class="form-group">
                 <label class="required"><?php echo $lang['dob']; ?></label>
-                    <input type="date" name="dob" class="form-control" min="1950-01-01" value="<?php echo $dob; ?>"><br>
-                <span class="help-block"><?php echo $dob_err; ?></span>
+                    <input type="text" name="dob" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}" class="form-control <?php echo (!empty($dob_err)) ? 'is-invalid' : ''; ?>" placeholder="dd/mm/yyyy" value="<?php echo $dob; ?>" required><br>
+                <span class="invalid-feedback text-align-center"><?php echo $dob_err; ?></span>
             </div>
 
             <div class="form-group">
                 <label class="required"><?php echo $lang['permanentAddress']; ?></label>
-                    <input type="text" name="permanentAddress" class="form-control" value="<?php echo $permanentAddress; ?>" required><br>
+                    <input type="text" name="permanentAddress" class="form-control <?php echo (!empty($permanent_address_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $permanentAddress; ?>" required><br>
+                    <span class="invalid-feedback text-align-center"><?php echo $permanent_address_err; ?></span>
             </div>
 
             <div class="form-group">
@@ -278,7 +304,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                 </select>
             </div>
 
-            <div class="form-group full-width">
+            <div class="form-group">
                 <label style="width: 230px;" class="required"><?php echo $lang['all_documents_provided']; ?></label>
                 <label style="width: 60px;">             
                     <input type="radio" class="margin-horiz-2x" name="userFormValid" style="width: 10px !important" value="1" required><?php echo $lang['yes']; ?>
@@ -289,12 +315,14 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                 <textarea name="remark" rows="4" cols="50" class="form-control textarea" maxlength="500" value="<?php echo $remark; ?>" placeholder="<?php echo $lang['remark_place_holder']; ?>" style="margin-left: 30px" disabled></textarea>
             </div>
 
-            <div class="form-group full-width">
-                <label class="required"><?php echo $lang['receipt_number']; ?></label>
-                <input type="number" name="receiptNumber" class="form-control" value="<?php echo $receiptNumber; ?>" required>
+            <div class="form-group">
+                <label class="required" style="width: 148px;"><?php echo $lang['receipt_number']; ?></label>
+                <?php $receiptNumber = !empty($receiptNumber) ? explode('_', $receiptNumber)[1] : ""; ?>
+                <input type="number" name="receiptNumber" class="form-control <?php echo (!empty($receipt_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $receiptNumber; ?>" required>
+                <span class="invalid-feedback text-align-center"><?php echo $receipt_number_err; ?></span>
             </div>
 
-            <div class="form-group full-width">
+            <div class="form-group">
                 <input type="hidden" name="id" value="<?php echo $id; ?>"/>
                 <input type="submit" class="btn btn-primary" value="<?php echo $lang['updateButton']; ?>">
                 <a href="dashboard.php" class="btn btn-default"><?php echo $lang['cancelButton']; ?></a>

@@ -119,7 +119,8 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                     <h4 class="modal-title"><?php echo $lang['delete_alert']; ?></h4>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $lang['yes']?></button>
+                    <button type="button" class="btn btn-default delete-data" data-dismiss="modal"><?php echo $lang['yes']?></button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $lang['no']?></button>
                 </div>
             </div>
         </div>
@@ -154,7 +155,7 @@ $(document).ready(function(){
         $('.first-modal').trigger('click');
     });
 
-    $('.btn-default').on('click', function() {
+    $('.delete-data').on('click', function() {
         $.ajax({
             type: 'POST',
             url: 'delete.php',

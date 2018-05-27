@@ -16,6 +16,14 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     }
 }
 
+if (isset($_SESSION['message'])) {
+    $msg = $_SESSION['message'];
+    echo '<script language="javascript">';
+    echo "alert('$msg')";
+    echo '</script>';
+    unset($_SESSION['message']);
+}
+
 $total_general_candidate = $total_sc_candidate = $total_st_candidate = 0;
 
 $sql = "SELECT * FROM candidate_list WHERE category = 'GENERAL' AND ulbRegion = '".$_SESSION['ulb_region']."'";

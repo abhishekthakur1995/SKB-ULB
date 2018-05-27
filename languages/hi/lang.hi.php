@@ -93,6 +93,9 @@
   	//general Erros
   	$lang['password_length_error'] = 'पासवर्ड में कम से कम 6 अक्षर होने चाहिए।';
   	$lang['password_mismatch_error'] = 'पासवर्ड और पासवर्ड की पुष्टि मेल नहीं खाते';
+    $lang['permanent_address_err'] = 'कृपया अपना स्थायी पता डाले';
+    $lang['receipt_number_err'] = 'आवेदक प्राप्ति क्रमांक अनिवार्य है';
+    $lang['duplicate_receipt_no'] = 'यह रसीद संख्या पहले से ही किसी अन्य उम्मीदवार के लिए दर्ज है';
 
     //buttons
     $lang['loginButton'] = 'लॉग इन करें';
@@ -111,6 +114,8 @@
   	$lang['currentPasswodErrMsg_1'] = 'कृपया अपना वर्तमान पासवर्ड दर्ज करें';  
 
     $lang['update_detail_title'] = 'उम्मीदवार के विवरण अपडेट करें';
+    $lang['save_success'] = 'डेटा सफलतापूर्वक दर्ज किया गया';
+    $lang['update_success'] = 'डेटा सफलतापूर्वक अपडेट किया गया';
 
     //
     $lang['all_documents_provided'] = 'उम्मीदवार का फॉर्म पूर्ण पाया गया';
@@ -131,6 +136,6 @@
     $lang['view_alert2']='या';
     $lang['view_alert3'] ='ब्राउज़र उपयोग करे |';
     $lang['delete_alert']='क्या आप रिकॉर्ड डिलीट करना चाहते है?';
-    $lang['delete_alert1']='रिकॉर्ड डिलीट';
+    $lang['delete_alert1']='डेटा सफलतापूर्वक हटा दिया गया';
     $lang['delete_alert2']='बंद करे';
 ?>
