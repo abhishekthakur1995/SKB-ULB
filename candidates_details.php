@@ -20,7 +20,8 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $lang['candidates_details_heading']; ?></title>
     <style type="text/css">
         table tr td:last-child a{

@@ -178,7 +178,8 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $lang['update_detail_title']; ?></title>
 </head>
 <body>

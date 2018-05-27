@@ -128,8 +128,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Reset Password</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?php echo $lang['reset_password']; ?></title>
     <style type="text/css">
         body{ font: 14px sans-serif; }
         .wrapper{ width: 400px; padding: 20px; margin:auto; background-color: #fff; margin-top:100px;}
@@ -138,7 +139,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
     <?php include 'header.php';?>
     <div class="wrapper">
-        <h2><?php echo $lang['reset_password'] ?></h2>
+        <h2><?php echo $lang['reset_password']; ?></h2>
         <p><?php echo $lang['reset_password_header']; ?></p>
         <form class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group margin-bottom-4x">
