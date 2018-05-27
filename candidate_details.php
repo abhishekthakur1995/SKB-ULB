@@ -283,8 +283,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
 
             <div class="form-group margin-left-3x">
-                <input type="submit" name="submit" class="btn btn-primary save" value="<?php echo $lang['saveButton'] ?>">
-                <input type="reset" class="btn btn-default" value="<?php echo $lang['resetButton'] ?>">
+                <input type="submit" name="submit" class="btn btn-primary fs4 save" value="<?php echo $lang['saveButton'] ?>">
+                <input type="reset" class="btn btn-danger fs4" value="<?php echo $lang['resetButton'] ?>">
             </div>
         </form>
     </div>    

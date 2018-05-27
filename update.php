@@ -324,8 +324,8 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
 
             <div class="form-group">
                 <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-                <input type="submit" class="btn btn-primary" value="<?php echo $lang['updateButton']; ?>">
-                <a href="dashboard.php" class="btn btn-default"><?php echo $lang['cancelButton']; ?></a>
+                <input type="submit" class="btn btn-primary fs4" value="<?php echo $lang['updateButton']; ?>">
+                <a href="dashboard.php" class="btn btn-danger fs4"><?php echo $lang['cancelButton']; ?></a>
             </div>
         </form>                
     </div>
