@@ -24,26 +24,6 @@ if (isset($_SESSION['message'])) {
     unset($_SESSION['message']);
 }
 
-$total_general_candidate = $total_sc_candidate = $total_st_candidate = 0;
-
-$sql = "SELECT * FROM candidate_list WHERE category = 'GENERAL' AND ulbRegion = '".$_SESSION['ulb_region']."'";
-$res = mysqli_query($link, $sql);
-$total_general_candidate = mysqli_num_rows($res);
-
-$sql = "SELECT * FROM candidate_list WHERE category = 'SC' AND ulbRegion = '".$_SESSION['ulb_region']."'";
-if ($res = mysqli_query($link, $sql)) {
-    $total_sc_candidate = mysqli_num_rows($res);
-}
-
-$sql = "SELECT * FROM candidate_list WHERE category = 'ST' AND ulbRegion = '".$_SESSION['ulb_region']."'";
-if ($res = mysqli_query($link, $sql)) {
-    $total_st_candidate = mysqli_num_rows($res);
-}
-
-
-// Close connection
-mysqli_close($link);
-
 ?>
  
 <!DOCTYPE html>
@@ -53,13 +33,19 @@ mysqli_close($link);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $lang['dashboard_title']; ?></title>
 </head>
-<body class="fleft">
+<body>
     <?php include 'header.php';?>
-    <?php include 'reservation_table.php';?>
-
-    <div class="fleft full-width text-align-center" >
-        <a href="candidate_details.php" class="btn btn-primary btn-lg"><?php echo $lang['dashboard_btn_1']; ?></a>
-        <a href="candidates_details.php" class="btn btn-primary btn-lg"><?php echo $lang['dashboard_btn_2']; ?></a>
+    <div class="wrapper">
+        <div class="fleft full-width text-align-center" >
+            <a href="candidate_details.php" class="btn btn-primary btn-lg fs4">
+                <span class="fa fa-plus-square fs4"></span>
+                <?php echo $lang['dashboard_btn_1']; ?>
+            </a>
+            <a href="candidates_details.php" class="btn btn-primary btn-lg fs4">
+                <span class="fa fa-edit fs4"></span>
+                <?php echo $lang['dashboard_btn_2']; ?>
+            </a>
+        </div>  
     </div>
 </body>
 </html>

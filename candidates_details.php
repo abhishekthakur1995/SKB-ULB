@@ -23,11 +23,8 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     <meta charset="UTF-8">
     <title><?php echo $lang['candidates_details_heading']; ?></title>
     <style type="text/css">
-        .page-header h2{
-            margin-top: 0;
-        }
         table tr td:last-child a{
-            margin-right: 15px;
+            margin-right: 5px;
         }
     </style>
 </head>
@@ -37,9 +34,12 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="page-header clearfix" style="margin-bottom: 20px;">
-                        <h2 class="pull-left" style="padding-top: 10px;"><?php echo $lang['candidates_details_heading']; ?></h2>
-                        <a href="candidate_details.php" class="btn btn-success pull-right"><?php echo $lang['add_new_candidate_btn']; ?></a>
+                    <div class="page-header clearfix margin-bottom-4x">
+                        <h2 class="pull-left padding-top-4x"><?php echo $lang['candidates_details_heading']; ?></h2>
+                        <a href="candidate_details.php" class="btn btn-success pull-right fs4">
+                            <span class="fa fa-plus-square fs4"></span>
+                            <?php echo $lang['add_new_candidate_btn']; ?>
+                        </a>
                     </div>
                     <?php
                     // Attempt select query execution
@@ -54,7 +54,6 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                                         echo "<th>".$lang['guardian']."</th>";
                                         echo "<th>".$lang['dob']."</th>";
                                         echo "<th>".$lang['permanentAddress']."</th>";
-                                        echo "<th>".$lang['temporaryAddress']."</th>";
                                         echo "<th>".$lang['district']."</th>";
                                         echo "<th>".$lang['birth_place']."</th>";
                                         echo "<th>".$lang['phone_number']."</th>";
@@ -62,6 +61,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                                         echo "<th>".$lang['maritial_status']."</th>";
                                         echo "<th>".$lang['category']."</th>";
                                         echo "<th>".$lang['ulb_region']."</th>";
+                                        echo "<th>".$lang['receipt_number']."</th>";
                                         echo "<th>".$lang['action']."</th>";
                                     echo "</tr>";
                                 echo "</thead>";
@@ -74,7 +74,6 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                                         echo "<td>" . $row['guardian'] . "</td>";
                                         echo "<td>" . $row['dob'] . "</td>";
                                         echo "<td>" . $row['permanentAddress'] . "</td>";
-                                        echo "<td>" . $row['temporaryAddress'] . "</td>";
                                         echo "<td>" . $row['district'] . "</td>";
                                         echo "<td>" . $row['birthPlace'] . "</td>";
                                         echo "<td>" . $row['phoneNumber'] . "</td>";
@@ -83,6 +82,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                                         echo "<td>" . $lang[ucwords(strtolower($row['maritialStatus']))] . "</td>";
                                         echo "<td>" . $lang[$row['category']] . "</td>";
                                         echo "<td>" . $row['ulbRegion'] . "</td>";
+                                        echo "<td>" . explode('_', $row['receiptNumber'])[1] . "</td>";
                                         echo "<td>";
                                             echo "<a href='update.php?id=". $row['id'] ."' title='".$lang['update_record']."' data-toggle='tooltip'><span class='fa fa-pencil-square-o clr-green'></span></a>";
                                             echo "<a data-id=". $row['id'] ." title='".$lang['delete_record']."' data-toggle='tooltip'><span data-id=". $row['id'] ." class='fa fa-trash clr-red'></span></a>";
@@ -115,7 +115,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" style="margin-left: 0px;">&times;</button>
+                    <button type="button" class="close margin-left-none" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title"><?php echo $lang['delete_alert']; ?></h4>
                 </div>
                 <div class="modal-footer">
@@ -131,7 +131,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" style="margin-left: 0px;">&times;</button>
+                    <button type="button" class="close margin-left-none" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body fs20">
                     <p><?php echo $lang['delete_alert1']; ?></p>

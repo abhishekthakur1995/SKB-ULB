@@ -73,9 +73,14 @@ body {
 .update_candidate_detail .form-group input, .form-group select {
     width: 250px !important;
 }
-
+.padding-top-4x{
+	padding-top: 20px !important;
+}
 .margin-bottom-2x{
 	margin-bottom: 10px !important;
+}
+.margin-bottom-4x{
+	margin-bottom: 20px !important;
 }
 .margin-bottom-4x{
 	margin-bottom: 20px !important;
@@ -92,6 +97,9 @@ body {
 }
 .margin-right-2x {
 	margin-right: 10px;
+}
+.margin-left-none{
+	margin-left: 0px !important;
 }
 .info-header {
 	font-size: 22px;
