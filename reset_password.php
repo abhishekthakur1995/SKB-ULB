@@ -90,7 +90,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 
                                 // Attempt to execute the prepared statement
                                 if(mysqli_stmt_execute($stmt)){
-                                    unset($_SESSION);      
+                                    $_SESSION = array();
+                                    session_destroy();
+                                    session_unset();      
                                     header("location: index.php");
                                 } else {
                                     echo "Something went wrong. Please try again later.";
