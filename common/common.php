@@ -8,6 +8,9 @@ function __construct() {
 
 class Common {
 
+	const TSP_AREA = ['JAIPUR'];
+	const TSP_AREA_EXCLUDE_CATEGORY = ['OBC', 'SPECIALOBC'];
+
 	const totalSeats = [
 		'KOTA' => 1821,
 		'JAIPUR' => 4961,

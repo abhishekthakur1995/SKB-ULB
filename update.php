@@ -3,6 +3,7 @@ session_start();
 
 require('config.php');
 require('languages/hi/lang.hi.php');
+require('common/common.php');
 
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     header("location: index.php");
@@ -286,7 +287,13 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                         $categoryListJson = file_get_contents(__DIR__ . '/data/category_list.json');
                         $categoryListArr = json_decode($categoryListJson, true);
                         foreach($categoryListArr as $key => $value) {
-                            echo "<option value=".$value['CODE'].">".$lang[$value['NAME']]."</option>"; 
+                            if(in_array($_SESSION['ulb_region'], Common::TSP_AREA)) {
+                                if(!in_array($value['CODE'], Common::TSP_AREA_EXCLUDE_CATEGORY)) {
+                                    echo "<option value=".$value['CODE'].">".$lang[$value['NAME']]."</option>";
+                                }
+                            } else {
+                                echo "<option value=".$value['CODE'].">".$lang[$value['NAME']]."</option>";   
+                            } 
                         }
                     ?>
                 </select>
