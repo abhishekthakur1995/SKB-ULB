@@ -4,6 +4,7 @@ session_start();
  
 require('config.php');
 require('languages/hi/lang.hi.php');
+require('common/common.php');
 
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     header("location: index.php");
@@ -39,16 +40,22 @@ if (isset($_SESSION['message'])) {
     <div class="wrapper fleft full-width margin-top-6x">
 
         <?php if($_SESSION['user_role'] === 'SUPERADMIN') { ?>
+            <div class="container" style="width: 500px;">
+                <div class="jumbotron text-align-center">
+                    <h1>Total Enteries: <?php echo Common::getCountOfTotalEnteries(); ?></h1>
+                </div>    
+            </div>
+
             <div class="fleft full-width text-align-center" >
-            <a href="superUser/forgotPassword.php" class="btn btn-primary btn-lg fs4">
-                <span class="fa fa-undo-alt fs4"></span>
-                <?php echo $lang['dashboard_btn_6']; ?>
-            </a>
-            <a href="superUser/viewAllCandidateReport.php" class="btn btn-primary btn-lg fs4">
-                <span class="fa fa-undo-alt fs4"></span>
-                <?php echo $lang['dashboard_btn_7']; ?>
-            </a>
-        </div>
+                <a href="superUser/forgotPassword.php" class="btn btn-primary btn-lg fs4">
+                    <span class="fa fa-undo-alt fs4"></span>
+                    <?php echo $lang['dashboard_btn_6']; ?>
+                </a>
+                <a href="superUser/viewAllCandidateReport.php" class="btn btn-primary btn-lg fs4">
+                    <span class="fa fa-undo-alt fs4"></span>
+                    <?php echo $lang['dashboard_btn_7']; ?>
+                </a>
+            </div>
         <?php } else { ?>
         <div class="fleft full-width text-align-center" >
             <a href="candidate_details.php" class="btn btn-primary btn-lg fs4">

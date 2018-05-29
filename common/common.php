@@ -2,13 +2,9 @@
 define('__ROOT__', dirname(dirname(__FILE__))); 
 require_once(__ROOT__.'/config.php');
 
-function __construct() {
-	$this->myVar = $GLOBALS['link'];
-}
-
 class Common {
 
-	const TSP_AREA = ['JAIPUR'];
+	const TSP_AREA = ['UNITED'];
 	const TSP_AREA_EXCLUDE_CATEGORY = ['OBC', 'SPECIALOBC'];
 
 	const totalSeats = [
@@ -238,6 +234,14 @@ class Common {
 
 
 	//get candidates
+
+	public static function getCountOfTotalEnteries() {
+		$sql= "SELECT COUNT(*) as total from candidate_list";
+		$result=mysqli_query($GLOBALS['link'], $sql);
+		$data=mysqli_fetch_assoc($result);
+		return $data['total'];
+	}
+
 	public static function getTotalEnteries() {
 		$sql = "SELECT * FROM candidate_list WHERE ulbRegion = '".$_SESSION['ulb_region']."'";
 		$res = mysqli_query($GLOBALS['link'], $sql);

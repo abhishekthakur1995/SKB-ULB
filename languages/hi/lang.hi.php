@@ -78,6 +78,7 @@
     $lang['dashboard_btn_4'] = 'चयनित उम्मीदवार रिपोर्ट जेनरेट करें';
     $lang['dashboard_btn_5'] = 'यहां क्लिक करे';
     $lang['dashboard_btn_6'] = 'यूएलबी पासवर्ड रीसेट करें';
+    $lang['dashboard_btn_7'] = 'उम्मीदवार रिपोर्ट देखें और डाउनलोड करें';
 
   	//create candidate form headings
   	$lang['enter_candidate_details'] = 'उम्मीदवार विवरण दर्ज करें';
