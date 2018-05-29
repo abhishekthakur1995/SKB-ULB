@@ -350,7 +350,8 @@
 	{
 		"NAME": "Behror",
 		"CODE": "BEHROR"
-	},{
+	},
+	{
 		"NAME": "Kishangarhbas",
 		"CODE": "KISHANGARHBAS"
 	},
@@ -430,7 +431,7 @@
 	},
 	{
 		"NAME": "Shrimadhopur",
-		"CODE": "Shrimadhopur"
+		"CODE": "SHRIMADHOPUR"
 	},
 	{
 		"NAME": "Khandela",
@@ -745,16 +746,8 @@
 		"CODE": "SHRIVIJAYNAGAR"
 	},
 	{
-		"NAME": "Roopwas",
-		"CODE": "ROOPWAS"
-	},
-	{
 		"NAME": "Khudlafalna",
 		"CODE": "KHUDLAFALNA"
-	},
-	{
-		"NAME": "Napasar",
-		"CODE": "NAPASAR"
 	},
 	{
 		"NAME": "Mahwa",
@@ -767,5 +760,9 @@
 	{
 		"NAME": "DLBSUPERADMIN",
 		"CODE": "DLBSUPERADMIN"
+	},
+	{
+		"NAME": "Ramgarh",
+		"NAME": "RAMGARH",	
 	}
 ]
