@@ -313,14 +313,14 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             </div>
 
             <div class="form-group">
-                <label style="width: 230px;" class="required"><?php echo $lang['all_documents_provided']; ?></label>
-                <label style="width: 60px;">             
+                <label class="required" style="width: 200px;"><?php echo $lang['all_documents_provided']; ?></label>                  
+                <label style="width: 60px;">                  
                     <input type="radio" class="margin-horiz-2x" name="userFormValid" style="width: 10px !important" value="1" required><?php echo $lang['yes']; ?>
                 </label>
-                <label style="width: 60px;">
+                <label style="width: 60px;"> 
                     <input type="radio" class="margin-horiz-2x" name="userFormValid" value="0" style="width: 10px !important"><?php echo $lang['no']; ?>
                 </label>
-                <textarea name="remark" rows="4" cols="50" class="form-control textarea" maxlength="500" value="<?php echo $remark; ?>" placeholder="<?php echo $lang['remark_place_holder']; ?>" style="margin-left: 30px" disabled></textarea>
+                <textarea name="remark" rows="4" cols="50" class="form-control textarea margin-left-6x" maxlength="500" value="<?php echo $remark; ?>" placeholder="<?php echo $lang['remark_place_holder']; ?>" disabled required></textarea>
             </div>
 
             <div class="form-group">
@@ -348,6 +348,13 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $(".gender").val('<?php echo $gender; ?>');
         $(".religion").val('<?php echo $religion; ?>');
         $('[name="remark"]').val('<?php echo $remark; ?>');
-        $('[name="userFormValid"]').val('<?php echo $userFormValid; ?>');
+
+        $('[name="userFormValid"]').on('change', function() {
+            if($("input[name='userFormValid']:checked").val() == '1') {
+                $('.textarea').attr('disabled', true);
+            } else {
+                $('.textarea').attr('disabled', false);
+            }
+        });
     });
 </script>
