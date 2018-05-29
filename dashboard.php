@@ -44,6 +44,10 @@ if (isset($_SESSION['message'])) {
                 <span class="fa fa-undo-alt fs4"></span>
                 <?php echo $lang['dashboard_btn_6']; ?>
             </a>
+            <a href="superUser/viewAllCandidateReport.php" class="btn btn-primary btn-lg fs4">
+                <span class="fa fa-undo-alt fs4"></span>
+                <?php echo $lang['dashboard_btn_7']; ?>
+            </a>
         </div>
         <?php } else { ?>
         <div class="fleft full-width text-align-center" >
