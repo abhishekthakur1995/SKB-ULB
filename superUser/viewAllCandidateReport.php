@@ -48,13 +48,13 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
                     </div>
                     <?php
                     // Attempt select query execution
-                    $sql = 'SELECT ulbRegion, COUNT(*) as total, 
+                    $sql = 'SELECT ulbRegion, COUNT(*) as total,
 							COUNT(case when candidate_list.gender="m" then 1 end) as male, 
 							COUNT(case when candidate_list.gender="f" then 1 end) as female, 
 							COUNT(case when candidate_list.gender="f" AND maritialStatus="WIDOW" then 1 end ) as "Female Widow",
-							COUNT(case when candidate_list.gender="f" AND maritialStatus="DIVORCE" then 1 end ) as "Female Divorcee",
-							COUNT(case when candidate_list.gender="f" AND maritialStatus="SINGLE" then 1 end ) as "Female Single",
-							COUNT(case when candidate_list.gender="f" AND maritialStatus="MARRIED" then 1 end ) as "Female Married"
+							COUNT(case when candidate_list.gender="f" AND maritialStatus="DIVORCEE" then 1 end ) as "Female Divorcee",
+							COUNT(case when candidate_list.gender="f" AND maritialStatus="MARRIED" then 1 end ) as "Female Married",
+							COUNT(case when candidate_list.gender="f" AND maritialStatus="UNMARRIED" then 1 end ) as "Female Unmarried"
 							from candidate_list group by ulbRegion order by total desc';
 
 
@@ -69,7 +69,7 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
                                         echo "<th>Female Candidates</th>";
                                         echo "<th>Female Widow Candidates</th>";
                                         echo "<th>Female Divorcee Candidates</th>";
-                                        echo "<th>Female MarriedCandidates</th>";
+                                        echo "<th>Female Married Candidates</th>";
                                         echo "<th>Female Unmarried Candidates</th>";
                                         echo "<th>Total Candidates</th>";
                                     echo "</tr>";
@@ -84,8 +84,8 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
                                         echo "<td>" . $row['female'] . "</td>";
                                         echo "<td>" . $row['Female Widow'] . "</td>";
                                         echo "<td>" . $row['Female Divorcee'] . "</td>";
-                                        echo "<td>" . $row['Female Single'] . "</td>";
                                         echo "<td>" . $row['Female Married'] . "</td>";
+                                        echo "<td>" . $row['Female Unmarried'] . "</td>";
                                         echo "<td>" . $row['total'] . "</td>";
                                     echo "</tr>";
                                 }

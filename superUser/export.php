@@ -24,9 +24,9 @@ $sql = 'SELECT ulbRegion,
 COUNT(case when candidate_list.gender="m" then 1 end) as male, 
 COUNT(case when candidate_list.gender="f" then 1 end) as female, 
 COUNT(case when candidate_list.gender="f" AND maritialStatus="WIDOW" then 1 end ) as "Female Widow",
-COUNT(case when candidate_list.gender="f" AND maritialStatus="DIVORCE" then 1 end ) as "Female Divorcee",
-COUNT(case when candidate_list.gender="f" AND maritialStatus="MARRIED" then 1 end ) as "Female Married"
-COUNT(case when candidate_list.gender="f" AND maritialStatus="SINGLE" then 1 end ) as "Female Single",
+COUNT(case when candidate_list.gender="f" AND maritialStatus="DIVORCEE" then 1 end ) as "Female Divorcee",
+COUNT(case when candidate_list.gender="f" AND maritialStatus="MARRIED" then 1 end ) as "Female Married",
+COUNT(case when candidate_list.gender="f" AND maritialStatus="UNMARRIED" then 1 end ) as "Female Unmarried",
 COUNT(*) as total
 from candidate_list group by ulbRegion order by total desc';
 
