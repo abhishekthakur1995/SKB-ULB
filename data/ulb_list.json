@@ -100,10 +100,6 @@
 		"CODE": "DEGANA"
 	},
 	{
-		"NAME": "Tonk",
-		"CODE": "TONK"
-	},
-	{
 		"NAME": "Deoli",
 		"CODE": "DEOLI"
 	},
@@ -647,7 +643,7 @@
 	},
 	{
 		"NAME": "Bidasar",
-		"CODE": "Bidasar"
+		"CODE": "BIDASAR"
 	},
 	{
 		"NAME": "Rajaldesar",
