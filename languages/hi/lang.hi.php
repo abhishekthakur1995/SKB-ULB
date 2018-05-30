@@ -30,6 +30,7 @@
     $lang['receipt_number'] = 'आवेदक प्राप्ति क्रमांक';
     $lang['yes'] = 'हां';
     $lang['no'] = 'ना';
+    $lang['under_scrutiny'] = 'जांच के दायरे में';
     $lang['data_saved'] = 'डेटा सफलतापूर्वक दर्ज किया गया';
     $lang['tbl1_heading'] = 'आरक्षण तालिका';
     $lang['tbl2_heading'] = 'उम्मीदवार संख्या तालिका';
@@ -73,7 +74,7 @@
     //$lang['welcome_msg_1'] = 'नमस्ते';
     $lang['welcome_msg_2'] = 'आपके डैशबोर्ड में आपका स्वागत है';
     $lang['dashboard_btn_1'] = 'नया उम्मीदवार विवरण दर्ज करें';
-    $lang['dashboard_btn_2'] = 'उम्मीदवारों विवरण संपादित करें';
+    $lang['dashboard_btn_2'] = 'उम्मीदवार का विवरण अपडेट करें';
     $lang['dashboard_btn_3'] = 'उम्मीदवारों का चयन करें';
     $lang['dashboard_btn_4'] = 'चयनित उम्मीदवार रिपोर्ट जेनरेट करें';
     $lang['dashboard_btn_5'] = 'यहां क्लिक करे';

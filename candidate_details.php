@@ -275,10 +275,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-group">
                 <label class="required" style="width: 200px;"><?php echo $lang['all_documents_provided']; ?></label>                  
                 <label style="width: 60px;">                  
-                    <input type="radio" class="margin-horiz-2x" name="userFormValid" style="width: 10px !important" value="1" required><?php echo $lang['yes']; ?>
+                    <input type="radio" class="margin-horiz-2x" name="userFormValid" value="1" style="width: 10px !important" required><?php echo $lang['yes']; ?>
                 </label>
                 <label style="width: 60px;"> 
                     <input type="radio" class="margin-horiz-2x" name="userFormValid" value="0" style="width: 10px !important"><?php echo $lang['no']; ?>
+                </label>
+                <label style="width: 150px;"> 
+                    <input type="radio" class="margin-horiz-2x" name="userFormValid" value="2" style="width: 10px !important"><?php echo $lang['under_scrutiny']; ?>
                 </label>
                 <textarea name="remark" rows="4" cols="50" class="form-control textarea margin-left-6x" maxlength="500" value="<?php echo $remark; ?>" placeholder="<?php echo $lang['remark_place_holder']; ?>" disabled required></textarea>
             </div>
@@ -302,10 +305,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <script type="text/javascript">
 $('document').ready(function() {
     $('[name="userFormValid"]').on('change', function() {
-        if($("input[name='userFormValid']:checked").val() == '1') {
-            $('.textarea').attr('disabled', true);
-        } else {
+        if($("input[name='userFormValid']:checked").val() == '0') {
             $('.textarea').attr('disabled', false);
+        } else {
+            $('.textarea').attr('disabled', true);
         }
     });
 });
