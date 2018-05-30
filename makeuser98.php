@@ -174,6 +174,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <?php 
                             $ulbListJson = file_get_contents(__DIR__ . '/data/ulb_list.json');
                             $ulbListArr = json_decode($ulbListJson, true);
+                            asort($ulbListArr);
                             foreach($ulbListArr as $key => $value) {
                                 echo "<option value=".$value['CODE'].">".$value['NAME']."</option>"; 
                             }
