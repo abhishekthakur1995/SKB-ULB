@@ -50,7 +50,8 @@ $totalMaleSPECIALOBCSeats = $totalSeatsForSPECIALOBC - ($totalSeatsForSPECIALOBC
 </head>
 <body>
     <div class="table-container fleft full-width">
-        <!-- <table class="ulb-table">
+        <?php /*
+        <table class="ulb-table">
             <thead>
                 <tr class="text-align-center"><td colspan="6" class="fs6"><?php echo $lang['tbl1_heading']; ?></td></tr>
                 <tr>
@@ -112,7 +113,8 @@ $totalMaleSPECIALOBCSeats = $totalSeatsForSPECIALOBC - ($totalSeatsForSPECIALOBC
                     <td><?php echo $totalSeatsInSeletedUlb; ?>/<?php echo $totalSeatsInSeletedUlb ?></td>
                 </tr>
             </tbody>
-        </table> -->
+        </table>
+        */ ?>
 
         <table class="ulb-table">
         <thead>
