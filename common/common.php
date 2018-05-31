@@ -8,9 +8,11 @@ class Common {
 	const TSP_AREA_EXCLUDE_CATEGORY = ['OBC', 'SPECIALOBC'];
 
 	const totalSeats = [
+		'AAMET' => 24,
+		'AASIND'=>9,
+		'BEAWAR'=>161,
 		'KOTA' => 1821,
 		'JAIPUR' => 4961,
-		'BEAWAR'=>161,
 		'KISHANGARH'=>161,
 		'KEKRI'=>113,
 		'PUSHKAR'=>97,
@@ -19,7 +21,6 @@ class Common {
 		'BHILWARA'=>320,
 		'GULABPURA'=>14,
 		'GANGAPUR'=>8,
-		'AASIND'=>9,
 		'MANDALGARH'=>8,
 		'SHAHPURABHILWARA'=>20,
 		'NAGAUR'=>50,
