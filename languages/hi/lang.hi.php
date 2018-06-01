@@ -34,6 +34,10 @@
     $lang['data_saved'] = 'डेटा सफलतापूर्वक दर्ज किया गया';
     $lang['tbl1_heading'] = 'आरक्षण तालिका';
     $lang['tbl2_heading'] = 'उम्मीदवार संख्या तालिका';
+    $lang['form_status'] = '';
+    $lang['form_status_1'] = 'हां';
+    $lang['form_status_0'] = 'ना';
+    $lang['form_status_2'] = 'जांच के दायरे में';
 
 
     //maritial_status
