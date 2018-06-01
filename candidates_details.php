@@ -76,10 +76,9 @@ $offset = ($page * $items) - $items;
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
-                                $i=0;
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                        echo "<td>" . ++$i . "</td>";
+                                        echo "<td>" . ++$offset . "</td>";
                                         echo "<td>" . $row['name'] . "</td>";
                                         echo "<td>" . $row['guardian'] . "</td>";
                                         echo "<td>" . $row['dob'] . "</td>";

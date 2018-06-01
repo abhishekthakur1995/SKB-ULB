@@ -58,13 +58,13 @@ $offset = ($page * $items) - $items;
                     <?php
                     // Attempt select query execution
                     $sql = "SELECT ulbRegion, COUNT(*) AS total,
-							COUNT(case when candidate_list.gender='m' then 1 end) as male, 
-							COUNT(case when candidate_list.gender='f' then 1 end) as female, 
-							COUNT(case when candidate_list.gender='f' AND maritialStatus='WIDOW' then 1 end ) as 'Female Widow',
-							COUNT(case when candidate_list.gender='f' AND maritialStatus='DIVORCEE' then 1 end ) as 'Female Divorcee',
-							COUNT(case when candidate_list.gender='f' AND maritialStatus='MARRIED' then 1 end ) as 'Female Married',
-							COUNT(case when candidate_list.gender='f' AND maritialStatus='UNMARRIED' then 1 end ) as 'Female Unmarried'
-							FROM candidate_list GROUP BY ulbRegion ORDER BY total desc LIMIT ".$items." OFFSET ".$offset."";
+							COUNT(CASE WHEN candidate_list.gender='m' THEN 1 END) AS male,
+							COUNT(CASE WHEN candidate_list.gender='f' THEN 1 END) AS female, 
+							COUNT(CASE WHEN candidate_list.gender='f' AND maritialStatus='WIDOW' THEN 1 END ) AS 'Female Widow',
+							COUNT(CASE WHEN candidate_list.gender='f' AND maritialStatus='DIVORCEE' THEN 1 END ) AS 'Female Divorcee',
+							COUNT(CASE WHEN candidate_list.gender='f' AND maritialStatus='MARRIED' THEN 1 END ) AS 'Female Married',
+							COUNT(CASE WHEN candidate_list.gender='f' AND maritialStatus='UNMARRIED' THEN 1 END ) AS 'Female Unmarried'
+							FROM candidate_list GROUP BY ulbRegion ORDER BY total DESC LIMIT ".$items." OFFSET ".$offset."";
 
 
                     if($result = mysqli_query($link, $sql)){
@@ -85,10 +85,9 @@ $offset = ($page * $items) - $items;
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
-                                $i=0;
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                        echo "<td>" . ++$i . "</td>";
+                                        echo "<td>" . ++$offset . "</td>";
                                         echo "<td>" . $row['ulbRegion'] . "</td>";
                                         echo "<td>" . $row['male'] . "</td>";
                                         echo "<td>" . $row['female'] . "</td>";
