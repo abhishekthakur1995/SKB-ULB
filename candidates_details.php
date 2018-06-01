@@ -15,6 +15,14 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     }
 }
 
+if($_GET && $_GET['page']) {
+    $page = $_GET['page'];
+} else {
+    $page = 1;
+}
+
+$items = 10;
+$offset = ($page * $items) - $items;
 ?>
 
 <!DOCTYPE html>
@@ -44,9 +52,10 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                     </div>
                     <?php
                     // Attempt select query execution
-                    $sql = "SELECT * FROM candidate_list WHERE ulbRegion = '".trim($_SESSION['ulb_region'])."' ORDER BY created_at DESC";
+                    $sql = "SELECT * FROM candidate_list WHERE ulbRegion = '".trim($_SESSION['ulb_region'])."' ORDER BY created_at DESC LIMIT ".$items." OFFSET ".$offset."";
                     if($result = mysqli_query($link, $sql)){
-                        if(mysqli_num_rows($result) > 0){
+                        $count = mysqli_num_rows($result);
+                        if($count > 0){
                             echo "<table class='table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
@@ -105,7 +114,22 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                     mysqli_close($link);
                     ?>
                 </div>
-            </div>        
+            </div>
+            <ul class="pagination pagination-lg fright">
+                <?php if ($page != 1) { ?>        
+                    <li class="page-item"><a class="page-link" href="candidates_details.php?page=<?php echo $page - 1; ?>">&laquo;</a></li>
+
+                    <li class="page-item"><a class="page-link" href="candidates_details.php?page=<?php echo $page - 1; ?>"><?php echo $page - 1; ?></a></li>
+                <?php } ?>
+
+                <li class="page-item active"><a class="page-link" href="candidates_details.php?page=<?php echo $page; ?>"><?php echo $page; ?></a></li>
+
+                <?php if ($count == $items) { ?>
+                    <li class="page-item"><a class="page-link" href="candidates_details.php?page=<?php echo $page + 1 ; ?>"><?php echo $page + 1; ?></a></li>
+
+                    <li class="page-item"><a class="page-link" href="candidates_details.php?page=<?php echo $page + 1; ?>">&raquo;</a></li>
+                <?php } ?>
+            </ul>
         </div>
     </div>
 

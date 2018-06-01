@@ -65,7 +65,7 @@ if (isset($_SESSION['message'])) {
                 <span class="fa fa-plus-square fs4"></span>
                 <?php echo $lang['dashboard_btn_1']; ?>
             </a>
-            <a href="candidates_details.php" class="btn btn-primary btn-lg fs4">
+            <a href="candidates_details.php?page=1" class="btn btn-primary btn-lg fs4">
                 <span class="fa fa-edit fs4"></span>
                 <?php echo $lang['dashboard_btn_2']; ?>
             </a>

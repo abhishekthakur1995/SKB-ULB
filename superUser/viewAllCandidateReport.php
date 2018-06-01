@@ -19,6 +19,15 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
 	header("location: ../error.php?err_msg=Access Not Allowed");
 }
 
+if($_GET && $_GET['page']) {
+    $page = $_GET['page'];
+} else {
+    $page = 1;
+}
+
+$items = 10;
+$offset = ($page * $items) - $items;
+
 ?>
 
 <!DOCTYPE html>
@@ -48,18 +57,19 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
                     </div>
                     <?php
                     // Attempt select query execution
-                    $sql = 'SELECT ulbRegion, COUNT(*) as total,
-							COUNT(case when candidate_list.gender="m" then 1 end) as male, 
-							COUNT(case when candidate_list.gender="f" then 1 end) as female, 
-							COUNT(case when candidate_list.gender="f" AND maritialStatus="WIDOW" then 1 end ) as "Female Widow",
-							COUNT(case when candidate_list.gender="f" AND maritialStatus="DIVORCEE" then 1 end ) as "Female Divorcee",
-							COUNT(case when candidate_list.gender="f" AND maritialStatus="MARRIED" then 1 end ) as "Female Married",
-							COUNT(case when candidate_list.gender="f" AND maritialStatus="UNMARRIED" then 1 end ) as "Female Unmarried"
-							from candidate_list group by ulbRegion order by total desc';
+                    $sql = "SELECT ulbRegion, COUNT(*) AS total,
+							COUNT(case when candidate_list.gender='m' then 1 end) as male, 
+							COUNT(case when candidate_list.gender='f' then 1 end) as female, 
+							COUNT(case when candidate_list.gender='f' AND maritialStatus='WIDOW' then 1 end ) as 'Female Widow',
+							COUNT(case when candidate_list.gender='f' AND maritialStatus='DIVORCEE' then 1 end ) as 'Female Divorcee',
+							COUNT(case when candidate_list.gender='f' AND maritialStatus='MARRIED' then 1 end ) as 'Female Married',
+							COUNT(case when candidate_list.gender='f' AND maritialStatus='UNMARRIED' then 1 end ) as 'Female Unmarried'
+							FROM candidate_list GROUP BY ulbRegion ORDER BY total desc LIMIT ".$items." OFFSET ".$offset."";
 
 
                     if($result = mysqli_query($link, $sql)){
-                        if(mysqli_num_rows($result) > 0){
+                        $count = mysqli_num_rows($result);
+                        if($count > 0){
                             echo "<table class='table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
@@ -104,7 +114,22 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
                     mysqli_close($link);
                     ?>
                 </div>
-            </div>        
+            </div>
+            <ul class="pagination pagination-lg fright">
+                <?php if ($page != 1) { ?>        
+                    <li class="page-item"><a class="page-link" href="viewAllCandidateReport.php?page=<?php echo $page - 1; ?>">&laquo;</a></li>
+
+                    <li class="page-item"><a class="page-link" href="viewAllCandidateReport.php?page=<?php echo $page - 1; ?>"><?php echo $page - 1; ?></a></li>
+                <?php } ?>
+
+                <li class="page-item active"><a class="page-link" href="viewAllCandidateReport.php?page=<?php echo $page; ?>"><?php echo $page; ?></a></li>
+
+                <?php if ($count == $items) { ?>
+                    <li class="page-item"><a class="page-link" href="viewAllCandidateReport.php?page=<?php echo $page + 1 ; ?>"><?php echo $page + 1; ?></a></li>
+
+                    <li class="page-item"><a class="page-link" href="viewAllCandidateReport.php?page=<?php echo $page + 1; ?>">&raquo;</a></li>
+                <?php } ?>
+            </ul>       
         </div>
 	</div>
 </body>

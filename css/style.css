@@ -16,6 +16,9 @@ body {
 .fleft {
 	float: left;
 }
+.fright {
+	float: right;
+}
 .full-width {
 	width: 100% !important;
 }
@@ -156,4 +159,25 @@ label.required:after {
     background-color: #36304a;
     text-align: center;
     color: white;
+}
+a.page-link {
+    color: #007bff !important;
+    border: 1px solid #dee2e6 !important;
+    background-color: #fff !important;
+}
+.page-item.active .page-link {
+	z-index: 1 !important;
+    color: #fff !important;
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+}
+.pagination a:hover:not(.active) {
+	background-color: #ddd !important;
+}
+.pagination a {
+    border-radius: 5px;
+}
+
+.pagination a.active {
+    border-radius: 5px;
 }
