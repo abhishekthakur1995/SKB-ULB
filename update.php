@@ -166,7 +166,6 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             $userFormValid = $row['userFormValid'];
             $specialPreference = $row['specialPreference'];
             $specialPreferenceArr = isset($specialPreference) ? explode(",", $specialPreference) : [] ;
-            //print_r($specialPreferenceArr); die();
         } else {
             // URL doesn't contain valid id. Redirect to error page
             header("location: error.php");

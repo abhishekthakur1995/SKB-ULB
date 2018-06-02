@@ -276,15 +276,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
 
             <div class="form-group">
-                <label style="width: 200px;"><?php echo $lang['special_preference']; ?></label>                  
-                <label style="width: 150px;">                  
-                    <input type="checkbox" class="margin-horiz-2x" name="specialPreference[]" value="EXOFFICER" style="width: 10px !important"><?php echo $lang['EXOFFICER']; ?>
+                <label style="width: 200px;"><?php echo $lang['special_preference']; ?></label>
+                <?php $specialPreferenceArr = isset($specialPreference) ? explode(",", $specialPreference) : [] ; ?>
+                <label style="width: 150px;">
+                    <input type="checkbox" class="margin-horiz-2x" name="specialPreference[]" value="EXOFFICER" style="width: 10px !important" <?php echo (in_array("EXOFFICER", $specialPreferenceArr) ? 'checked' : '');?>><?php echo $lang['EXOFFICER']; ?>
                 </label>
                 <label style="width: 150px;"> 
-                    <input type="checkbox" class="margin-horiz-2x" name="specialPreference[]" value="DISABLED" style="width: 10px !important"><?php echo $lang['DISABLED']; ?>
+                    <input type="checkbox" class="margin-horiz-2x" name="specialPreference[]" value="DISABLED" style="width: 10px !important" <?php echo (in_array("DISABLED", $specialPreferenceArr) ? 'checked' : '');?>><?php echo $lang['DISABLED']; ?>
                 </label>
                 <label style="width: 150px;"> 
-                    <input type="checkbox" class="margin-horiz-2x" name="specialPreference[]" value="SPORTSPERSON" style="width: 10px !important"><?php echo $lang['SPORTSPERSON']; ?>
+                    <input type="checkbox" class="margin-horiz-2x" name="specialPreference[]" value="SPORTSPERSON" style="width: 10px !important" <?php echo (in_array("SPORTSPERSON", $specialPreferenceArr) ? 'checked' : '');?>><?php echo $lang['SPORTSPERSON']; ?>
                 </label>
             </div>
 
