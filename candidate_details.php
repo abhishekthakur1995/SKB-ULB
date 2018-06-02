@@ -307,7 +307,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <label class="required" style="width: 148px;"><?php echo $lang['receipt_number']; ?></label>
                 <?php $receiptNumber = !empty($receiptNumber) ? explode('_', $receiptNumber)[1] : ""; ?>
                 <input type="number" name="receiptNumber" class="form-control <?php echo (!empty($receipt_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $receiptNumber; ?>" required>
-                <span class="invalid-feedback text-align-center"><?php echo $receipt_number_err; ?></span>
+                <span class="invalid-feedback text-align-center" style="width:120px;"><?php echo $receipt_number_err; ?></span>
             </div>
 
             <div class="form-group margin-left-3x">
