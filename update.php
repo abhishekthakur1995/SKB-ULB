@@ -336,10 +336,48 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             <div class="form-group">
                 <input type="hidden" name="id" value="<?php echo $id; ?>"/>
                 <input type="submit" class="btn btn-primary fs4" value="<?php echo $lang['updateButton']; ?>">
-                <a href="dashboard.php" class="btn btn-danger fs4"><?php echo $lang['cancelButton']; ?></a>
+                <a href="dashboard.php" class="btn btn-warning fs4"><?php echo $lang['cancelButton']; ?></a>
+                <input type="button" data-id="<?php echo $id; ?>" class="btn btn-danger delete-button fs4" value="<?php echo $lang['delete_record']; ?>" />
             </div>
         </form>                
     </div>
+
+    <button type="button" class="btn btn-info btn-lg display-none first-modal" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close margin-left-none" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><?php echo $lang['delete_alert']; ?></h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default delete-data" data-dismiss="modal"><?php echo $lang['yes']?></button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $lang['no']?></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-info btn-lg display-none second-modal" data-toggle="modal" data-target="#myModalSmall">Open Small Modal</button>
+    <div class="modal fade" id="myModalSmall" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close margin-left-none" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body fs20">
+                    <p><?php echo $lang['delete_alert1']; ?></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default confirm-delete" data-dismiss="modal"><?php echo $lang['delete_alert2']; ?></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 </html>
 
@@ -359,5 +397,34 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                 $('.textarea').attr('disabled', true);
             }
         });
+
+        var id = '';
+        $('[data-toggle="tooltip"]').tooltip();
+        $('.delete-button').on('click', function() {
+            id = $('.delete-button').data('id');
+            $('.first-modal').trigger('click');
+        });
+
+        $('.delete-data').on('click', function() {
+            $.ajax({
+                type: 'POST',
+                url: 'delete.php',
+                data: {id : id},
+                success: function(data) {
+                    data = JSON.parse(data);
+                    if(data.response == 'SUCCESS') {
+                        $('.second-modal').trigger('click');
+                    }
+                    if(data.response == 'FAILURE') {
+                        $('.second-modal').trigger('click');
+                    } 
+                }
+            });
+        });
+
+        $('.confirm-delete').on('click', function() {
+            document.location.href = '<?php echo BASE_URL; ?>/dashboard.php';
+        });
+
     });
 </script>

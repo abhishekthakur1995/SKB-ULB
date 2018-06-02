@@ -31,6 +31,12 @@ body {
 .text-align-center {
 	text-align: center;
 }
+.text-docoration-none {
+	text-decoration: none;
+}
+.clr-black {
+	color: black !important;
+}
 .clr-white { 
 	color:white; 
 }
@@ -39,6 +45,9 @@ body {
 }
 .clr-red { 
 	color:red; 
+}
+.bold {
+	font-weight: bold;
 }
 .login_detail label{
 	width: 60px;
@@ -180,4 +189,46 @@ a.page-link {
 
 .pagination a.active {
     border-radius: 5px;
+}
+
+.search-box{
+    width: 300px;
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+    padding-top: 15px;
+}
+.search-box input[type="text"]{
+    height: 32px;
+    padding: 5px 10px;
+    border: 1px solid #CCCCCC;
+    font-size: 14px;
+    padding: 20px;
+}
+.result{
+    position: absolute;        
+    z-index: 999;
+    top: 100%;
+    left: 0;
+    overflow: auto;
+    background-color: #fff;
+}
+.search-box input[type="text"], .result{
+    width: 100%;
+    box-sizing: border-box;
+}
+/* Formatting result items */
+.result p{
+    margin: 0;
+    padding: 12px 10px;
+    border: 1px solid #CCCCCC;
+    border-top: none;
+    cursor: pointer;
+    overflow: hidden;
+    height: 50px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.result p:hover{
+    background: #f2f2f2;
 }

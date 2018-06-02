@@ -45,10 +45,20 @@ $offset = ($page * $items) - $items;
                 <div class="col-md-12">
                     <div class="page-header clearfix margin-bottom-4x">
                         <h2 class="pull-left padding-top-4x"><?php echo $lang['candidates_details_heading']; ?></h2>
-                        <a href="candidate_details.php" class="btn btn-success pull-right fs4">
-                            <span class="fa fa-plus-square fs4"></span>
-                            <?php echo $lang['add_new_candidate_btn']; ?>
-                        </a>
+
+                        <div class="fright">
+                            <div id="search-box" class="search-box">
+                                <input type="text" autocomplete="off" placeholder="<?php echo $lang['search_candidates']; ?>" />
+                                <div class="result"></div>
+                            </div>
+
+
+                            <a href="candidate_details.php" class="btn btn-success pull-right fs4">
+                                <span class="fa fa-plus-square fs4"></span>
+                                <?php echo $lang['add_new_candidate_btn']; ?>
+                            </a>
+                        </div>
+
                     </div>
                     <?php
                     // Attempt select query execution
@@ -197,5 +207,24 @@ $(document).ready(function(){
             }
         });
     });
+
+    $('.search-box input[type="text"]').on("keyup", function(){
+        var inputVal = $(this).val();
+        var resultDropdown = $(this).siblings(".result");
+        if(inputVal.length){
+            $.get("backend_search.php", {term: inputVal}).done(function(data){
+                resultDropdown.html(data);
+            });
+        } else {
+            resultDropdown.empty();
+        }
+    });
+    
+    $("body").click(function(e) {
+        if (e.target.id != "search-box" || !($(e.target).parents("#search-box").length)) {
+            $('.result').empty();
+        }
+    });
+
 });
 </script>
