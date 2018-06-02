@@ -17,7 +17,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 }
  
 // Define variables and initialize with empty values
-$name = $gender = $dob = $category = $phoneNumber = $guardian = $permanentAddress = $temporaryAddress = $birthPlace = $district = $receiptNumber = $remark = $userFormValid = "";
+$name = $gender = $dob = $category = $phoneNumber = $guardian = $permanentAddress = $temporaryAddress = $birthPlace = $district = $receiptNumber = $remark = $userFormValid = $specialPreference = "";
 $name_err = $gender_err = $dob_err = $phone_number_err = $guardian_err = $receipt_number_err = $permanent_address_err = "";
  
 // Processing form data when form is submitted
@@ -84,15 +84,16 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     $district = trim($_POST['district']);
     $userFormValid = trim($_POST['userFormValid']);
     $remark = isset($_POST['remark']) ? trim($_POST['remark']) : '';
+    $specialPreference = isset($_POST['specialPreference']) ? implode(',', $_POST['specialPreference']) : '';
 
     // Check input errors before inserting in database
     if(empty($name_err) && empty($dob_err) && empty($guardian_err) && empty($receipt_number_err) && empty($gender_err)) {
         // Prepare an insert statement
-        $sql = "UPDATE candidate_list SET name=?, gender=?, dob=?, category=?, maritialStatus=?, ulbRegion=?, phoneNumber=?, guardian=?, birthPlace=?, religion=?, permanentAddress=?, temporaryAddress=?, district=?, userFormValid = ?, receiptNumber=?, remark=? WHERE id=?";
+        $sql = "UPDATE candidate_list SET name=?, gender=?, dob=?, category=?, maritialStatus=?, ulbRegion=?, phoneNumber=?, guardian=?, birthPlace=?, religion=?, permanentAddress=?, temporaryAddress=?, district=?, userFormValid = ?, receiptNumber=?, remark=? specialPreference=? WHERE id=?";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ssssssssssssssssi", $param_name, $param_gender, $param_dob, $param_category, $param_maritialStatus, $param_ulbRegion, $param_phoneNumber, $param_guardian, $param_birthPlace, $param_religion, $param_permanentAddress, $param_temporaryAddress, $param_district, $param_userFormValid, $param_receiptNumber, $param_remark, $param_id);
+            mysqli_stmt_bind_param($stmt, "sssssssssssssssssi", $param_name, $param_gender, $param_dob, $param_category, $param_maritialStatus, $param_ulbRegion, $param_phoneNumber, $param_guardian, $param_birthPlace, $param_religion, $param_permanentAddress, $param_temporaryAddress, $param_district, $param_userFormValid, $param_receiptNumber, $param_remark, $param_id);
             
             // Set parameters
             $param_name = $name;
@@ -111,6 +112,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             $param_userFormValid = $userFormValid;
             $param_receiptNumber = $receiptNumber;
             $param_remark = $remark;
+            $param_specialPreference = $specialPreference;
             $param_id = $id;
             
             // Attempt to execute the prepared statement
@@ -161,8 +163,10 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             $maritialStatus = $row['maritialStatus'];
             $gender = $row['gender'];
             $remark = $row['remark'];
-
             $userFormValid = $row['userFormValid'];
+            $specialPreference = $row['specialPreference'];
+            $specialPreferenceArr = isset($specialPreference) ? explode(",", $specialPreference) : '' ;
+            //print_r($specialPreferenceArr); die();
         } else {
             // URL doesn't contain valid id. Redirect to error page
             header("location: error.php");
@@ -268,6 +272,11 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             </div>
 
             <div class="form-group">
+                <label class="required"><?php echo $lang['nationality']; ?></label>
+                <input type="text" class="form-control" value="<?php echo $lang['indian']; ?>" readonly>
+            </div>
+
+            <div class="form-group">
                 <label for="maritialStatus" class="required"><?php echo $lang['maritial_status'] ?></label>
                 <select class="form-control maritialStatus" name="maritialStatus">
                     <?php 
@@ -310,6 +319,19 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                         }
                     ?>
                 </select>
+            </div>
+
+            <div class="form-group">
+                <label style="width: 200px;"><?php echo $lang['special_preference']; ?></label>                  
+                <label style="width: 150px;">
+                    <input type="checkbox" class="margin-horiz-2x" name="specialPreference[]" value="EXOFFICER" style="width: 10px !important" <?php echo (in_array("EXOFFICER", $specialPreferenceArr) ? 'checked' : '');?>><?php echo $lang['EXOFFICER']; ?>
+                </label>
+                <label style="width: 150px;"> 
+                    <input type="checkbox" class="margin-horiz-2x" name="specialPreference[]" value="DISABLED" style="width: 10px !important" <?php echo (in_array("DISABLED", $specialPreferenceArr) ? 'checked' : '');?>><?php echo $lang['DISABLED']; ?>
+                </label>
+                <label style="width: 150px;"> 
+                    <input type="checkbox" class="margin-horiz-2x" name="specialPreference[]" value="SPORTSPERSON" style="width: 10px !important" <?php echo (in_array("SPORTSPERSON", $specialPreferenceArr) ? 'checked' : '');?>><?php echo $lang['SPORTSPERSON']; ?>
+                </label>
             </div>
 
             <div class="form-group">

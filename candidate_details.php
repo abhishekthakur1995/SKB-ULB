@@ -25,11 +25,12 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 }
 
 // Define variables and initialize with empty values
-$name = $gender = $dob = $category = $phoneNumber = $guardian = $permanentAddress = $temporaryAddress = $birthPlace = $district = $remark = $receiptNumber = $userFormValid = "";
+$name = $gender = $dob = $category = $phoneNumber = $guardian = $permanentAddress = $temporaryAddress = $birthPlace = $district = $remark = $receiptNumber = $userFormValid = $specialPreference = "";
 $name_err = $gender_err = $dob_err = $phone_number_err = $guardian_err = $receipt_number_err = $permanent_address_err = "";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+
     // Validate name
     $trimName = trim($_POST["name"]);
     if(empty($trimName)) {
@@ -88,16 +89,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $district = trim($_POST['district']);
     $userFormValid = $_POST['userFormValid'];
     $remark = isset($_POST['remark']) ? trim($_POST['remark']) : '';
+    $specialPreference = isset($_POST['specialPreference']) ? implode(',', $_POST['specialPreference']) : '';
 
     // Check input errors before inserting in database
     if(empty($name_err) && empty($dob_err) && empty($guardian_err) && empty($receipt_number_err) && empty($gender_err)) {
         
         // Prepare an insert statement
-        $sql = "INSERT INTO candidate_list (name, gender, dob, category, maritialStatus, ulbRegion, phoneNumber, guardian, birthPlace, religion, permanentAddress, temporaryAddress , district, userFormValid, receiptNumber, remark) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO candidate_list (name, gender, dob, category, maritialStatus, ulbRegion, phoneNumber, guardian, birthPlace, religion, permanentAddress, temporaryAddress , district, userFormValid, receiptNumber, remark, specialPreference) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ssssssssssssssss", $param_name, $param_gender, $param_dob, $param_category, $param_maritialStatus, $param_ulbRegion, $param_phoneNumber, $param_guardian, $param_birthPlace, $param_religion, $param_permanentAddress, $param_temporaryAddress, $param_district, $param_userFormValid, $param_receiptNumber, $param_remark);
+            mysqli_stmt_bind_param($stmt, "sssssssssssssssss", $param_name, $param_gender, $param_dob, $param_category, $param_maritialStatus, $param_ulbRegion, $param_phoneNumber, $param_guardian, $param_birthPlace, $param_religion, $param_permanentAddress, $param_temporaryAddress, $param_district, $param_userFormValid, $param_receiptNumber, $param_remark, $param_specialPreference);
             
             // Set parameters
             $param_name = $name;
@@ -116,6 +118,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_userFormValid = $userFormValid;
             $param_receiptNumber = $receiptNumber;
             $param_remark = $remark;
+            $param_specialPreference = $specialPreference;
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -270,6 +273,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         }
                     ?>
                 </select>
+            </div>
+
+            <div class="form-group">
+                <label style="width: 200px;"><?php echo $lang['special_preference']; ?></label>                  
+                <label style="width: 150px;">                  
+                    <input type="checkbox" class="margin-horiz-2x" name="specialPreference[]" value="EXOFFICER" style="width: 10px !important"><?php echo $lang['EXOFFICER']; ?>
+                </label>
+                <label style="width: 150px;"> 
+                    <input type="checkbox" class="margin-horiz-2x" name="specialPreference[]" value="DISABLED" style="width: 10px !important"><?php echo $lang['DISABLED']; ?>
+                </label>
+                <label style="width: 150px;"> 
+                    <input type="checkbox" class="margin-horiz-2x" name="specialPreference[]" value="SPORTSPERSON" style="width: 10px !important"><?php echo $lang['SPORTSPERSON']; ?>
+                </label>
             </div>
 
             <div class="form-group">

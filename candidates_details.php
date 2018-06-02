@@ -48,6 +48,7 @@ $offset = ($page * $items) - $items;
 
                         <div class="fright">
                             <div id="search-box" class="search-box">
+                                <div class="lds-ellipsis loading hide"><div></div><div></div><div></div><div></div></div>
                                 <input type="text" autocomplete="off" placeholder="<?php echo $lang['search_candidates']; ?>" />
                                 <div class="result"></div>
                             </div>
@@ -212,8 +213,10 @@ $(document).ready(function(){
         var inputVal = $(this).val();
         var resultDropdown = $(this).siblings(".result");
         if(inputVal.length){
+            $('.loading').removeClass('hide');
             $.get("backend_search.php", {term: inputVal}).done(function(data){
                 resultDropdown.html(data);
+                $('.loading').addClass('hide');
             });
         } else {
             resultDropdown.empty();

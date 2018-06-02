@@ -38,6 +38,10 @@
     $lang['form_status_1'] = 'हां';
     $lang['form_status_0'] = 'ना';
     $lang['form_status_2'] = 'जांच के दायरे में';
+    $lang['special_preference'] = 'क्या उमीदवार इनमे से कुछ है';
+    $lang['EXOFFICER'] = 'भूतपूर्व सैनिक';
+    $lang['DISABLED'] = 'दिव्यांग';
+    $lang['SPORTSPERSON'] = 'खिलाड़ी';
 
 
     //maritial_status
@@ -45,7 +49,7 @@
     $lang['Unmarried'] = 'अविवाहित';
     $lang['Married/Unmarried'] = 'विवाहित / अविवाहित';
     $lang['Widow'] = 'विधवा';
-    $lang['Divorcee'] = 'तलाकशुदा';
+    $lang['Divorcee'] = 'तलाकशुदा / परितक्या';
 
     //category
     $lang['SC'] = 'अनुसूचित जाति';
