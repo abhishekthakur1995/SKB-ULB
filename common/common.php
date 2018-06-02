@@ -211,6 +211,7 @@ class Common {
 		'WIDOW' => 8,
 		'DIVORCEE' => 2,
 		'MARRIED' => 20,
+		'UNMARRIED' => 20,
 	];
 
 	public static function getTotalSeatsForUlbByName($ulbRegion) {

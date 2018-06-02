@@ -70,7 +70,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         echo "<td>".++$sno."</td>";
                         echo "<td>".$row['name']."</td>";
                         echo "<td>".$row['guardian']."</td>";
-                        echo "<td>".$row['address']."</td>";
+                        echo "<td>".$row['permanentAddress']."</td>";
                         $fullGender = $row['gender'] == 'm' ? 'Male' : 'Female';
                         echo "<td>".$fullGender."</td>";
                         echo "<td>".$row['dob']."</td>";
