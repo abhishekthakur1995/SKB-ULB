@@ -89,11 +89,11 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Check input errors before inserting in database
     if(empty($name_err) && empty($dob_err) && empty($guardian_err) && empty($receipt_number_err) && empty($gender_err)) {
         // Prepare an insert statement
-        $sql = "UPDATE candidate_list SET name=?, gender=?, dob=?, category=?, maritialStatus=?, ulbRegion=?, phoneNumber=?, guardian=?, birthPlace=?, religion=?, permanentAddress=?, temporaryAddress=?, district=?, userFormValid = ?, receiptNumber=?, remark=? specialPreference=? WHERE id=?";
+        $sql = "UPDATE candidate_list SET name=?, gender=?, dob=?, category=?, maritialStatus=?, ulbRegion=?, phoneNumber=?, guardian=?, birthPlace=?, religion=?, permanentAddress=?, temporaryAddress=?, district=?, userFormValid = ?, receiptNumber=?, remark=?, specialPreference=? WHERE id=?";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sssssssssssssssssi", $param_name, $param_gender, $param_dob, $param_category, $param_maritialStatus, $param_ulbRegion, $param_phoneNumber, $param_guardian, $param_birthPlace, $param_religion, $param_permanentAddress, $param_temporaryAddress, $param_district, $param_userFormValid, $param_receiptNumber, $param_remark, $param_id);
+            mysqli_stmt_bind_param($stmt, "sssssssssssssssssi", $param_name, $param_gender, $param_dob, $param_category, $param_maritialStatus, $param_ulbRegion, $param_phoneNumber, $param_guardian, $param_birthPlace, $param_religion, $param_permanentAddress, $param_temporaryAddress, $param_district, $param_userFormValid, $param_receiptNumber, $param_remark, $param_specialPreference, $param_id);
             
             // Set parameters
             $param_name = $name;
@@ -165,7 +165,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             $remark = $row['remark'];
             $userFormValid = $row['userFormValid'];
             $specialPreference = $row['specialPreference'];
-            $specialPreferenceArr = isset($specialPreference) ? explode(",", $specialPreference) : '' ;
+            $specialPreferenceArr = isset($specialPreference) ? explode(",", $specialPreference) : [] ;
             //print_r($specialPreferenceArr); die();
         } else {
             // URL doesn't contain valid id. Redirect to error page
