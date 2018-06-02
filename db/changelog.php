@@ -34,3 +34,4 @@ CREATE TABLE ulb_admins (
 <sql>ALTER TABLE ulb_admins ADD COLUMN firstLogin TINYINT(1) NOT NULL DEFAULT 0 AFTER role</sql>
 <sql>ALTER TABLE candidate_list ENGINE = InnoDB;</sql>
 <sql>ALTER TABLE ulb_admins ENGINE = InnoDB;</sql>
+<sql>ALTER TABLE candidate_list ADD COLUMN specialPreference VARCHAR(50) DEFAULT NULL</sql>
