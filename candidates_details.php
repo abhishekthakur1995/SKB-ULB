@@ -188,7 +188,7 @@ $(document).ready(function(){
     var id = '';
     $('[data-toggle="tooltip"]').tooltip();
     $('.fa-trash').on('click', function() {
-        id = $('.fa-trash').data('id');
+        id = $(this).data('id');
         $('.first-modal').trigger('click');
     });
 
