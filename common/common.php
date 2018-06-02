@@ -4,7 +4,7 @@ require_once(__ROOT__.'/config.php');
 
 class Common {
 
-	const TSP_AREA = ['UNITED'];
+	const TSP_AREA = ['BANSWARA'];
 	const TSP_AREA_EXCLUDE_CATEGORY = ['OBC', 'SPECIALOBC'];
 
 	const totalSeats = [
