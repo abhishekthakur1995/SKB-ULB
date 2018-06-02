@@ -65,7 +65,7 @@ if (isset($_SESSION['message'])) {
             <div class="container" style="width: 500px;">
                 <div class="jumbotron text-align-center">
                     <h1><?php echo $lang['total_enteries']; ?>: <?php echo Common::getTotalEnteries(); ?></h1>
-                    <a href="reservation_table.php?page=1" class="btn btn-primary btn-sm fs4">
+                    <a href="reservation_table.php" class="btn btn-primary btn-sm fs4">
                         <span class="fa fa-table fs4"></span>
                         <?php echo $lang['detailed_table']; ?>
                     </a>
