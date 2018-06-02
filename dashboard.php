@@ -55,12 +55,23 @@ if (isset($_SESSION['message'])) {
                     <span class="fa fa-undo-alt fs4"></span>
                     <?php echo $lang['dashboard_btn_7']; ?>
                 </a>
-                <a href="superUser/duplicateRecords.php" class="btn btn-primary btn-lg fs4">
+                <!-- <a href="superUser/duplicateRecords.php" class="btn btn-primary btn-lg fs4">
                     <span class="fa fa-undo-alt fs4"></span>View Duplicates
-                </a>
+                </a> -->
             </div>
         <?php } else { ?>
         <div class="fleft full-width text-align-center" >
+
+            <div class="container" style="width: 500px;">
+                <div class="jumbotron text-align-center">
+                    <h1><?php echo $lang['total_enteries']; ?>: <?php echo Common::getTotalEnteries(); ?></h1>
+                    <a href="reservation_table.php?page=1" class="btn btn-primary btn-sm fs4">
+                        <span class="fa fa-table fs4"></span>
+                        <?php echo $lang['detailed_table']; ?>
+                    </a>
+                </div>    
+            </div>
+
             <a href="candidate_details.php" class="btn btn-primary btn-lg fs4">
                 <span class="fa fa-plus-square fs4"></span>
                 <?php echo $lang['dashboard_btn_1']; ?>
@@ -70,7 +81,7 @@ if (isset($_SESSION['message'])) {
                 <?php echo $lang['dashboard_btn_2']; ?>
             </a>
         </div>
-            <?php include 'reservation_table.php'; ?>
+            <?php //include 'reservation_table.php'; ?>
     <?php } ?>
 
     </div>

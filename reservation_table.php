@@ -1,4 +1,19 @@
 <?php
+session_start();
+require('config.php');
+require('languages/hi/lang.hi.php');
+require('common/common.php');
+
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+    header("location: index.php");
+    exit;
+} else {
+    if (time()-$_SESSION['timestamp'] > IDLE_TIME) {
+        header("location: logout.php");
+    }   else{
+        $_SESSION['timestamp']=time();
+    }
+}
 
 //sc
 $totalSeatsInSeletedUlb = Common::getTotalSeatsForUlbByName($_SESSION['ulb_region']);
@@ -49,6 +64,7 @@ $totalMaleSPECIALOBCSeats = $totalSeatsForSPECIALOBC - ($totalSeatsForSPECIALOBC
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+    <?php include 'header.php'; ?>
     <div class="table-container fleft full-width">
         <?php /*
         <table class="ulb-table">
