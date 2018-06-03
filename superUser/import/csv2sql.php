@@ -46,14 +46,13 @@
 	<div class="form-group">
         <label for="csvfile" class="control-label col-xs-2">Name of the file</label>
 		<div class="col-xs-3">
-        <input type="name" class="form-control" value="data.csv" name="csv" id="csv">
+            <input type="name" class="form-control" name="csv" id="csv">
 		</div>
-		eg. MYDATA.csv
     </div>
 	<div class="form-group">
 	<label for="login" class="control-label col-xs-2"></label>
     <div class="col-xs-3">
-    <button type="submit" class="btn btn-primary">Upload</button>
+    <button type="submit" class="btn btn-primary">Export to Database</button>
 	</div>
 	</div>
 </form>
@@ -71,7 +70,6 @@ $password=isset($_POST['password']) ? $_POST['password'] : '';
 $db=$_POST['db'];
 $file=$_POST['csv'];
 $cons= mysqli_connect("$sqlname", "$username","$password","$db") or die(mysql_error());
-//mysqli_set_charset($cons, "UTF-8");
 
 $result1=mysqli_query($cons,"select count(*) count from $table");
 $r1=mysqli_fetch_array($result1);
@@ -86,9 +84,9 @@ mysqli_query($cons, '
     FIELDS TERMINATED BY \',\'
     OPTIONALLY ENCLOSED BY \'"\'
     LINES TERMINATED BY \'\n\'
-    IGNORE 1 LINES
+    IGNORE 0 LINES
     (name, guardian, permanentAddress, temporaryAddress,  phoneNumber, birthPlace, gender, district, ulbRegion, maritialStatus, @dob, category, receiptNumber, religion, userFormValid, remark)'
-) or die(mysql_error());
+) or die(mysqli_error());
 
 $result2=mysqli_query($cons,"select count(*) count from $table");
 $r2=mysqli_fetch_array($result2);
@@ -98,8 +96,6 @@ $count=$count2-$count1;
 if($count>0)
 echo "Success";
 echo "<b> total $count records have been added to the table $table </b> ";
-
-
 }
 else{
 echo "Mysql Server address/Host name ,Username , Database name ,Table name , File name are the Mandatory Fields";
