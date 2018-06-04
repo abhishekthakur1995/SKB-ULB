@@ -156,4 +156,9 @@
     $lang['delete_alert']='क्या आप रिकॉर्ड डिलीट करना चाहते है?';
     $lang['delete_alert1']='डेटा सफलतापूर्वक हटा दिया गया';
     $lang['delete_alert2']='बंद करे';
+
+    $lang['apply_filter'] = 'डाटा फ़िल्टर करे';
+    $lang['apply_filter_submit'] = 'फ़िल्टर करे ';
+    $lang['close'] = 'बंद करे';
+
 ?>

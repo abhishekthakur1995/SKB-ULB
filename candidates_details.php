@@ -15,10 +15,17 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     }
 }
 
-if($_GET && $_GET['page']) {
+
+if($_GET && isset($_GET['page'])) {
     $page = $_GET['page'];
 } else {
     $page = 1;
+}
+
+if($_GET && isset($_GET['userFormValid']) && is_numeric($_GET['userFormValid'])) {
+    $formValid = $_GET['userFormValid'];
+} else {
+    $formValid = '';
 }
 
 $items = 500;
@@ -54,7 +61,7 @@ $offset = ($page * $items) - $items;
                                 <div class="result"></div>
                             </div>
 
-                            <button class="pure-button">
+                            <button class="pure-button settings-btn">
                                 <i class="fa fa-cog fs4"></i>
                                 <span><?php echo $lang['settings']; ?></span>
                             </button>
@@ -62,8 +69,13 @@ $offset = ($page * $items) - $items;
 
                     </div>
                     <?php
-                    // Attempt select query execution
-                    $sql = "SELECT * FROM candidate_list WHERE ulbRegion = '".trim($_SESSION['ulb_region'])."' AND STATUS = 0 ORDER BY created_at DESC LIMIT ".$items." OFFSET ".$offset."";
+                    if($formValid != '') {
+                        $query = "AND userFormValid = ".$formValid."";
+                    } else {
+                        $query = '';
+                    }
+
+                    $sql = "SELECT * FROM candidate_list WHERE ulbRegion = '".trim($_SESSION['ulb_region'])."' ".$query." ORDER BY created_at DESC LIMIT ".$items." OFFSET ".$offset."";
 
 
                     if($result = mysqli_query($link, $sql)){
@@ -130,26 +142,38 @@ $offset = ($page * $items) - $items;
                 </div>
             </div>
             <ul class="pagination pagination-lg fright">
-                <?php if ($page != 1) { ?>        
-                    <li class="page-item"><a class="page-link" href="candidates_details.php?page=<?php echo $page - 1; ?>">&laquo;</a></li>
+                <?php
+                    $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                    $parts = parse_url($url);
+                    $param = '';
+                    if($parts && isset($parts['query'])) {
+                        parse_str($parts['query'], $query);
+                        if($query && isset($query['userFormValid'])) {
+                            $param = 'userFormValid='.$query['userFormValid'].'&';
+                        }
+                    }
+                ?>
 
-                    <li class="page-item"><a class="page-link" href="candidates_details.php?page=<?php echo $page - 1; ?>"><?php echo $page - 1; ?></a></li>
+                <?php if ($page != 1) { ?>        
+                    <li class="page-item">
+                        <a class="page-link" href="candidates_details.php?<?php echo $param; ?>page=<?php echo $page - 1; ?>">&laquo;</a>
+                    </li>
+
+                    <li class="page-item"><a class="page-link" href="candidates_details.php?<?php echo $param; ?>page=<?php echo $page - 1; ?>"><?php echo $page - 1; ?></a></li>
                 <?php } ?>
 
-                <li class="page-item active"><a class="page-link" href="candidates_details.php?page=<?php echo $page; ?>"><?php echo $page; ?></a></li>
+                <li class="page-item active"><a class="page-link" href="candidates_details.php?<?php echo $param; ?>page=<?php echo $page; ?>"><?php echo $page; ?></a></li>
 
                 <?php if ($count == $items) { ?>
-                    <li class="page-item"><a class="page-link" href="candidates_details.php?page=<?php echo $page + 1 ; ?>"><?php echo $page + 1; ?></a></li>
+                    <li class="page-item"><a class="page-link" href="candidates_details.php?<?php echo $param; ?>page=<?php echo $page + 1 ; ?>"><?php echo $page + 1; ?></a></li>
 
-                    <li class="page-item"><a class="page-link" href="candidates_details.php?page=<?php echo $page + 1; ?>">&raquo;</a></li>
+                    <li class="page-item"><a class="page-link" href="candidates_details.php?<?php echo $param; ?>page=<?php echo $page + 1; ?>">&raquo;</a></li>
                 <?php } ?>
             </ul>
         </div>
     </div>
 
-    <button type="button" class="btn btn-info btn-lg display-none first-modal" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-    <!-- Modal -->
+    <button type="button" class="btn btn-info btn-lg display-none first-modal" data-toggle="modal" data-target="#myModal"></button>
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -165,7 +189,7 @@ $offset = ($page * $items) - $items;
         </div>
     </div>
 
-    <button type="button" class="btn btn-info btn-lg display-none second-modal" data-toggle="modal" data-target="#myModalSmall">Open Small Modal</button>
+    <button type="button" class="btn btn-info btn-lg display-none second-modal" data-toggle="modal" data-target="#myModalSmall"></button>
     <div class="modal fade" id="myModalSmall" role="dialog">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -182,6 +206,38 @@ $offset = ($page * $items) - $items;
         </div>
     </div>
 
+    <button type="button" class="btn btn-primary display-none filter-modal" data-toggle="modal" data-target="#filterModal"></button>
+    <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle"><?php echo $lang['apply_filter']; ?></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label><?php echo $lang['all_documents_provided']; ?></label>                  
+                        <label>                  
+                            <input type="radio" class="margin-horiz-2x" name="userFormValid" value="1" checked><?php echo $lang['yes']; ?>
+                        </label>
+                        <label> 
+                            <input type="radio" class="margin-horiz-2x" name="userFormValid" value="0"><?php echo $lang['no']; ?>
+                        </label>
+                        <label> 
+                            <input type="radio" class="margin-horiz-2x" name="userFormValid" value="2"><?php echo $lang['under_scrutiny']; ?>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"><?php echo $lang['close']; ?></button>
+                    <button type="button" class="btn btn-primary apply-filter-btn"><?php echo $lang['apply_filter_submit']; ?></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
 
@@ -189,6 +245,7 @@ $offset = ($page * $items) - $items;
 $(document).ready(function(){
     var id = '';
     $('[data-toggle="tooltip"]').tooltip();
+
     $('.fa-trash').on('click', function() {
         id = $(this).data('id');
         $('.first-modal').trigger('click');
@@ -229,6 +286,17 @@ $(document).ready(function(){
         if (e.target.id != "search-box" || !($(e.target).parents("#search-box").length)) {
             $('.result').empty();
         }
+    });
+
+    $('.settings-btn').click(function(e) {
+        $('.filter-modal').trigger('click');
+    });
+
+    $('.apply-filter-btn').on('click', function() {
+        var param = $('input:radio[name="userFormValid"]:checked').val();
+        var url = window.location.href.split('?')[0];
+        url += '?userFormValid='+param+'&page=1';
+        window.location.href = url;
     });
 
 });
