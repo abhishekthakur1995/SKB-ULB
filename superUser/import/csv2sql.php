@@ -85,7 +85,7 @@ mysqli_query($cons, '
     OPTIONALLY ENCLOSED BY \'"\'
     LINES TERMINATED BY \'\n\'
     IGNORE 0 LINES
-    (name, guardian, permanentAddress, temporaryAddress,  phoneNumber, birthPlace, gender, district, ulbRegion, maritialStatus, @dob, category, receiptNumber, religion, userFormValid, remark)'
+    (name, guardian, permanentAddress, temporaryAddress,  phoneNumber, birthPlace, gender, district, ulbRegion, maritialStatus, dob, category, receiptNumber, religion, userFormValid, remark)'
 ) or die(mysqli_error());
 
 $result2=mysqli_query($cons,"select count(*) count from $table");
