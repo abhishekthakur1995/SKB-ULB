@@ -21,14 +21,14 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
  
 
 $sql = 'SELECT ulbRegion, 
-COUNT(case when candidate_list.gender="m" then 1 end) as male, 
-COUNT(case when candidate_list.gender="f" then 1 end) as female, 
-COUNT(case when candidate_list.gender="f" AND maritialStatus="WIDOW" then 1 end ) as "Female Widow",
-COUNT(case when candidate_list.gender="f" AND maritialStatus="DIVORCEE" then 1 end ) as "Female Divorcee",
-COUNT(case when candidate_list.gender="f" AND maritialStatus="MARRIED" then 1 end ) as "Female Married",
-COUNT(case when candidate_list.gender="f" AND maritialStatus="UNMARRIED" then 1 end ) as "Female Unmarried",
-COUNT(*) as total
-from candidate_list group by ulbRegion order by total desc';
+COUNT(CASE WHEN gender="m" AND status = 0 THEN 1 END) AS male, 
+COUNT(CASE WHEN gender="f" AND status = 0 THEN 1 END) AS female,
+COUNT(CASE WHEN gender="f" AND status = 0 AND maritialStatus="WIDOW" THEN 1 END ) AS "Female Widow",
+COUNT(CASE WHEN gender="f" AND status = 0 AND maritialStatus="DIVORCEE" THEN 1 END ) AS "Female Divorcee",
+COUNT(CASE WHEN gender="f" AND status = 0 AND maritialStatus="MARRIED" THEN 1 END ) AS "Female Married",
+COUNT(CASE WHEN gender="f" AND status = 0 AND maritialStatus="UNMARRIED" THEN 1 END ) AS "Female Unmarried",
+COUNT(*) AS total
+FROM candidate_list WHERE status = 0 GROUP BY ulbRegion ORDER BY total DESC';
 
 if (!$result = mysqli_query($link, $sql)) {
     exit(mysqli_error($link));

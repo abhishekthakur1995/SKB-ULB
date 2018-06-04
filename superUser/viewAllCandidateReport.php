@@ -25,7 +25,7 @@ if($_GET && $_GET['page']) {
     $page = 1;
 }
 
-$items = 10;
+$items = 20;
 $offset = ($page * $items) - $items;
 
 ?>
@@ -58,13 +58,13 @@ $offset = ($page * $items) - $items;
                     <?php
                     // Attempt select query execution
                     $sql = "SELECT ulbRegion, COUNT(*) AS total,
-							COUNT(CASE WHEN candidate_list.gender='m' THEN 1 END) AS male,
-							COUNT(CASE WHEN candidate_list.gender='f' THEN 1 END) AS female, 
-							COUNT(CASE WHEN candidate_list.gender='f' AND maritialStatus='WIDOW' THEN 1 END ) AS 'Female Widow',
-							COUNT(CASE WHEN candidate_list.gender='f' AND maritialStatus='DIVORCEE' THEN 1 END ) AS 'Female Divorcee',
-							COUNT(CASE WHEN candidate_list.gender='f' AND maritialStatus='MARRIED' THEN 1 END ) AS 'Female Married',
-							COUNT(CASE WHEN candidate_list.gender='f' AND maritialStatus='UNMARRIED' THEN 1 END ) AS 'Female Unmarried'
-							FROM candidate_list GROUP BY ulbRegion ORDER BY total DESC LIMIT ".$items." OFFSET ".$offset."";
+							COUNT(CASE WHEN gender='m' AND status = 0 THEN 1 END) AS male,
+							COUNT(CASE WHEN gender='f' AND status = 0 THEN 1 END) AS female, 
+							COUNT(CASE WHEN gender='f' AND status = 0 AND maritialStatus='WIDOW' THEN 1 END ) AS 'Female Widow',
+							COUNT(CASE WHEN gender='f' AND status = 0 AND maritialStatus='DIVORCEE' THEN 1 END ) AS 'Female Divorcee',
+							COUNT(CASE WHEN gender='f' AND status = 0 AND maritialStatus='MARRIED' THEN 1 END ) AS 'Female Married',
+							COUNT(CASE WHEN gender='f' AND status = 0 AND maritialStatus='UNMARRIED' THEN 1 END ) AS 'Female Unmarried'
+							FROM candidate_list WHERE status = 0 GROUP BY ulbRegion ORDER BY total DESC LIMIT ".$items." OFFSET ".$offset."";
 
 
                     if($result = mysqli_query($link, $sql)){

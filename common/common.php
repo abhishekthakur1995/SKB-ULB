@@ -234,53 +234,50 @@ class Common {
 		return floor(($percentage / 100) * $of);
 	}
 
-
-	//get candidates
-
 	public static function getCountOfTotalEnteries() {
-		$sql= "SELECT COUNT(*) as total from candidate_list";
+		$sql= "SELECT COUNT(*) as total from candidate_list where status = 0";
 		$result=mysqli_query($GLOBALS['link'], $sql);
 		$data=mysqli_fetch_assoc($result);
 		return $data['total'];
 	}
 
 	public static function getTotalEnteries() {
-		$sql = "SELECT * FROM candidate_list WHERE ulbRegion = '".$_SESSION['ulb_region']."'";
-		$res = mysqli_query($GLOBALS['link'], $sql);
-		$count = mysqli_num_rows($res);
-		return $count;
+		$sql = "SELECT COUNT(*) as total FROM candidate_list WHERE status = 0 AND ulbRegion = '".$_SESSION['ulb_region']."'";
+		$result=mysqli_query($GLOBALS['link'], $sql);
+		$data=mysqli_fetch_assoc($result);
+		return $data['total'];
 	}
 
 	public static function getTotalEnteriesByCategory($category) {
-		$sql = "SELECT * FROM candidate_list WHERE category = '".$category."' AND ulbRegion = '".$_SESSION['ulb_region']."'";
+		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND category = '".$category."' AND ulbRegion = '".$_SESSION['ulb_region']."'";
 		$res = mysqli_query($GLOBALS['link'], $sql);
 		$count = mysqli_num_rows($res);
 		return $count;
 	}
 
 	public static function getTotalEnteriesByStatus($maritialStatus) {
-		$sql = "SELECT * FROM candidate_list WHERE maritialStatus = '".$maritialStatus."' AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = 'f' ";
+		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND maritialStatus = '".$maritialStatus."' AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = 'f' ";
 		$res = mysqli_query($GLOBALS['link'], $sql);
 		$count = mysqli_num_rows($res);
 		return $count;
 	}
 
 	public static function getTotalEnteriesByGender($gender) {
-		$sql = "SELECT * FROM candidate_list WHERE gender = '".$gender."' AND ulbRegion = '".$_SESSION['ulb_region']."'";
+		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND gender = '".$gender."' AND ulbRegion = '".$_SESSION['ulb_region']."'";
 		$res = mysqli_query($GLOBALS['link'], $sql);
 		$count = mysqli_num_rows($res);
 		return $count;
 	}
 
 	public static function getTotalEnteriesByCatAndGender($category, $gender) {
-		$sql = "SELECT * FROM candidate_list WHERE gender = '".$gender."' AND category = '".$category."'AND ulbRegion = '".$_SESSION['ulb_region']."'";
+		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND gender = '".$gender."' AND category = '".$category."'AND ulbRegion = '".$_SESSION['ulb_region']."'";
 		$res = mysqli_query($GLOBALS['link'], $sql);
 		$count = mysqli_num_rows($res);
 		return $count;
 	}
 
 	public static function getTotalEnteriesByCatAndStatus($category, $maritialStatus) {
-		$sql = "SELECT * FROM candidate_list WHERE category = '".$category."' AND maritialStatus = '".$maritialStatus."' AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = 'f'";
+		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND category = '".$category."' AND maritialStatus = '".$maritialStatus."' AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = 'f'";
 		$res = mysqli_query($GLOBALS['link'], $sql);
 		$count = mysqli_num_rows($res);
 		return $count;

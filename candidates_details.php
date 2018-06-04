@@ -21,7 +21,7 @@ if($_GET && $_GET['page']) {
     $page = 1;
 }
 
-$items = 10;
+$items = 500;
 $offset = ($page * $items) - $items;
 ?>
 
@@ -63,7 +63,9 @@ $offset = ($page * $items) - $items;
                     </div>
                     <?php
                     // Attempt select query execution
-                    $sql = "SELECT * FROM candidate_list WHERE ulbRegion = '".trim($_SESSION['ulb_region'])."' ORDER BY created_at DESC LIMIT ".$items." OFFSET ".$offset."";
+                    $sql = "SELECT * FROM candidate_list WHERE ulbRegion = '".trim($_SESSION['ulb_region'])."' AND STATUS = 0 ORDER BY created_at DESC LIMIT ".$items." OFFSET ".$offset."";
+
+
                     if($result = mysqli_query($link, $sql)){
                         $count = mysqli_num_rows($result);
                         if($count > 0){
