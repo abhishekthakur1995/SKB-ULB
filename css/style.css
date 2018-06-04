@@ -307,7 +307,7 @@ a.page-link {
 }
 button.pure-button {
     font-size: 100%;
-    padding: 0.67em 2em 1em 2em;
+    padding: 0.67em 2em 0.85em 2em;
     color: rgba(0,0,0,.8);
     border: transparent;
     background-color: #E6E6E6;
