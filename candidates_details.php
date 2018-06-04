@@ -49,15 +49,15 @@ $offset = ($page * $items) - $items;
                         <div class="fright">
                             <div id="search-box" class="search-box">
                                 <div class="lds-ellipsis loading hide"><div></div><div></div><div></div><div></div></div>
-                                <input type="text" autocomplete="off" placeholder="<?php echo $lang['search_candidates']; ?>" />
+                                <input type="text" style="padding-left: 40px;" autocomplete="off" placeholder="<?php echo $lang['search_candidates']; ?>" />
+                                <i class="fa fa-search input-search-icon" aria-hidden="true"></i>
                                 <div class="result"></div>
                             </div>
 
-
-                            <a href="candidate_details.php" class="btn btn-success pull-right fs4">
-                                <span class="fa fa-plus-square fs4"></span>
-                                <?php echo $lang['add_new_candidate_btn']; ?>
-                            </a>
+                            <button class="pure-button">
+                                <i class="fa fa-cog fs4"></i>
+                                <span><?php echo $lang['settings']; ?></span>
+                            </button>
                         </div>
 
                     </div>

@@ -42,6 +42,7 @@
     $lang['EXOFFICER'] = 'भूतपूर्व सैनिक';
     $lang['DISABLED'] = 'दिव्यांग';
     $lang['SPORTSPERSON'] = 'खिलाड़ी';
+    $lang['settings'] = 'सेटिंग्स';
 
 
     //maritial_status
