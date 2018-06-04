@@ -75,7 +75,9 @@ $offset = ($page * $items) - $items;
                         $query = '';
                     }
 
-                    $sql = "SELECT * FROM candidate_list WHERE ulbRegion = '".trim($_SESSION['ulb_region'])."' ".$query." ORDER BY created_at DESC LIMIT ".$items." OFFSET ".$offset."";
+                    $sql = "SELECT * FROM candidate_list WHERE status = 0 AND ulbRegion = '".trim($_SESSION['ulb_region'])."' ".$query." ORDER BY created_at DESC LIMIT ".$items." OFFSET ".$offset."";
+
+                    print_r($sql);
 
 
                     if($result = mysqli_query($link, $sql)){
