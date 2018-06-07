@@ -96,7 +96,8 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
                                         echo "<td>" . $lang[ucwords(strtolower($row['maritialStatus']))] . "</td>";
                                         echo "<td>" . $lang[$row['category']] . "</td>";
                                         echo "<td>" . $row['ulbRegion'] . "</td>";
-                                        echo "<td>" . explode('_', $row['receiptNumber'])[1] . "</td>";
+                                        echo "<td>" . substr($row['receiptNumber'], strpos($row['receiptNumber'], "_") + 1)
+ . "</td>";
                                     echo "</tr>";
                                 }
                                 echo "</tbody>";                            

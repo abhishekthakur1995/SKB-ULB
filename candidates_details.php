@@ -116,7 +116,7 @@ $offset = ($page * $items) - $items;
                                         echo "<td>" . $lang[ucwords(strtolower($row['maritialStatus']))] . "</td>";
                                         echo "<td>" . $lang[$row['category']] . "</td>";
                                         echo "<td>" . $row['ulbRegion'] . "</td>";
-                                        echo "<td>" . explode('_', $row['receiptNumber'])[1] . "</td>";
+                                        echo "<td>" . substr($row['receiptNumber'], strpos($row['receiptNumber'], "_") + 1) . "</td>";
                                         echo "<td>" . $lang['form_status_'.$row['userFormValid']] . "</td>";
                                         echo "<td>";
                                             echo "<a href='update.php?id=". $row['id'] ."' title='".$lang['update_record']."' data-toggle='tooltip'><span class='fa fa-pencil-square-o clr-green'></span></a>";
