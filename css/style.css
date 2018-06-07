@@ -15,6 +15,12 @@ body {
 .fright {
 	float: right;
 }
+.width150 {
+    width: 150px !important;
+}
+.width200 {
+    width: 200px !important;
+}
 .full-width {
 	width: 100% !important;
 }
@@ -79,9 +85,15 @@ body {
     margin-right: 10px;
 } 
 .candidate_detail .form-group input, .form-group select {
+    width: 250px;
+}
+.candidate_detail .form-group select {
     width: 250px !important;
 }
-.update_candidate_detail .form-group input, .form-group select {
+.update_candidate_detail .form-group input {
+    width: 250px;
+}
+.update_candidate_detail .form-group select {
     width: 250px !important;
 }
 .padding-top-4x{

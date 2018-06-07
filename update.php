@@ -257,7 +257,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     <div class="input-group-prepend">
                         <div class="input-group-text">+91</div>
                     </div>
-                    <input type="number" name="phoneNumber" class="form-control" onKeyPress="if(this.value.length==10) return false;" value="<?php echo $phoneNumber; ?>" style="width: 200px !important;">
+                    <input type="number" name="phoneNumber" class="form-control width200" onKeyPress="if(this.value.length==10) return false;" value="<?php echo $phoneNumber; ?>">
                 </div>
                 <span class="help-block"><?php echo $phone_number_err; ?></span>
             </div>
@@ -322,34 +322,34 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             </div>
 
             <div class="form-group">
-                <label style="width: 200px;"><?php echo $lang['special_preference']; ?></label>                  
-                <label style="width: 150px;">
+                <label class="width200"><?php echo $lang['special_preference']; ?></label>                  
+                <label class="width150">
                     <input type="checkbox" class="margin-horiz-2x" name="specialPreference[]" value="EXOFFICER" style="width: 10px !important" <?php echo (in_array("EXOFFICER", $specialPreferenceArr) ? 'checked' : '');?>><?php echo $lang['EXOFFICER']; ?>
                 </label>
-                <label style="width: 150px;"> 
+                <label class="width150"> 
                     <input type="checkbox" class="margin-horiz-2x" name="specialPreference[]" value="DISABLED" style="width: 10px !important" <?php echo (in_array("DISABLED", $specialPreferenceArr) ? 'checked' : '');?>><?php echo $lang['DISABLED']; ?>
                 </label>
-                <label style="width: 150px;"> 
+                <label class="width150"> 
                     <input type="checkbox" class="margin-horiz-2x" name="specialPreference[]" value="SPORTSPERSON" style="width: 10px !important" <?php echo (in_array("SPORTSPERSON", $specialPreferenceArr) ? 'checked' : '');?>><?php echo $lang['SPORTSPERSON']; ?>
                 </label>
             </div>
 
             <div class="form-group">
-                <label class="required" style="width: 200px;"><?php echo $lang['all_documents_provided']; ?></label>                  
-                <label style="width: 60px;">                  
+                <label class="required width200"><?php echo $lang['all_documents_provided']; ?></label>                  
+                <label class="width150">                  
                     <input type="radio" class="margin-horiz-2x" name="userFormValid" value="1" style="width: 10px !important" required><?php echo $lang['yes']; ?>
                 </label>
-                <label style="width: 60px;"> 
+                <label class="width150"> 
                     <input type="radio" class="margin-horiz-2x" name="userFormValid" value="0" style="width: 10px !important"><?php echo $lang['no']; ?>
                 </label>
-                <label style="width: 150px;"> 
+                <label class="width150"> 
                     <input type="radio" class="margin-horiz-2x" name="userFormValid" value="2" style="width: 10px !important"><?php echo $lang['under_scrutiny']; ?>
                 </label>
                 <textarea name="remark" rows="4" cols="50" class="form-control textarea margin-left-6x" maxlength="500" value="<?php echo $remark; ?>" placeholder="<?php echo $lang['remark_place_holder']; ?>" disabled required></textarea>
             </div>
 
             <div class="form-group">
-                <label class="required" style="width: 148px;"><?php echo $lang['receipt_number']; ?></label>
+                <label class="required" style="width: 180px;"><?php echo $lang['receipt_number']; ?></label>
                 <?php $receiptNumber = !empty($receiptNumber) ? substr($receiptNumber, strpos($receiptNumber, "_") + 1) : ""; ?>
                 <input type="number" name="receiptNumber" class="form-control <?php echo (!empty($receipt_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $receiptNumber; ?>" required>
                 <span class="invalid-feedback text-align-center" style="width:120px;"><?php echo $receipt_number_err; ?></span>

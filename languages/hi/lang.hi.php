@@ -28,21 +28,22 @@
     $lang['update_record'] = 'विवरण अपडेट करें';
     $lang['delete_record'] = 'उम्मीदवार रिकॉर्ड हटाएं';
     $lang['receipt_number'] = 'आवेदक प्राप्ति क्रमांक';
-    $lang['yes'] = 'हां';
-    $lang['no'] = 'ना';
-    $lang['under_scrutiny'] = 'जांच के दायरे में';
+
+    $lang['yes'] = 'स्वीकृत';
+    $lang['no'] = 'अस्वीकृत';
+    $lang['under_scrutiny'] = 'विचारधीन';
     $lang['data_saved'] = 'डेटा सफलतापूर्वक दर्ज किया गया';
-    $lang['tbl1_heading'] = 'आरक्षण तालिका';
-    $lang['tbl2_heading'] = 'उम्मीदवार संख्या तालिका';
-    $lang['form_status'] = '';
-    $lang['form_status_1'] = 'हां';
-    $lang['form_status_0'] = 'ना';
-    $lang['form_status_2'] = 'जांच के दायरे में';
+    $lang['form_status_1'] = 'स्वीकृत';
+    $lang['form_status_0'] = 'अस्वीकृत';
+    $lang['form_status_2'] = 'विचारधीन';
+
     $lang['special_preference'] = 'क्या उमीदवार इनमे से कुछ है';
     $lang['EXOFFICER'] = 'भूतपूर्व सैनिक';
     $lang['DISABLED'] = 'दिव्यांग';
     $lang['SPORTSPERSON'] = 'खिलाड़ी';
     $lang['settings'] = 'सेटिंग्स';
+    $lang['tbl1_heading'] = 'आरक्षण तालिका';
+    $lang['tbl2_heading'] = 'उम्मीदवार संख्या तालिका';
 
 
     //maritial_status
@@ -134,7 +135,7 @@
     $lang['update_success'] = 'डेटा सफलतापूर्वक अपडेट किया गया';
     $lang['reset_password_sucess'] = 'पासवर्ड सफलतापूर्वक रीसेट कर दिया गया है। कृपया अपने नए पासवर्ड से फिर से लॉगिन करें।';
     
-    $lang['all_documents_provided'] = 'उम्मीदवार का फॉर्म पूर्ण पाया गया';
+    $lang['all_documents_provided'] = 'उमीदवार के फॉर्म की स्थिति';
     $lang['experience_certificate'] = 'अनुभव प्रमाण पत्र';
     $lang['category_certificate'] = 'जाति प्रमाण पत्र';
     $lang['education_qualififcation_certificate'] = 'शैक्षिक योग्यता प्रमाण पत्र';
