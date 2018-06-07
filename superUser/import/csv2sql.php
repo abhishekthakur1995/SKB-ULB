@@ -1,3 +1,26 @@
+<?php
+
+session_start();
+ 
+if($_SESSION['user_role'] == 'SUPERADMIN') {
+    require('../../config.php');
+
+    if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+        header("location: ../../index.php");
+        exit;
+    } else {
+        if (time()-$_SESSION['timestamp'] > IDLE_TIME) {
+            header("location: ../../logout.php");
+        }   else{
+            $_SESSION['timestamp']=time();
+        }
+    }
+} else {
+    header("location: ../../error.php?err_msg=Access Not Allowed");
+}
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -69,18 +92,17 @@ $table=$_POST['table'];
 $password=isset($_POST['password']) ? $_POST['password'] : '';
 $db=$_POST['db'];
 $file=$_POST['csv'];
-$cons= mysqli_connect("$sqlname", "$username","$password","$db") or die(mysql_error());
 
-$result1=mysqli_query($cons,"select count(*) count from $table");
+$result1=mysqli_query($link,"select count(*) count from $table");
 $r1=mysqli_fetch_array($result1);
 $count1=(int)$r1['count'];
 //If the fields in CSV are not seperated by comma(,)  replace comma(,) in the below query with that  delimiting character
 //If each tuple in CSV are not seperated by new line.  replace \n in the below query  the delimiting character which seperates two tuples in csv
 // for more information about the query http://dev.mysql.com/doc/refman/5.1/en/load-data.html
-mysqli_query($cons, '
+mysqli_query($link, '
     LOAD DATA LOCAL INFILE "'.$file.'"
     INTO TABLE candidate_list
-    CHARACTER SET latin1
+    CHARACTER SET utf8
     FIELDS TERMINATED BY \',\'
     OPTIONALLY ENCLOSED BY \'"\'
     LINES TERMINATED BY \'\n\'
@@ -88,7 +110,7 @@ mysqli_query($cons, '
     (name, guardian, permanentAddress, temporaryAddress,  phoneNumber, birthPlace, gender, district, ulbRegion, maritialStatus, dob, category, receiptNumber, religion, userFormValid, remark)'
 ) or die(mysqli_error());
 
-$result2=mysqli_query($cons,"select count(*) count from $table");
+$result2=mysqli_query($link,"select count(*) count from $table");
 $r2=mysqli_fetch_array($result2);
 $count2=(int)$r2['count'];
 
@@ -102,16 +124,5 @@ echo "Mysql Server address/Host name ,Username , Database name ,Table name , Fil
 }
 
 ?>
-<h3> Instructions </h3>
-1.  Keep this php file and Your csv file in one folder <br>
-2.  Create a table in your mysql database to which you want to import <br>
-3.  Open the php file from your localhost server <br>
-4.  Enter all the fields  <br>
-5.  click on upload button  </p>
-
-<h3> Facing Problems ? Some of the reasons can be the ones shown below </h3>
-1) Check if the table to which you want to import is created and the datatype of each column matches with the data in csv<br>
-2) If fields in your csv are not separated by commas go to Line 117 of php file and change the query<br>
-3) If each tuple in your csv are not one below other(i.e not seperated by a new line) got line 117 of php file and change the query<br>
 
 </html>
