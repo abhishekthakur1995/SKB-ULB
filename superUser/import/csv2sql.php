@@ -35,37 +35,6 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
 
 </br>
 <form class="form-horizontal" action="csv2sql.php" method="post">
-    <div class="form-group">
-        <label for="mysql" class="control-label col-xs-2">Mysql Server address (or)<br>Host name</label>
-		<div class="col-xs-3">
-        <input type="text" class="form-control" name="mysql" value="localhost" id="mysql" placeholder="">
-		</div>
-    </div>
-	<div class="form-group">
-        <label for="username" class="control-label col-xs-2">Username</label>
-		<div class="col-xs-3">
-        <input type="text" class="form-control" name="username" value="root" id="username" placeholder="">
-		</div>
-    </div>
-	<div class="form-group">
-        <label for="password" class="control-label col-xs-2">Password</label>
-		<div class="col-xs-3">
-        <input type="text" class="form-control" name="password" value="" id="password" placeholder="">
-		</div>
-    </div>
-	<div class="form-group">
-        <label for="db" class="control-label col-xs-2">Database name</label>
-		<div class="col-xs-3">
-        <input type="text" class="form-control" value="candidate_selection_portal" name="db" id="db" placeholder="">
-		</div>
-    </div>
-	
-	<div class="form-group">
-        <label for="table" class="control-label col-xs-2">table name</label>
-		<div class="col-xs-3">
-        <input type="name" class="form-control" value="candidate_list" name="table" id="table">
-		</div>
-    </div>
 	<div class="form-group">
         <label for="csvfile" class="control-label col-xs-2">Name of the file</label>
 		<div class="col-xs-3">
@@ -84,45 +53,41 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
 </body>
 
 <?php 
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    if(!empty($_POST['csv'])) {
 
-if(isset($_POST['username'])&&isset($_POST['mysql'])&&isset($_POST['db'])&&isset($_POST['username'])) {
-$sqlname=$_POST['mysql'];
-$username=$_POST['username'];
-$table=$_POST['table'];
-$password=isset($_POST['password']) ? $_POST['password'] : '';
-$db=$_POST['db'];
-$file=$_POST['csv'];
+        $file=$_POST['csv'];
+        $table = "candidate_list";
 
-$result1=mysqli_query($link,"select count(*) count from $table");
-$r1=mysqli_fetch_array($result1);
-$count1=(int)$r1['count'];
-//If the fields in CSV are not seperated by comma(,)  replace comma(,) in the below query with that  delimiting character
-//If each tuple in CSV are not seperated by new line.  replace \n in the below query  the delimiting character which seperates two tuples in csv
-// for more information about the query http://dev.mysql.com/doc/refman/5.1/en/load-data.html
-mysqli_query($link, '
-    LOAD DATA LOCAL INFILE "'.$file.'"
-    INTO TABLE candidate_list
-    CHARACTER SET utf8
-    FIELDS TERMINATED BY \',\'
-    OPTIONALLY ENCLOSED BY \'"\'
-    LINES TERMINATED BY \'\n\'
-    IGNORE 0 LINES
-    (name, guardian, permanentAddress, temporaryAddress,  phoneNumber, birthPlace, gender, district, ulbRegion, maritialStatus, dob, category, receiptNumber, religion, userFormValid, remark)'
-) or die(mysqli_error());
+        $result1=mysqli_query($link,"select count(*) count from $table");
+        $r1=mysqli_fetch_array($result1);
+        $count1=(int)$r1['count'];
 
-$result2=mysqli_query($link,"select count(*) count from $table");
-$r2=mysqli_fetch_array($result2);
-$count2=(int)$r2['count'];
+        mysqli_query($link, '
+            LOAD DATA LOCAL INFILE "'.$file.'"
+            INTO TABLE candidate_list
+            CHARACTER SET utf8
+            FIELDS TERMINATED BY \',\'
+            OPTIONALLY ENCLOSED BY \'"\'
+            LINES TERMINATED BY \'\n\'
+            IGNORE 0 LINES
+            (name, guardian, permanentAddress, temporaryAddress,  phoneNumber, birthPlace, gender, district, ulbRegion, maritialStatus, dob, category, receiptNumber, religion, userFormValid, remark)'
+        ) or die(mysqli_error());
 
-$count=$count2-$count1;
-if($count>0)
-echo "Success";
-echo "<b> total $count records have been added to the table $table </b> ";
+        $result2=mysqli_query($link,"select count(*) count from $table");
+        $r2=mysqli_fetch_array($result2);
+        $count2=(int)$r2['count'];
+
+        $count=$count2-$count1;
+        if($count>0) {
+            echo "Success";
+            echo "<b> total $count records have been added to the table $table </b> ";
+        } else {
+            echo "No Record Entered";
+        }
+    } else {
+        echo "Please enter file name";
+    }
 }
-else{
-echo "Mysql Server address/Host name ,Username , Database name ,Table name , File name are the Mandatory Fields";
-}
-
 ?>
-
 </html>
