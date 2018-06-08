@@ -25,7 +25,7 @@ if($_GET && $_GET['page']) {
     $page = 1;
 }
 
-$items = 20;
+$items = 50;
 $offset = ($page * $items) - $items;
 
 ?>
@@ -137,9 +137,8 @@ $offset = ($page * $items) - $items;
 <script>
     function Export() {
         var conf = confirm("Export users to CSV?");
-        if(conf == true)
-        {
-            window.open("export.php", '_blank');
+        if(conf == true) {
+            window.open("export.php?view=all", '_blank');
         }
     }
 </script>

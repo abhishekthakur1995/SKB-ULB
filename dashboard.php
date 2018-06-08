@@ -55,6 +55,10 @@ if (isset($_SESSION['message'])) {
                     <span class="fa fa-eye fs4"></span>
                     <?php echo $lang['dashboard_btn_7']; ?>
                 </a>
+                <a href="superUser/formStatusCandidateReport.php" class="btn btn-primary btn-lg fs4">
+                    <span class="fa fa-eye fs4"></span>
+                    <?php echo $lang['dashboard_btn_8']; ?>
+                </a>
                 <!-- <a href="superUser/duplicateRecords.php" class="btn btn-primary btn-lg fs4">
                     <span class="fa fa-undo-alt fs4"></span>View Duplicates
                 </a> -->

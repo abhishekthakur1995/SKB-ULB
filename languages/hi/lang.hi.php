@@ -90,6 +90,7 @@
     $lang['dashboard_btn_5'] = 'यहां क्लिक करे';
     $lang['dashboard_btn_6'] = 'यूएलबी पासवर्ड रीसेट करें';
     $lang['dashboard_btn_7'] = 'उम्मीदवार रिपोर्ट देखें और डाउनलोड करें';
+    $lang['dashboard_btn_8'] = 'उम्मीदवार फॉर्म की स्थिति के आधार पर देखें';
     $lang['total_enteries'] = 'कुल उम्मीदवार';
     $lang['detailed_table'] = 'विस्तृत उम्मीदवार टेबल';
 
