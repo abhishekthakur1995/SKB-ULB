@@ -31,7 +31,6 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
 <body>
 <br>
 <h1> CSV to Mysql </h1>
-<p> This Php Script Will Import very large CSV files to MYSQL database in a minute</p>
 
 </br>
 <form class="form-horizontal" action="csv2sql.php" method="post">
@@ -70,7 +69,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             FIELDS TERMINATED BY \',\'
             OPTIONALLY ENCLOSED BY \'"\'
             LINES TERMINATED BY \'\n\'
-            IGNORE 0 LINES
+            IGNORE 1 LINES
             (name, guardian, permanentAddress, temporaryAddress,  phoneNumber, birthPlace, gender, district, ulbRegion, maritialStatus, dob, category, receiptNumber, religion, userFormValid, remark)'
         ) or die(mysqli_error());
 
