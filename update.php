@@ -351,7 +351,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             <div class="form-group">
                 <label class="required" style="width: 180px;"><?php echo $lang['receipt_number']; ?></label>
                 <?php $receiptNumber = !empty($receiptNumber) ? substr($receiptNumber, strpos($receiptNumber, "_") + 1) : ""; ?>
-                <input type="number" name="receiptNumber" class="form-control <?php echo (!empty($receipt_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $receiptNumber; ?>" required>
+                <input type="text" name="receiptNumber" class="form-control <?php echo (!empty($receipt_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $receiptNumber; ?>" required>
                 <span class="invalid-feedback text-align-center" style="width:120px;"><?php echo $receipt_number_err; ?></span>
             </div>
 
