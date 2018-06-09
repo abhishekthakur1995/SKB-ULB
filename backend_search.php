@@ -17,7 +17,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 $term = $link->real_escape_string($_REQUEST['term']);
  
 if(isset($term)){
-    $sql = "SELECT * FROM candidate_list WHERE name LIKE '" . $term . "%' AND ulbRegion = '".trim($_SESSION['ulb_region'])."' ORDER BY created_at DESC LIMIT 50";
+    $sql = "SELECT * FROM candidate_list WHERE receiptNumber LIKE '" . $_SESSION['ulb_region'].'_'.$term . "%' AND ulbRegion = '".trim($_SESSION['ulb_region'])."' ORDER BY created_at DESC LIMIT 10";
     if($result = $link->query($sql)){
         if($result->num_rows > 0){
             $visibleClass = ($result->num_rows > 7) ? 'height-8x' : '';
@@ -25,7 +25,7 @@ if(isset($term)){
             echo "<div class='dropdown-result ".$visibleClass."'>";
 
             while($row = $result->fetch_array()) {
-                echo "<a class='clr-black' href='update.php?id=". $row['id'] ."'> <p><span class='fs4 bold'>".$row['name']."</span>"."&nbsp;&nbsp;". $row['permanentAddress']  ."</p></a>";
+                echo "<a class='clr-black' href='update.php?id=". $row['id'] ."'> <p><span class='fs4 bold'>".substr($row['receiptNumber'], strpos($row['receiptNumber'], "_") + 1)."</span>"."&nbsp;&nbsp;". $row['name']  ."</p></a>";
             }
             echo "</div>";
             $result->free();
