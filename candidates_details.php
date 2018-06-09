@@ -61,6 +61,11 @@ $offset = ($page * $items) - $items;
                                 <div class="result"></div>
                             </div>
 
+                            <button class="pure-button download-btn">
+                                <i class="fa fa-download fs4"></i>
+                                <span><?php echo $lang['download']; ?></span>
+                            </button>
+
                             <button class="pure-button settings-btn">
                                 <i class="fa fa-cog fs4"></i>
                                 <span><?php echo $lang['settings']; ?></span>
@@ -296,6 +301,13 @@ $(document).ready(function(){
         var url = window.location.href.split('?')[0];
         url += '?userFormValid='+param+'&page=1';
         window.location.href = url;
+    });
+
+    $('.download-btn').on('click', function() {
+        var conf = confirm('<?php echo $lang['export_csv']; ?>');
+        if(conf == true) {
+            window.open("exportUlbData.php", '_blank');
+        }
     });
 
 });

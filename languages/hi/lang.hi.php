@@ -29,19 +29,20 @@
     $lang['delete_record'] = 'उम्मीदवार रिकॉर्ड हटाएं';
     $lang['receipt_number'] = 'आवेदक प्राप्ति क्रमांक';
 
+    $lang['data_saved'] = 'डेटा सफलतापूर्वक दर्ज किया गया';
     $lang['yes'] = 'स्वीकृत';
     $lang['no'] = 'अस्वीकृत';
     $lang['under_scrutiny'] = 'विचारधीन';
-    $lang['data_saved'] = 'डेटा सफलतापूर्वक दर्ज किया गया';
     $lang['form_status_1'] = 'स्वीकृत';
     $lang['form_status_0'] = 'अस्वीकृत';
     $lang['form_status_2'] = 'विचारधीन';
 
-    $lang['special_preference'] = 'क्या उमीदवार इनमे से कुछ है';
+    $lang['special_preference'] = 'क्या उम्मीदवार इनमे से कुछ है';
     $lang['EXOFFICER'] = 'भूतपूर्व सैनिक';
     $lang['DISABLED'] = 'दिव्यांग';
     $lang['SPORTSPERSON'] = 'खिलाड़ी';
     $lang['settings'] = 'सेटिंग्स';
+    $lang['download'] = 'डेटा डाउनलोड';
     $lang['tbl1_heading'] = 'आरक्षण तालिका';
     $lang['tbl2_heading'] = 'उम्मीदवार संख्या तालिका';
 
@@ -49,9 +50,13 @@
     //maritial_status
     $lang['Married'] = 'विवाहित';
     $lang['Unmarried'] = 'अविवाहित';
-    $lang['Married/Unmarried'] = 'विवाहित / अविवाहित';
     $lang['Widow'] = 'विधवा';
     $lang['Divorcee'] = 'तलाकशुदा / परितक्या';
+
+    $lang['MARRIED'] = 'विवाहित';
+    $lang['UNMARRIED'] = 'अविवाहित';
+    $lang['WIDOW'] = 'विधवा';
+    $lang['DIVORCEE'] = 'तलाकशुदा / परितक्या';
 
     //category
     $lang['SC'] = 'अनुसूचित जाति';
@@ -136,7 +141,7 @@
     $lang['update_success'] = 'डेटा सफलतापूर्वक अपडेट किया गया';
     $lang['reset_password_sucess'] = 'पासवर्ड सफलतापूर्वक रीसेट कर दिया गया है। कृपया अपने नए पासवर्ड से फिर से लॉगिन करें।';
     
-    $lang['all_documents_provided'] = 'उमीदवार के फॉर्म की स्थिति';
+    $lang['all_documents_provided'] = 'उम्मीदवार के फॉर्म की स्थिति';
     $lang['experience_certificate'] = 'अनुभव प्रमाण पत्र';
     $lang['category_certificate'] = 'जाति प्रमाण पत्र';
     $lang['education_qualififcation_certificate'] = 'शैक्षिक योग्यता प्रमाण पत्र';
@@ -162,5 +167,5 @@
     $lang['apply_filter'] = 'डाटा फ़िल्टर करे';
     $lang['apply_filter_submit'] = 'फ़िल्टर करे ';
     $lang['close'] = 'बंद करे';
-
+    $lang['export_csv'] = 'सीएसवी के रूप में सभी उम्मीदवार डेटा डाउनलोड करें';
 ?>
