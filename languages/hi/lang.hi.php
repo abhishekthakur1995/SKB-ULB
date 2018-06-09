@@ -42,7 +42,7 @@
     $lang['DISABLED'] = 'दिव्यांग';
     $lang['SPORTSPERSON'] = 'खिलाड़ी';
     $lang['settings'] = 'सेटिंग्स';
-    $lang['download'] = 'डेटा डाउनलोड';
+    $lang['download'] = 'सूची डाउनलोड करें';
     $lang['tbl1_heading'] = 'आरक्षण तालिका';
     $lang['tbl2_heading'] = 'उम्मीदवार संख्या तालिका';
 
