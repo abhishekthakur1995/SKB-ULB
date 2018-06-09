@@ -117,10 +117,10 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             $param_id = $id;
             
             // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
+            if(mysqli_stmt_execute($stmt)) {
                 // Records updated successfully. Redirect to landing page
                 $_SESSION['message'] = $lang['update_success'];
-                header("location: dashboard.php");
+                header("location: candidates_details.php");
                 exit();
             } else{
                 if(mysqli_errno($link) === 1062) {
@@ -358,7 +358,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             <div class="form-group">
                 <input type="hidden" name="id" value="<?php echo $id; ?>"/>
                 <input type="submit" class="btn btn-primary fs4" value="<?php echo $lang['updateButton']; ?>">
-                <a href="dashboard.php" class="btn btn-warning fs4"><?php echo $lang['cancelButton']; ?></a>
+                <a href="candidates_details.php" class="btn btn-warning fs4"><?php echo $lang['cancelButton']; ?></a>
                 <input type="button" data-id="<?php echo $id; ?>" class="btn btn-danger delete-button fs4" value="<?php echo $lang['delete_record']; ?>" />
             </div>
         </form>                
@@ -445,7 +445,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         });
 
         $('.confirm-delete').on('click', function() {
-            document.location.href = '<?php echo BASE_URL; ?>/dashboard.php';
+            document.location.href = '<?php echo BASE_URL; ?>/candidates_details.php';
         });
 
     });

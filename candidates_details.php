@@ -15,6 +15,14 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     }
 }
 
+if (isset($_SESSION['message'])) {
+    $msg = $_SESSION['message'];
+    echo '<script language="javascript">';
+    echo "alert('$msg')";
+    echo '</script>';
+    unset($_SESSION['message']);
+}
+
 
 if($_GET && isset($_GET['page'])) {
     $page = $_GET['page'];
