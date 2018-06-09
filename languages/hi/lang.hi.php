@@ -98,6 +98,7 @@
     $lang['dashboard_btn_8'] = 'उम्मीदवार फॉर्म की स्थिति के आधार पर देखें';
     $lang['total_enteries'] = 'कुल उम्मीदवार';
     $lang['detailed_table'] = 'विस्तृत उम्मीदवार टेबल';
+    $lang['reservation_chart'] = 'आरक्षण चार्ट';
 
   	//create candidate form headings
   	$lang['enter_candidate_details'] = 'उम्मीदवार विवरण दर्ज करें';
