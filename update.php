@@ -411,6 +411,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $(".gender").val('<?php echo $gender; ?>');
         $(".religion").val('<?php echo $religion; ?>');
         $('[name="remark"]').val('<?php echo $remark; ?>');
+        $("[name=userFormValid][value=" + '<?php echo $userFormValid; ?>' + "]").prop('checked', true);
 
         $('[name="userFormValid"]').on('change', function() {
             if($("input[name='userFormValid']:checked").val() == '0') {
