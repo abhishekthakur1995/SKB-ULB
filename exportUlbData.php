@@ -29,7 +29,15 @@ if (!$result = mysqli_query($link, $sql)) {
 $users = array();
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
-    	$row['userFormValid'] = $row['userFormValid'] == 1 ? $lang['yes'] : ($row['userFormValid'] == 0) ? $lang['no'] : $lang['under_scrutiny'];
+
+    	if($row['userFormValid'] == 1) {
+    		$row['userFormValid'] = $lang['yes'];
+    	} else if($row['userFormValid'] == 0) {
+    		$row['userFormValid'] = $lang['no'];
+    	} else {
+    		$row['userFormValid'] = $lang['under_scrutiny'];
+    	}
+
     	$row['maritialStatus'] = $lang[$row['maritialStatus']];
     	$row['receiptNumber'] = substr($row['receiptNumber'], strpos($row['receiptNumber'], "_") + 1);
         $users[] = $row;
