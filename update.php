@@ -413,6 +413,10 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $('[name="remark"]').val('<?php echo $remark; ?>');
         $("[name=userFormValid][value=" + '<?php echo $userFormValid; ?>' + "]").prop('checked', true);
 
+        if($("input[name='userFormValid']:checked").val() == '0') {
+            $('.textarea').attr('disabled', false);
+        }
+
         $('[name="userFormValid"]').on('change', function() {
             if($("input[name='userFormValid']:checked").val() == '0') {
                 $('.textarea').attr('disabled', false);
