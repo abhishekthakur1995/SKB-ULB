@@ -1,5 +1,10 @@
 <?php
-  require('languages/hi/lang.hi.php');
+    require_once('Mustache/Autoloader.php');
+    Mustache_Autoloader::register();
+    $mustache = new Mustache_Engine(array(
+        'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__).'/templates') 
+    ));
+    require_once('languages/hi/lang.hi.php');
 ?>
 
 <!DOCTYPE html>

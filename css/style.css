@@ -15,17 +15,26 @@ body {
 .fright {
 	float: right;
 }
+.width10 {
+    width: 10px !important;
+}
 .width150 {
     width: 150px !important;
 }
 .width200 {
     width: 200px !important;
 }
+.width500 {
+    width: 500px !important;
+}
 .full-width {
 	width: 100% !important;
 }
 .no-border-radius { 
 	border-radius: 0px !important 
+}
+.no-margin {
+    margin: 0px !important;
 }
 .no-margin-bottom { 
 	margin-bottom: 0px !important 
@@ -328,4 +337,8 @@ button.pure-button {
 }
 button.pure-button:hover, button.pure-button:focus {
     background-image: linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));
+}
+
+#get-candidates .form-group {
+    width: 25%;
 }

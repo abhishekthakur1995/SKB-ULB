@@ -52,6 +52,7 @@
     $lang['Unmarried'] = 'अविवाहित';
     $lang['Widow'] = 'विधवा';
     $lang['Divorcee'] = 'तलाकशुदा / परितक्या';
+    $lang['Common'] = 'विवाहित / अविवाहित';
 
     $lang['MARRIED'] = 'विवाहित';
     $lang['UNMARRIED'] = 'अविवाहित';
@@ -96,6 +97,8 @@
     $lang['dashboard_btn_6'] = 'यूएलबी पासवर्ड रीसेट करें';
     $lang['dashboard_btn_7'] = 'उम्मीदवार रिपोर्ट देखें और डाउनलोड करें';
     $lang['dashboard_btn_8'] = 'उम्मीदवार फॉर्म की स्थिति के आधार पर देखें';
+    $lang['dashboard_btn_9'] = 'डुप्लिकेट डेटा';
+    $lang['dashboard_btn_10'] = '';
     $lang['total_enteries'] = 'कुल उम्मीदवार';
     $lang['detailed_table'] = 'विस्तृत उम्मीदवार टेबल';
     $lang['reservation_chart'] = 'आरक्षण चार्ट';

@@ -83,7 +83,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     $religion = trim($_POST['religion']);
     $district = trim($_POST['district']);
     $userFormValid = trim($_POST['userFormValid']);
-    $remark = isset($_POST['remark']) ? trim($_POST['remark']) : '';
+    $remark = isset($_POST['remark']) ? htmlspecialchars(trim($_POST['remark'])) : '';
     $specialPreference = isset($_POST['specialPreference']) ? implode(',', $_POST['specialPreference']) : '';
     $specialPreferenceArr = isset($specialPreference) ? explode(",", $specialPreference) : [];
 
@@ -163,7 +163,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             $category = $row['category'];
             $maritialStatus = $row['maritialStatus'];
             $gender = $row['gender'];
-            $remark = $row['remark'];
+            $remark = htmlspecialchars_decode(nl2br(($row['remark'])));
             $userFormValid = $row['userFormValid'];
             $specialPreference = $row['specialPreference'];
             $specialPreferenceArr = isset($specialPreference) ? explode(",", $specialPreference) : [] ;

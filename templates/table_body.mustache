@@ -1,0 +1,30 @@
+<h3>Total Selected Candidates : {{total}}</h3>
+<table class='table table-striped table-hover table-condensed'>
+	<tr>
+		<th>#</th>
+ 		<th>Name</th>
+		<th>Receipt Number</th>
+		<th>ULB Region</th>
+		<th>Father Name</th>
+		<th>Gender</th>
+		<th>Category</th>
+	</tr>
+
+	{{#data}}
+	<tr>
+		<td>{{serialNumber}}</td>
+		<td>{{name}}</td>
+		<td>{{receiptNumber}}</td>
+		<td>{{ulbRegion}}</td>
+		<td>{{guardian}}</td>
+		<td>{{gender}}</td>
+		<td>{{category}}</td>
+	</tr>
+	{{/data}}
+
+	{{^data}}
+		<tr>
+	    	<td>No Record Found</td>
+		</tr>
+	{{/data}}
+</table>

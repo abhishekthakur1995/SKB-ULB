@@ -17,7 +17,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 $term = $link->real_escape_string($_REQUEST['term']);
  
 if(isset($term)){
-    $sql = "SELECT * FROM candidate_list WHERE receiptNumber LIKE '" . $_SESSION['ulb_region'].'_'.$term . "%' AND ulbRegion = '".trim($_SESSION['ulb_region'])."' ORDER BY created_at DESC LIMIT 10";
+    $sql = "SELECT * FROM candidate_list WHERE receiptNumber LIKE '" . $_SESSION['ulb_region'].'_'.$term . "%' AND ulbRegion = '".trim($_SESSION['ulb_region'])."' AND status = 0 ORDER BY created_at DESC LIMIT 200";
     if($result = $link->query($sql)){
         if($result->num_rows > 0){
             $visibleClass = ($result->num_rows > 7) ? 'height-8x' : '';

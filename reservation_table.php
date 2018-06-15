@@ -15,44 +15,88 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     }
 }
 
-//sc
+$insertToDB = false;
+if($_GET && $_GET['insertToDB'] && $_GET['insertToDB'] == true) {
+    $insertToDB = true;
+}
+
+if($insertToDB == true) {
+    Common::createUlbEntryInReservationChartTable();
+}
+
 $totalSeatsInSeletedUlb = Common::getTotalSeatsForUlbByName($_SESSION['ulb_region']);
+if($insertToDB == true) {
+    Common::populateReservationChartTable('TOTAL_SEATS', $totalSeatsInSeletedUlb);
+}
 
 $totalSeatsForSC = Common::getTotalSeatsByCategoryName('SC', $totalSeatsInSeletedUlb);
 $totalSeatsForSCFemale = Common::getTotalSeatsByGender('F', $totalSeatsForSC);
 $totalSeatsWidowSC = Common::getTotalSeatsByMaritialStatus('WIDOW', $totalSeatsForSC);
 $totalSeatsDivorceeSC = Common::getTotalSeatsByMaritialStatus('DIVORCEE', $totalSeatsForSC);
 $totalSeatsCommonSC = $totalSeatsForSCFemale - ($totalSeatsWidowSC+$totalSeatsDivorceeSC);
+if($insertToDB == true) {
+    Common::populateReservationChartTable('SC_FEMALE_WIDOW', $totalSeatsWidowSC);
+    Common::populateReservationChartTable('SC_FEMALE_DIVORCEE', $totalSeatsDivorceeSC);
+    Common::populateReservationChartTable('SC_FEMALE_COMMON', $totalSeatsCommonSC);
+}
 
 $totalSeatsForST = Common::getTotalSeatsByCategoryName('ST', $totalSeatsInSeletedUlb);
 $totalSeatsForSTFemale = Common::getTotalSeatsByGender('F', $totalSeatsForST);
 $totalSeatsWidowST = Common::getTotalSeatsByMaritialStatus('WIDOW', $totalSeatsForST);
 $totalSeatsDivorceeST = Common::getTotalSeatsByMaritialStatus('DIVORCEE', $totalSeatsForST);
 $totalSeatsCommonST = $totalSeatsForSTFemale - ($totalSeatsWidowST + $totalSeatsDivorceeST);
+if($insertToDB == true) {
+    Common::populateReservationChartTable('ST_FEMALE_WIDOW', $totalSeatsWidowST);
+    Common::populateReservationChartTable('ST_FEMALE_DIVORCEE', $totalSeatsDivorceeST);
+    Common::populateReservationChartTable('ST_FEMALE_COMMON', $totalSeatsCommonST);
+}
 
 $totalSeatsForOBC = Common::getTotalSeatsByCategoryName('OBC', $totalSeatsInSeletedUlb);
 $totalSeatsForOBCFemale = Common::getTotalSeatsByGender('F', $totalSeatsForOBC);
 $totalSeatsWidowOBC = Common::getTotalSeatsByMaritialStatus('WIDOW', $totalSeatsForOBC);
 $totalSeatsDivorceeOBC = Common::getTotalSeatsByMaritialStatus('DIVORCEE', $totalSeatsForOBC);
 $totalSeatsCommonOBC = $totalSeatsForOBCFemale - ($totalSeatsWidowOBC + $totalSeatsDivorceeOBC);
+if($insertToDB == true) {
+    Common::populateReservationChartTable('OBC_FEMALE_WIDOW', $totalSeatsWidowOBC);
+    Common::populateReservationChartTable('OBC_FEMALE_DIVORCEE', $totalSeatsDivorceeOBC);
+    Common::populateReservationChartTable('OBC_FEMALE_COMMON', $totalSeatsCommonOBC);
+}
 
 $totalSeatsForSPECIALOBC = Common::getTotalSeatsByCategoryName('SPECIALOBC', $totalSeatsInSeletedUlb);
 $totalSeatsForSPECIALOBCFemale = Common::getTotalSeatsByGender('F', $totalSeatsForSPECIALOBC);
 $totalSeatsWidowSPECIALOBC = Common::getTotalSeatsByMaritialStatus('WIDOW', $totalSeatsForSPECIALOBC);
 $totalSeatsDivorceeSPECIALOBC = Common::getTotalSeatsByMaritialStatus('DIVORCEE', $totalSeatsForSPECIALOBC);
 $totalSeatsCommonSPECIALOBC = $totalSeatsForSPECIALOBCFemale - ($totalSeatsWidowSPECIALOBC + $totalSeatsDivorceeSPECIALOBC);
+if($insertToDB == true) {
+    Common::populateReservationChartTable('SPECIALOBC_FEMALE_WIDOW', $totalSeatsWidowSPECIALOBC);
+    Common::populateReservationChartTable('SPECIALOBC_FEMALE_DIVORCEE', $totalSeatsDivorceeSPECIALOBC);
+    Common::populateReservationChartTable('SPECIALOBC_FEMALE_COMMON', $totalSeatsCommonSPECIALOBC);
+}
 
 $totalSeatsForGENERAL = $totalSeatsInSeletedUlb - ($totalSeatsForSC + $totalSeatsForST + $totalSeatsForOBC + $totalSeatsForSPECIALOBC);
 $totalSeatsForGENERALFemale = Common::getTotalSeatsByGender('F', $totalSeatsForGENERAL);
 $totalSeatsWidowGENERAL = Common::getTotalSeatsByMaritialStatus('WIDOW', $totalSeatsForGENERAL);
 $totalSeatsDivorceeGENERAL = Common::getTotalSeatsByMaritialStatus('DIVORCEE', $totalSeatsForGENERAL);
 $totalSeatsCommonGENERAL = $totalSeatsForGENERALFemale - ($totalSeatsWidowGENERAL + $totalSeatsDivorceeGENERAL);
+if($insertToDB == true) {
+    Common::populateReservationChartTable('TOTAL_GENERAL', $totalSeatsForGENERAL);
+    Common::populateReservationChartTable('GENERAL_FEMALE_WIDOW', $totalSeatsWidowGENERAL);
+    Common::populateReservationChartTable('GENERAL_FEMALE_DIVORCEE', $totalSeatsDivorceeGENERAL);
+    Common::populateReservationChartTable('GENERAL_FEMALE_COMMON', $totalSeatsCommonGENERAL);
+}
 
 $totalMaleSCSeats = $totalSeatsForSC - ($totalSeatsForSCFemale);
 $totalMaleSTSeats = $totalSeatsForST - ($totalSeatsForSTFemale);
-$totalMaleGENERALSeats = $totalSeatsForGENERAL - ($totalSeatsForGENERALFemale);
 $totalMaleOBCSeats = $totalSeatsForOBC - ($totalSeatsForOBCFemale);
 $totalMaleSPECIALOBCSeats = $totalSeatsForSPECIALOBC - ($totalSeatsForSPECIALOBCFemale);
+$totalMaleGENERALSeats = $totalSeatsForGENERAL - ($totalSeatsForGENERALFemale);
+if($insertToDB == true) {
+    Common::populateReservationChartTable('SC_MALE', $totalMaleSCSeats);
+    Common::populateReservationChartTable('ST_MALE', $totalMaleSTSeats);
+    Common::populateReservationChartTable('OBC_MALE', $totalMaleOBCSeats);
+    Common::populateReservationChartTable('SPECIALOBC_MALE', $totalMaleSPECIALOBCSeats);
+    Common::populateReservationChartTable('GENERAL_MALE', $totalMaleGENERALSeats);
+}
 
 ?>
 

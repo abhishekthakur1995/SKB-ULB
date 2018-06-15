@@ -88,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $religion = trim($_POST['religion']);
     $district = trim($_POST['district']);
     $userFormValid = $_POST['userFormValid'];
-    $remark = isset($_POST['remark']) ? trim($_POST['remark']) : '';
+    $remark = isset($_POST['remark']) ? trim(htmlspecialchars($_POST['remark'])) : '';
     $specialPreference = isset($_POST['specialPreference']) ? implode(',', $_POST['specialPreference']) : '';
 
     // Check input errors before inserting in database

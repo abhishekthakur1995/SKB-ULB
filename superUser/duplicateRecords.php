@@ -49,16 +49,15 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
                     <?php
                     // Attempt select query execution
                     $sql = "SELECT t1.* FROM candidate_list t1
-                            join(
-                                select name, guardian
-                                from candidate_list
-                                group by name, guardian
-                                having count(*) > 1
-                            ) t2 on t1.name = t2.name and t1.guardian = t2.guardian";
+                            JOIN(
+                                SELECT name, guardian
+                                FROM candidate_list
+                                GROUP BY name, guardian
+                                HAVING count(*) > 1
+                            ) t2 ON t1.name = t2.name AND t1.guardian = t2.guardian ORDER BY name, guardian";
 
 
                     if($result = mysqli_query($link, $sql)){
-                        print_r($result);
                         if(mysqli_num_rows($result) > 0){
                             echo "<table class='table table-bordered table-striped'>";
                                 echo "<thead>";

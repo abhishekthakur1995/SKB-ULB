@@ -4,7 +4,7 @@ require_once(__ROOT__.'/config.php');
 
 class Common {
 
-	const TSP_AREA = ['BANSWARA'];
+	const TSP_AREA = ['BANSWARA', 'DUNGARPUR', 'PRATAPGARH'];
 	const TSP_AREA_EXCLUDE_CATEGORY = ['OBC', 'SPECIALOBC'];
 
 	const totalSeats = [
@@ -195,11 +195,25 @@ class Common {
 	];
 
 	const categoryResPercentage = [
-		'GENERAL' => 50,
-		'OBC' => 21,
+		'EXOFFICER' => 12.5,
+		'DISABLED' => 3,
+		'SPORTSPERSON' => 2,
 		'SC' => 16,
 		'ST' => 12,
-		'SPECIALOBC' => 1
+		'OBC' => 21,
+		'SPECIALOBC' => 1,
+		'GENERAL' => 50
+	];
+
+	const tspCategoryResPercentage = [
+		'EXOFFICER' => 12.5,
+		'DISABLED' => 3,
+		'SPORTSPERSON' => 2,
+		'SC' => 45,
+		'ST' => 5,
+		'OBC' => 0,
+		'SPECIALOBC' => 0,
+		'GENERAL' => 50
 	];
 
 	const genderResPercentage = [
@@ -214,12 +228,64 @@ class Common {
 		'UNMARRIED' => 20,
 	];
 
+	const codes = [
+		'EXOFFICER' => 0,
+		'DISABLED' => 1,
+		'SPORTSPERSON' => 2,
+		'SC_FEMALE_WIDOW' => 3,
+		'SC_FEMALE_DIVORCEE' =>4,
+		'SC_FEMALE_COMMON'=> 5,
+		'SC_MALE' =>6,
+		'ST_FEMALE_WIDOW' => 7,
+		'ST_FEMALE_DIVORCEE' =>8,
+		'ST_FEMALE_COMMON'=> 9,
+		'ST_MALE' =>10,
+		'OBC_FEMALE_WIDOW' => 11,
+		'OBC_FEMALE_DIVORCEE' =>12,
+		'OBC_FEMALE_COMMON'=> 13,
+		'OBC_MALE' =>14,
+		'SPECIALOBC_FEMALE_WIDOW' => 15,
+		'SPECIALOBC_FEMALE_DIVORCEE' =>16,
+		'SPECIALOBC_FEMALE_COMMON'=> 17,
+		'SPECIALOBC_MALE' =>18,
+		'GENERAL_FEMALE_WIDOW' => 19,
+		'GENERAL_FEMALE_DIVORCEE' =>20,
+		'GENERAL_FEMALE_COMMON'=> 21,
+		'GENERAL_MALE' =>22,
+	];
+
+	const complementaryPairArr = [
+		'SC_FEMALE_WIDOW' => 'SC_FEMALE_DIVORCEE',
+		'SC_FEMALE_DIVORCEE' => 'SC_FEMALE_WIDOW',
+	];
+
+	//These are the categories which seats will be nullified when no candidates are found
+	const noTransferCriteria = [
+		'SC_FEMALE_DIVORCEE', 'ST_FEMALE_DIVORCEE'
+	];
+
+	public static function getCodeForSelectionCriteria($criteria) {
+		return self::codes[strtoupper($criteria)];
+	}
+
 	public static function getTotalSeatsForUlbByName($ulbRegion) {
 		return self::totalSeats[strtoupper($ulbRegion)];
 	}
 
+	public static function getCandidateSelectionLimitForSpecialPreferences($criteria) {
+		if(in_array($_SESSION['ulb_region'], Common::TSP_AREA)) {
+			return self::getPercentage(self::tspCategoryResPercentage[$criteria], self::getTotalSeatsForUlbByName($_SESSION['ulb_region']));		
+		} else {
+			return self::getPercentage(self::categoryResPercentage[$criteria], self::getTotalSeatsForUlbByName($_SESSION['ulb_region']));
+		}
+	}
+
 	public static function getTotalSeatsByCategoryName($categoryName, $totalUlbSeats) {
-		return self::getPercentage(self::categoryResPercentage[strtoupper($categoryName)], $totalUlbSeats);
+		if(in_array($_SESSION['ulb_region'], Common::TSP_AREA)) {
+			return self::getPercentage(self::tspCategoryResPercentage[strtoupper($categoryName)], $totalUlbSeats);
+		} else {
+			return self::getPercentage(self::categoryResPercentage[strtoupper($categoryName)], $totalUlbSeats);
+		}
 	}
 
 	public static function getTotalSeatsByGender($gender, $outOf) {
@@ -281,6 +347,275 @@ class Common {
 		$res = mysqli_query($GLOBALS['link'], $sql);
 		$count = mysqli_num_rows($res);
 		return $count;
+	}
+
+	public static function createUlbEntryInReservationChartTable() {
+		$sql = "INSERT INTO reservation_chart (ULB_REGION) VALUES (?)";
+		if($stmt = mysqli_prepare($GLOBALS['link'], $sql)){
+			mysqli_stmt_bind_param($stmt, "s", $param_ulbRegion);
+			$param_ulbRegion = $_SESSION['ulb_region'];
+			if(mysqli_stmt_execute($stmt)){
+                echo "Entry created into reservation chart table";
+            } else {
+            	echo "ERROR: Could not able to execute $sql. " . mysqli_error($GLOBALS['link']);
+            }
+		}
+		mysqli_stmt_close($stmt);
+	}
+
+	public static function populateReservationChartTable($fieldName, $value) {
+		$sql = "UPDATE reservation_chart SET ".$fieldName." = ".$value." WHERE ULB_REGION ='".$_SESSION['ulb_region']."'";
+		if(mysqli_query($GLOBALS['link'], $sql)){
+    	} else {
+        	echo "ERROR: Could not able to execute $sql. " . mysqli_error($GLOBALS['link']);
+    	}
+	}
+
+	public static function getUpdatedSeats() {
+		$sql = "SELECT TOTAL_GENERAL FROM reservation_chart WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
+		$result = mysqli_query($GLOBALS['link'], $sql);
+		$row = mysqli_fetch_array($result);
+		$totalGeneralSeats = $row['TOTAL_GENERAL'];
+
+		$val = array();
+		$val['TOTAL_FEMALE'] = self::getTotalSeatsByGender('F', $totalGeneralSeats);
+		$val['GENERAL_FEMALE_WIDOW'] = self::getTotalSeatsByMaritialStatus('WIDOW', $totalGeneralSeats);
+		$val['GENERAL_FEMALE_DIVORCEE'] = self::getTotalSeatsByMaritialStatus('DIVORCEE', $totalGeneralSeats);
+		$val['GENERAL_FEMALE_COMMON'] = $val['TOTAL_FEMALE'] - ($val['GENERAL_FEMALE_WIDOW'] + $val['GENERAL_FEMALE_DIVORCEE']);
+		$val['GENERAL_MALE'] = $totalGeneralSeats - $val['TOTAL_FEMALE'];
+		return $val;
+	}
+
+	// public static function updateGeneralCandidatesSeat($count) {
+	// 	$sql = "UPDATE reservation_chart SET TOTAL_GENERAL = TOTAL_GENERAL + ".$count." WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
+
+	// 	if(mysqli_query($GLOBALS['link'], $sql)){
+	// 		$updatedSeats = Common::getUpdatedSeats();
+	// 		$sql = "UPDATE reservation_chart SET GENERAL_FEMALE_WIDOW = ".$updatedSeats['GENERAL_FEMALE_WIDOW'].", GENERAL_FEMALE_DIVORCEE = ".$updatedSeats['GENERAL_FEMALE_DIVORCEE'].", GENERAL_FEMALE_COMMON = ".$updatedSeats['GENERAL_FEMALE_COMMON'].", GENERAL_MALE = ".$updatedSeats['GENERAL_MALE']." WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
+	// 		if(mysqli_query($GLOBALS['link'], $sql)){
+	// 			// data updated
+	// 		} else {
+	// 			echo "ERROR: Could not able to execute $sql. " . mysqli_error($GLOBALS['link']);
+	// 		}
+ //    	} else {
+ //        	echo "ERROR: Could not able to execute $sql. " . mysqli_error($GLOBALS['link']);
+ //    	}
+
+	// }
+
+	public static function existsInDb($value, $field) {
+		$sql = "SELECT id FROM lock_code_seed WHERE ulbRegion = ? AND ".$field." = ?";
+		if($stmt = mysqli_prepare($GLOBALS['link'], $sql)){
+			mysqli_stmt_bind_param($stmt, "ss", $param_ulbRegion, $param_fieldValue);
+			$param_fieldValue = $value;
+			$param_ulbRegion = $_SESSION['ulb_region'];
+			if(mysqli_stmt_execute($stmt)){
+                mysqli_stmt_store_result($stmt);
+                if(mysqli_stmt_num_rows($stmt) > 0){
+                    return true;
+                } else{
+                    return false;
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+        }
+        mysqli_stmt_close($stmt);
+	}
+
+	public static function codeAndSeedExistsInDB($code, $seed) {
+		$sql = "SELECT id FROM lock_code_seed WHERE ulbRegion = ? AND seedNumber = ? AND code = ?";
+        if($stmt = mysqli_prepare($GLOBALS['link'], $sql)){
+            mysqli_stmt_bind_param($stmt, "sss", $param_ulbRegion, $param_seedNumber, $param_code);
+            $param_ulbRegion = $_SESSION['ulb_region'];
+            $param_code = $code;
+            $param_seedNumber = $seed;
+            if(mysqli_stmt_execute($stmt)){
+                mysqli_stmt_store_result($stmt);
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    return true;
+                } else{
+                    return false;
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+        }
+
+        mysqli_stmt_close($stmt);
+	}
+
+	public static function getDataFromDbByCodeAndSeed($code, $seedNumber) {
+		$sql = "SET @a:=0";
+		mysqli_query($GLOBALS['link'], $sql);
+
+		$sql = "SELECT *, @a:=@a+1 AS serialNumber FROM selected_candidates INNER JOIN candidate_list ON selected_candidates.receiptNumber = candidate_list.receiptNumber WHERE selected_candidates.code = ".$code." AND selected_candidates.seedNumber = ".$seedNumber." AND selected_candidates.ulbRegion = '".$_SESSION['ulb_region']."'";
+
+        $res = mysqli_query($GLOBALS['link'], $sql);
+        $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
+        return $data;
+	}
+
+	public static function getCandidateSelectionLimit($criteria) {
+		$sql = "SELECT ".$criteria." FROM reservation_chart WHERE ULB_REGION = ?";
+		if($stmt = mysqli_prepare($GLOBALS['link'], $sql)){ 
+		 	mysqli_stmt_bind_param($stmt, "s", $param_ulbName);
+		 	$param_ulbName = $_SESSION['ulb_region'];
+		 	if(mysqli_stmt_execute($stmt)){
+		 		mysqli_stmt_store_result($stmt);
+		 		if(mysqli_stmt_num_rows($stmt) == 1){
+		 			mysqli_stmt_bind_result($stmt, $limit);
+		 			if(mysqli_stmt_fetch($stmt)){
+		 				return $limit;
+		 			}
+		 		} else {
+		 			echo "No Record Found";
+		 		}
+		 	}
+		}
+		mysqli_stmt_close($stmt);
+	}
+
+	public static function selectCandidatesForSpecialPrefCategory($prefName, $limit, $code, $seedNumber) {
+		$sql = "SET @a:=0";
+		mysqli_query($GLOBALS['link'], $sql);
+
+		$sql = "SELECT *, @a:=@a+1 AS serialNumber from candidate_list WHERE status = 0 AND selected = 0 AND specialPreference = '".$prefName."' AND ulbRegion = '".$_SESSION['ulb_region']."' ORDER BY RAND() LIMIT ".$limit;
+
+		$data = array();
+		if ($res = mysqli_query($GLOBALS['link'], $sql)) {
+			if (mysqli_num_rows($res) > 0) {
+				while ($row = mysqli_fetch_assoc($res)) {
+					array_push($data, $row);
+					$statusUpdated = self::updateStatusOfSelectedCandidates($row['id']);
+					if($statusUpdated) {
+						self::removeSpecialPreferencesSeatsFromCategories($row['category'], $row['gender']);
+						self::copySelectedCandidateData($row, $code, $seedNumber);
+					}
+				}
+				self::lockSeedAndCode($code, $seedNumber);
+				return $data;
+			} else {
+				echo "No candidate found";
+			}
+		}
+	}
+
+	public static function removeSpecialPreferencesSeatsFromCategories($category, $gender) {
+		$deleteFrom = ($gender == 'f') ? strtoupper($category.'_FEMALE_COMMON') : strtoupper($category.'_MALE');
+		$sql = "UPDATE reservation_chart SET ".$deleteFrom." = ".$deleteFrom." - 1 WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
+
+		if(mysqli_query($GLOBALS['link'], $sql)) {
+			//echo "Data descreased";
+		} else {
+			echo "Error updating record: " . mysqli_error($GLOBALS['link']);
+		}
+	}
+
+	public static function selectCandidatesForOthersCategory($criteria, $limit, $code, $seedNumber) {
+		$fieldsArr = explode("_", $criteria);
+		$criteriaArr['category'] = $fieldsArr[0];
+		$criteriaArr['gender'] = $fieldsArr[1] == 'MALE' ? 'm' : 'f';
+		$criteriaArr['maritialStatus'] = (isset($fieldsArr[2]) && !empty($fieldsArr[2])) ? $fieldsArr[2] : '';
+
+		switch($criteriaArr['category']) {
+			case 'GENERAL':
+				$sql = self::getQueriesForGeneralCandidates($criteriaArr, $limit);
+			break;
+
+			default:
+				$sql = self::getQueriesForRestCandidates($criteriaArr, $limit);
+			break;
+		}
+
+		$data = self::getDataFromQuery($sql, $code, $seedNumber);
+		return $data;
+	}
+
+	public static function getQueriesForRestCandidates($criteriaArr, $limit) {
+		if($criteriaArr['maritialStatus'] == '') {
+			$sql = "SELECT * FROM candidate_list WHERE status = 0 AND selected = 0 AND ulbRegion = '".$_SESSION['ulb_region']."' AND category = '".$criteriaArr['category']."' ORDER BY RAND() LIMIT ".$limit;	
+		} else {
+			if($criteriaArr['maritialStatus'] == 'COMMON') {
+				$sql = "SELECT * FROM candidate_list WHERE status = 0 AND selected = 0 AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = '".$criteriaArr['gender']."' AND category = '".$criteriaArr['category']."' ORDER BY RAND() LIMIT ".$limit;
+			} else {
+				$sql = "SELECT * FROM candidate_list WHERE status = 0 AND selected = 0 AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = '".$criteriaArr['gender']."' AND category = '".$criteriaArr['category']."' AND maritialStatus = '".$criteriaArr['maritialStatus']."' ORDER BY RAND() LIMIT ".$limit;
+			}
+		}
+		return $sql;
+	}
+
+	public static function getQueriesForGeneralCandidates($criteriaArr, $limit) {
+		if($criteriaArr['maritialStatus'] == '') {
+			$sql = "SELECT * FROM candidate_list WHERE status = 0 AND selected = 0 AND ulbRegion = '".$_SESSION['ulb_region']."' ORDER BY RAND() LIMIT ".$limit;	
+		} else {
+			if($criteriaArr['maritialStatus'] == 'COMMON') {
+				$sql = "SELECT * FROM candidate_list WHERE status = 0 AND selected = 0 AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = '".$criteriaArr['gender']."' ORDER BY RAND() LIMIT ".$limit;
+			} else {
+				$sql = "SELECT * FROM candidate_list WHERE status = 0 AND selected = 0 AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = '".$criteriaArr['gender']."' AND maritialStatus = '".$criteriaArr['maritialStatus']."' ORDER BY RAND() LIMIT ".$limit;
+			}
+		}
+		return $sql;
+	}
+
+	public static function getDataFromQuery($sql, $code, $seedNumber) {
+		$data = array();
+		if($res = mysqli_query($GLOBALS['link'], $sql)) {
+			if (mysqli_num_rows($res) > 0) {
+				while ($row = mysqli_fetch_assoc($res)) {
+					array_push($data, $row);
+					$statusUpdated = self::updateStatusOfSelectedCandidates($row['id']);
+					if($statusUpdated) {
+						self::copySelectedCandidateData($row, $code, $seedNumber);
+					}
+				}
+				self::lockSeedAndCode($code, $seedNumber);
+			}
+		}
+		return $data;
+	}
+
+	public static function updateStatusOfSelectedCandidates($id) {
+		$sql = "UPDATE candidate_list SET selected = 1 WHERE id= ".$id."";
+		if(mysqli_query($GLOBALS['link'], $sql)) {
+			return true;
+		} else {
+			echo "Error updating record: " . mysqli_error($GLOBALS['link']);
+			return false;
+		}
+	}
+
+	public static function copySelectedCandidateData($row, $code, $seedNumber) {
+		$sql = "INSERT INTO selected_candidates (ulbRegion, name, receiptNumber, code, seedNumber) VALUES (?,?,?,?,?)";
+		if($stmt = mysqli_prepare($GLOBALS['link'], $sql)){
+			mysqli_stmt_bind_param($stmt, "sssss", $param_ulbRegion, $param_name, $param_receiptNumber, $param_code, $param_seedNumber);
+
+			$param_ulbRegion = $row['ulbRegion'];
+			$param_name = $row['name'];
+			$param_receiptNumber = $row['receiptNumber'];
+			$param_code = $code;
+			$param_seedNumber = $seedNumber;
+
+			if(mysqli_stmt_execute($stmt)){
+				//
+            } else {
+            	echo "ERROR: Could not able to execute $sql. " . mysqli_error($GLOBALS['link']);
+            }
+		}
+	}
+
+	public static function lockSeedAndCode($code, $seedNumber) {
+		$sql = "INSERT INTO lock_code_seed (ulbRegion, code, seedNumber) VALUES (?,?,?)";
+		if($stmt = mysqli_prepare($GLOBALS['link'], $sql)) {
+			mysqli_stmt_bind_param($stmt, "sss", $param_ulbRegion, $param_code, $param_seedNumber);
+			$param_code = $code;
+			$param_seedNumber = $seedNumber;
+			$param_ulbRegion = $_SESSION['ulb_region'];
+			if(mysqli_stmt_execute($stmt)) {
+			} else {
+				echo "ERROR: Could not able to execute $sql. " . mysqli_error($GLOBALS['link']);
+			}
+		}
 	}
 }
 

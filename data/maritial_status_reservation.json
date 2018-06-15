@@ -1,0 +1,14 @@
+[
+	{
+		"NAME": "Common",
+		"CODE": "COMMON"
+	},
+	{
+		"NAME": "Divorcee",
+		"CODE": "DIVORCEE"
+	},
+	{
+		"NAME": "Widow",
+		"CODE": "WIDOW"
+	}
+]
