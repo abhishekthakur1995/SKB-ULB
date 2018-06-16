@@ -19,7 +19,7 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
 	header("location: ../error.php?err_msg=Access Not Allowed");
 }
 
-if($_GET && $_GET['page']) {
+if($_GET && $_GET['page'] && is_numeric($_GET['page'])) {
     $page = $_GET['page'];
 } else {
     $page = 1;
