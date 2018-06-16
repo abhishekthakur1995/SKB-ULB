@@ -91,6 +91,33 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                 </tr>
             </tbody>
         </table>
+
+        <?php 
+            $totalEnteriesEXOFFICER = Common::getTotalEnteriesBySpecialPreferences('EXOFFICER');
+            $totalEnteriesDISABLED =  Common::getTotalEnteriesBySpecialPreferences('DISABLED');
+            $totalEnteriesSPORTSPERSON = Common::getTotalEnteriesBySpecialPreferences('SPORTSPERSON');
+            $totalSpecialPreference = $totalEnteriesEXOFFICER + $totalEnteriesDISABLED + $totalEnteriesSPORTSPERSON;
+        ?>
+
+        <table class="ulb-table">
+            <thead>
+                <tr>
+                    <th>Exofficer</th>
+                    <th>Disabled</th>
+                    <th>Sportsperson</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-align-center"><?php echo $totalEnteriesEXOFFICER; ?></td>
+                    <td class="text-align-center"><?php echo $totalEnteriesDISABLED; ?></td>
+                    <td class="text-align-center"><?php echo $totalEnteriesSPORTSPERSON; ?></td>
+                    <td class="text-align-center"><?php echo $totalSpecialPreference; ?></td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 </body>
 </html>

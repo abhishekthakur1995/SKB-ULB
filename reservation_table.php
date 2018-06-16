@@ -182,7 +182,7 @@ if($insertToDB == true) {
             <thead>
                 <tr>
                     <th>Exofficer</th>
-                    <th>Disbaled</th>
+                    <th>Disabled</th>
                     <th>Sportsperson</th>
                     <th>Total</th>
                 </tr>
