@@ -264,6 +264,18 @@ class Common {
 		'SC_FEMALE_DIVORCEE', 'ST_FEMALE_DIVORCEE'
 	];
 
+	public static function getTotalSeatsForExofficer($totalUlbSeats) {
+		return self::getPercentage(self::categoryResPercentage['EXOFFICER'], $totalUlbSeats);
+	}
+
+	public static function getTotalSeatsForDisabled($totalUlbSeats) {
+		return self::getPercentage(self::categoryResPercentage['DISABLED'], $totalUlbSeats);
+	}
+
+	public static function getTotalSeatsForSportsperson($totalUlbSeats) {
+		return self::getPercentage(self::categoryResPercentage['SPORTSPERSON'], $totalUlbSeats);
+	}
+
 	public static function getCodeForSelectionCriteria($criteria) {
 		return self::codes[strtoupper($criteria)];
 	}
