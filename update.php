@@ -163,7 +163,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             $category = $row['category'];
             $maritialStatus = $row['maritialStatus'];
             $gender = $row['gender'];
-            $remark = htmlspecialchars_decode(nl2br(($row['remark'])));
+            $remark = htmlspecialchars_decode(($row['remark']));
             $userFormValid = $row['userFormValid'];
             $specialPreference = $row['specialPreference'];
             $specialPreferenceArr = isset($specialPreference) ? explode(",", $specialPreference) : [] ;
@@ -410,7 +410,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $(".district").val('<?php echo $district; ?>');
         $(".gender").val('<?php echo $gender; ?>');
         $(".religion").val('<?php echo $religion; ?>');
-        $('[name="remark"]').val('<?php echo $remark; ?>');
+        $('[name="remark"]').val(`<?php echo $remark; ?>`);
         $("[name=userFormValid][value=" + '<?php echo $userFormValid; ?>' + "]").prop('checked', true);
 
         if($("input[name='userFormValid']:checked").val() == '0') {
