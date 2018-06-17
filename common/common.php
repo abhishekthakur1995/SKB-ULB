@@ -1,6 +1,7 @@
 <?php
 define('__ROOT__', dirname(dirname(__FILE__))); 
 require_once(__ROOT__.'/config.php');
+require_once(__ROOT__.'/languages/hi/lang.hi.php');
 
 class Common {
 
@@ -464,6 +465,21 @@ class Common {
         mysqli_stmt_close($stmt);
 	}
 
+	public static function getDuplicateRecordsData() {
+		$sql = "SET @a:=0";
+		mysqli_query($GLOBALS['link'], $sql);
+
+		$sql = "SELECT t1.*, @a:=@a+1 AS serialNumber FROM candidate_list t1 JOIN(
+            		SELECT name, guardian, dob FROM candidate_list GROUP BY name, guardian, dob HAVING COUNT(*) >= 2
+                ) t2 ON t1.name = t2.name AND t1.guardian = t2.guardian AND t1.dob = t2.dob WHERE status = 0 ORDER BY name, guardian";
+
+        $result = mysqli_query($GLOBALS['link'], $sql);
+        $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        mysqli_free_result($result);
+        mysqli_close($GLOBALS['link']);
+        return $data;
+	}
+
 	public static function getDataFromDbByCodeAndSeed($code, $seedNumber) {
 		$sql = "SET @a:=0";
 		mysqli_query($GLOBALS['link'], $sql);
@@ -635,6 +651,10 @@ class Common {
 				echo "ERROR: Could not able to execute $sql. " . mysqli_error($GLOBALS['link']);
 			}
 		}
+	}
+
+	public static function getTextInHindi($text) {
+		return $GLOBALS['lang'][$text];
 	}
 }
 

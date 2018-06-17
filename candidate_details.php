@@ -320,7 +320,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </html>
 
 <script type="text/javascript">
-$('document').ready(function() {
+$(document).ready(function() {
     $('[name="userFormValid"]').on('change', function() {
         if($("input[name='userFormValid']:checked").val() == '0') {
             $('.textarea').attr('disabled', false);

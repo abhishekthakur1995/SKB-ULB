@@ -47,24 +47,24 @@ if (isset($_SESSION['message'])) {
             </div>
 
             <div class="fleft full-width text-align-center" >
-                <a href="superUser/forgotPassword.php" class="btn btn-primary btn-lg fs4">
+                <a href="superUser/forgotPassword.php" class="btn btn-primary btn-lg fs4 width450">
                     <span class="fa fa-unlock fs4"></span>
                     <?php echo $lang['dashboard_btn_6']; ?>
                 </a>
-                <a href="superUser/viewAllCandidateReport.php" class="btn btn-primary btn-lg fs4">
+                <a href="superUser/viewAllCandidateReport.php" class="btn btn-primary btn-lg fs4 width450">
                     <span class="fa fa-eye fs4"></span>
                     <?php echo $lang['dashboard_btn_7']; ?>
                 </a>
             </div>
             <div class="fleft full-width text-align-center">
-                <a href="superUser/formStatusCandidateReport.php" class="btn btn-primary btn-lg fs4">
+                <a href="superUser/formStatusCandidateReport.php" class="btn btn-primary btn-lg fs4 width450">
                     <span class="fa fa-eye fs4"></span>
                     <?php echo $lang['dashboard_btn_8']; ?>
                 </a>
-                <!-- <a href="superUser/duplicateRecords.php" class="btn btn-primary btn-lg fs4">
-                    <span class="fa fa-undo-alt fs4"></span>
-                    <?php //echo $lang['dashboard_btn_9']; ?>
-                </a> -->
+                <a href="superUser/duplicateRecords.php" class="btn btn-primary btn-lg fs4 width450">
+                    <span class="fa fa-copy fs4"></span>
+                    <?php echo $lang['dashboard_btn_9']; ?>
+                </a>
             </div>
         <?php } else { ?>
         <div class="fleft full-width text-align-center" >
@@ -81,18 +81,18 @@ if (isset($_SESSION['message'])) {
                     </a>
                 </div>    
             </div>
-            <a href="candidate_details.php" class="btn btn-primary btn-lg fs4">
+            <a href="candidate_details.php" class="btn btn-primary btn-lg fs4 width450">
                 <span class="fa fa-plus-square fs4"></span>
                 <?php echo $lang['dashboard_btn_1']; ?>
             </a>
-            <a href="candidates_details.php?page=1" class="btn btn-primary btn-lg fs4">
+            <a href="candidates_details.php?page=1" class="btn btn-primary btn-lg fs4 width450">
                 <span class="fa fa-edit fs4"></span>
                 <?php echo $lang['dashboard_btn_2']; ?>
             </a>
-            <!-- <a href="" class="btn btn-primary btn-lg fs4">
+            <a href="select_page.php" class="btn btn-primary btn-lg fs4 width450">
                 <span class="fa fa-check fs4"></span>
-                <?php //echo $lang['dashboard_btn_3']; ?>
-            </a> -->
+                <?php echo $lang['dashboard_btn_3']; ?>
+            </a>
         </div>
     <?php } ?>
     </div>

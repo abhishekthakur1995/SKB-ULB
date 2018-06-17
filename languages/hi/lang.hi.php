@@ -20,6 +20,8 @@
     $lang['birth_place'] = 'जन्मस्थल';
     $lang['male'] = 'पुरुष';
     $lang['female'] = 'महिला';
+    $lang['m'] = 'पुरुष';
+    $lang['f'] = 'महिला';
     $lang['nationality'] = 'राष्ट्रीयता';
     $lang['indian'] = 'भारतीय';
     $lang['religion'] = 'धर्म';

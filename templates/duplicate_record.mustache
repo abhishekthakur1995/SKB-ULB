@@ -1,0 +1,46 @@
+<table class='table table-striped table-bordered table-hover table-condensed'>
+	<thead>
+		<tr>
+			{{#lang}}
+				<th>#</th>
+	            <th>{{name}}</th>
+	            <th>{{guardian}}</th>
+	            <th>{{dob}}</th>
+	            <th>{{permanentAddress}}</th>
+	            <th>{{district}}</th>
+	            <th>{{birth_place}}</th>
+	            <th>{{phone_number}}</th>
+	            <th>{{gender}}</th>
+	            <th>{{maritial_status}}</th>
+	            <th>{{category}}</th>
+	            <th>{{ulb_region}}</th>
+	            <th>{{receipt_number}}</th>
+	        {{/lang}}    
+		</tr>
+	</thead>
+	<tbody>
+		{{#data}}
+			<tr>
+				<td>{{serialNumber}}</td>
+				<td>{{name}}</td>
+				<td>{{guardian}}</td>
+				<td>{{dob}}</td>
+				<td>{{permanentAddress}}</td>
+				<td>{{district}}</td>
+				<td>{{birthPlace}}</td>
+				<td>{{phoneNumber}}</td>
+				<td>{{#getTextInHindi}} {{gender}} {{/getTextInHindi}}</td>
+				<td>{{#getTextInHindi}} {{maritialStatus}} {{/getTextInHindi}}</td>
+				<td>{{#getTextInHindi}} {{category}} {{/getTextInHindi}}</td>
+				<td>{{ulbRegion}}</td>
+				<td>{{#getReceiptNumber}} {{receiptNumber}} {{/getReceiptNumber}}</td>
+			</tr>
+		{{/data}}
+
+		{{^data}}
+			<tr>
+	    		<td>No Record Found</td>
+			</tr>
+		{{/data}}
+	</tbody>
+</table>

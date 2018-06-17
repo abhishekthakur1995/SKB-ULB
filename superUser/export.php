@@ -3,7 +3,8 @@
 session_start();
 
 if($_SESSION['user_role'] == 'SUPERADMIN') {
-	require('../config.php');
+	require_once('../config.php');
+    require_once('../languages/hi/lang.hi.php');
 
 	if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 	    header("location: ../index.php");
@@ -62,6 +63,33 @@ if($view === 'all') {
 	        $users[] = $row;
 	    }
 	}
+} else if($view === 'duplicateRecord') {
+	$sql = "SELECT t1.name, t1.guardian, t1.permanentAddress, t1.temporaryAddress, t1.dob, t1.phoneNumber, t1.birthPlace, t1.district, t1.ulbRegion, t1.category, t1.gender, t1.maritialStatus, t1.religion, t1.receiptNumber, t1.userFormValid, t1.specialPreference, t1.remark FROM candidate_list t1 JOIN(
+    		SELECT name, guardian, dob FROM candidate_list GROUP BY name, guardian, dob HAVING COUNT(*) >= 2
+        ) t2 ON t1.name = t2.name AND t1.guardian = t2.guardian AND t1.dob = t2.dob WHERE status = 0 ORDER BY name, guardian";
+
+	if (!$result = mysqli_query($link, $sql)) {
+	    exit(mysqli_error($link));
+	}
+ 
+	$users = array();
+	if (mysqli_num_rows($result) > 0) {
+	    while ($row = mysqli_fetch_assoc($result)) {
+	    	if($row['userFormValid'] == 1) {
+	    		$row['userFormValid'] = $lang['yes'];
+	    	} else if($row['userFormValid'] == 0) {
+	    		$row['userFormValid'] = $lang['no'];
+	    	} else {
+	    		$row['userFormValid'] = $lang['under_scrutiny'];
+	    	}
+	    	$row['maritialStatus'] = $lang[$row['maritialStatus']];
+	    	$row['receiptNumber'] = substr($row['receiptNumber'], strpos($row['receiptNumber'], "_") + 1);
+	    	$row['gender'] = $row['gender'] == 'm' ? $lang['male'] : $lang['female'];
+	    	$row['category'] = $lang[$row['category']];	
+	        $users[] = $row;
+	    }
+	}
+
 } else {
 	header("location: ../error.php?err_msg=Invalid value passed");
 }
@@ -76,6 +104,10 @@ if($view == 'formStatus') {
 
 if($view == 'all') {
 	fputcsv($output, array('ULB', 'Male Candidates', 'Female Candidates', 'Female Widow Candidates', 'Female Divorcee Candidates','Female Married Candidates', 'Female Unmarried Candidates', 'Total Candidates'));
+}
+
+if($view == 'duplicateRecord') {
+	fputcsv($output, array($lang['name'], $lang['guardian'], $lang['permanentAddress'], $lang['temporaryAddress'], $lang['dob'], $lang['phone_number'], $lang['birth_place'], $lang['district'], $lang['ulb_region'], $lang['category'], $lang['gender'], $lang['maritial_status'], $lang['religion'], $lang['receipt_number'], $lang['all_documents_provided'], $lang['special_preference'], $lang['remark']));
 }
  
 if (count($users) > 0) {
