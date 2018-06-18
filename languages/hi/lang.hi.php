@@ -100,7 +100,6 @@
     $lang['dashboard_btn_7'] = 'उम्मीदवार रिपोर्ट देखें और डाउनलोड करें';
     $lang['dashboard_btn_8'] = 'उम्मीदवार फॉर्म की स्थिति के आधार पर देखें';
     $lang['dashboard_btn_9'] = 'डुप्लिकेट डेटा';
-    $lang['dashboard_btn_10'] = '';
     $lang['total_enteries'] = 'कुल उम्मीदवार';
     $lang['detailed_table'] = 'विस्तृत उम्मीदवार टेबल';
     $lang['reservation_chart'] = 'आरक्षण चार्ट';
@@ -174,4 +173,7 @@
     $lang['apply_filter_submit'] = 'फ़िल्टर करे ';
     $lang['close'] = 'बंद करे';
     $lang['export_csv'] = 'सीएसवी के रूप में सभी उम्मीदवार डेटा डाउनलोड करें';
+
+    $lang['candidate_already_selected'] = 'उम्मीदवारों को इस श्रेणी के लिए पहले ही चुना जा चुका है';
+    $lang['code_already_used'] = 'यह सीड नंबर  का उपयोग पहले ही किया जा चूका है कृपया कोई दूसरा सीड नंबर का चयन करे';
 ?>

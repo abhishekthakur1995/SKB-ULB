@@ -31,16 +31,14 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 	    <?php include 'header.php';?>
 
 	    <div class="wrapper fleft full-width margin-top-6x">
-
 			<div class="fleft full-width text-align-center" >
                 <a href="get_candidates_1.php" class="btn btn-primary btn-lg fs4">
                     <span class="fa fa-unlock fs4"></span>EXOFFICER/PLAYER/HANDICAPPED
                 </a>
                 <a href="get_candidates_2.php" class="btn btn-primary btn-lg fs4">
-                    <span class="fa fa-eye fs4"></span>SC/SC/OBC/MBC/General
+                    <span class="fa fa-eye fs4"></span>SC/ST/OBC/MBC/General
                 </a>
             </div>
-
 	    </div>
 	</body>
 </html>

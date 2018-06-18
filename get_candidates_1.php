@@ -49,19 +49,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
     <?php include 'header.php';?>
     <div id="get-candidates" class="get_candidates_wrapper">
-        <div class="form-detail">
-            <h2>Get Candidates</h2>
-            <p>Select the criteria to select a candidate</p>
-        </div>
-
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
                         <div class="form-group">
                             <label for="seedNumber" class="required"><?php echo $lang['seed_number']; ?></label>
-                            <input type="number" name="seedNumber" min="0" class="form-control <?php echo(!empty($seed_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $seedNumber; ?>" required>
+                            <input type="number" name="seedNumber" min="0" class="seed-number form-control <?php echo(!empty($seed_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $seedNumber; ?>" required>
                             <span class="invalid-feedback text-align-center"><?php echo $seed_number_err; ?></span>
                         </div>
                     </div>
@@ -94,31 +88,57 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
 <?php
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if(empty($seed_number_err) && empty($special_preference_err)) {
 
-        $criteria = strtoupper($specialPreference);
-        $code = Common::getCodeForSelectionCriteria($criteria);
-
-        if(Common::codeAndSeedExistsInDB($code, $seedNumber)) {
-            $data = Common::getDataFromDbByCodeAndSeed($code, $seedNumber);
+        function selectCandidate($criteria, $code, $seedNumber, $mustache, $lang) {
+            $limit = Common::getCandidateSelectionLimitForSpecialPreferences($criteria);
+            $data = Common::selectCandidatesForSpecialPrefCategory($criteria, $limit, $code, $seedNumber);
             $template = $mustache->loadTemplate('table_body');
-            echo $template->render(array('data'=>$data, 'total'=>sizeof($data)));
-        } else {
-            if(Common::existsInDB($code, 'code')) {
-                echo "Candidates have already been selected from this criteria";
-            } else if(Common::existsInDB($seedNumber, 'seedNumber')){
-                echo "This seed number is already used.";
-            } else {
-                $limit = Common::getCandidateSelectionLimitForSpecialPreferences($criteria);
-                $data = Common::selectCandidatesForSpecialPrefCategory($criteria, $limit, $code, $seedNumber);
+            echo $template->render(array('data'=>$data, 'total'=>sizeof($data), 'lang'=>$lang));
+        }
+
+        $specialPreferenceArr = ['EXOFFICER', 'DISABLED', 'SPORTSPERSON'];
+
+        for($i=0; $i<sizeof($specialPreferenceArr); $i++) {
+            $criteria = strtoupper($specialPreferenceArr[$i]);
+            $code = Common::getCodeForSelectionCriteria($criteria);
+            if(Common::codeAndSeedExistsInDB($code, $seedNumber)) {
+                $data = Common::getDataFromDbByCodeAndSeed($code, $seedNumber);
                 $template = $mustache->loadTemplate('table_body');
-                echo $template->render(array('data'=>$data, 'total'=>sizeof($data)));
+                echo $template->render(array(
+                    'data'=>$data, 
+                    'lang'=>$lang,
+                    'getReceiptNumber' => function($text, Mustache_LambdaHelper $helper) {
+                        return substr($helper->render($text), strpos($helper->render($text), "_") + 1);
+                    },
+                    'getTextInHindi' => function($text, Mustache_LambdaHelper $helper) {
+                        return Common::getTextInHindi(trim($helper->render($text)));
+                    }
+                ));
+            } else {
+                // if(Common::existsInDB($code, 'code')) {
+                //     Common::showAlert($lang['candidate_already_selected']);
+                // } else if(Common::existsInDB($seedNumber, 'seedNumber')){
+                //     Common::showAlert($lang['code_already_used']);
+                // } else {
+                //     selectCandidate($criteria, $code, $seedNumber, $mustache, $lang);
+                // }
+                selectCandidate($criteria, $code, $seedNumber, $mustache, $lang);
             }
         }
+
         mysqli_close($link);
     }
 }
 
 ?>
+
+<script type="text/javascript">
+// $(document).ready(function() {
+//     $('.seed-number').click(function(){
+//         console.log($(this).length);
+//     });
+// });
+</script>
