@@ -65,7 +65,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="col-sm">
                         <div class="form-group">
                             <label for="seedNumber" class="required"><?php echo $lang['seed_number']; ?></label>
-                            <input type="number" min="0" name="seedNumber" class="form-control <?php echo(!empty($seed_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $seedNumber; ?>" required>
+                            <input type="number" autocomplete="off" min="0" name="seedNumber" class="form-control <?php echo(!empty($seed_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $seedNumber; ?>" required>
                             <span class="invalid-feedback text-align-center"><?php echo $seed_number_err; ?></span>
                         </div>
                     </div>

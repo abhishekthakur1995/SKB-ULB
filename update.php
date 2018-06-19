@@ -210,30 +210,30 @@ if(isset($_POST["id"]) && !empty($_POST["id"])) {
 
             <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
                 <label class="required"><?php echo $lang['name'] ?></label>
-                <input type="text" name="name" class="form-control" value="<?php echo $name; ?>" required>
+                <input type="text" autocomplete="on" name="name" class="form-control" value="<?php echo $name; ?>" required>
                 <span class="help-block"><?php echo $name_err; ?></span>
             </div>
 
             <div class="form-group">
                 <label class="required"><?php echo $lang['guardian']; ?></label>
-                <input type="text" name="guardian" class="form-control" value="<?php echo $guardian; ?>" required>
+                <input type="text" autocomplete="on" name="guardian" class="form-control" value="<?php echo $guardian; ?>" required>
             </div>
 
             <div class="form-group">
                 <label class="required"><?php echo $lang['dob']; ?></label>
-                    <input type="text" name="dob" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}" class="form-control <?php echo (!empty($dob_err)) ? 'is-invalid' : ''; ?>" placeholder="dd/mm/yyyy" value="<?php echo $dob; ?>" required><br>
+                    <input type="text" autocomplete="on" name="dob" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}" class="form-control <?php echo (!empty($dob_err)) ? 'is-invalid' : ''; ?>" placeholder="dd/mm/yyyy" value="<?php echo $dob; ?>" required><br>
                 <span class="invalid-feedback text-align-center"><?php echo $dob_err; ?></span>
             </div>
 
             <div class="form-group">
                 <label class="required"><?php echo $lang['permanentAddress']; ?></label>
-                    <input type="text" name="permanentAddress" class="form-control <?php echo (!empty($permanent_address_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $permanentAddress; ?>" required><br>
+                    <input type="text" autocomplete="on" name="permanentAddress" class="form-control <?php echo (!empty($permanent_address_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $permanentAddress; ?>" required><br>
                     <span class="invalid-feedback text-align-center"><?php echo $permanent_address_err; ?></span>
             </div>
 
             <div class="form-group">
                 <label><?php echo $lang['temporaryAddress']; ?></label>
-                    <input type="text" name="temporaryAddress" class="form-control" value="<?php echo $temporaryAddress; ?>"><br>
+                    <input type="text" autocomplete="on" name="temporaryAddress" class="form-control" value="<?php echo $temporaryAddress; ?>"><br>
             </div>
 
             <div class="form-group">
@@ -251,13 +251,13 @@ if(isset($_POST["id"]) && !empty($_POST["id"])) {
 
             <div class="form-group">
                 <label><?php echo $lang['birth_place']; ?></label>
-                <input type="text" name="birthPlace" class="form-control" value="<?php echo $birthPlace; ?>">
+                <input type="text" autocomplete="on" name="birthPlace" class="form-control" value="<?php echo $birthPlace; ?>">
             </div>
 
             <div class="form-group">
                 <label class="required"><?php echo $lang['ulb_region'] ?></label>
                 <input type="hidden" name="ulbRegion" value="<?php echo ucwords(strtolower($_SESSION['ulb_region']))?>" />
-                <input type="text" name="ulbRegion" class="form-control" value="<?php echo ucwords(strtolower($_SESSION['ulb_region']))?>" readonly>
+                <input type="text" autocomplete="off" name="ulbRegion" class="form-control" value="<?php echo ucwords(strtolower($_SESSION['ulb_region']))?>" readonly>
             </div>
 
             <div class="form-group <?php echo (!empty($phone_number_err)) ? 'has-error' : ''; ?>">
@@ -266,7 +266,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])) {
                     <div class="input-group-prepend">
                         <div class="input-group-text">+91</div>
                     </div>
-                    <input type="number" name="phoneNumber" class="form-control width200" onKeyPress="if(this.value.length==10) return false;" value="<?php echo $phoneNumber; ?>">
+                    <input type="number" autocomplete="on" name="phoneNumber" class="form-control width200" onKeyPress="if(this.value.length==10) return false;" value="<?php echo $phoneNumber; ?>">
                 </div>
                 <span class="help-block"><?php echo $phone_number_err; ?></span>
             </div>
@@ -282,7 +282,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])) {
 
             <div class="form-group">
                 <label class="required"><?php echo $lang['nationality']; ?></label>
-                <input type="text" class="form-control" value="<?php echo $lang['indian']; ?>" readonly>
+                <input type="text" autocomplete="off" class="form-control" value="<?php echo $lang['indian']; ?>" readonly>
             </div>
 
             <div class="form-group">
@@ -360,7 +360,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])) {
             <div class="form-group">
                 <label class="required" style="width: 180px;"><?php echo $lang['receipt_number']; ?></label>
                 <?php $receiptNumber = !empty($receiptNumber) ? substr($receiptNumber, strpos($receiptNumber, "_") + 1) : ""; ?>
-                <input type="text" name="receiptNumber" class="form-control <?php echo (!empty($receipt_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $receiptNumber; ?>" required>
+                <input type="text" autocomplete="off" name="receiptNumber" class="form-control <?php echo (!empty($receipt_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $receiptNumber; ?>" required>
                 <span class="invalid-feedback text-align-center" style="width:120px;"><?php echo $receipt_number_err; ?></span>
             </div>
 

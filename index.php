@@ -95,7 +95,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <form class="form-inline login_detail" role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group margin-bottom-4x full-width">
                 <label><?php echo $lang['username']; ?></label>
-                <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>"" value="<?php echo $username; ?>" required>
+                <input type="text" name="username" autocomplete="off" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>"" value="<?php echo $username; ?>" required>
                 <span class="invalid-feedback text-align-center"><?php echo $username_err; ?></span>
             </div>
             <div class="form-group margin-bottom-4x full-width" required>
