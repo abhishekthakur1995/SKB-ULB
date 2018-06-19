@@ -149,7 +149,6 @@ if(isset($_POST["id"]) && !empty($_POST["id"])) {
     mysqli_close($link);
 } else {
     if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
-        $token = $easyCSRF->generate('my_token');
         $id =  htmlspecialchars(trim($_GET["id"]));
         
         $sql = "SELECT * FROM candidate_list WHERE id = ".$id." AND ulbRegion = '".$_SESSION['ulb_region']."'";
@@ -203,7 +202,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])) {
         </div>
         <form class="form-inline update_candidate_detail" role="form" action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post" style="margin-top: 10px; margin-left: 3px;">
 
-            <input type="hidden" name="token" value="<?php echo $token; ?>">
+            <input type="hidden" name="token" value="<?php echo $easyCSRF->generate('my_token'); ?>">
 
             <div class="alert alert-info full-width margin-horiz-2x info-header">
                 <strong><?php echo $lang['alert_msg_1']; ?></strong> <?php echo $lang['alert_msg_2']; ?> <strong><?php echo $lang['alert_msg_3']; ?></strong> <?php echo $lang['alert_msg_4']; ?>

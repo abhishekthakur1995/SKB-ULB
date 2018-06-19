@@ -142,11 +142,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         mysqli_stmt_close($stmt);
     }
     mysqli_close($link);
-} else {
-    $token = $easyCSRF->generate('my_token');
-} 
+}
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -164,7 +164,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </div>
         <form class="form-inline candidate_detail margin-top-2x" role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
-            <input type="hidden" name="token" value="<?php echo $token; ?>">
+            <input type="hidden" name="token" value="<?php echo $easyCSRF->generate('my_token'); ?>">
 
             <div class="alert alert-info full-width margin-horiz-2x info-header">
                 <strong><?php echo $lang['alert_msg_1']; ?></strong> <?php echo $lang['alert_msg_2']; ?> <strong><?php echo $lang['alert_msg_3']; ?></strong> <?php echo $lang['alert_msg_4']; ?>
