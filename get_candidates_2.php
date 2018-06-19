@@ -26,19 +26,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($trimGender)) {
         $gender_err = "Please select a gender.";
     } else {
-        $gender = mysql_real_escape_string($trimGender);
+        $gender = $trimGender;
     }
 
-    $category = mysql_real_escape_string(trim($_POST["category"]));
+    $category = trim($_POST["category"]);
 
     $trimSeedNumber = $_POST["seedNumber"];
     if(empty($trimSeedNumber)){
         $seed_number_err = "Please enter a seed number.";
     } else {
-        $seedNumber = mysql_real_escape_string($trimSeedNumber);
+        $seedNumber = $trimSeedNumber;
     }
 
-    $maritialStatus = isset($_POST['maritialStatus']) ? mysql_real_escape_string(trim($_POST['maritialStatus'])) : '';
+    $maritialStatus = isset($_POST['maritialStatus']) ? trim($_POST['maritialStatus']) : '';
 }
 
 ?>

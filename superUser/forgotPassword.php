@@ -30,7 +30,7 @@ $ulb = $ulb_err = '';
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-	$trimUlb = mysql_real_escape_string(trim($_POST['ulb']));
+	$trimUlb = trim($_POST['ulb']);
 	if(empty($trimUlb)) {
 		$ulb_err = 'Please select a ulb to proceed further';
 	} else {

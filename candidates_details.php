@@ -31,7 +31,7 @@ if($_GET && isset($_GET['page'])) {
 }
 
 if($_GET && isset($_GET['userFormValid']) && is_numeric($_GET['userFormValid'])) {
-    $formValid = mysql_real_escape_string($_GET['userFormValid']);
+    $formValid = htmlspecialchars($_GET['userFormValid']);
 } else {
     $formValid = '';
 }
