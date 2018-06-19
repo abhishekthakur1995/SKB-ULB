@@ -21,11 +21,7 @@
                         <h1>Invalid Request</h1>
                     </div>
                     <div class="alert alert-danger fade in">
-                        <?php if(isset($_GET['err_msg'])) { ?>
-                        <div class="jumbotron fs4">
-                            <span><?php echo $_GET['err_msg']; ?></span> 
-                        </div>
-                        <?php } ?>
+                        <div class="jumbotron fs4">Access Not Allowed</div>
                         <p>Sorry, you've made an invalid request. Please <a href="dashboard.php" class="alert-link">go back</a> and try again.</p>
                     </div>
                 </div>

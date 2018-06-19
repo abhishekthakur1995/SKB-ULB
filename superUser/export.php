@@ -17,11 +17,11 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
 	    }
 	}
 } else {
-	header("location: ../error.php?err_msg=Access Not Allowed");
+	header("location: ../error.php");
 }
 
 if($_GET && $_GET['view']) {
-    $view = htmlspecialchars(trim($_GET['view']));
+    $view = htmlspecialchars(trim($_GET['view']), ENT_QUOTES);
 }
  
 if($view === 'all') {
@@ -91,7 +91,7 @@ if($view === 'all') {
 	}
 
 } else {
-	header("location: ../error.php?err_msg=Invalid value passed");
+	header("location: ../error.php");
 }
  
 header('Content-Type: text/csv; charset=utf-8');

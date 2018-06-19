@@ -23,14 +23,14 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
 	    }
 	}
 } else {
-	header("location: ../error.php?err_msg=Access Not Allowed");
+	header("location: ../error.php");
 }
 
 $ulb = $ulb_err = '';
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-	$trimUlb = trim($_POST['ulb']);
+	$trimUlb = mysql_real_escape_string(trim($_POST['ulb']));
 	if(empty($trimUlb)) {
 		$ulb_err = 'Please select a ulb to proceed further';
 	} else {

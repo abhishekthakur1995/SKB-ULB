@@ -92,7 +92,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 if(mysqli_stmt_execute($stmt)){
                                     $_SESSION = array();
                                     session_destroy();
-                                    session_unset();      
+                                    session_unset();
                                     header("location: index.php");
                                 } else {
                                     echo "Something went wrong. Please try again later.";
@@ -144,17 +144,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <form class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group margin-bottom-4x">
                 <label style="width:140px"><?php echo $lang['reset_password_msg_1']; ?></label>
-                <input type="password" name="currentPassword" class="form-control" <?php echo (!empty($confirm_new_password_err)) ? 'is-invalid' : ''; ?>" required>
+                <input type="password" name="currentPassword" autocomplete="off" class="form-control" <?php echo (!empty($confirm_new_password_err)) ? 'is-invalid' : ''; ?>" required>
                 <span class="invalid-feedback text-align-center"><?php echo $current_password_err; ?></span>
             </div>    
             <div class="form-group margin-bottom-4x">
                 <label style="width:140px"><?php echo $lang['reset_password_msg_2']; ?></label>
-                <input type="password" name="newPassword" class="form-control" <?php echo (!empty($confirm_new_password_err)) ? 'is-invalid' : ''; ?>" required>
+                <input type="password" name="newPassword" autocomplete="off" class="form-control" <?php echo (!empty($confirm_new_password_err)) ? 'is-invalid' : ''; ?>" required>
                 <span class="invalid-feedback text-align-center"><?php echo $new_password_err; ?></span>
             </div>
             <div class="form-group margin-bottom-4x">
                 <label style="width:140px"><?php echo $lang['reset_password_msg_3']; ?></label>
-                <input type="password" name="confirmNewPassword" class="form-control <?php echo (!empty($confirm_new_password_err)) ? 'is-invalid' : ''; ?>" required>
+                <input type="password" name="confirmNewPassword" autocomplete="off" class="form-control <?php echo (!empty($confirm_new_password_err)) ? 'is-invalid' : ''; ?>" required>
                 <span class="invalid-feedback text-align-center"><?php echo $confirm_new_password_err; ?></span>
             </div>
             <div class="form-group">

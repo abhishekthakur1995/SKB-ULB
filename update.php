@@ -4,6 +4,9 @@ session_start();
 require('config.php');
 require('languages/hi/lang.hi.php');
 require('common/common.php');
+require('vendor/autoload.php');
+$sessionProvider = new EasyCSRF\NativeSessionProvider();
+$easyCSRF = new EasyCSRF\EasyCSRF($sessionProvider);
 
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     header("location: index.php");
@@ -21,16 +24,23 @@ $name = $gender = $dob = $category = $phoneNumber = $guardian = $permanentAddres
 $name_err = $gender_err = $dob_err = $phone_number_err = $guardian_err = $receipt_number_err = $permanent_address_err = "";
  
 // Processing form data when form is submitted
-if(isset($_POST["id"]) && !empty($_POST["id"])){
-    // Get hidden input value
-    $id = $_POST["id"];
+if(isset($_POST["id"]) && !empty($_POST["id"])) {
+
+    try {
+        $easyCSRF->check('my_token', $_POST['token']);
+    }
+    catch(Exception $e) {
+        die($e->getMessage());
+    }
+
+    $id = htmlspecialchars($_POST["id"]);
     
     // Validate name
     $trimName = trim($_POST["name"]); 
     if(empty($trimName)){
         $name_err = "Please enter a name.";
     } else {
-        $name = $trimName;
+        $name = htmlspecialchars($trimName);
     }
 
     // Validate gender
@@ -38,7 +48,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     if(empty($trimGender)) {
         $gender_err = "Please select a gender.";
     } else {
-        $gender = $trimGender;
+        $gender = htmlspecialchars($trimGender);
     }
 
     // Validate dob
@@ -46,7 +56,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     if(empty($trimDOB)) {
         $dob_err = "Please select a DOB.";
     } else {
-        $dob = $trimDOB;
+        $dob = htmlspecialchars($trimDOB);
     }
 
     // Validate name
@@ -54,11 +64,11 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     if(empty($trimGuardianName)) {
         $guardian_err = "Please enter a guardian name.";
     } else {
-        $guardian = $trimGuardianName;
+        $guardian = htmlspecialchars($trimGuardianName);
     }
 
     //validate receipt number
-    $trimReceiptNumber = trim($_POST["receiptNumber"]);
+    $trimReceiptNumber = htmlspecialchars(trim($_POST["receiptNumber"]));
     if(empty($trimReceiptNumber)) {
         $receipt_number_err = $lang['receipt_number_err'];
     } else {
@@ -70,22 +80,22 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     if(empty($trimPermanentAddress)) {
         $permanent_address_err = $lang['permanent_address_err'];
     } else {
-        $permanentAddress = $trimPermanentAddress;
+        $permanentAddress = htmlspecialchars($trimPermanentAddress);
     }
 
-    $category = trim($_POST['category']);
-    $maritialStatus = trim($_POST['maritialStatus']);
-    $ulbRegion = trim($_SESSION['ulb_region']);
-    $phoneNumber = isset($_POST['phoneNumber']) ? trim($_POST['phoneNumber']) : '';
-    $guardian = trim($_POST['guardian']);
-    $temporaryAddress = isset($_POST['temporaryAddress']) ? trim($_POST['temporaryAddress']) : '';
-    $birthPlace = trim($_POST['birthPlace']);
-    $religion = trim($_POST['religion']);
-    $district = trim($_POST['district']);
-    $userFormValid = trim($_POST['userFormValid']);
+    $category = htmlspecialchars(trim($_POST['category']));
+    $maritialStatus = htmlspecialchars(trim($_POST['maritialStatus']));
+    $ulbRegion = htmlspecialchars(trim($_SESSION['ulb_region']));
+    $phoneNumber = isset($_POST['phoneNumber']) ? htmlspecialchars(trim($_POST['phoneNumber'])) : '';
+    $guardian = htmlspecialchars(trim($_POST['guardian']));
+    $temporaryAddress = isset($_POST['temporaryAddress']) ? htmlspecialchars(trim($_POST['temporaryAddress'])) : '';
+    $birthPlace = htmlspecialchars(trim($_POST['birthPlace']));
+    $religion = htmlspecialchars(trim($_POST['religion']));
+    $district = htmlspecialchars(trim($_POST['district']));
+    $userFormValid = htmlspecialchars(trim($_POST['userFormValid']));
     $remark = isset($_POST['remark']) ? htmlspecialchars(trim($_POST['remark'])) : '';
-    $specialPreference = isset($_POST['specialPreference']) ? implode(',', $_POST['specialPreference']) : '';
-    $specialPreferenceArr = isset($specialPreference) ? explode(",", $specialPreference) : [];
+    $specialPreference = isset($_POST['specialPreference']) ? implode(',', htmlspecialchars($_POST['specialPreference'])) : '';
+    $specialPreferenceArr = isset($specialPreference) ? explode(",", htmlspecialchars($specialPreference)) : [];
 
     // Check input errors before inserting in database
     if(empty($name_err) && empty($dob_err) && empty($guardian_err) && empty($receipt_number_err) && empty($gender_err)) {
@@ -137,36 +147,34 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     
     // Close connection
     mysqli_close($link);
-} else{
-    // Check existence of id parameter before processing further
+} else {
     if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
-        // Get URL parameter
-        $id =  trim($_GET["id"]);
+        $token = $easyCSRF->generate('my_token');
+        $id =  htmlspecialchars(trim($_GET["id"]));
         
-        // Prepare a select statement
         $sql = "SELECT * FROM candidate_list WHERE id = ".$id." AND ulbRegion = '".$_SESSION['ulb_region']."'";
 
         $result = mysqli_query($link, $sql);
         if(mysqli_num_rows($result) == 1) {
             $row = $result->fetch_assoc();
-            $name = $row['name'];
-            $dob = $row['dob'];
-            $ulbRegion = $row['ulbRegion'];
-            $phoneNumber = $row['phoneNumber'];
-            $guardian = $row['guardian'];
-            $permanentAddress = $row['permanentAddress'];
-            $temporaryAddress = $row['temporaryAddress'];
-            $birthPlace = $row['birthPlace'];
-            $receiptNumber = $row['receiptNumber'];
-            $religion = $row['religion'];
-            $district = $row['district'];
-            $category = $row['category'];
-            $maritialStatus = $row['maritialStatus'];
-            $gender = $row['gender'];
+            $name = htmlspecialchars_decode($row['name']);
+            $dob = htmlspecialchars_decode($row['dob']);
+            $ulbRegion = htmlspecialchars_decode($row['ulbRegion']);
+            $phoneNumber = htmlspecialchars_decode($row['phoneNumber']);
+            $guardian = htmlspecialchars_decode($row['guardian']);
+            $permanentAddress = htmlspecialchars_decode($row['permanentAddress']);
+            $temporaryAddress = htmlspecialchars_decode($row['temporaryAddress']);
+            $birthPlace = htmlspecialchars_decode($row['birthPlace']);
+            $receiptNumber = htmlspecialchars_decode($row['receiptNumber']);
+            $religion = htmlspecialchars_decode($row['religion']);
+            $district = htmlspecialchars_decode($row['district']);
+            $category = htmlspecialchars_decode($row['category']);
+            $maritialStatus = htmlspecialchars_decode($row['maritialStatus']);
+            $gender = htmlspecialchars_decode($row['gender']);
             $remark = htmlspecialchars_decode(($row['remark']));
-            $userFormValid = $row['userFormValid'];
-            $specialPreference = $row['specialPreference'];
-            $specialPreferenceArr = isset($specialPreference) ? explode(",", $specialPreference) : [] ;
+            $userFormValid = htmlspecialchars_decode($row['userFormValid']);
+            $specialPreference = htmlspecialchars_decode($row['specialPreference']);
+            $specialPreferenceArr = isset($specialPreference) ? explode(",", htmlspecialchars_decode($specialPreference)) : [] ;
         } else {
             // URL doesn't contain valid id. Redirect to error page
             header("location: error.php");
@@ -194,6 +202,8 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             <h2><?php echo $lang['update_detail_title']; ?></h2>
         </div>
         <form class="form-inline update_candidate_detail" role="form" action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post" style="margin-top: 10px; margin-left: 3px;">
+
+            <input type="hidden" name="token" value="<?php echo $token; ?>">
 
             <div class="alert alert-info full-width margin-horiz-2x info-header">
                 <strong><?php echo $lang['alert_msg_1']; ?></strong> <?php echo $lang['alert_msg_2']; ?> <strong><?php echo $lang['alert_msg_3']; ?></strong> <?php echo $lang['alert_msg_4']; ?>

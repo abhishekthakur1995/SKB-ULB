@@ -1,70 +1,56 @@
 <?php
-// Include config file
+
 require('config.php');
 require('languages/hi/lang.hi.php');
  
-// Define variables and initialize with empty values
 $username = $password = "";
 $username_err = $password_err = "";
  
-// Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST") {
  
-    // Check if username is empty
-    $trimUserName = trim($_POST["username"]);
+    $trimUserName = htmlspecialchars(trim($_POST["username"], ENT_QUOTES));
     if(empty($trimUserName)){
         $username_err = 'Please enter username.';
     } else{
-        $username = trim($_POST["username"]);
+        $username = $trimUserName;
     }
     
-    // Check if password is empty
     $trimPassword = trim($_POST['password']);
     if(empty($trimPassword)){
         $password_err = 'Please enter your password.';
     } else{
-        $password = trim($_POST['password']);
+        $password = $trimPassword;
     }
     
-    // Validate credentials
     if(empty($username_err) && empty($password_err)){
-        // Prepare a select statement
         $sql = "SELECT username, password, region, role, firstLogin FROM ulb_admins WHERE username = ?";
         
         if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $param_username);
             
-            // Set parameters
             $param_username = $username;
             
-            // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
-                // Store result
                 mysqli_stmt_store_result($stmt);
-                
-                // Check if username exists, if yes then verify password
+
                 if(mysqli_stmt_num_rows($stmt) == 1){                    
-                    // Bind result variables
                     mysqli_stmt_bind_result($stmt, $username, $hashedPassword, $ulbRegion, $userRole, $firstLogin);
 
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashedPassword)){
-                            /* Password is correct, so start a new session and
-                            save the username to the session */
                             session_start();
 
                             $_SESSION['username'] = $username;
                             $_SESSION['ulb_region'] = $ulbRegion;
                             $_SESSION['user_role'] = $userRole;
                             $_SESSION['timestamp']=time();
+                            session_regenerate_id();
                             if($firstLogin === 0) {
                                 $sql = "UPDATE ulb_admins SET firstLogin = 1 WHERE username = '".$username."'";
                                 if (mysqli_query($link, $sql)) {
                                     header("location: reset_password.php");
                                 } else {
-                                    $msg = mysqli_error($link);
-                                    header("location: error.php?err_msg=$msg");
+                                    header("location: error.php");
                                 }
                             } else {
                                 header("location: dashboard.php");
@@ -83,11 +69,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }
         }
         
-        // Close statement
         mysqli_stmt_close($stmt);
     }
     
-    // Close connection
     mysqli_close($link);
 }
 ?>
@@ -116,7 +100,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <div class="form-group margin-bottom-4x full-width" required>
                 <label><?php echo $lang['password']?></label>
-                <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" required>
+                <input type="password" name="password" autocomplete="off" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" required>
                 <span class="invalid-feedback text-align-center"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group full-width">

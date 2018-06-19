@@ -25,13 +25,13 @@ if (isset($_SESSION['message'])) {
 
 
 if($_GET && isset($_GET['page'])) {
-    $page = $_GET['page'];
+    $page = htmlspecialchars($_GET['page'], ENT_QUOTES);
 } else {
     $page = 1;
 }
 
 if($_GET && isset($_GET['userFormValid']) && is_numeric($_GET['userFormValid'])) {
-    $formValid = $_GET['userFormValid'];
+    $formValid = mysql_real_escape_string($_GET['userFormValid']);
 } else {
     $formValid = '';
 }

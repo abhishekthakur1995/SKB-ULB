@@ -16,7 +16,7 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
         }
     }
 } else {
-    header("location: ../../error.php?err_msg=Access Not Allowed");
+    header("location: ../../error.php");
 }
 ?>
 

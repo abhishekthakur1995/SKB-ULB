@@ -17,7 +17,7 @@ if($_SESSION['user_role'] == 'ULBADMIN') {
 	    }
 	}
 } else {
-	header("location: error.php?err_msg=Access Not Allowed");
+	header("location: error.php");
 }
  
 $sql = "SELECT name, guardian, permanentAddress, temporaryAddress, dob, phoneNumber, birthPlace, district, ulbRegion, category, gender, maritialStatus, religion, receiptNumber, userFormValid, specialPreference, remark FROM candidate_list WHERE status = 0 AND ulbRegion = '".$_SESSION['ulb_region']."'";

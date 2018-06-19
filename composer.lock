@@ -1,0 +1,57 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "563e1f3cc7ac9d261359ccbb3ac5a540",
+    "packages": [
+        {
+            "name": "gilbitron/easycsrf",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gilbitron/EasyCSRF.git",
+                "reference": "6927d540193f09621c0fb65140c2963992f5fd6b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gilbitron/EasyCSRF/zipball/6927d540193f09621c0fb65140c2963992f5fd6b",
+                "reference": "6927d540193f09621c0fb65140c2963992f5fd6b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EasyCSRF\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gilbert Pellegrom",
+                    "email": "gilbert@pellegrom.me"
+                }
+            ],
+            "description": "A simple, standalone CSRF protection library",
+            "time": "2015-03-19T14:44:39+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

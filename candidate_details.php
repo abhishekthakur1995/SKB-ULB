@@ -12,6 +12,9 @@ if (isset($_SESSION['message'])) {
 require('config.php');
 require('languages/hi/lang.hi.php');
 require('common/common.php');
+require('vendor/autoload.php');
+$sessionProvider = new EasyCSRF\NativeSessionProvider();
+$easyCSRF = new EasyCSRF\EasyCSRF($sessionProvider);
 
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     header("location: index.php");
@@ -30,13 +33,19 @@ $name_err = $gender_err = $dob_err = $phone_number_err = $guardian_err = $receip
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+    try {
+        $easyCSRF->check('my_token', $_POST['token']);
+    }
+    catch(Exception $e) {
+        die($e->getMessage());
+    }
 
     // Validate name
     $trimName = trim($_POST["name"]);
     if(empty($trimName)) {
         $name_err = "Please enter a name.";
     } else {
-        $name = trim($_POST['name']);
+        $name = htmlspecialchars($trimName);
     }
 
     // Validate name
@@ -44,7 +53,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($trimGuardianName)) {
         $guardian_err = "Please enter a guardian name.";
     } else {
-        $guardian = $trimGuardianName;
+        $guardian = htmlspecialchars($trimGuardianName);
     }
 
     // Validate gender
@@ -52,7 +61,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($trimGender)) {
         $gender_err = "Please select a gender.";
     } else {
-        $gender = $trimGender;
+        $gender = htmlspecialchars($trimGender);
     }
 
     // Validate dob
@@ -60,11 +69,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($trimDob)) {
         $dob_err = "Please select a DOB.";
     } else {
-        $dob = $trimDob;
+        $dob = htmlspecialchars($trimDob);
     }
 
     //validate receipt number
-    $trimReceiptNumber = trim($_POST["receiptNumber"]);
+    $trimReceiptNumber = htmlspecialchars(trim($_POST["receiptNumber"]));
     if(empty($trimReceiptNumber)) {
         $receipt_number_err = $lang['receipt_number_err'];
     } else {
@@ -76,32 +85,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($trimPermanentAddress)) {
         $permanent_address_err = $lang['permanent_address_err'];
     } else {
-        $permanentAddress = $trimPermanentAddress;
+        $permanentAddress = htmlspecialchars($trimPermanentAddress);
     }
 
-    $category = trim($_POST['category']);
-    $maritialStatus = trim($_POST['maritialStatus']);
-    $ulbRegion = trim($_SESSION['ulb_region']);
-    $phoneNumber = isset($_POST['phoneNumber']) ? trim($_POST['phoneNumber']) : '';
-    $temporaryAddress = isset($_POST['temporaryAddress']) ? trim($_POST['temporaryAddress']) : '';
-    $birthPlace = trim($_POST['birthPlace']);
-    $religion = trim($_POST['religion']);
-    $district = trim($_POST['district']);
-    $userFormValid = $_POST['userFormValid'];
-    $remark = isset($_POST['remark']) ? trim(htmlspecialchars($_POST['remark'])) : '';
-    $specialPreference = isset($_POST['specialPreference']) ? implode(',', $_POST['specialPreference']) : '';
+    $category = htmlspecialchars(trim($_POST['category']));
+    $maritialStatus = htmlspecialchars(trim($_POST['maritialStatus']));
+    $ulbRegion = htmlspecialchars(trim($_SESSION['ulb_region']));
+    $phoneNumber = isset($_POST['phoneNumber']) ? htmlspecialchars(trim($_POST['phoneNumber'])) : '';
+    $temporaryAddress = isset($_POST['temporaryAddress']) ? htmlspecialchars(trim($_POST['temporaryAddress'])) : '';
+    $birthPlace = htmlspecialchars(trim($_POST['birthPlace']));
+    $religion = htmlspecialchars(trim($_POST['religion']));
+    $district = htmlspecialchars(trim($_POST['district']));
+    $userFormValid = htmlspecialchars($_POST['userFormValid']);
+    $remark = isset($_POST['remark']) ? htmlspecialchars(trim($_POST['remark'])) : '';
+    $specialPreference = isset($_POST['specialPreference']) ? implode(',', htmlspecialchars($_POST['specialPreference'])) : '';
 
     // Check input errors before inserting in database
     if(empty($name_err) && empty($dob_err) && empty($guardian_err) && empty($receipt_number_err) && empty($gender_err)) {
         
-        // Prepare an insert statement
         $sql = "INSERT INTO candidate_list (name, gender, dob, category, maritialStatus, ulbRegion, phoneNumber, guardian, birthPlace, religion, permanentAddress, temporaryAddress , district, userFormValid, receiptNumber, remark, specialPreference) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "sssssssssssssssss", $param_name, $param_gender, $param_dob, $param_category, $param_maritialStatus, $param_ulbRegion, $param_phoneNumber, $param_guardian, $param_birthPlace, $param_religion, $param_permanentAddress, $param_temporaryAddress, $param_district, $param_userFormValid, $param_receiptNumber, $param_remark, $param_specialPreference);
             
-            // Set parameters
             $param_name = $name;
             $param_gender = $gender;
             $param_dob = $dob;
@@ -133,14 +139,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 }
             }
         }
-         
-        // Close statement
         mysqli_stmt_close($stmt);
     }
-    
-    // Close connection
     mysqli_close($link);
-}
+} else {
+    $token = $easyCSRF->generate('my_token');
+} 
 
 ?>
 
@@ -158,7 +162,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <h2><?php echo $lang['enter_candidate_details']?></h2>
             <p><?php echo $lang['detail_header']?></p>
         </div>
-        <form class="form-inline candidate_detail" role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" style="margin-top: 10px;" method="post">
+        <form class="form-inline candidate_detail margin-top-2x" role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+
+            <input type="hidden" name="token" value="<?php echo $token; ?>">
 
             <div class="alert alert-info full-width margin-horiz-2x info-header">
                 <strong><?php echo $lang['alert_msg_1']; ?></strong> <?php echo $lang['alert_msg_2']; ?> <strong><?php echo $lang['alert_msg_3']; ?></strong> <?php echo $lang['alert_msg_4']; ?>

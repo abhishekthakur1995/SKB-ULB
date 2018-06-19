@@ -16,11 +16,11 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
 	    }
 	}
 } else {
-	header("location: ../error.php?err_msg=Access Not Allowed");
+	header("location: ../error.php");
 }
 
 if($_GET && $_GET['page']) {
-    $page = $_GET['page'];
+    $page = htmlspecialchars($_GET['page'], ENT_QUOTES);
 } else {
     $page = 1;
 }
