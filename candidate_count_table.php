@@ -65,7 +65,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                     <td><?php echo Common::getTotalEnteriesByCategory('OBC'); ?></td>
                 </tr>
                 <tr>
-                    <td>SPECIAL OBC</td>
+                    <td>MBC</td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('SPECIALOBC', 'WIDOW'); ?></td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('SPECIALOBC', 'DIVORCEE'); ?></td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('SPECIALOBC', 'MARRIED') + Common::getTotalEnteriesByCatAndStatus('SPECIALOBC', 'UNMARRIED') ?></td>

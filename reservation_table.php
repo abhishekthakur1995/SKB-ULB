@@ -152,7 +152,7 @@ if($insertToDB == true) {
                     <td><?php echo $totalSeatsForOBC; ?></td>
                 </tr>
                 <tr>
-                    <td>Special OBC</td>
+                    <td>MBC</td>
                     <td><?php echo $totalSeatsWidowSPECIALOBC; ?></td>
                     <td><?php echo $totalSeatsDivorceeSPECIALOBC; ?></td>
                     <td><?php echo $totalSeatsCommonSPECIALOBC; ?></td>
