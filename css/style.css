@@ -148,8 +148,11 @@ body {
 .margin-left-none {
     margin-left: 0px !important;
 }
+.margin-top-1x {
+    margin-top: 5px !important;
+}
 .margin-top-2x {
-    margin-top: 10px;
+    margin-top: 10px !important;
 }
 .margin-top-3x {
     margin-top: 15px;
@@ -185,16 +188,16 @@ label.required:after {
     float: left;
     width: 100%;
 }
-
 .ulb-table td, .ulb-table th {
     border: 1px solid #ddd;
     padding: 8px;
 }
-
-.ulb-table tr:nth-child(even){background-color: #f2f2f2;}
-
-.ulb-table tr:hover {background-color: #ddd;}
-
+.ulb-table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+.ulb-table tr:hover {
+    background-color: #ddd;
+}
 .ulb-table th {
     padding-top: 12px;
     padding-bottom: 12px;

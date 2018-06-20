@@ -27,7 +27,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 <body>
     <?php include 'header.php'; ?>
     <div class="table-container fleft full-width">
-        <table class="ulb-table margin-top-2x">
+        <table class="ulb-table no-margin">
             <thead>
                 <tr class="text-align-center"><td colspan="6" class="fs6"><?php echo $lang['tbl2_heading']; ?></td></tr>
                 <tr>
@@ -99,7 +99,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
             $totalSpecialPreference = $totalEnteriesEXOFFICER + $totalEnteriesDISABLED + $totalEnteriesSPORTSPERSON;
         ?>
 
-        <table class="ulb-table">
+        <table class="ulb-table margin-top-3x">
             <thead>
                 <tr>
                     <th>Total Enteries: <?php echo $totalSpecialPreference; ?></th>
