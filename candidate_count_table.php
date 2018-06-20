@@ -27,7 +27,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 <body>
     <?php include 'header.php'; ?>
     <div class="table-container fleft full-width">
-        <table class="ulb-table">
+        <table class="ulb-table margin-top-2x">
             <thead>
                 <tr class="text-align-center"><td colspan="6" class="fs6"><?php echo $lang['tbl2_heading']; ?></td></tr>
                 <tr>
@@ -102,6 +102,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
         <table class="ulb-table">
             <thead>
                 <tr>
+                    <th>Total Enteries: <?php echo $totalSpecialPreference; ?></th>
                     <th>Exofficer</th>
                     <th>Disabled</th>
                     <th>Sportsperson</th>
@@ -110,10 +111,135 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
             </thead>
             <tbody>
                 <tr>
+                    <td>SC</td>
+                    <td class="text-align-center">
+                        <?php 
+                            $count1 =  Common::getTotalEnteriesBySpecialPreferencesCategory('EXOFFICER', 'SC');
+                            echo $count1;
+                        ?>
+                    </td>
+                    <td class="text-align-center">
+                        <?php 
+                            $count2 = Common::getTotalEnteriesBySpecialPreferencesCategory('DISABLED', 'SC'); 
+                            echo $count2;
+                        ?>
+                    </td>
+                    <td class="text-align-center">
+                        <?php 
+                            $count3 =  Common::getTotalEnteriesBySpecialPreferencesCategory('SPORTSPERSON', 'SC');
+                            echo $count3;
+                        ?>
+                    </td>
+                    <td class="text-align-center">
+                        <?php echo $count1 + $count2 + $count3; ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>ST</td>
+                    <td class="text-align-center">
+                        <?php 
+                            $count1 =  Common::getTotalEnteriesBySpecialPreferencesCategory('EXOFFICER', 'ST');
+                            echo $count1;
+                        ?>
+                    </td>
+                    <td class="text-align-center">
+                        <?php 
+                            $count2 = Common::getTotalEnteriesBySpecialPreferencesCategory('DISABLED', 'ST'); 
+                            echo $count2;
+                        ?>
+                    </td>
+                    <td class="text-align-center">
+                        <?php 
+                            $count3 =  Common::getTotalEnteriesBySpecialPreferencesCategory('SPORTSPERSON', 'ST');
+                            echo $count3;
+                        ?>
+                    </td>
+                    <td class="text-align-center">
+                        <?php echo $count1 + $count2 + $count3; ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>OBC</td>
+                    <td class="text-align-center">
+                        <?php 
+                            $count1 =  Common::getTotalEnteriesBySpecialPreferencesCategory('EXOFFICER', 'OBC');
+                            echo $count1;
+                        ?>
+                    </td>
+                    <td class="text-align-center">
+                        <?php 
+                            $count2 = Common::getTotalEnteriesBySpecialPreferencesCategory('DISABLED', 'OBC'); 
+                            echo $count2;
+                        ?>
+                    </td>
+                    <td class="text-align-center">
+                        <?php 
+                            $count3 =  Common::getTotalEnteriesBySpecialPreferencesCategory('SPORTSPERSON', 'OBC');
+                            echo $count3;
+                        ?>
+                    </td>
+                    <td class="text-align-center">
+                        <?php echo $count1 + $count2 + $count3; ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>MBC</td>
+                    <td class="text-align-center">
+                        <?php 
+                            $count1 =  Common::getTotalEnteriesBySpecialPreferencesCategory('EXOFFICER', 'SPECIALOBC');
+                            echo $count1;
+                        ?>
+                    </td>
+                    <td class="text-align-center">
+                        <?php 
+                            $count2 = Common::getTotalEnteriesBySpecialPreferencesCategory('DISABLED', 'SPECIALOBC'); 
+                            echo $count2;
+                        ?>
+                    </td>
+                    <td class="text-align-center">
+                        <?php 
+                            $count3 =  Common::getTotalEnteriesBySpecialPreferencesCategory('SPORTSPERSON', 'SPECIALOBC');
+                            echo $count3;
+                        ?>
+                    </td>
+                    <td class="text-align-center">
+                        <?php echo $count1 + $count2 + $count3; ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>GENERAL</td>
+                    <td class="text-align-center">
+                        <?php 
+                            $count1 =  Common::getTotalEnteriesBySpecialPreferencesCategory('EXOFFICER', 'GENERAL');
+                            echo $count1;
+                        ?>
+                    </td>
+                    <td class="text-align-center">
+                        <?php 
+                            $count2 = Common::getTotalEnteriesBySpecialPreferencesCategory('DISABLED', 'GENERAL'); 
+                            echo $count2;
+                        ?>
+                    </td>
+                    <td class="text-align-center">
+                        <?php 
+                            $count3 =  Common::getTotalEnteriesBySpecialPreferencesCategory('SPORTSPERSON', 'GENERAL');
+                            echo $count3;
+                        ?>
+                    </td>
+                    <td class="text-align-center">
+                        <?php echo $count1 + $count2 + $count3; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total</td>
                     <td class="text-align-center"><?php echo $totalEnteriesEXOFFICER; ?></td>
-                    <td class="text-align-center"><?php echo $totalEnteriesDISABLED; ?></td>
-                    <td class="text-align-center"><?php echo $totalEnteriesSPORTSPERSON; ?></td>
-                    <td class="text-align-center"><?php echo $totalSpecialPreference; ?></td>
+                    <td class="text-align-center"><?php echo $totalEnteriesDISABLED ?></td>
+                    <td class="text-align-center"><?php echo $totalEnteriesSPORTSPERSON ?></td>
+                    <td class="text-align-center"><?php echo $totalSpecialPreference.'/'.$totalSpecialPreference; ?></td>
                 </tr>
             </tbody>
         </table>

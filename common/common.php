@@ -369,6 +369,13 @@ class Common {
 		return $count;
 	}
 
+	public static function getTotalEnteriesBySpecialPreferencesCategory($specialPreference, $category) {
+		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND category = '".$category."' AND specialPreference = '".$specialPreference."' AND ulbRegion = '".$_SESSION['ulb_region']."'";
+		$res = mysqli_query($GLOBALS['link'], $sql);
+		$count = mysqli_num_rows($res);
+		return $count;
+	}
+
 	public static function createUlbEntryInReservationChartTable() {
 		$sql = "INSERT INTO reservation_chart (ULB_REGION) VALUES (?)";
 		if($stmt = mysqli_prepare($GLOBALS['link'], $sql)){
