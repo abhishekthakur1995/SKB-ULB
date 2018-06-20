@@ -132,20 +132,42 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if(Common::codeAndSeedExistsInDB($code, $seedNumber)) {
             $data = Common::getDataFromDbByCodeAndSeed($code, $seedNumber);
-            $template = $mustache->loadTemplate('table_body');
-            echo $template->render(array('data'=>$data, 'total'=>sizeof($data)));
+            $template = $mustache->loadTemplate('table_body_1');
+            echo $template->render(array(
+                'data'=>$data, 
+                'lang'=>$lang,
+                // 'totalParticipated'=>0,
+                'totalSelected'=>sizeof($data),
+                'selectionFor'=>$criteria,
+                'getReceiptNumber' => function($text, Mustache_LambdaHelper $helper) {
+                    return substr($helper->render($text), strpos($helper->render($text), "_") + 1);
+                },
+                'getTextInHindi' => function($text, Mustache_LambdaHelper $helper) {
+                    return Common::getTextInHindi(trim($helper->render($text)));
+                }
+            ));
         } else {
             if(Common::existsInDB($code, 'code')) {
-                echo "Candidates have already been selected from this criteria";
+                Common::showAlert($lang['candidate_already_selected']);
             } else if(Common::existsInDB($seedNumber, 'seedNumber')) {
-                echo "This seed number is already used.";
+                Common::showAlert($lang['seed_already_used']);
             } else {
                 $limit = Common::getCandidateSelectionLimit($criteria);
-
                 $data = Common::selectCandidatesForOthersCategory($criteria, $limit, $code, $seedNumber);
-
-                $template = $mustache->loadTemplate('table_body');
-                echo $template->render(array('data'=>$data, 'total'=>sizeof($data)));
+                $template = $mustache->loadTemplate('table_body_1');
+                echo $template->render(array(
+                    'data'=>$data, 
+                    'lang'=>$lang,
+                    // 'totalParticipated'=>0,
+                    'totalSelected'=>sizeof($data),
+                    'selectionFor'=>$criteria,
+                    'getReceiptNumber' => function($text, Mustache_LambdaHelper $helper) {
+                        return substr($helper->render($text), strpos($helper->render($text), "_") + 1);
+                    },
+                    'getTextInHindi' => function($text, Mustache_LambdaHelper $helper) {
+                        return Common::getTextInHindi(trim($helper->render($text)));
+                    }
+                ));
 
                 // $carriedForwardSeats = $limit - sizeof($totalData[0]);
                 // $discardSeats = 0;

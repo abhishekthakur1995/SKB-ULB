@@ -177,10 +177,11 @@
     $lang['export_csv'] = 'सीएसवी के रूप में सभी उम्मीदवार डेटा डाउनलोड करें';
 
     $lang['candidate_already_selected'] = 'उम्मीदवारों को इस श्रेणी के लिए पहले ही चुना जा चुका है';
-    $lang['code_already_used'] = 'यह सीड नंबर  का उपयोग पहले ही किया जा चूका है कृपया कोई दूसरा सीड नंबर का चयन करे';
+    $lang['seed_already_used'] = 'यह सीड नंबर  का उपयोग पहले ही किया जा चूका है कृपया कोई दूसरा सीड नंबर का चयन करे';
     $lang['total_seats'] = 'कुल सीटें';
     $lang['total_selected'] = 'कुल चयनित उम्मीदवार';
     $lang['total_participated'] = 'कुल उम्मीदवार';
     $lang['select_candidates'] = 'उम्मीदवारों का चयन करें';
+    $lang['no_candidate_selected'] = 'कोई उम्मीदवार नहीं मिला';
 
 ?>
