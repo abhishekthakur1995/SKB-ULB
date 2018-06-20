@@ -143,7 +143,7 @@ body {
 	margin-right: 15px;
 }
 .margin-top-6x {
-	margin-top: 30px !important;
+	margin-top: 30px;
 }
 .margin-left-none {
 	margin-left: 0px !important;
@@ -181,6 +181,7 @@ label.required:after {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 40%;
+    /*margin: 55px 55px 55px 55px;*/
     margin-top: 55px;
     float: left;
     width: 100%;
