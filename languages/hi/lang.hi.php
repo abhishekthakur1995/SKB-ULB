@@ -39,6 +39,7 @@
     $lang['form_status_0'] = 'अस्वीकृत';
     $lang['form_status_2'] = 'विचारधीन';
 
+    $lang['selected_for'] = 'श्रेणी';
     $lang['special_preference'] = 'क्या उम्मीदवार इनमे से कुछ है';
     $lang['EXOFFICER'] = 'भूतपूर्व सैनिक';
     $lang['DISABLED'] = 'दिव्यांग';
@@ -89,7 +90,6 @@
 
     //dashboard data
     $lang['dashboard_title'] = 'एडमिन डैशबोर्ड';
-    //$lang['welcome_msg_1'] = 'नमस्ते';
     $lang['welcome_msg_2'] = 'आपके डैशबोर्ड में आपका स्वागत है';
     $lang['dashboard_btn_1'] = 'नया उम्मीदवार विवरण दर्ज करें';
     $lang['dashboard_btn_2'] = 'उम्मीदवार का विवरण अपडेट करें';
@@ -100,6 +100,8 @@
     $lang['dashboard_btn_7'] = 'उम्मीदवार रिपोर्ट देखें और डाउनलोड करें';
     $lang['dashboard_btn_8'] = 'उम्मीदवार फॉर्म की स्थिति के आधार पर देखें';
     $lang['dashboard_btn_9'] = 'डुप्लिकेट डेटा';
+    $lang['dashboard_btn_10'] = 'भूतपूर्व सैनिक/दिव्यांग/खिलाड़ी का चयन करे';
+    $lang['dashboard_btn_11'] = 'सभी वर्गों  के लिए उम्मीदवारों का चयन करें';
     $lang['total_enteries'] = 'कुल उम्मीदवार';
     $lang['detailed_table'] = 'विस्तृत उम्मीदवार टेबल';
     $lang['reservation_chart'] = 'आरक्षण चार्ट';
@@ -176,4 +178,9 @@
 
     $lang['candidate_already_selected'] = 'उम्मीदवारों को इस श्रेणी के लिए पहले ही चुना जा चुका है';
     $lang['code_already_used'] = 'यह सीड नंबर  का उपयोग पहले ही किया जा चूका है कृपया कोई दूसरा सीड नंबर का चयन करे';
+    $lang['total_seats'] = 'कुल सीटें';
+    $lang['total_selected'] = 'कुल चयनित उम्मीदवार';
+    $lang['total_participated'] = 'कुल उम्मीदवार';
+    $lang['select_candidates'] = 'उम्मीदवारों का चयन करें';
+
 ?>

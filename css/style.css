@@ -9,6 +9,9 @@ body {
     text-align: center;
     margin-top: 20px;
 }
+.bold {
+    font-weight: bold;
+}
 .fleft {
 	float: left;
 }
@@ -113,6 +116,9 @@ body {
 }
 .padding-top-4x{
 	padding-top: 20px !important;
+}
+.margin-right-1x {
+    margin-right: 5px;
 }
 .margin-bottom-2x{
 	margin-bottom: 10px !important;
@@ -347,7 +353,6 @@ button.pure-button {
 button.pure-button:hover, button.pure-button:focus {
     background-image: linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));
 }
-
 #get-candidates .form-group {
     width: 25%;
 }

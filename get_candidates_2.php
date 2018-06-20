@@ -48,16 +48,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Get Candidates</title>
+    <title><?php echo $lang['select_candidates']; ?></title>
 </head>
 <body>
     <?php include 'header.php';?>
     <div id="get-candidates_2" class="get_candidates_wrapper">
-        <div class="form-detail">
-            <h2>Get Candidates</h2>
-            <p>Select the criteria to select a candidate</p>
-        </div>
-
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
             <div class="container no-margin">
@@ -117,7 +112,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Get Candidate List">
+                <input type="submit" class="btn btn-primary" value="<?php echo $lang['select_candidates']; ?>">
             </div>
         </form>
     </div>    

@@ -20,14 +20,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 $seedNumber = $specialPreference = '';
 $seed_number_err = $special_preference_err = '';
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-
-    $trimSpecialPreference = $_POST["specialPreference"];
-    if(empty($trimSpecialPreference)){
-        $special_preference_err = "Please enter a special number.";
-    } else {
-        $specialPreference = $trimSpecialPreference;
-    }
+if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $trimSeedNumber = $_POST["seedNumber"];
     if(empty($trimSeedNumber)){
@@ -44,42 +37,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Get Candidates</title>
+    <title><?php echo $lang['select_candidates']; ?></title>
 </head>
 <body>
     <?php include 'header.php';?>
     <div id="get-candidates" class="get_candidates_wrapper">
+
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
-                        <div class="form-group">
+                        <div class="form-group pull-left">
                             <label for="seedNumber" class="required"><?php echo $lang['seed_number']; ?></label>
                             <input type="number" autocomplete="off" name="seedNumber" min="0" class="seed-number form-control <?php echo(!empty($seed_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $seedNumber; ?>" required>
                             <span class="invalid-feedback text-align-center"><?php echo $seed_number_err; ?></span>
                         </div>
-                    </div>
 
-                    <div class="col-sm">
                         <div class="form-group">
-                            <label for="specialPreference" class="required"><?php echo $lang['category']; ?></label>
-                            <select class="form-control" name="specialPreference">
-                                <?php 
-                                    $specialPreferenceListJson = file_get_contents(__DIR__ . '/data/special_preference.json');
-                                    $specialPreferenceArr = json_decode($specialPreferenceListJson, true);
-                                    foreach($specialPreferenceArr as $key => $value) {
-                                        echo "<option value=".$value['CODE'].">".$lang[$value['NAME']]."</option>";
-                                    }
-                                ?>
-                            </select>
+                            <input type="submit" class="btn btn-primary" value="<?php echo $lang['select_candidates']; ?>">
                         </div>
                     </div>
-
                 </div>
-            </div>
-            
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Get Candidate List">
             </div>
         </form>
     </div>    
@@ -96,7 +74,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $limit = Common::getCandidateSelectionLimitForSpecialPreferences($criteria);
             $data = Common::selectCandidatesForSpecialPrefCategory($criteria, $limit, $code, $seedNumber);
             $template = $mustache->loadTemplate('table_body');
-            echo $template->render(array('data'=>$data, 'total'=>sizeof($data), 'lang'=>$lang));
+            echo $template->render(array(
+                'data'=>$data, 
+                'lang'=>$lang,
+                'totalSeats'=>$limit,
+                'totalParticipated'=>Common::getTotalEnteriesBySpecialPreferences($criteria),
+                'totalSelected'=>sizeof($data),
+                'selectionFor'=>$criteria,
+                'getReceiptNumber' => function($text, Mustache_LambdaHelper $helper) {
+                    return substr($helper->render($text), strpos($helper->render($text), "_") + 1);
+                },
+                'getTextInHindi' => function($text, Mustache_LambdaHelper $helper) {
+                    return Common::getTextInHindi(trim($helper->render($text)));
+                }
+            ));
         }
 
         $specialPreferenceArr = ['EXOFFICER', 'DISABLED', 'SPORTSPERSON'];
@@ -110,6 +101,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo $template->render(array(
                     'data'=>$data, 
                     'lang'=>$lang,
+                    'totalSeats'=>Common::getCandidateSelectionLimitForSpecialPreferences($criteria),
+                    'totalParticipated'=>Common::getTotalEnteriesBySpecialPreferences($criteria),
+                    'totalSelected'=>sizeof($data),
+                    'selectionFor'=>$criteria,
                     'getReceiptNumber' => function($text, Mustache_LambdaHelper $helper) {
                         return substr($helper->render($text), strpos($helper->render($text), "_") + 1);
                     },
@@ -118,13 +113,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     }
                 ));
             } else {
-                // if(Common::existsInDB($code, 'code')) {
-                //     Common::showAlert($lang['candidate_already_selected']);
-                // } else if(Common::existsInDB($seedNumber, 'seedNumber')){
-                //     Common::showAlert($lang['code_already_used']);
-                // } else {
-                //     selectCandidate($criteria, $code, $seedNumber, $mustache, $lang);
-                // }
+                if(Common::existsInDB($code, 'code')) {
+                    Common::showAlert($lang['candidate_already_selected']);
+                    exit();
+                } 
                 selectCandidate($criteria, $code, $seedNumber, $mustache, $lang);
             }
         }
@@ -134,11 +126,3 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 ?>
-
-<script type="text/javascript">
-// $(document).ready(function() {
-//     $('.seed-number').click(function(){
-//         console.log($(this).length);
-//     });
-// });
-</script>

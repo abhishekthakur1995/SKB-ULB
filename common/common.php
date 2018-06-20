@@ -656,6 +656,12 @@ class Common {
 	public static function getTextInHindi($text) {
 		return $GLOBALS['lang'][$text];
 	}
+
+	public static function showalert($msg) {
+	    echo '<script language="javascript">';
+	    echo "alert('$msg')";
+	    echo '</script>';
+	}
 }
 
 ?>

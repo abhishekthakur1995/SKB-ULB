@@ -89,9 +89,11 @@ if (isset($_SESSION['message'])) {
                 <span class="fa fa-edit fs4"></span>
                 <?php echo $lang['dashboard_btn_2']; ?>
             </a>
-            <a href="select_page.php" class="btn btn-primary btn-lg fs4 width450">
-                <span class="fa fa-check fs4"></span>
-                <?php echo $lang['dashboard_btn_3']; ?>
+            <a href="get_candidates_1.php" class="btn btn-primary btn-lg fs4 width450">
+                <span class="fa fa-users fs4 margin-right-1x"></span><?php echo $lang['dashboard_btn_10'];?>
+            </a>
+            <a href="get_candidates_2.php" class="btn btn-primary btn-lg fs4 width450">
+                <span class="fa fa-users fs4 margin-right-1x"></span><?php echo $lang['dashboard_btn_11']; ;?>
             </a>
         </div>
     <?php } ?>
