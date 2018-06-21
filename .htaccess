@@ -2,6 +2,10 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
+<LimitExcept POST GET>
+	deny from all
+</LimitExcept>
+
 RewriteEngine On
 RewriteCond %{HTTP_USER_AGENT} ^.*(Baiduspider|HTTrack|Yandex|Zeus).*$ [NC]
 RewriteRule .* - [F,L]
