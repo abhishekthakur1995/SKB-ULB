@@ -31,17 +31,17 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
             <thead>
                 <tr class="text-align-center"><td colspan="6" class="fs6"><?php echo $lang['tbl2_heading']; ?></td></tr>
                 <tr>
-                    <th>Total Candidates: <?php echo Common::getTotalEnteries(); ?></th>
-                    <th>Female-Widow</th>
-                    <th>Female-Divorcee</th>
-                    <th>Female-Common</th>
-                    <th>Male</th>
-                    <th>Total</th>
+                      <th><?php echo  $lang['totalentries']; ?>: <?php echo Common::getTotalEnteries(); ?></th>
+                    <th><?php echo  $lang['tbl2_heading_1']; ?></th>
+                    <th><?php echo  $lang['tbl2_heading_2']; ?></th>
+                    <th><?php echo  $lang['tbl2_heading_3']; ?></th>
+                    <th><?php echo  $lang['tbl2_heading_4']; ?></th>
+                    <th><?php echo  $lang['totalentries'];  ?></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>SC</td>
+                    <td><?php echo $lang['SC']?></td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('SC', 'WIDOW'); ?></td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('SC', 'DIVORCEE'); ?></td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('SC', 'MARRIED') + Common::getTotalEnteriesByCatAndStatus('SC', 'UNMARRIED') ?></td>
@@ -49,7 +49,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                     <td><?php echo Common::getTotalEnteriesByCategory('SC'); ?></td>
                 </tr>
                 <tr>
-                    <td>ST</td>
+                    <td><?php echo $lang['ST']?></td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('ST', 'WIDOW'); ?></td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('ST', 'DIVORCEE'); ?></td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('ST', 'MARRIED') + Common::getTotalEnteriesByCatAndStatus('ST', 'UNMARRIED') ?></td>
@@ -57,7 +57,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                     <td><?php echo Common::getTotalEnteriesByCategory('ST'); ?></td>
                 </tr>
                 <tr>
-                    <td>OBC</td>
+                    <td><?php echo $lang['OBC']?></td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('OBC', 'WIDOW'); ?></td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('OBC', 'DIVORCEE'); ?></td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('OBC', 'MARRIED') + Common::getTotalEnteriesByCatAndStatus('OBC', 'UNMARRIED') ?></td>
@@ -65,7 +65,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                     <td><?php echo Common::getTotalEnteriesByCategory('OBC'); ?></td>
                 </tr>
                 <tr>
-                    <td>MBC</td>
+                    <td><?php echo $lang['Special OBC']?></td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('SPECIALOBC', 'WIDOW'); ?></td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('SPECIALOBC', 'DIVORCEE'); ?></td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('SPECIALOBC', 'MARRIED') + Common::getTotalEnteriesByCatAndStatus('SPECIALOBC', 'UNMARRIED') ?></td>
@@ -73,7 +73,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                     <td><?php echo Common::getTotalEnteriesByCategory('SPECIALOBC'); ?></td>
                 </tr>
                 <tr>
-                    <td>GENERAL</td>
+                    <td><?php echo $lang['General']?></td></td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('GENERAL', 'WIDOW'); ?></td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('GENERAL', 'DIVORCEE'); ?></td>
                     <td><?php echo Common::getTotalEnteriesByCatAndStatus('GENERAL', 'MARRIED') + Common::getTotalEnteriesByCatAndStatus('GENERAL', 'UNMARRIED') ?></td>
@@ -81,7 +81,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                     <td><?php echo Common::getTotalEnteriesByCategory('GENERAL'); ?></td>
                 </tr>
                 <tr>
-                    <td>Total</td>
+                    <td><?php echo  $lang['total'];  ?></td>
                     <td><?php echo Common::getTotalEnteriesByStatus('WIDOW'); ?></td>
                     <td><?php echo Common::getTotalEnteriesByStatus('DIVORCEE'); ?></td>
                     <td><?php echo Common::getTotalEnteriesByStatus('MARRIED') + Common::getTotalEnteriesByStatus('UNMARRIED') ?></td>
@@ -102,16 +102,16 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
         <table class="ulb-table margin-top-3x">
             <thead>
                 <tr>
-                    <th>Total Enteries: <?php echo $totalSpecialPreference; ?></th>
-                    <th>Exofficer</th>
-                    <th>Disabled</th>
-                    <th>Sportsperson</th>
-                    <th>Total</th>
+                    <th><?php echo  $lang['totalentries'];  ?> <?php echo $totalSpecialPreference; ?></th>
+                    <th><?php echo $lang['EXOFFICER'];?></th>
+                    <th><?php echo $lang['DISABLED'];?></th>
+                    <th><?php echo $lang['SPORTSPERSON'];?></th>
+                    <th><?php echo  $lang['totalentries'];  ?></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>SC</td>
+                    <td><?php echo $lang['SC']?></td>
                     <td class="text-align-center">
                         <?php 
                             $count1 =  Common::getTotalEnteriesBySpecialPreferencesCategory('EXOFFICER', 'SC');
@@ -136,7 +136,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                 </tr>
 
                 <tr>
-                    <td>ST</td>
+                    <td><?php echo $lang['ST']?></td>
                     <td class="text-align-center">
                         <?php 
                             $count1 =  Common::getTotalEnteriesBySpecialPreferencesCategory('EXOFFICER', 'ST');
@@ -161,7 +161,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                 </tr>
 
                 <tr>
-                    <td>OBC</td>
+                    <td><?php echo $lang['OBC']?></td>
                     <td class="text-align-center">
                         <?php 
                             $count1 =  Common::getTotalEnteriesBySpecialPreferencesCategory('EXOFFICER', 'OBC');
@@ -186,7 +186,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                 </tr>
 
                 <tr>
-                    <td>MBC</td>
+                    <td><?php echo $lang['Special OBC']?></td>
                     <td class="text-align-center">
                         <?php 
                             $count1 =  Common::getTotalEnteriesBySpecialPreferencesCategory('EXOFFICER', 'SPECIALOBC');
@@ -211,7 +211,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                 </tr>
 
                 <tr>
-                    <td>GENERAL</td>
+                    <td><?php echo $lang['General']?></td>
                     <td class="text-align-center">
                         <?php 
                             $count1 =  Common::getTotalEnteriesBySpecialPreferencesCategory('EXOFFICER', 'GENERAL');
@@ -235,7 +235,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                     </td>
                 </tr>
                 <tr>
-                    <td>Total</td>
+                    <td><?php echo $lang['total']?></td>
                     <td class="text-align-center"><?php echo $totalEnteriesEXOFFICER; ?></td>
                     <td class="text-align-center"><?php echo $totalEnteriesDISABLED ?></td>
                     <td class="text-align-center"><?php echo $totalEnteriesSPORTSPERSON ?></td>
