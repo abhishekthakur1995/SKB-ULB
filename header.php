@@ -1,18 +1,12 @@
 <?php
-    header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *; font-src http: https:; ");
-    header("X-XSS-Protection: 1; mode=block");
-    header('X-Content-Type-Options: nosniff');
-    header('X-Frame-Options: DENY');
-    header('Access-Control-Allow-Methods: POST, GET');
 
+require('Mustache/Autoloader.php');
+Mustache_Autoloader::register();
+$mustache = new Mustache_Engine(array(
+    'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__).'/templates') 
+));
 
-    require('Mustache/Autoloader.php');
-    Mustache_Autoloader::register();
-    $mustache = new Mustache_Engine(array(
-        'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__).'/templates') 
-    ));
-
-    require_once('languages/hi/lang.hi.php');
+require_once('languages/hi/lang.hi.php');
 ?>
 
 <!DOCTYPE html>

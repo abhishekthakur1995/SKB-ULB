@@ -1,0 +1,17 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+RewriteEngine On
+RewriteCond %{HTTP_USER_AGENT} ^.*(Baiduspider|HTTrack|Yandex|Zeus).*$ [NC]
+RewriteRule .* - [F,L]
+
+ErrorDocument 404 /error.php
+
+Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src  'self' 'unsafe-inline' *; font-src 'self' *.bootstrapcdn.com; frame-ancestors 'none'; base-uri 'self'; child-src 'self'; object-src 'self'; img-src 'none'; media-src 'none';"
+Header add Access-Control-Allow-Methods "GET, POST"
+Header add X-Frame-Options "DENY"
+Header add X-Content-Type-Options "nosniff"
+Header always set X-XSS-Protection "1; mode=block"
+Header always set Referrer-Policy "origin"
+
