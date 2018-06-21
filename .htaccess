@@ -7,7 +7,7 @@ RewriteRule ^([^\.]+)$ $1.php [NC,L]
 </LimitExcept>
 
 RewriteEngine On
-RewriteCond %{HTTP_USER_AGENT} ^.*(Baiduspider|HTTrack|Yandex|Zeus).*$ [NC]
+RewriteCond %{HTTP_USER_AGENT} ^.*(Baiduspider|HTTrack|Yandex|Zeus|GoogleBot|Bingbot|slurp|DuckDuckBot|Sogou\ web\ spider|Exabot|AddThis\.com|Primalbot|datagnionbot|archive\.org_bot|Screaming\ Frog\ SEO\ Spider|bot_ranking1|ltx71|istellabot|BehloolBot|SiteExplorer|StormCrawler|WikiDo|proximic|adbeat_bot|LivelapBot|Domain\ Re-Animator\ Bot|Kraken|Leikibot|HepBulur|AdsBot-Google|SurdotlyBot|SeznamBot|MJ12bot|SemrushBot|Twitterbot|BuzzSumo|Flamingo_SearchEngine|FeedlyBot).*$ [NC]
 RewriteRule .* - [F,L]
 
 ErrorDocument 404 /error.php
@@ -18,4 +18,5 @@ Header add X-Frame-Options "DENY"
 Header add X-Content-Type-Options "nosniff"
 Header always set X-XSS-Protection "1; mode=block"
 Header always set Referrer-Policy "origin"
+
 
