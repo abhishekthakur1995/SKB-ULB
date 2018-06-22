@@ -37,7 +37,7 @@ CREATE TABLE lock_code_seed (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     ulbRegion varchar(30) NOT NULL,
     code TINYINT(2) NOT NULL,
-    seedNumber varchar(10) NOT NULL,
+    seedNumber varchar(10) NOT NULL
 )
 
 DROP TABLE IF EXISTS reservation_chart;
