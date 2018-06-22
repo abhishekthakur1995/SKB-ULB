@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require('config.php');
 require('languages/hi/lang.hi.php');
 require('common/common.php');
@@ -47,8 +47,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashedPassword)){
-                            session_start();
-
                             $_SESSION['username'] = $username;
                             $_SESSION['ulb_region'] = $ulbRegion;
                             $_SESSION['user_role'] = $userRole;
