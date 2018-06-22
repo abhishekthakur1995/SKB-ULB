@@ -1,10 +1,10 @@
 <?php
 session_start();
- 
+
+session_regenerate_id();
 $_SESSION = array(); 
 session_destroy();
 session_unset();
-session_regenerate_id();
  
 header("location: index.php");
 exit;
