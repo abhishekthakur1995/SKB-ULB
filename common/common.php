@@ -128,9 +128,9 @@ class Common {
 		'ANOOPGARH'=>43,
 		'PADAMPURA'=>14,
 		'SHRIKARANPUR'=>28,
-		'SADULSAHAR' =>19,
-		'SHREEVIJAYNAGAR' =>28,
-		'GAJSINGHPURA' =>8,
+		'SADULSAHAR'=>19,
+		'SHREEVIJAYNAGAR'=>28,
+		'GAJSINGHPURA'=>8,
 		'SURATGARH'=>64,
 		'HANUMANGARH'=>134,
 		'BHADRA'=>30,
@@ -159,7 +159,7 @@ class Common {
 		'RAMGARH'=>6,
 		'FATEHPURSHEKHAWATI'=>64,
 		'CHHABRA'=>41,
-		'GANGAPUR'=>41,
+		'GANGAPURCITY'=>41,
 		'HINDON'=>25,
 		'UDAIPUR'=>1174,
 		'FATEHNAGAR'=>24,
@@ -193,6 +193,7 @@ class Common {
 		'NAGAR'=>9,
 		'KAMA'=>15,
 		'NADBAI'=>20,
+		'KESARISINGHPUR'=>9,
 	];
 
 	const categoryResPercentage = [
