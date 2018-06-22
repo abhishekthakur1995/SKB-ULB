@@ -660,6 +660,57 @@ class Common {
 		}
 	}
 
+	public static function confirmIPAddress($value) {
+		$sql = "SELECT attempts, (CASE when lastlogin is not NULL and DATE_ADD(LastLogin, INTERVAL ".TIME_PERIOD." MINUTE)>NOW() then 1 else 0 end) as Denied FROM ".TBL_ATTEMPTS." WHERE ip = '$value'"; 
+
+		$result = mysqli_query($GLOBALS['link'], $sql); 
+	  	$data = mysqli_fetch_array($result); 
+
+		//Verify that at least one login attempt is in database 
+	  	if (!$data) { 
+	    	return 0; 
+	  	} 
+	  	if ($data["attempts"] >= ATTEMPTS_NUMBER) { 
+	    	if($data["Denied"] == 1) { 
+	  			return 1; 
+	    	} else { 
+	  			self::clearLoginAttempts($value); 
+	      		return 0; 
+	    	} 
+	  	} 
+	  	return 0; 
+	}
+
+	public static function clearLoginAttempts($value) {
+		$sql = "UPDATE ".TBL_ATTEMPTS." SET attempts = 0 WHERE ip = '$value'"; 
+  		return mysqli_query($GLOBALS['link'], $sql);
+	}
+
+	public static function addLoginAttempt($value) {
+		//Increase number of attempts. Set last login attempt if required.
+		$sql = "SELECT * FROM ".TBL_ATTEMPTS." WHERE ip = '$value'"; 
+   		$result = mysqli_query($GLOBALS['link'], $sql);
+   		$data = mysqli_fetch_array($result);
+   		if($data) {
+ 			$attempts = $data["attempts"]+1;         
+     		if($attempts==3) {
+   				$sql = "UPDATE ".TBL_ATTEMPTS." SET attempts=".$attempts.", lastlogin=NOW() WHERE ip = '$value'";
+       			$result = mysqli_query($GLOBALS['link'], $sql);
+     		} else {
+   				$sql = "UPDATE ".TBL_ATTEMPTS." SET attempts=".$attempts." WHERE ip = '$value'";
+       			$result = mysqli_query($GLOBALS['link'], $sql);
+     		}
+   		} else {
+ 			$sql = "INSERT INTO ".TBL_ATTEMPTS." (attempts,IP,lastlogin) values (1, '$value', NOW())";
+     		$result = mysqli_query($GLOBALS['link'], $sql);
+   		}
+	}
+
+	public static function getIPAddress() {
+		$ip = $_SERVER['REMOTE_ADDR'] ? : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? : $_SERVER['HTTP_CLIENT_IP']);
+		return $ip;
+	}
+
 	public static function getTextInHindi($text) {
 		return $GLOBALS['lang'][$text];
 	}

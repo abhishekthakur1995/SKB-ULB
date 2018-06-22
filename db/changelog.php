@@ -73,6 +73,12 @@ CREATE TABLE reservation_chart (
     CREATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE `login_attempts` (
+  `ip` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `attempts` int(11) DEFAULT '0',
+  `lastlogin` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 CREATE TABLE ulb_admins (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,

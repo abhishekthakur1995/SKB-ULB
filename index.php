@@ -2,11 +2,20 @@
 
 require('config.php');
 require('languages/hi/lang.hi.php');
+require('common/common.php');
  
 $username = $password = "";
 $username_err = $password_err = "";
  
 if($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $ipAddress = Common::getIPAddress();
+
+    $result = Common::confirmIPAddress($ipAddress);
+    if($result == 1) {
+        Common::showAlert("Access denied for ".TIME_PERIOD." minutes. Please try again after some time.");
+        return false;
+    }
  
     $trimUserName = htmlspecialchars(trim($_POST["username"], ENT_QUOTES));
     if(empty($trimUserName)){
@@ -45,6 +54,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                             $_SESSION['user_role'] = $userRole;
                             $_SESSION['timestamp']=time();
                             session_regenerate_id();
+                            Common::clearLoginAttempts($ipAddress);
                             if($firstLogin === 0) {
                                 $sql = "UPDATE ulb_admins SET firstLogin = 1 WHERE username = '".$username."'";
                                 if (mysqli_query($link, $sql)) {
@@ -58,11 +68,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         } else{
                             // Display an error message if password is not valid
                             $password_err = $lang['login_password_not_valid'];
+                            Common::addLoginAttempt($ipAddress);
                         }
                     }
                 } else{
                     // Display an error message if username doesn't exist
                     $username_err = $lang['login_no_account_found'];
+                    Common::addLoginAttempt($ipAddress);
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
