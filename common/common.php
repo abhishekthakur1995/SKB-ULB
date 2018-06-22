@@ -211,8 +211,8 @@ class Common {
 		'EXOFFICER' => 12.5,
 		'DISABLED' => 3,
 		'SPORTSPERSON' => 2,
-		'SC' => 45,
-		'ST' => 5,
+		'SC' => 5,
+		'ST' => 45,
 		'OBC' => 0,
 		'SPECIALOBC' => 0,
 		'GENERAL' => 50
