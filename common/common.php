@@ -5,7 +5,7 @@ require_once(__ROOT__.'/languages/hi/lang.hi.php');
 
 class Common {
 
-	const TSP_AREA = ['BANSWARA', 'DUNGARPUR', 'PRATAPGARH', 'SAGWARA'];
+	const TSP_AREA = ['BANSWARA', 'DUNGARPUR', 'PRATAPGARH', 'SAGWARA', 'KUSHALGARH'];
 	const TSP_AREA_EXCLUDE_CATEGORY = ['OBC', 'SPECIALOBC'];
 
 	const totalSeats = [
