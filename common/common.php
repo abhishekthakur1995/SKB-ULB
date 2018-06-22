@@ -128,7 +128,7 @@ class Common {
 		'ANUPGARH' =>9,
 		'PADAMPURA' =>14,
 		'KARANPUR' =>28,
-		'SARDULSAHAR' =>19,
+		'SADULSAHAR' =>19,
 		'SHREEVIJAYNAGAR' =>28,
 		'GAJSINGHPURA' =>8,
 		'SURATGARH' =>64,
