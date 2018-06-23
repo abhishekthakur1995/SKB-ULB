@@ -479,7 +479,7 @@ class Common {
 
 		$sql = "SELECT t1.*, @a:=@a+1 AS serialNumber FROM candidate_list t1 JOIN(
             		SELECT name, guardian, dob FROM candidate_list GROUP BY name, guardian, dob HAVING COUNT(*) >= 2
-                ) t2 ON t1.name = t2.name AND t1.guardian = t2.guardian AND t1.dob = t2.dob WHERE status = 0 AND userFormValid = 1 ORDER BY name, guardian";
+                ) t2 ON t1.name = t2.name AND t1.guardian = t2.guardian AND t1.dob = t2.dob WHERE status = 0 ORDER BY name, guardian";
 
         $result = mysqli_query($GLOBALS['link'], $sql);
         $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -713,6 +713,10 @@ class Common {
 
 	public static function getTextInHindi($text) {
 		return $GLOBALS['lang'][$text];
+	}
+
+	public static function getFormStatusInHindi($text) {
+		return $GLOBALS['lang']['form_status_'.$text];
 	}
 
 	public static function showalert($msg) {

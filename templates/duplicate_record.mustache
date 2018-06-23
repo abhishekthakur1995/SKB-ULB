@@ -14,6 +14,7 @@
 	            <th>{{maritial_status}}</th>
 	            <th>{{category}}</th>
 	            <th>{{ulb_region}}</th>
+	            <th>{{all_documents_provided}}</th>
 	            <th>{{receipt_number}}</th>
 	        {{/lang}}    
 		</tr>
@@ -33,6 +34,7 @@
 				<td>{{#getTextInHindi}} {{maritialStatus}} {{/getTextInHindi}}</td>
 				<td>{{#getTextInHindi}} {{category}} {{/getTextInHindi}}</td>
 				<td>{{ulbRegion}}</td>
+				<td> {{#getFormStatus}} {{userFormValid}} {{/getFormStatus}} </td>
 				<td>{{#getReceiptNumber}} {{receiptNumber}} {{/getReceiptNumber}}</td>
 			</tr>
 		{{/data}}

@@ -58,6 +58,9 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
                                 },
                                 'getTextInHindi' => function($text, Mustache_LambdaHelper $helper) {
                                     return Common::getTextInHindi(trim($helper->render($text)));
+                                },
+                                'getFormStatus' => function($text, Mustache_LambdaHelper $helper) {
+                                    return Common::getFormStatusInHindi(trim($helper->render($text)));
                                 }
                             ));
                         ?>
