@@ -154,7 +154,7 @@ class Common {
 		'KPATAN'=>51,
 		'NAINWA'=>68,
 		'ANTA'=>10,
-		'KOTPUTLI'=>24,
+		'KOTPUTALI'=>24,
 		'DHAULPUR'=>99,
 		'RAMGARH'=>6,
 		'FATEHPURSHEKHAWATI'=>64,
