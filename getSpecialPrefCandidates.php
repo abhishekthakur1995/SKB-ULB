@@ -42,14 +42,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <?php include 'header.php';?>
     <div id="get-candidates" class="get_candidates_wrapper">
-
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
                         <div class="form-group pull-left">
                             <label for="seedNumber" class="required"><?php echo $lang['seed_number']; ?></label>
-                            <input type="number" autocomplete="off" name="seedNumber" min="0" class="seed-number form-control <?php echo(!empty($seed_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $seedNumber; ?>" required>
+                             <input type="text" autocomplete="off" name="seedNumber" maxlength="4" class="seed-number form-control <?php echo(!empty($seed_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $seedNumber; ?>" pattern="\d{4}" required/>
                             <span class="invalid-feedback text-align-center"><?php echo $seed_number_err; ?></span>
                         </div>
 
