@@ -94,8 +94,8 @@ if(isset($_POST["id"]) && !empty($_POST["id"])) {
     $district = htmlspecialchars(trim($_POST['district']));
     $userFormValid = htmlspecialchars(trim($_POST['userFormValid']));
     $remark = isset($_POST['remark']) ? htmlspecialchars(trim($_POST['remark'])) : '';
-    $specialPreference = isset($_POST['specialPreference']) ? implode(',', htmlspecialchars($_POST['specialPreference'])) : '';
-    $specialPreferenceArr = isset($specialPreference) ? explode(",", htmlspecialchars($specialPreference)) : [];
+    $specialPreference = isset($_POST['specialPreference']) ? implode(',', $_POST['specialPreference']) : '';
+    $specialPreferenceArr = isset($specialPreference) ? explode(",", $specialPreference) : [];
 
     // Check input errors before inserting in database
     if(empty($name_err) && empty($dob_err) && empty($guardian_err) && empty($receipt_number_err) && empty($gender_err)) {
