@@ -132,7 +132,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </form>
     </div>   
-    <div class="alert alert-info margin-horiz-2x info-header margin-5x text-align-center"F>
+    <div class="alert alert-info margin-horiz-2x info-header margin-5x text-align-center">
         <strong><?php echo $lang['view_alert1']; ?></strong> <strong><a href="https://www.google.co.in/chrome/index.html" target="block">
             Google Chrome</a></strong> <strong><?php echo $lang['view_alert2'];?><strong><a href="https://www.mozilla.org/en-US/firefox/new/" target="block">&nbsp;Firefox</a>
                  <strong ><?php echo $lang['view_alert3'];?></strong>

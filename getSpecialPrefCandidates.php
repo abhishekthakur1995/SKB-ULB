@@ -50,7 +50,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <?php include 'header.php';?>
+    <?php include 'lottery_information.php';?>
     <div id="get-candidates" class="get_candidates_wrapper">
+        <div class="alert alert-info margin-horiz-2x margin-2x text-align-center">
+            <a data-toggle="modal" data-target="#lotteryInformation" class="fs4"><?php echo $lang['lottery_msg_1'];?>
+                <strong><?php echo $lang['lottery_msg_2'];?></strong>
+            </a>
+        </div>
+
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <input type="hidden" name="token" value="<?php echo $easyCSRF->generate('my_token'); ?>">
             <div class="container">

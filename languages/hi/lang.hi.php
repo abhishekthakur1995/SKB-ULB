@@ -193,4 +193,10 @@
     $lang['tbl2_heading_5']='कुल';
     $lang['totalentries']='कुल आवेदन';
     $lang['total']='कुल ';
+
+    //lottery modal
+    $lang['lottery_msg_1'] = 'लॉटरी के लिए आगे बढ़ने से पहले कृपया';
+    $lang['lottery_msg_2'] = 'महत्वपूर्ण निर्देश पढ़ें|';
+    $lang['lottery_msg_3'] = 'महत्वपूर्ण निर्देश';
+    $lang['lottery_msg_4'] = 'आगे बढे';
 ?>
