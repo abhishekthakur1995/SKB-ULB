@@ -6,6 +6,11 @@ require('common/common.php');
 require('vendor/autoload.php');
 $sessionProvider = new EasyCSRF\NativeSessionProvider();
 $easyCSRF = new EasyCSRF\EasyCSRF($sessionProvider);
+
+if(isset($_SESSION['username']) || !empty($_SESSION['username'])){
+    header("location: dashboard.php");
+    exit;
+} 
  
 $username = $password = "";
 $username_err = $password_err = "";
