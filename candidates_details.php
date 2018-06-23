@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+header("location: error.php");
+die();
+
 require('config.php');
 require('languages/hi/lang.hi.php');
 

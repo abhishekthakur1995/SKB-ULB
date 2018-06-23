@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+header("location: error.php");
+die();
+
 if (isset($_SESSION['message'])) {
     $msg = $_SESSION['message'];
     echo '<script language="javascript">';
