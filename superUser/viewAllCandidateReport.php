@@ -64,7 +64,7 @@ $offset = ($page * $items) - $items;
 							COUNT(CASE WHEN gender='f' AND status = 0 AND maritialStatus='DIVORCEE' THEN 1 END ) AS 'Female Divorcee',
 							COUNT(CASE WHEN gender='f' AND status = 0 AND maritialStatus='MARRIED' THEN 1 END ) AS 'Female Married',
 							COUNT(CASE WHEN gender='f' AND status = 0 AND maritialStatus='UNMARRIED' THEN 1 END ) AS 'Female Unmarried'
-							FROM candidate_list WHERE status = 0 GROUP BY ulbRegion ORDER BY total DESC LIMIT ".$items." OFFSET ".$offset."";
+							FROM candidate_list WHERE status = 0 AND userFormValid = 1 GROUP BY ulbRegion ORDER BY total DESC LIMIT ".$items." OFFSET ".$offset."";
 
 
                     if($result = mysqli_query($link, $sql)){

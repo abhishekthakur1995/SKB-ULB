@@ -31,7 +31,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
             <thead>
                 <tr class="text-align-center"><td colspan="6" class="fs6"><?php echo $lang['tbl2_heading']; ?></td></tr>
                 <tr>
-                      <th><?php echo  $lang['totalentries']; ?>: <?php echo Common::getTotalEnteries(); ?></th>
+                    <th><?php echo  $lang['totalentries']; ?>: <?php echo Common::getTotalEnteries(); ?></th>
                     <th><?php echo  $lang['tbl2_heading_1']; ?></th>
                     <th><?php echo  $lang['tbl2_heading_2']; ?></th>
                     <th><?php echo  $lang['tbl2_heading_3']; ?></th>

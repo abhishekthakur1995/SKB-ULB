@@ -33,7 +33,7 @@ if($view === 'all') {
 	COUNT(CASE WHEN gender="f" AND status = 0 AND maritialStatus="MARRIED" THEN 1 END ) AS "Female Married",
 	COUNT(CASE WHEN gender="f" AND status = 0 AND maritialStatus="UNMARRIED" THEN 1 END ) AS "Female Unmarried",
 	COUNT(*) AS total
-	FROM candidate_list WHERE status = 0 GROUP BY ulbRegion ORDER BY total DESC';
+	FROM candidate_list WHERE status = 0 and userFormValid = 1 GROUP BY ulbRegion ORDER BY total DESC';
 
 	if (!$result = mysqli_query($link, $sql)) {
 	    exit(mysqli_error($link));
@@ -66,7 +66,7 @@ if($view === 'all') {
 } else if($view === 'duplicateRecord') {
 	$sql = "SELECT t1.name, t1.guardian, t1.permanentAddress, t1.temporaryAddress, t1.dob, t1.phoneNumber, t1.birthPlace, t1.district, t1.ulbRegion, t1.category, t1.gender, t1.maritialStatus, t1.religion, t1.receiptNumber, t1.userFormValid, t1.specialPreference, t1.remark FROM candidate_list t1 JOIN(
     		SELECT name, guardian, dob FROM candidate_list GROUP BY name, guardian, dob HAVING COUNT(*) >= 2
-        ) t2 ON t1.name = t2.name AND t1.guardian = t2.guardian AND t1.dob = t2.dob WHERE status = 0 ORDER BY name, guardian";
+        ) t2 ON t1.name = t2.name AND t1.guardian = t2.guardian AND t1.dob = t2.dob WHERE status = 0 and userFormValid = 1 ORDER BY name, guardian";
 
 	if (!$result = mysqli_query($link, $sql)) {
 	    exit(mysqli_error($link));

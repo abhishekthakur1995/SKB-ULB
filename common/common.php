@@ -322,56 +322,56 @@ class Common {
 	}
 
 	public static function getTotalEnteries() {
-		$sql = "SELECT COUNT(*) as total FROM candidate_list WHERE status = 0 AND ulbRegion = '".$_SESSION['ulb_region']."'";
+		$sql = "SELECT COUNT(*) as total FROM candidate_list WHERE status = 0 AND userFormValid = 1 AND ulbRegion = '".$_SESSION['ulb_region']."'";
 		$result=mysqli_query($GLOBALS['link'], $sql);
 		$data=mysqli_fetch_assoc($result);
 		return $data['total'];
 	}
 
 	public static function getTotalEnteriesByCategory($category) {
-		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND category = '".$category."' AND ulbRegion = '".$_SESSION['ulb_region']."'";
+		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND userFormValid = 1 AND category = '".$category."' AND ulbRegion = '".$_SESSION['ulb_region']."'";
 		$res = mysqli_query($GLOBALS['link'], $sql);
 		$count = mysqli_num_rows($res);
 		return $count;
 	}
 
 	public static function getTotalEnteriesByStatus($maritialStatus) {
-		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND maritialStatus = '".$maritialStatus."' AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = 'f' ";
+		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND userFormValid = 1 AND maritialStatus = '".$maritialStatus."' AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = 'f' ";
 		$res = mysqli_query($GLOBALS['link'], $sql);
 		$count = mysqli_num_rows($res);
 		return $count;
 	}
 
 	public static function getTotalEnteriesByGender($gender) {
-		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND gender = '".$gender."' AND ulbRegion = '".$_SESSION['ulb_region']."'";
+		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND userFormValid = 1 AND gender = '".$gender."' AND ulbRegion = '".$_SESSION['ulb_region']."'";
 		$res = mysqli_query($GLOBALS['link'], $sql);
 		$count = mysqli_num_rows($res);
 		return $count;
 	}
 
 	public static function getTotalEnteriesByCatAndGender($category, $gender) {
-		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND gender = '".$gender."' AND category = '".$category."'AND ulbRegion = '".$_SESSION['ulb_region']."'";
+		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND userFormValid = 1 AND gender = '".$gender."' AND category = '".$category."'AND ulbRegion = '".$_SESSION['ulb_region']."'";
 		$res = mysqli_query($GLOBALS['link'], $sql);
 		$count = mysqli_num_rows($res);
 		return $count;
 	}
 
 	public static function getTotalEnteriesByCatAndStatus($category, $maritialStatus) {
-		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND category = '".$category."' AND maritialStatus = '".$maritialStatus."' AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = 'f'";
+		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND userFormValid = 1 AND category = '".$category."' AND maritialStatus = '".$maritialStatus."' AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = 'f'";
 		$res = mysqli_query($GLOBALS['link'], $sql);
 		$count = mysqli_num_rows($res);
 		return $count;
 	}
 
 	public static function getTotalEnteriesBySpecialPreferences($specialPreference) {
-		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND specialPreference = '".$specialPreference."' AND ulbRegion = '".$_SESSION['ulb_region']."'";
+		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND userFormValid = 1 AND specialPreference = '".$specialPreference."' AND ulbRegion = '".$_SESSION['ulb_region']."'";
 		$res = mysqli_query($GLOBALS['link'], $sql);
 		$count = mysqli_num_rows($res);
 		return $count;
 	}
 
 	public static function getTotalEnteriesBySpecialPreferencesCategory($specialPreference, $category) {
-		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND category = '".$category."' AND specialPreference = '".$specialPreference."' AND ulbRegion = '".$_SESSION['ulb_region']."'";
+		$sql = "SELECT * FROM candidate_list WHERE status = 0 AND userFormValid = 1 AND category = '".$category."' AND specialPreference = '".$specialPreference."' AND ulbRegion = '".$_SESSION['ulb_region']."'";
 		$res = mysqli_query($GLOBALS['link'], $sql);
 		$count = mysqli_num_rows($res);
 		return $count;
@@ -399,20 +399,20 @@ class Common {
     	}
 	}
 
-	public static function getUpdatedSeats() {
-		$sql = "SELECT TOTAL_GENERAL FROM reservation_chart WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
-		$result = mysqli_query($GLOBALS['link'], $sql);
-		$row = mysqli_fetch_array($result);
-		$totalGeneralSeats = $row['TOTAL_GENERAL'];
+	// public static function getUpdatedSeats() {
+	// 	$sql = "SELECT TOTAL_GENERAL FROM reservation_chart WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
+	// 	$result = mysqli_query($GLOBALS['link'], $sql);
+	// 	$row = mysqli_fetch_array($result);
+	// 	$totalGeneralSeats = $row['TOTAL_GENERAL'];
 
-		$val = array();
-		$val['TOTAL_FEMALE'] = self::getTotalSeatsByGender('F', $totalGeneralSeats);
-		$val['GENERAL_FEMALE_WIDOW'] = self::getTotalSeatsByMaritialStatus('WIDOW', $totalGeneralSeats);
-		$val['GENERAL_FEMALE_DIVORCEE'] = self::getTotalSeatsByMaritialStatus('DIVORCEE', $totalGeneralSeats);
-		$val['GENERAL_FEMALE_COMMON'] = $val['TOTAL_FEMALE'] - ($val['GENERAL_FEMALE_WIDOW'] + $val['GENERAL_FEMALE_DIVORCEE']);
-		$val['GENERAL_MALE'] = $totalGeneralSeats - $val['TOTAL_FEMALE'];
-		return $val;
-	}
+	// 	$val = array();
+	// 	$val['TOTAL_FEMALE'] = self::getTotalSeatsByGender('F', $totalGeneralSeats);
+	// 	$val['GENERAL_FEMALE_WIDOW'] = self::getTotalSeatsByMaritialStatus('WIDOW', $totalGeneralSeats);
+	// 	$val['GENERAL_FEMALE_DIVORCEE'] = self::getTotalSeatsByMaritialStatus('DIVORCEE', $totalGeneralSeats);
+	// 	$val['GENERAL_FEMALE_COMMON'] = $val['TOTAL_FEMALE'] - ($val['GENERAL_FEMALE_WIDOW'] + $val['GENERAL_FEMALE_DIVORCEE']);
+	// 	$val['GENERAL_MALE'] = $totalGeneralSeats - $val['TOTAL_FEMALE'];
+	// 	return $val;
+	// }
 
 	// public static function updateGeneralCandidatesSeat($count) {
 	// 	$sql = "UPDATE reservation_chart SET TOTAL_GENERAL = TOTAL_GENERAL + ".$count." WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
@@ -479,7 +479,7 @@ class Common {
 
 		$sql = "SELECT t1.*, @a:=@a+1 AS serialNumber FROM candidate_list t1 JOIN(
             		SELECT name, guardian, dob FROM candidate_list GROUP BY name, guardian, dob HAVING COUNT(*) >= 2
-                ) t2 ON t1.name = t2.name AND t1.guardian = t2.guardian AND t1.dob = t2.dob WHERE status = 0 ORDER BY name, guardian";
+                ) t2 ON t1.name = t2.name AND t1.guardian = t2.guardian AND t1.dob = t2.dob WHERE status = 0 AND userFormValid = 1 ORDER BY name, guardian";
 
         $result = mysqli_query($GLOBALS['link'], $sql);
         $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -523,7 +523,7 @@ class Common {
 		$sql = "SET @a:=0";
 		mysqli_query($GLOBALS['link'], $sql);
 
-		$sql = "SELECT *, @a:=@a+1 AS serialNumber from candidate_list WHERE status = 0 AND selected = 0 AND specialPreference = '".$prefName."' AND ulbRegion = '".$_SESSION['ulb_region']."' ORDER BY RAND() LIMIT ".$limit;
+		$sql = "SELECT *, @a:=@a+1 AS serialNumber from candidate_list WHERE status = 0 AND selected = 0 AND userFormValid = 1 AND specialPreference = '".$prefName."' AND ulbRegion = '".$_SESSION['ulb_region']."' ORDER BY RAND() LIMIT ".$limit;
 
 		$data = array();
 		if ($res = mysqli_query($GLOBALS['link'], $sql)) {
@@ -577,12 +577,12 @@ class Common {
 
 	public static function getQueriesForRestCandidates($criteriaArr, $limit) {
 		if($criteriaArr['maritialStatus'] == '') {
-			$sql = "SELECT * FROM candidate_list WHERE status = 0 AND selected = 0 AND ulbRegion = '".$_SESSION['ulb_region']."' AND category = '".$criteriaArr['category']."' ORDER BY RAND() LIMIT ".$limit;	
+			$sql = "SELECT * FROM candidate_list WHERE status = 0 AND selected = 0 AND userFormValid = 1 AND ulbRegion = '".$_SESSION['ulb_region']."' AND category = '".$criteriaArr['category']."' ORDER BY RAND() LIMIT ".$limit;	
 		} else {
 			if($criteriaArr['maritialStatus'] == 'COMMON') {
-				$sql = "SELECT * FROM candidate_list WHERE status = 0 AND selected = 0 AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = '".$criteriaArr['gender']."' AND category = '".$criteriaArr['category']."' ORDER BY RAND() LIMIT ".$limit;
+				$sql = "SELECT * FROM candidate_list WHERE status = 0 AND selected = 0 AND userFormValid = 1 AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = '".$criteriaArr['gender']."' AND category = '".$criteriaArr['category']."' ORDER BY RAND() LIMIT ".$limit;
 			} else {
-				$sql = "SELECT * FROM candidate_list WHERE status = 0 AND selected = 0 AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = '".$criteriaArr['gender']."' AND category = '".$criteriaArr['category']."' AND maritialStatus = '".$criteriaArr['maritialStatus']."' ORDER BY RAND() LIMIT ".$limit;
+				$sql = "SELECT * FROM candidate_list WHERE status = 0 AND selected = 0 AND userFormValid = 1 AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = '".$criteriaArr['gender']."' AND category = '".$criteriaArr['category']."' AND maritialStatus = '".$criteriaArr['maritialStatus']."' ORDER BY RAND() LIMIT ".$limit;
 			}
 		}
 		return $sql;
@@ -590,12 +590,12 @@ class Common {
 
 	public static function getQueriesForGeneralCandidates($criteriaArr, $limit) {
 		if($criteriaArr['maritialStatus'] == '') {
-			$sql = "SELECT * FROM candidate_list WHERE status = 0 AND selected = 0 AND ulbRegion = '".$_SESSION['ulb_region']."' ORDER BY RAND() LIMIT ".$limit;	
+			$sql = "SELECT * FROM candidate_list WHERE status = 0 AND userFormValid = 1 AND selected = 0 AND ulbRegion = '".$_SESSION['ulb_region']."' ORDER BY RAND() LIMIT ".$limit;	
 		} else {
 			if($criteriaArr['maritialStatus'] == 'COMMON') {
-				$sql = "SELECT * FROM candidate_list WHERE status = 0 AND selected = 0 AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = '".$criteriaArr['gender']."' ORDER BY RAND() LIMIT ".$limit;
+				$sql = "SELECT * FROM candidate_list WHERE status = 0 AND userFormValid = 1 AND selected = 0 AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = '".$criteriaArr['gender']."' ORDER BY RAND() LIMIT ".$limit;
 			} else {
-				$sql = "SELECT * FROM candidate_list WHERE status = 0 AND selected = 0 AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = '".$criteriaArr['gender']."' AND maritialStatus = '".$criteriaArr['maritialStatus']."' ORDER BY RAND() LIMIT ".$limit;
+				$sql = "SELECT * FROM candidate_list WHERE status = 0 AND userFormValid = 1 AND selected = 0 AND ulbRegion = '".$_SESSION['ulb_region']."' AND gender = '".$criteriaArr['gender']."' AND maritialStatus = '".$criteriaArr['maritialStatus']."' ORDER BY RAND() LIMIT ".$limit;
 			}
 		}
 		return $sql;
@@ -688,7 +688,6 @@ class Common {
 	}
 
 	public static function addLoginAttempt($value) {
-		//Increase number of attempts. Set last login attempt if required.
 		$sql = "SELECT * FROM ".TBL_ATTEMPTS." WHERE ip = '$value'"; 
    		$result = mysqli_query($GLOBALS['link'], $sql);
    		$data = mysqli_fetch_array($result);
