@@ -36,7 +36,7 @@ if($view === 'all') {
 	FROM candidate_list WHERE status = 0 and userFormValid = 1 GROUP BY ulbRegion ORDER BY total DESC';
 
 	if (!$result = mysqli_query($link, $sql)) {
-	    exit(mysqli_error($link));
+	    exit("Error processing query");
 	}
  
 	$users = array();
@@ -54,7 +54,7 @@ if($view === 'all') {
 	FROM candidate_list WHERE status = 0 GROUP BY ulbRegion ORDER BY total DESC";
 
 	if (!$result = mysqli_query($link, $sql)) {
-	    exit(mysqli_error($link));
+	    exit("Error processing query");
 	}
  
 	$users = array();
@@ -69,7 +69,7 @@ if($view === 'all') {
         ) t2 ON t1.name = t2.name AND t1.guardian = t2.guardian AND t1.dob = t2.dob WHERE status = 0 and userFormValid = 1 ORDER BY name, guardian";
 
 	if (!$result = mysqli_query($link, $sql)) {
-	    exit(mysqli_error($link));
+	    exit("Error processing query");
 	}
  
 	$users = array();

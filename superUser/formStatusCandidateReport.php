@@ -19,15 +19,6 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
 	header("location: ../error.php");
 }
 
-if($_GET && $_GET['page']) {
-    $page = htmlspecialchars($_GET['page'], ENT_QUOTES);
-} else {
-    $page = 1;
-}
-
-$items = 50;
-$offset = ($page * $items) - $items;
-
 ?>
 
 <!DOCTYPE html>
@@ -36,11 +27,6 @@ $offset = ($page * $items) - $items;
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Enteries by ULB</title>
-    <style type="text/css">
-        table tr td:last-child a{
-            margin-right: 5px;
-        }
-    </style>
 </head>
 <body>
     <?php include '../header.php';?>
@@ -61,7 +47,7 @@ $offset = ($page * $items) - $items;
 							COUNT(CASE WHEN userFormValid = 1 AND status = 0 THEN 1 END) AS valid,
 							COUNT(CASE WHEN userFormValid = 0 AND status = 0 THEN 1 END) AS invalid,
 							COUNT(CASE WHEN userFormValid = 2 AND status = 0 THEN 1 END) AS under_scrutiny
-							FROM candidate_list WHERE status = 0 GROUP BY ulbRegion ORDER BY total DESC LIMIT ".$items." OFFSET ".$offset."";
+							FROM candidate_list WHERE status = 0 GROUP BY ulbRegion ORDER BY total DESC";
 
 
                     if($result = mysqli_query($link, $sql)){
@@ -79,9 +65,10 @@ $offset = ($page * $items) - $items;
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
+                                $sno = 0;
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                        echo "<td>" . ++$offset . "</td>";
+                                        echo "<td>" . ++$sno . "</td>";
                                         echo "<td>" . $row['ulbRegion'] . "</td>";
                                         echo "<td>" . $row['valid'] . "</td>";
                                         echo "<td>" . $row['invalid'] . "</td>";
@@ -97,29 +84,14 @@ $offset = ($page * $items) - $items;
                             echo "<p class='lead'><em>No records were found.</em></p>";
                         }
                     } else{
-                        echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+                        echo "Error processing query";
                     }
  
                     // Close connection
                     mysqli_close($link);
                     ?>
                 </div>
-            </div>
-            <ul class="pagination pagination-lg fright">
-                <?php if ($page != 1) { ?>        
-                    <li class="page-item"><a class="page-link" href="formStatusCandidateReport.php?page=<?php echo $page - 1; ?>">&laquo;</a></li>
-
-                    <li class="page-item"><a class="page-link" href="formStatusCandidateReport.php?page=<?php echo $page - 1; ?>"><?php echo $page - 1; ?></a></li>
-                <?php } ?>
-
-                <li class="page-item active"><a class="page-link" href="formStatusCandidateReport.php?page=<?php echo $page; ?>"><?php echo $page; ?></a></li>
-
-                <?php if ($count == $items) { ?>
-                    <li class="page-item"><a class="page-link" href="formStatusCandidateReport.php?page=<?php echo $page + 1 ; ?>"><?php echo $page + 1; ?></a></li>
-
-                    <li class="page-item"><a class="page-link" href="formStatusCandidateReport.php?page=<?php echo $page + 1; ?>">&raquo;</a></li>
-                <?php } ?>
-            </ul>       
+            </div>      
         </div>
 	</div>
 </body>

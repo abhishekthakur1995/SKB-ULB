@@ -5,6 +5,9 @@ session_start();
 require('config.php');
 require('languages/hi/lang.hi.php');
 require('common/common.php');
+require('vendor/autoload.php');
+$sessionProvider = new EasyCSRF\NativeSessionProvider();
+$easyCSRF = new EasyCSRF\EasyCSRF($sessionProvider);
 
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     header("location: index.php");
@@ -21,24 +24,35 @@ $gender = $category = $maritialStatus = $seedNumber = "";
 $gender_err = $maritial_status_err = $seed_number_err = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+    try {
+        $easyCSRF->check('my_token', $_POST['token']);
+    }
+    catch(Exception $e) {
+        die($e->getMessage());
+    }
 
     $trimGender = trim($_POST["gender"]); 
     if(empty($trimGender)) {
         $gender_err = "Please select a gender.";
     } else {
-        $gender = $trimGender;
+        $gender = htmlspecialchars($trimGender);
     }
 
-    $category = trim($_POST["category"]);
+    $trimCategory = trim($_POST["category"]); 
+    if(empty($trimCategory)) {
+        $gender_err = "Please select a category.";
+    } else {
+        $category = htmlspecialchars($trimCategory);
+    }
 
     $trimSeedNumber = $_POST["seedNumber"];
     if(empty($trimSeedNumber)){
         $seed_number_err = "Please enter a seed number.";
     } else {
-        $seedNumber = $trimSeedNumber;
+        $seedNumber = htmlspecialchars($trimSeedNumber);
     }
 
-    $maritialStatus = isset($_POST['maritialStatus']) ? trim($_POST['maritialStatus']) : '';
+    $maritialStatus = isset($_POST['maritialStatus']) ? htmlspecialchars(trim($_POST['maritialStatus'])) : '';
 }
 
 ?>
@@ -54,7 +68,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <?php include 'header.php';?>
     <div id="get-candidates_2" class="get_candidates_wrapper">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-
+            <input type="hidden" name="token" value="<?php echo $easyCSRF->generate('my_token'); ?>">
             <div class="container no-margin">
                 <div class="row">
                     <div class="col-sm">
@@ -168,20 +182,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         return Common::getTextInHindi(trim($helper->render($text)));
                     }
                 ));
-
-                // $carriedForwardSeats = $limit - sizeof($totalData[0]);
-                // $discardSeats = 0;
-                // $newData = $totalData[1];
-
-                // if($carriedForwardSeats > 0) {
-                //     if(sizeof($newData > 0)) {
-                //         if(sizeof($newData) < $carriedForwardSeats) {
-                //             $discardSeats = $carriedForwardSeats - sizeof($newData);
-                //         }
-                //         $carriedForwardSeats = sizeof($newData);    
-                //     }
-                //     Common::carryForwardSeats($carriedForwardSeats, $code, $discardSeats);
-                // }
             }
         }
         mysqli_close($link);
@@ -205,4 +205,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         });
     });  
-</script>    
+</script>

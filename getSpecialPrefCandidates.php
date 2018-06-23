@@ -5,6 +5,9 @@ session_start();
 require('config.php');
 require('languages/hi/lang.hi.php');
 require('common/common.php');
+require('vendor/autoload.php');
+$sessionProvider = new EasyCSRF\NativeSessionProvider();
+$easyCSRF = new EasyCSRF\EasyCSRF($sessionProvider);
 
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     header("location: index.php");
@@ -21,12 +24,18 @@ $seedNumber = $specialPreference = '';
 $seed_number_err = $special_preference_err = '';
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
+    try {
+        $easyCSRF->check('my_token', $_POST['token']);
+    }
+    catch(Exception $e) {
+        die($e->getMessage());
+    }
 
     $trimSeedNumber = $_POST["seedNumber"];
     if(empty($trimSeedNumber)){
         $seed_number_err = "Please enter a seed number.";
     } else {
-        $seedNumber = $trimSeedNumber;
+        $seedNumber = htmlspecialchars($trimSeedNumber);
     }
 }
 
@@ -43,6 +52,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php include 'header.php';?>
     <div id="get-candidates" class="get_candidates_wrapper">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <input type="hidden" name="token" value="<?php echo $easyCSRF->generate('my_token'); ?>">
             <div class="container">
                 <div class="row">
                     <div class="col-sm">

@@ -23,7 +23,7 @@ if($_SESSION['user_role'] == 'ULBADMIN') {
 $sql = "SELECT name, guardian, permanentAddress, temporaryAddress, dob, phoneNumber, birthPlace, district, ulbRegion, category, gender, maritialStatus, religion, receiptNumber, userFormValid, specialPreference, remark FROM candidate_list WHERE status = 0 AND ulbRegion = '".$_SESSION['ulb_region']."'";
 
 if (!$result = mysqli_query($link, $sql)) {
-    exit(mysqli_error($link));
+    exit("Error processing query");
 }
 
 $users = array();

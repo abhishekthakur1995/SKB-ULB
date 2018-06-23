@@ -106,7 +106,7 @@ $offset = ($page * $items) - $items;
                             echo "<p class='lead'><em>No records were found.</em></p>";
                         }
                     } else{
-                        echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+                        echo "Error processing query";
                     }
  
                     // Close connection

@@ -3,14 +3,22 @@ session_start();
 require('config.php');
 require('languages/hi/lang.hi.php');
 require('common/common.php');
+require('vendor/autoload.php');
+$sessionProvider = new EasyCSRF\NativeSessionProvider();
+$easyCSRF = new EasyCSRF\EasyCSRF($sessionProvider);
  
 $username = $password = "";
 $username_err = $password_err = "";
  
 if($_SERVER["REQUEST_METHOD"] == "POST") {
+    try {
+        $easyCSRF->check('my_token', $_POST['token']);
+    }
+    catch(Exception $e) {
+        die($e->getMessage());
+    }
 
     $ipAddress = Common::getIPAddress();
-
     $result = Common::confirmIPAddress($ipAddress);
     if($result == 1) {
         Common::showAlert("Access denied for ".TIME_PERIOD." minutes. Please try again after some time.");
@@ -103,6 +111,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <h2><?php echo $lang['login']; ?></h2>
         <p><?php echo $lang['login_detail_header']; ?></p>
         <form class="form-inline login_detail" role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <input type="hidden" name="token" value="<?php echo $easyCSRF->generate('my_token'); ?>">
             <div class="form-group margin-bottom-4x full-width">
                 <label><?php echo $lang['username']; ?></label>
                 <input type="text" name="username" autocomplete="off" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>"" value="<?php echo $username; ?>" required>

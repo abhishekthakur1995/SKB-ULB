@@ -11,6 +11,9 @@ if (isset($_SESSION['message'])) {
 
 if($_SESSION['user_role'] == 'SUPERADMIN') {
 	require('../config.php');
+    require('../vendor/autoload.php');
+    $sessionProvider = new EasyCSRF\NativeSessionProvider();
+    $easyCSRF = new EasyCSRF\EasyCSRF($sessionProvider);
 
 	if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 	    header("location: ../index.php");
@@ -29,12 +32,18 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
 $ulb = $ulb_err = '';
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+    try {
+        $easyCSRF->check('my_token', $_POST['token']);
+    }
+    catch(Exception $e) {
+        die($e->getMessage());
+    }
 
 	$trimUlb = trim($_POST['ulb']);
 	if(empty($trimUlb)) {
 		$ulb_err = 'Please select a ulb to proceed further';
 	} else {
-		$ulb = $trimUlb;
+		$ulb = htmlspecialchars($trimUlb);
 	}
 
 	if(empty($ulb_err)) {
@@ -44,7 +53,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     		$_SESSION['message'] = 'Password has been successfully resetted for the selected ulb';
             header("Location: forgotPassword.php");
 		} else {
-    		echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+    		echo "Error processing query.";
 		}
  
 		// Close connection
@@ -68,6 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="wrapper">
         <h2>Forgot Password</h2>
         <form class="form-inline" role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <input type="hidden" name="token" value="<?php echo $easyCSRF->generate('my_token'); ?>">
             <div class="form-group full-width">
                 <label>Select the ULB for which you want to reset the password</label>
                 <select class="form-control <?php echo (!empty($ulb_err)) ? 'is-invalid' : ''; ?>"" name="ulb">
