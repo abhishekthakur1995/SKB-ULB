@@ -538,8 +538,6 @@ class Common {
 				}
 				self::lockSeedAndCode($code, $seedNumber);
 				return $data;
-			} else {
-				echo "No candidate found";
 			}
 		}
 	}
