@@ -19,15 +19,6 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
 	header("location: ../error.php");
 }
 
-if($_GET && $_GET['page'] && is_numeric($_GET['page'])) {
-    $page = htmlspecialchars($_GET['page'], ENT_QUOTES);
-} else {
-    $page = 1;
-}
-
-$items = 50;
-$offset = ($page * $items) - $items;
-
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +55,7 @@ $offset = ($page * $items) - $items;
 							COUNT(CASE WHEN gender='f' AND status = 0 AND maritialStatus='DIVORCEE' THEN 1 END ) AS 'Female Divorcee',
 							COUNT(CASE WHEN gender='f' AND status = 0 AND maritialStatus='MARRIED' THEN 1 END ) AS 'Female Married',
 							COUNT(CASE WHEN gender='f' AND status = 0 AND maritialStatus='UNMARRIED' THEN 1 END ) AS 'Female Unmarried'
-							FROM candidate_list WHERE status = 0 AND userFormValid = 1 GROUP BY ulbRegion ORDER BY total DESC LIMIT ".$items." OFFSET ".$offset."";
+							FROM candidate_list WHERE status = 0 AND userFormValid = 1 GROUP BY ulbRegion ORDER BY total DESC";
 
 
                     if($result = mysqli_query($link, $sql)){
@@ -85,9 +76,10 @@ $offset = ($page * $items) - $items;
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
+                                $sno=0;
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                        echo "<td>" . ++$offset . "</td>";
+                                        echo "<td>" . ++$sno . "</td>";
                                         echo "<td>" . $row['ulbRegion'] . "</td>";
                                         echo "<td>" . $row['male'] . "</td>";
                                         echo "<td>" . $row['female'] . "</td>";
@@ -113,22 +105,7 @@ $offset = ($page * $items) - $items;
                     mysqli_close($link);
                     ?>
                 </div>
-            </div>
-            <ul class="pagination pagination-lg fright">
-                <?php if ($page != 1) { ?>        
-                    <li class="page-item"><a class="page-link" href="viewAllCandidateReport.php?page=<?php echo $page - 1; ?>">&laquo;</a></li>
-
-                    <li class="page-item"><a class="page-link" href="viewAllCandidateReport.php?page=<?php echo $page - 1; ?>"><?php echo $page - 1; ?></a></li>
-                <?php } ?>
-
-                <li class="page-item active"><a class="page-link" href="viewAllCandidateReport.php?page=<?php echo $page; ?>"><?php echo $page; ?></a></li>
-
-                <?php if ($count == $items) { ?>
-                    <li class="page-item"><a class="page-link" href="viewAllCandidateReport.php?page=<?php echo $page + 1 ; ?>"><?php echo $page + 1; ?></a></li>
-
-                    <li class="page-item"><a class="page-link" href="viewAllCandidateReport.php?page=<?php echo $page + 1; ?>">&raquo;</a></li>
-                <?php } ?>
-            </ul>       
+            </div>       
         </div>
 	</div>
 </body>
