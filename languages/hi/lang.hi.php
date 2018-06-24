@@ -54,13 +54,13 @@
     $lang['Married'] = 'विवाहित';
     $lang['Unmarried'] = 'अविवाहित';
     $lang['Widow'] = 'विधवा';
-    $lang['Divorcee'] = 'तलाकशुदा / परितक्या';
+    $lang['Divorcee'] = 'तलाकशुदा / परितक्यता';
     $lang['Common'] = 'विवाहित / अविवाहित';
 
     $lang['MARRIED'] = 'विवाहित';
     $lang['UNMARRIED'] = 'अविवाहित';
     $lang['WIDOW'] = 'विधवा';
-    $lang['DIVORCEE'] = 'तलाकशुदा / परितक्या';
+    $lang['DIVORCEE'] = 'तलाकशुदा / परितक्यता';
 
     //category
     $lang['SC'] = 'अनुसूचित जाति';
@@ -187,7 +187,7 @@
     #reservation table
     $lang['totalseat']='कुल पद ';
     $lang['tbl2_heading_1']='विधवा महिला ';
-    $lang['tbl2_heading_2']='महिला (तलाकशुदा/ परितक्यता)';
+    $lang['tbl2_heading_2']='महिला (तलाकशुदा / परितक्यता)';
     $lang['tbl2_heading_3']='महिला (अन्य)';
     $lang['tbl2_heading_4']='पुरुष';
     $lang['tbl2_heading_5']='कुल';
@@ -199,4 +199,32 @@
     $lang['lottery_msg_2'] = 'महत्वपूर्ण निर्देश पढ़ें|';
     $lang['lottery_msg_3'] = 'महत्वपूर्ण निर्देश';
     $lang['lottery_msg_4'] = 'आगे बढे';
+    $lang['lottery_msg_5'] = 'निकाली गई लॉटरी देखे';
+    $lang['lottery_msg_6'] = 'निकाली गई लॉटरी';
+    $lang['lottery_table_criteria'] = 'चयनित वर्ग / लिंग / वैवाहिक स्थिति';
+
+    $lang['SC_FEMALE_WIDOW']  = 'अनुसूचित जाति / महिला / विधवा';
+    $lang['SC_FEMALE_DIVORCEE']  = 'अनुसूचित जाति / महिला / परितक्यता';
+    $lang['SC_FEMALE_COMMON']  = 'अनुसूचित जाति / महिला / अन्य';
+    $lang['SC_MALE']  = 'अनुसूचित जाति / पुरुष';
+
+    $lang['ST_FEMALE_WIDOW']  = 'अनुसूचित जनजाति / महिला / विधवा';
+    $lang['ST_FEMALE_DIVORCEE']  = 'अनुसूचित जनजाति / महिला / परितक्यता';
+    $lang['ST_FEMALE_COMMON']  = 'अनुसूचित जनजाति / महिला / अन्य';
+    $lang['ST_MALE']  = 'अनुसूचित जनजाति / पुरुष';
+
+    $lang['OBC_FEMALE_WIDOW']  = 'अन्य पिछडे वर्ग / महिला / विधवा';
+    $lang['OBC_FEMALE_DIVORCEE']  = 'अन्य पिछडे वर्ग / महिला / परितक्यता';
+    $lang['OBC_FEMALE_COMMON']  = 'अन्य पिछडे वर्ग / महिला/ अन्य';
+    $lang['OBC_MALE']  = 'अन्य पिछडे वर्ग / पुरुष';
+
+    $lang['SPECIALOBC_FEMALE_WIDOW']  = 'विशेष अन्य पिछड़ा वर्ग / महिला / विधवा';
+    $lang['SPECIALOBC_FEMALE_DIVORCEE']  = 'विशेष अन्य पिछड़ा वर्ग / महिला / परितक्यता';
+    $lang['SPECIALOBC_FEMALE_COMMON']  = 'विशेष अन्य पिछड़ा वर्ग / महिला / अन्य';
+    $lang['SPECIALOBC_MALE']  = 'विशेष अन्य पिछड़ा वर्ग / पुरुष';
+
+    $lang['GENERAL_FEMALE_WIDOW']  = 'सामान्य/ महिला / विधवा';
+    $lang['GENERAL_FEMALE_DIVORCEE']  = 'सामान्य / महिला / परितक्यता';
+    $lang['GENERAL_FEMALE_COMMON']  = 'सामान्य / महिला / अन्य';
+    $lang['GENERAL_MALE']  = 'सामान्य/ पुरुष';
 ?>

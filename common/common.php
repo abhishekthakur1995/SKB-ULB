@@ -262,11 +262,6 @@ class Common {
 		'GENERAL_FEMALE_COMMON' => 'GENERAL_MALE'
 	];
 
-	//These are the categories which seats will be nullified when no candidates are found
-	const noTransferCriteria = [
-		'SC_FEMALE_DIVORCEE', 'ST_FEMALE_DIVORCEE'
-	];
-
 	public static function getTotalSeatsForExofficer($totalUlbSeats) {
 		return self::getPercentage(self::categoryResPercentage['EXOFFICER'], $totalUlbSeats);
 	}
@@ -712,7 +707,7 @@ class Common {
 	}
 
 	public static function getSelectedCodeByUlb() {
-		$sql = "SELECT code from lock_code_seed where ulbRegion = '".$_SESSION['ulb_region']."'";
+		$sql = "SELECT code, seedNumber from lock_code_seed where ulbRegion = '".$_SESSION['ulb_region']."'";
 		$res = mysqli_query($GLOBALS['link'], $sql);
         $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
         return $data;

@@ -364,3 +364,6 @@ button.pure-button:hover, button.pure-button:focus {
 .text-decoration-underline {
     text-decoration: underline;
 }
+.half-width {
+    width: 50%;
+}
