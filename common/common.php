@@ -257,8 +257,9 @@ class Common {
 	];
 
 	const complementaryPairArr = [
-		'SC_FEMALE_WIDOW' => 'SC_FEMALE_DIVORCEE',
-		'SC_FEMALE_DIVORCEE' => 'SC_FEMALE_WIDOW',
+		'GENERAL_FEMALE_DIVORCEE' => 'GENERAL_FEMALE_WIDOW',
+		'GENERAL_FEMALE_WIDOW' => 'GENERAL_FEMALE_COMMON',
+		'GENERAL_FEMALE_COMMON' => 'GENERAL_MALE'
 	];
 
 	//These are the categories which seats will be nullified when no candidates are found
@@ -511,8 +512,6 @@ class Common {
 		 			if(mysqli_stmt_fetch($stmt)){
 		 				return $limit;
 		 			}
-		 		} else {
-		 			echo "No Record Found";
 		 		}
 		 	}
 		}
@@ -547,7 +546,6 @@ class Common {
 		$sql = "UPDATE reservation_chart SET ".$deleteFrom." = ".$deleteFrom." - 1 WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
 
 		if(mysqli_query($GLOBALS['link'], $sql)) {
-			//echo "Data descreased";
 		} else {
 			echo "Error updating record: " . mysqli_error($GLOBALS['link']);
 		}
@@ -610,9 +608,9 @@ class Common {
 						self::copySelectedCandidateData($row, $code, $seedNumber);
 					}
 				}
-				self::lockSeedAndCode($code, $seedNumber);
 			}
 		}
+		self::lockSeedAndCode($code, $seedNumber);
 		return $data;
 	}
 
@@ -702,6 +700,22 @@ class Common {
  			$sql = "INSERT INTO ".TBL_ATTEMPTS." (attempts,IP,lastlogin) values (1, '$value', NOW())";
      		$result = mysqli_query($GLOBALS['link'], $sql);
    		}
+	}
+
+	public function carryForwardSeats($carryForwardSeats, $code) {
+		$transferFrom = $code;
+		$transferTo = self::complementaryPairArr[$code];
+		$sql = "UPDATE reservation_chart SET ".$transferFrom." = ".$transferFrom." - ".$carryForwardSeats." AND ".$transferTo." = ".$transferTo." + ".$carryForwardSeats." WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
+		if(!mysqli_query($GLOBALS['link'], $sql)) {
+			echo "Error updating record";
+		}
+	}
+
+	public static function getSelectedCodeByUlb() {
+		$sql = "SELECT code from lock_code_seed where ulbRegion = '".$_SESSION['ulb_region']."'";
+		$res = mysqli_query($GLOBALS['link'], $sql);
+        $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
+        return $data;
 	}
 
 	public static function getIPAddress() {

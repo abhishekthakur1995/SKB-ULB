@@ -54,7 +54,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <div id="get-candidates" class="get_candidates_wrapper">
         <div class="alert alert-info margin-horiz-2x margin-2x text-align-center">
             <a data-toggle="modal" data-target="#lotteryInformation" class="fs4"><?php echo $lang['lottery_msg_1'];?>
-                <strong><?php echo $lang['lottery_msg_2'];?></strong>
+                <strong class="text-decoration-underline clr-blue"><?php echo $lang['lottery_msg_2'];?></strong>
             </a>
         </div>
 
@@ -65,7 +65,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="col-sm">
                         <div class="form-group pull-left">
                             <label for="seedNumber" class="required"><?php echo $lang['seed_number']; ?></label>
-                             <input type="text" autocomplete="off" name="seedNumber" maxlength="4" class="seed-number form-control <?php echo(!empty($seed_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $seedNumber; ?>" pattern="\d{4}" required/>
+                                <input type="text" autocomplete="off" name="seedNumber" maxlength="4" class="seed-number form-control <?php echo(!empty($seed_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $seedNumber; ?>" pattern="\d{4}" required/>
                             <span class="invalid-feedback text-align-center"><?php echo $seed_number_err; ?></span>
                         </div>
 
@@ -85,7 +85,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if(empty($seed_number_err) && empty($special_preference_err)) {
-
         function selectCandidate($criteria, $code, $seedNumber, $mustache, $lang) {
             $limit = Common::getCandidateSelectionLimitForSpecialPreferences($criteria);
             $data = Common::selectCandidatesForSpecialPrefCategory($criteria, $limit, $code, $seedNumber);
@@ -136,7 +135,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 selectCandidate($criteria, $code, $seedNumber, $mustache, $lang);
             }
         }
-
         mysqli_close($link);
     }
 }

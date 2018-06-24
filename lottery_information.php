@@ -9,10 +9,18 @@
             </div>
             <div class="modal-body">
                 <ul>
-                    <li class="margin-2x">Test1</li>
-                    <li class="margin-2x">Test1</li>
-                    <li class="margin-2x">Test1</li>
-                    <li class="margin-2x">Test1</li>
+                    <li class="margin-2x fs4">सीड नंबर कोई भी 4 अंक की यादृच्छिक संख्या होगी|</li>
+                    <li class="margin-2x fs4">लॉटरी के लिए आगे बढ़ने से पहले सीड नंबर का चयन करना आवश्यक है|</li>
+                    <li class="margin-2x fs4">एक बार इस्तेमाल होने वाले सीड नंबर का उपयोग फिर से नहीं किया जा सकता है|</li>
+                    <li class="margin-2x fs4">लॉटरी क्रम :---
+                        <ol>
+                            <li class="margin-2x">अनुसूचित जाति :-- परित्यक्ता -> विधवा --> महिला (अन्य) --> पुरुष</li>
+                            <li class="margin-2x">अनुसूचित जनजाति :-- परित्यक्ता -> विधवा --> महिला (अन्य) --> पुरुष</li>
+                            <li class="margin-2x">अन्य पिछड़ा वर्ग :-- परित्यक्ता -> विधवा --> महिला (अन्य) --> पुरुष</li>
+                            <li class="margin-2x">विशेष अन्य पिछड़ा वर्ग :-- परित्यक्ता -> विधवा --> महिला (अन्य) --> पुरुष</li>
+                            <li class="margin-2x">सामान्य वर्ग :-- परित्यक्ता -> विधवा --> महिला (अन्य) --> पुरुष</li>
+                        </ol>
+                    </li>
                 </ul>
             </div>
             <div class="modal-footer">

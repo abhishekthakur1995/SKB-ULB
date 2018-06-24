@@ -31,6 +31,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         die($e->getMessage());
     }
 
+    $maritialStatus = isset($_POST['maritialStatus']) ? htmlspecialchars(trim($_POST['maritialStatus'])) : '';
+
     $trimGender = trim($_POST["gender"]); 
     if(empty($trimGender)) {
         $gender_err = "Please select a gender.";
@@ -51,8 +53,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else {
         $seedNumber = htmlspecialchars($trimSeedNumber);
     }
-
-    $maritialStatus = isset($_POST['maritialStatus']) ? htmlspecialchars(trim($_POST['maritialStatus'])) : '';
 }
 
 ?>
@@ -66,7 +66,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 <body>
     <?php include 'header.php';?>
-    <div id="get-candidates_2" class="get_candidates_wrapper">
+    <?php include 'lottery_information.php';?>
+    <div class="get_candidates_wrapper">
+        <div class="alert alert-info margin-horiz-2x margin-2x text-align-center">
+            <a data-toggle="modal" data-target="#lotteryInformation" class="fs4"><?php echo $lang['lottery_msg_1'];?>
+                <strong class="text-decoration-underline clr-blue"><?php echo $lang['lottery_msg_2'];?></strong>
+            </a>
+        </div>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <input type="hidden" name="token" value="<?php echo $easyCSRF->generate('my_token'); ?>">
             <div class="container no-margin">
@@ -74,7 +80,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="col-sm">
                         <div class="form-group">
                             <label for="seedNumber" class="required"><?php echo $lang['seed_number']; ?></label>
-                            <input type="number" autocomplete="off" min="0" name="seedNumber" class="form-control <?php echo(!empty($seed_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $seedNumber; ?>" required>
+                            <input type="text" autocomplete="off" name="seedNumber" maxlength="4" class="seed-number form-control <?php echo(!empty($seed_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $seedNumber; ?>" pattern="\d{4}" required/>
                             <span class="invalid-feedback text-align-center"><?php echo $seed_number_err; ?></span>
                         </div>
                     </div>
@@ -102,8 +108,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <div class="form-group <?php echo (!empty($gender_err)) ? 'has-error' : ''; ?>">
                             <label class="required"><?php echo $lang['gender']; ?></label>
                             <select class="form-control gender" name="gender">
-                                <option value="m"><?php echo $lang['male']; ?></option>
                                 <option value="f"><?php echo $lang['female']; ?></option>
+                                <option value="m"><?php echo $lang['male']; ?></option>
                             </select>
                             <span class="invalid-feedback text-align-center"><?php echo $gender_err; ?></span>
                         </div>
@@ -166,22 +172,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             } else if(Common::existsInDB($seedNumber, 'seedNumber')) {
                 Common::showAlert($lang['seed_already_used']);
             } else {
-                $limit = Common::getCandidateSelectionLimit($criteria);
-                $data = Common::selectCandidatesForOthersCategory($criteria, $limit, $code, $seedNumber);
-                $template = $mustache->loadTemplate('table_body_1');
-                echo $template->render(array(
-                    'data'=>$data, 
-                    'lang'=>$lang,
-                    // 'totalParticipated'=>0,
-                    'totalSelected'=>sizeof($data),
-                    'selectionFor'=>$criteria,
-                    'getReceiptNumber' => function($text, Mustache_LambdaHelper $helper) {
-                        return substr($helper->render($text), strpos($helper->render($text), "_") + 1);
-                    },
-                    'getTextInHindi' => function($text, Mustache_LambdaHelper $helper) {
-                        return Common::getTextInHindi(trim($helper->render($text)));
+                if($category === 'GENERAL') {
+                    $limit = Common::getCandidateSelectionLimit($criteria);
+                    $data = Common::selectCandidatesForOthersCategory($criteria, $limit, $code, $seedNumber);
+                    $carriedForwardSeats = $limit - sizeof($data);
+                    if($carriedForwardSeats > 0) {
+                        Common::carryForwardSeats($carriedForwardSeats, $code);
                     }
-                ));
+                } else {
+                    $limit = Common::getCandidateSelectionLimit($criteria);
+                    $data = Common::selectCandidatesForOthersCategory($criteria, $limit, $code, $seedNumber);
+                    $template = $mustache->loadTemplate('table_body_1');
+                    echo $template->render(array(
+                        'data'=>$data, 
+                        'lang'=>$lang,
+                        // 'totalParticipated'=>0,
+                        'totalSelected'=>sizeof($data),
+                        'selectionFor'=>$criteria,
+                        'getReceiptNumber' => function($text, Mustache_LambdaHelper $helper) {
+                            return substr($helper->render($text), strpos($helper->render($text), "_") + 1);
+                        },
+                        'getTextInHindi' => function($text, Mustache_LambdaHelper $helper) {
+                            return Common::getTextInHindi(trim($helper->render($text)));
+                        }
+                    ));
+                }
             }
         }
         mysqli_close($link);
@@ -191,7 +206,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('.maritial_status').attr('disabled', true);
         $('.gender').change(function() {
             if($('.gender').val() !== '') {
                 $('.maritial_status').attr('disabled', true);
