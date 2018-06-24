@@ -105,7 +105,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             ));
         }
 
-        $specialPreferenceArr = ['EXOFFICER', 'DISABLED', 'SPORTSPERSON'];
+        $specialPreferenceArr = ['EXOFFICER', 'SPORTSPERSON', 'DISABLED'];
 
         for($i=0; $i<sizeof($specialPreferenceArr); $i++) {
             $criteria = strtoupper($specialPreferenceArr[$i]);
