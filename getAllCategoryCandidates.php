@@ -67,7 +67,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
     <?php include 'header.php';?>
     <?php include 'lottery_information.php';?>
-    <div class="get_candidates_wrapper">
+    <div id="get-all-candidates" class="get_candidates_wrapper">
         <div class="row">
             <div class="modal fade" id="lotteryTable" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -196,13 +196,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if(Common::codeAndSeedExistsInDB($code, $seedNumber)) {
             $data = Common::getDataFromDbByCodeAndSeed($code, $seedNumber);
+            $template = $mustache->loadTemplate('print_button');
+            echo $template->render();
+            $template = $mustache->loadTemplate('print_header');
+            echo $template->render(array('lang'=>$lang));
             $template = $mustache->loadTemplate('table_body_1');
             echo $template->render(array(
                 'data'=>$data, 
                 'lang'=>$lang,
-                // 'totalParticipated'=>0,
                 'totalSelected'=>sizeof($data),
                 'selectionFor'=>$criteria,
+                'seedNumber'=>$seedNumber,
                 'getReceiptNumber' => function($text, Mustache_LambdaHelper $helper) {
                     return substr($helper->render($text), strpos($helper->render($text), "_") + 1);
                 },
@@ -216,31 +220,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             } else if(Common::existsInDB($seedNumber, 'seedNumber')) {
                 Common::showAlert($lang['seed_already_used']);
             } else {
-                if($category === 'GENERAL') {
-                    $limit = Common::getCandidateSelectionLimit($criteria);
-                    $data = Common::selectCandidatesForOthersCategory($criteria, $limit, $code, $seedNumber);
+                $limit = Common::getCandidateSelectionLimit($criteria);
+                $data = Common::selectCandidatesForOthersCategory($criteria, $limit, $code, $seedNumber);
+                if($category === 'GENERAL') {    
                     $carriedForwardSeats = $limit - sizeof($data);
                     if($carriedForwardSeats > 0) {
                         Common::carryForwardSeats($carriedForwardSeats, $code);
                     }
-                } else {
-                    $limit = Common::getCandidateSelectionLimit($criteria);
-                    $data = Common::selectCandidatesForOthersCategory($criteria, $limit, $code, $seedNumber);
-                    $template = $mustache->loadTemplate('table_body_1');
-                    echo $template->render(array(
-                        'data'=>$data, 
-                        'lang'=>$lang,
-                        // 'totalParticipated'=>0,
-                        'totalSelected'=>sizeof($data),
-                        'selectionFor'=>$criteria,
-                        'getReceiptNumber' => function($text, Mustache_LambdaHelper $helper) {
-                            return substr($helper->render($text), strpos($helper->render($text), "_") + 1);
-                        },
-                        'getTextInHindi' => function($text, Mustache_LambdaHelper $helper) {
-                            return Common::getTextInHindi(trim($helper->render($text)));
-                        }
-                    ));
                 }
+                $template = $mustache->loadTemplate('print_button');
+                echo $template->render();
+                $template = $mustache->loadTemplate('print_header');
+                echo $template->render(array('lang'=>$lang));
+                $template = $mustache->loadTemplate('table_body_1');
+                echo $template->render(array(
+                    'data'=>$data, 
+                    'lang'=>$lang,
+                    'totalSelected'=>sizeof($data),
+                    'selectionFor'=>$criteria,
+                    'seedNumber'=>$seedNumber,
+                    'getReceiptNumber' => function($text, Mustache_LambdaHelper $helper) {
+                        return substr($helper->render($text), strpos($helper->render($text), "_") + 1);
+                    },
+                    'getTextInHindi' => function($text, Mustache_LambdaHelper $helper) {
+                        return Common::getTextInHindi(trim($helper->render($text)));
+                    }
+                ));
             }
         }
         mysqli_close($link);
@@ -262,5 +267,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 $('.maritial_status').attr('disabled', true);
             }
         });
-    });  
+    });
+
+    function printpage() {
+        var printButton = document.getElementById("printbtn"); 
+        var content = document.getElementById("get-all-candidates");
+        var printHeader = document.getElementById("print-header");
+        printButton.style.display = 'none';
+        content.style.display = 'none';
+        printHeader.style.display = 'block';
+        window.print();
+        printButton.style.display = 'block';
+        content.style.display = 'block';
+        printHeader.style.display = 'none';
+    }
 </script>

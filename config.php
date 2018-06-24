@@ -7,7 +7,7 @@ define('DB_PASSWORD', '');
 define('DB_NAME', 'candidate_selection_portal');
 define('ULB_ADMIN_TABLE', 'ulb_admins');
 define('PASSWORD_REQUIRED_LENGTH', 6);
-define('IDLE_TIME', 900);
+define('IDLE_TIME', 900000);
 define('DEFAULT_PASSWORD', 'password_9807');
 define('BASE_URL', "/candidate_portal");
 define("TBL_ATTEMPTS", "login_attempts");

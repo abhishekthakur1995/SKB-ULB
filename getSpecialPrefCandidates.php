@@ -8,6 +8,7 @@ require('common/common.php');
 require('vendor/autoload.php');
 $sessionProvider = new EasyCSRF\NativeSessionProvider();
 $easyCSRF = new EasyCSRF\EasyCSRF($sessionProvider);
+$mpdf = new mPDF();
 
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     header("location: index.php");
@@ -38,9 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $seedNumber = htmlspecialchars($trimSeedNumber);
     }
 }
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -88,6 +87,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         function selectCandidate($criteria, $code, $seedNumber, $mustache, $lang) {
             $limit = Common::getCandidateSelectionLimitForSpecialPreferences($criteria);
             $data = Common::selectCandidatesForSpecialPrefCategory($criteria, $limit, $code, $seedNumber);
+            $template = $mustache->loadTemplate('print_button');
+            echo $template->render();
+            $template = $mustache->loadTemplate('print_header');
+            echo $template->render(array('lang'=>$lang));
             $template = $mustache->loadTemplate('table_body');
             echo $template->render(array(
                 'data'=>$data, 
@@ -96,6 +99,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 'totalParticipated'=>Common::getTotalEnteriesBySpecialPreferences($criteria),
                 'totalSelected'=>sizeof($data),
                 'selectionFor'=>$criteria,
+                'seedNumber'=>$seedNumber,
                 'getReceiptNumber' => function($text, Mustache_LambdaHelper $helper) {
                     return substr($helper->render($text), strpos($helper->render($text), "_") + 1);
                 },
@@ -106,7 +110,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $specialPreferenceArr = ['EXOFFICER', 'SPORTSPERSON', 'DISABLED'];
-
+        $template = $mustache->loadTemplate('print_button');
+        echo $template->render();
+        $template = $mustache->loadTemplate('print_header');
+        echo $template->render(array('lang'=>$lang));
         for($i=0; $i<sizeof($specialPreferenceArr); $i++) {
             $criteria = strtoupper($specialPreferenceArr[$i]);
             $code = Common::getCodeForSelectionCriteria($criteria);
@@ -120,6 +127,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     'totalParticipated'=>Common::getTotalEnteriesBySpecialPreferences($criteria),
                     'totalSelected'=>sizeof($data),
                     'selectionFor'=>$criteria,
+                    'seedNumber'=>$seedNumber,
                     'getReceiptNumber' => function($text, Mustache_LambdaHelper $helper) {
                         return substr($helper->render($text), strpos($helper->render($text), "_") + 1);
                     },
@@ -138,5 +146,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_close($link);
     }
 }
-
 ?>
+
+<script type="text/javascript">
+    function printpage() {
+        var printButton = document.getElementById("printbtn"); 
+        var content = document.getElementById("get-candidates");
+        var printHeader = document.getElementById("print-header");
+        printButton.style.display = 'none';
+        content.style.display = 'none';
+        printHeader.style.display = 'block';
+        window.print();
+        printButton.style.display = 'block';
+        content.style.display = 'block';
+        printHeader.style.display = 'none';
+    }
+</script>
