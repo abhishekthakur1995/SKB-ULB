@@ -207,6 +207,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 'totalSelected'=>sizeof($data),
                 'selectionFor'=>$criteria,
                 'seedNumber'=>$seedNumber,
+                'errorMessage'=>Common::getErrorMessage($limit, sizeof($data)),
                 'getReceiptNumber' => function($text, Mustache_LambdaHelper $helper) {
                     return substr($helper->render($text), strpos($helper->render($text), "_") + 1);
                 },
@@ -239,6 +240,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     'totalSelected'=>sizeof($data),
                     'selectionFor'=>$criteria,
                     'seedNumber'=>$seedNumber,
+                    'errorMessage'=>Common::getErrorMessage($limit, sizeof($data)),
                     'getReceiptNumber' => function($text, Mustache_LambdaHelper $helper) {
                         return substr($helper->render($text), strpos($helper->render($text), "_") + 1);
                     },

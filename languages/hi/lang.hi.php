@@ -227,4 +227,7 @@
     $lang['GENERAL_FEMALE_DIVORCEE']  = 'सामान्य / महिला / परितक्यता';
     $lang['GENERAL_FEMALE_COMMON']  = 'सामान्य / महिला / अन्य';
     $lang['GENERAL_MALE']  = 'सामान्य/ पुरुष';
+
+    $lang['lottery_msg_1'] = 'कोई भी आवेदक नहीं मिला';
+    $lang['lottery_msg_2'] = 'कोई भी सीट आरक्षित नहीं है';
 ?>

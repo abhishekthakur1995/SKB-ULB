@@ -713,6 +713,16 @@ class Common {
         return $data;
 	}
 
+	public static function getErrorMessage($limit, $dataLength) {
+		if($limit == 0) {
+			return $GLOBALS['lang']['lottery_msg_2'];
+		}
+
+		if($dataLength == 0) {
+			return $GLOBALS['lang']['lottery_msg_1'];
+		}
+	}
+
 	public static function getIPAddress() {
 		$ip = $_SERVER['REMOTE_ADDR'] ? : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? : $_SERVER['HTTP_CLIENT_IP']);
 		return $ip;
