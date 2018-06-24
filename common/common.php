@@ -715,11 +715,11 @@ class Common {
 
 	public static function getErrorMessage($limit, $dataLength) {
 		if($limit == 0) {
-			return $GLOBALS['lang']['lottery_msg_2'];
+			return $GLOBALS['lang']['lottery_err_msg_2'];
 		}
 
 		if($dataLength == 0) {
-			return $GLOBALS['lang']['lottery_msg_1'];
+			return $GLOBALS['lang']['lottery_err_msg_1'];
 		}
 	}
 
