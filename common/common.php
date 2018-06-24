@@ -170,7 +170,7 @@ class Common {
 		'KUSHALGARH'=>23,
 		'DUNGARPUR'=>33,
 		'SAGWARA'=>26,
-		'CHITTAURGARH'=>97,
+		'CHITTORGRH'=>97,
 		'NIMBAHERA'=>45,
 		'KAPASAN'=>26,
 		'BADISADRI'=>18,
