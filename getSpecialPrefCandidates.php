@@ -8,7 +8,6 @@ require('common/common.php');
 require('vendor/autoload.php');
 $sessionProvider = new EasyCSRF\NativeSessionProvider();
 $easyCSRF = new EasyCSRF\EasyCSRF($sessionProvider);
-$mpdf = new mPDF();
 
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     header("location: index.php");
