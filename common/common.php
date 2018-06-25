@@ -143,7 +143,7 @@ class Common {
 		'RATANNAGAR'=>24,
 		'RATANGARH'=>58,
 		'RAJGARH'=>131,
-		'CHHAPAR'=>17,
+		'CHHPAR'=>17,
 		'RAJALDESAR'=>26,
 		'BIDASAR'=>21,
 		'SUJANGARH'=>88,
