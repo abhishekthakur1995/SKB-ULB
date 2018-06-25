@@ -149,7 +149,7 @@ class Common {
 		'SUJANGARH'=>88,
 		'SARDARSAHAR'=>45,
 		'PHULERA'=>9,
-		'SAMBHARLAKE'=>19,
+		'SAMBHAR'=>19,
 		'KHUDALAFALNA'=>14,
 		'KPATAN'=>51,
 		'NAINVA'=>68,
