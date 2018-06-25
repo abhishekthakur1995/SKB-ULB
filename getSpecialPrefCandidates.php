@@ -50,10 +50,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php include 'header.php';?>
     <?php include 'lottery_information.php';?>
     <div id="get-candidates" class="get_candidates_wrapper">
-        <div class="alert alert-info margin-horiz-2x margin-2x text-align-center">
-            <a data-toggle="modal" data-target="#lotteryInformation" class="fs4"><?php echo $lang['lottery_msg_1'];?>
+        <div class="row">
+            <div class="col alert alert-info margin-5x text-align-center">
+                <a data-toggle="modal" data-target="#lotteryInformation" class="fs4"><?php echo $lang['lottery_msg_1'];?>
                 <strong class="text-decoration-underline clr-blue"><?php echo $lang['lottery_msg_2'];?></strong>
             </a>
+            </div>
+            <div class="col alert alert-info margin-5x text-align-center">
+                <a class="fs4" href="getAllCategoryCandidates.php"><?php echo $lang['lottery_msg_7']; ?></a> 
+                </a>
+            </div>
         </div>
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

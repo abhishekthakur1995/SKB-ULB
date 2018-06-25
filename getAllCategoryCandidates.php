@@ -68,25 +68,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <?php include 'header.php';?>
     <?php include 'lottery_information.php';?>
     <div id="get-all-candidates" class="get_candidates_wrapper">
-        <div class="row">
-            <div class="modal fade" id="lotteryTable" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle"><?php echo $lang['lottery_msg_6']; ?></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <table id="classTable" class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <td class="text-align-center half-width"><?php echo $lang['seed_number']; ?></td>
-                                        <td class="text-align-center half-width"><?php echo $lang['lottery_table_criteria']; ?></td>
-                                    </tr>
-                                </thead>
-                                <?php
+        <div class="modal fade" id="lotteryTable" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"><?php echo $lang['lottery_msg_6']; ?></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table id="classTable" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <td class="text-align-center half-width"><?php echo $lang['seed_number']; ?></td>
+                                    <td class="text-align-center half-width"><?php echo $lang['lottery_table_criteria']; ?></td>
+                                </tr>
+                            </thead>
+                            <?php
                                 $usedCodes = Common::getSelectedCodeByUlb();
                                 foreach ($usedCodes as $key => $value) {
                                 ?>
@@ -96,16 +95,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                             <td class="text-align-center"><?php echo $lang[array_search($value['code'], Common::codes)]; ?></td>
                                         </tr>
                                     </tbody>
-                                <?php } ?>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="pure-button" data-dismiss="modal"><?php echo $lang['delete_alert2']; ?></button>
-                        </div>
+                            <?php } ?>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="pure-button" data-dismiss="modal"><?php echo $lang['delete_alert2']; ?></button>
                     </div>
                 </div>
             </div>
-
+        </div>
+        <div class="row">
             <div class="col alert alert-info margin-5x text-align-center">
                 <a data-toggle="modal" data-target="#lotteryTable" class="fs4"><?php echo $lang['lottery_msg_5'];?>
                     <span class="fa fa-arrow-right fs4"></span>

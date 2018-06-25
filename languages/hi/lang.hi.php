@@ -201,6 +201,7 @@
     $lang['lottery_msg_4'] = 'आगे बढे';
     $lang['lottery_msg_5'] = 'निकाली गई लॉटरी देखे';
     $lang['lottery_msg_6'] = 'निकाली गई लॉटरी';
+    $lang['lottery_msg_7'] = 'श्रेणीवार लाटरी निकालने के लिए यहाँ क्लिक करे';
     $lang['lottery_table_criteria'] = 'चयनित वर्ग / लिंग / वैवाहिक स्थिति';
 
     $lang['SC_FEMALE_WIDOW']  = 'अनुसूचित जाति / महिला / विधवा';
