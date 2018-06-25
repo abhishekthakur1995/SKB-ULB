@@ -530,14 +530,46 @@ class Common {
 						self::copySelectedCandidateData($row, $code, $seedNumber);
 					}
 				}
-				self::lockSeedAndCode($code, $seedNumber);
-				return $data;
+			}
+		}
+		self::lockSeedAndCode($code, $seedNumber);
+		return $data;
+	}
+
+	public static function getDeleteFromForSpecialPreferenceSeatRemoval($category, $gender) {
+		if($gender == 'f') {
+			$sql= "SELECT ". strtoupper($category.'_FEMALE_COMMON')." as total from reservation_chart WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
+			$result=mysqli_query($GLOBALS['link'], $sql);
+			$data=mysqli_fetch_assoc($result);
+			if($data['total'] > 0) {
+				return strtoupper($category.'_FEMALE_COMMON');
+			} else {
+				$sql= "SELECT ". strtoupper($category.'_MALE')." as total from reservation_chart WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
+				$result=mysqli_query($GLOBALS['link'], $sql);
+				$data=mysqli_fetch_assoc($result);
+				if($data['total'] > 0) {
+					return strtoupper($category.'_MALE');
+				} else {
+					return 'GENERAL_MALE';
+				}
+			}
+		}
+
+		if($gender == 'm') {
+			$sql= "SELECT ". strtoupper($category.'_MALE')." as total from reservation_chart WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
+			$result=mysqli_query($GLOBALS['link'], $sql);
+			$data=mysqli_fetch_assoc($result);
+			if($data['total'] > 0) {
+				return strtoupper($category.'_MALE');
+			} else {
+				return 'GENERAL_MALE';
 			}
 		}
 	}
 
 	public static function removeSpecialPreferencesSeatsFromCategories($category, $gender) {
-		$deleteFrom = ($gender == 'f') ? strtoupper($category.'_FEMALE_COMMON') : strtoupper($category.'_MALE');
+		$deleteFrom = self::getDeleteFromForSpecialPreferenceSeatRemoval($category, $gender);
+		//$deleteFrom = ($gender == 'f') ? strtoupper($category.'_FEMALE_COMMON') : strtoupper($category.'_MALE');
 		$sql = "UPDATE reservation_chart SET ".$deleteFrom." = ".$deleteFrom." - 1 WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
 
 		if(mysqli_query($GLOBALS['link'], $sql)) {
@@ -697,10 +729,10 @@ class Common {
    		}
 	}
 
-	public function carryForwardSeats($carryForwardSeats, $code) {
-		$transferFrom = $code;
-		$transferTo = self::complementaryPairArr[$code];
-		$sql = "UPDATE reservation_chart SET ".$transferFrom." = ".$transferFrom." - ".$carryForwardSeats." AND ".$transferTo." = ".$transferTo." + ".$carryForwardSeats." WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
+	public function carryForwardSeats($carryForwardSeats, $criteria) {
+		$transferFrom = $criteria;
+		$transferTo = self::complementaryPairArr[$criteria];
+		$sql = "UPDATE reservation_chart SET ".$transferFrom." = ".$transferFrom." - ".$carryForwardSeats.", ".$transferTo." = ".$transferTo." + ".$carryForwardSeats." WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
 		if(!mysqli_query($GLOBALS['link'], $sql)) {
 			echo "Error updating record";
 		}

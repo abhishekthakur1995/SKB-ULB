@@ -223,10 +223,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $limit = Common::getCandidateSelectionLimit($criteria);
                 $data = Common::selectCandidatesForOthersCategory($criteria, $limit, $code, $seedNumber);
-                if($category === 'GENERAL') {    
+                if($category === 'GENERAL' && $criteria != 'GENRAL_MALE') {
                     $carriedForwardSeats = $limit - sizeof($data);
                     if($carriedForwardSeats > 0) {
-                        Common::carryForwardSeats($carriedForwardSeats, $code);
+                        Common::carryForwardSeats($carriedForwardSeats, $criteria);
                     }
                 }
                 $template = $mustache->loadTemplate('print_button');
