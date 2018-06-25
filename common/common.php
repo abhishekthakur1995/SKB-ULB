@@ -178,7 +178,7 @@ class Common {
 		'RAWATBHATA'=>128,
 		'PRATAPGARH'=>53,
 		'CHOTISADRI'=>14,
-		'RAJSAMAND'=>79,
+		'RAJASAMAND'=>79,
 		'NATHDWARA'=>56,
 		'DEVGARH'=>23,
 		'AMET'=>24,
