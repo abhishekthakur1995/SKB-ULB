@@ -32,6 +32,11 @@ if($insertToDB == true) {
 $totalSeatsForExOfficer = Common::getTotalSeatsForExofficer($totalSeatsInSeletedUlb);
 $totalSeatsForDisabled = Common::getTotalSeatsForDisabled($totalSeatsInSeletedUlb);
 $totalSeatsForSportsperson = Common::getTotalSeatsForSportsperson($totalSeatsInSeletedUlb);
+if($insertToDB == true) {
+    Common::populateReservationChartTable('EXOFFICER', $totalSeatsForExOfficer);
+    Common::populateReservationChartTable('SPORTSPERSON', $totalSeatsForSportsperson);
+    Common::populateReservationChartTable('DISABLED', $totalSeatsForDisabled);
+}
 
 $totalSeatsForSC = Common::getTotalSeatsByCategoryName('SC', $totalSeatsInSeletedUlb);
 $totalSeatsForSCFemale = Common::getTotalSeatsByGender('F', $totalSeatsForSC);
