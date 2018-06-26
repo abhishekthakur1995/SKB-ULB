@@ -47,7 +47,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	}
 
 	if(empty($ulb_err)) {
-		$passsword = password_hash(DEFAULT_PASSWORD, PASSWORD_DEFAULT);
+        $customPassword = $_SESSION['ulb_region']."__".mt_rand(1000,9999);
+		$passsword = password_hash($customPassword, PASSWORD_DEFAULT);
 		$sql = "UPDATE ulb_admins SET firstLogin = 0, password = '".$passsword."' WHERE region = '".$ulb."'";
 		if(mysqli_query($link, $sql)){
     		$_SESSION['message'] = 'Password has been successfully resetted for the selected ulb';
