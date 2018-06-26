@@ -41,6 +41,7 @@ if (mysqli_num_rows($result) > 0) {
     	$row['receiptNumber'] = substr($row['receiptNumber'], strpos($row['receiptNumber'], "_") + 1);
     	$row['gender'] = $row['gender'] == 'm' ? $lang['male'] : $lang['female'];
     	$row['category'] = $lang[$row['category']];
+        $row['specialPreference'] = $lang[$row['specialPreference']];
         $users[] = $row;
     }
 }
@@ -49,7 +50,7 @@ header('Content-Type: text/csv; charset=utf-8');
 header('Content-Disposition: attachment; filename=data.csv');
 $output = fopen('php://output', 'w');
 
-fputcsv($output, array($lang['name'], $lang['guardian'], $lang['permanentAddress'], $lang['temporaryAddress'], $lang['dob'], $lang['phone_number'], $lang['birth_place'], $lang['district'], $lang['ulb_region'], $lang['category'], $lang['gender'], $lang['maritial_status'], $lang['religion'], $lang['receipt_number'], $lang['all_documents_provided'], $lang['special_preference'], $lang['remark']));
+fputcsv($output, array($lang['name'], $lang['guardian'], $lang['permanentAddress'], $lang['temporaryAddress'], $lang['dob'], $lang['phone_number'], $lang['birth_place'], $lang['district'], $lang['ulb_region'], $lang['category'], $lang['gender'], $lang['maritial_status'], $lang['religion'], $lang['receipt_number'], $lang['all_documents_provided'], $lang['special_preference_list'], $lang['remark']));
  
 if (count($users) > 0) {
     foreach ($users as $row) {

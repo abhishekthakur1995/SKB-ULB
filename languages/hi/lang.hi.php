@@ -42,6 +42,7 @@
 
     $lang['selected_for'] = 'श्रेणी';
     $lang['special_preference'] = 'क्या आवेदक इनमे से कुछ है';
+    $lang['special_preference_list'] = 'विशेष वरीयता';
     $lang['EXOFFICER'] = 'भूतपूर्व सैनिक';
     $lang['DISABLED'] = 'दिव्यांग';
     $lang['SPORTSPERSON'] = 'खिलाड़ी';
