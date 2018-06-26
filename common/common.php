@@ -5,7 +5,7 @@ require_once(__ROOT__.'/languages/hi/lang.hi.php');
 
 class Common {
 
-	const TSP_AREA = ['BANSWARA', 'DUNGARPUR', 'PRATAPGARH', 'SAGWARA', 'KUSHALGARH'];
+	const TSP_AREA = ['BANSWARA', 'DUNGARPUR', 'PRATAPGARH', 'SAGWARA', 'KSHULGARH'];
 	const TSP_AREA_EXCLUDE_CATEGORY = ['OBC', 'SPECIALOBC'];
 
 	const totalSeats = [
@@ -174,7 +174,7 @@ class Common {
 		'NIMBAHERA'=>45,
 		'KAPASAN'=>26,
 		'BADISADRI'=>18,
-		'BEGU'=>15,
+		'BEGUN'=>15,
 		'RAWATBHATA'=>128,
 		'PRATAPGARH'=>53,
 		'CHOTISADRI'=>14,
@@ -731,10 +731,17 @@ class Common {
    		}
 	}
 
-	public function carryForwardSeats($carryForwardSeats, $criteria) {
+	public static function carryForwardSeats($carryForwardSeats, $criteria) {
 		$transferFrom = $criteria;
 		$transferTo = self::complementaryPairArr[$criteria];
 		$sql = "UPDATE reservation_chart SET ".$transferFrom." = ".$transferFrom." - ".$carryForwardSeats.", ".$transferTo." = ".$transferTo." + ".$carryForwardSeats." WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
+		if(!mysqli_query($GLOBALS['link'], $sql)) {
+			echo "Error updating record";
+		}
+	}
+
+	public static function saveDiscardedSeats($discardObj) {
+		$sql = "UPDATE reservation_chart SET DISCARDED_SEATS = '".$discardObj."' WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
 		if(!mysqli_query($GLOBALS['link'], $sql)) {
 			echo "Error updating record";
 		}
