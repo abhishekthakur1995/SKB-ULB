@@ -77,6 +77,7 @@ CREATE TABLE reservation_chart (
     CREATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+DROP TABLE IF EXISTS login_attempts;
 CREATE TABLE `login_attempts` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `ip` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
