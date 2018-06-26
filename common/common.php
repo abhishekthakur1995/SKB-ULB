@@ -395,38 +395,6 @@ class Common {
     	}
 	}
 
-	// public static function getUpdatedSeats() {
-	// 	$sql = "SELECT TOTAL_GENERAL FROM reservation_chart WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
-	// 	$result = mysqli_query($GLOBALS['link'], $sql);
-	// 	$row = mysqli_fetch_array($result);
-	// 	$totalGeneralSeats = $row['TOTAL_GENERAL'];
-
-	// 	$val = array();
-	// 	$val['TOTAL_FEMALE'] = self::getTotalSeatsByGender('F', $totalGeneralSeats);
-	// 	$val['GENERAL_FEMALE_WIDOW'] = self::getTotalSeatsByMaritialStatus('WIDOW', $totalGeneralSeats);
-	// 	$val['GENERAL_FEMALE_DIVORCEE'] = self::getTotalSeatsByMaritialStatus('DIVORCEE', $totalGeneralSeats);
-	// 	$val['GENERAL_FEMALE_COMMON'] = $val['TOTAL_FEMALE'] - ($val['GENERAL_FEMALE_WIDOW'] + $val['GENERAL_FEMALE_DIVORCEE']);
-	// 	$val['GENERAL_MALE'] = $totalGeneralSeats - $val['TOTAL_FEMALE'];
-	// 	return $val;
-	// }
-
-	// public static function updateGeneralCandidatesSeat($count) {
-	// 	$sql = "UPDATE reservation_chart SET TOTAL_GENERAL = TOTAL_GENERAL + ".$count." WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
-
-	// 	if(mysqli_query($GLOBALS['link'], $sql)){
-	// 		$updatedSeats = Common::getUpdatedSeats();
-	// 		$sql = "UPDATE reservation_chart SET GENERAL_FEMALE_WIDOW = ".$updatedSeats['GENERAL_FEMALE_WIDOW'].", GENERAL_FEMALE_DIVORCEE = ".$updatedSeats['GENERAL_FEMALE_DIVORCEE'].", GENERAL_FEMALE_COMMON = ".$updatedSeats['GENERAL_FEMALE_COMMON'].", GENERAL_MALE = ".$updatedSeats['GENERAL_MALE']." WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
-	// 		if(mysqli_query($GLOBALS['link'], $sql)){
-	// 			// data updated
-	// 		} else {
-	// 			echo "ERROR: Could not able to execute $sql. " . mysqli_error($GLOBALS['link']);
-	// 		}
- //    	} else {
- //        	echo "ERROR: Could not able to execute $sql. " . mysqli_error($GLOBALS['link']);
- //    	}
-
-	// }
-
 	public static function existsInDb($value, $field) {
 		$sql = "SELECT id FROM lock_code_seed WHERE ulbRegion = ? AND ".$field." = ?";
 		if($stmt = mysqli_prepare($GLOBALS['link'], $sql)){
@@ -586,7 +554,6 @@ class Common {
 
 	public static function removeSpecialPreferencesSeatsFromCategories($category, $gender) {
 		$deleteFrom = self::getDeleteFromForSpecialPreferenceSeatRemoval($category, $gender);
-		//$deleteFrom = ($gender == 'f') ? strtoupper($category.'_FEMALE_COMMON') : strtoupper($category.'_MALE');
 		$sql = "UPDATE reservation_chart SET ".$deleteFrom." = ".$deleteFrom." - 1 WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
 
 		if(mysqli_query($GLOBALS['link'], $sql)) {
@@ -765,14 +732,13 @@ class Common {
 	}
 
 	public static function getErrorMessage($limit, $dataLength) {
-		if($limit == '') {
-			return $GLOBALS['lang']['lottery_err_msg_1'];
-		}
 		if($limit == 0) {
 			return $GLOBALS['lang']['lottery_err_msg_2'];
 		}
-
 		if($dataLength == 0) {
+			return $GLOBALS['lang']['lottery_err_msg_1'];
+		}
+		if($limit == 10000000) {
 			return $GLOBALS['lang']['lottery_err_msg_1'];
 		}
 	}

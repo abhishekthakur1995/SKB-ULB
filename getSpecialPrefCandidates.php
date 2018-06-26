@@ -123,10 +123,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $criteria = strtoupper($specialPreferenceArr[$i]);
             $code = Common::getCodeForSelectionCriteria($criteria);
             if(Common::codeAndSeedExistsInDB($code, $seedNumber)) {
-                $template = $mustache->loadTemplate('print_button');
-                echo $template->render();
-                $template = $mustache->loadTemplate('print_header');
-                echo $template->render(array('lang'=>$lang));
+                $limit = Common::getCandidateSelectionLimitForSpecialPreferences($criteria);
+                if($print) {
+                    $template = $mustache->loadTemplate('print_button');
+                    echo $template->render();
+                    $template = $mustache->loadTemplate('print_header');
+                    echo $template->render(array('lang'=>$lang));
+                }
+                $print = false;
                 $data = Common::getDataFromDbByCodeAndSeed($code, $seedNumber);
                 $template = $mustache->loadTemplate('table_body');
                 echo $template->render(array(
@@ -137,7 +141,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     'totalSelected'=>sizeof($data),
                     'selectionFor'=>$criteria,
                     'seedNumber'=>$seedNumber,
-                    'errorMessage'=>Common::getErrorMessage('', sizeof($data)),
+                    'errorMessage'=>Common::getErrorMessage($limit, sizeof($data)),
                     'getReceiptNumber' => function($text, Mustache_LambdaHelper $helper) {
                         return substr($helper->render($text), strpos($helper->render($text), "_") + 1);
                     },
