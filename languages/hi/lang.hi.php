@@ -58,6 +58,7 @@
     $lang['Widow'] = 'विधवा';
     $lang['Divorcee'] = 'तलाकशुदा / परितक्यता';
     $lang['Common'] = 'विवाहित / अविवाहित';
+    $lang['Common_1'] = 'अन्य';
 
     $lang['MARRIED'] = 'विवाहित';
     $lang['UNMARRIED'] = 'अविवाहित';
