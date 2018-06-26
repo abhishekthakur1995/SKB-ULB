@@ -1,0 +1,34 @@
+<table class='table table-striped table-bordered table-hover table-condensed'>
+	<thead>
+		<tr>
+            <th>ULB</th>
+            <th class="grey">Total Male Candidate</th>
+            <th class="grey">Total Female Candidate</th>
+            <th>Female Widow Candidates</th>
+            <th>Female Divorcee Candidates</th>
+            <th>Female Married Candidates</th>
+            <th>Female Unmarried Candidates</th>
+            <th>Total Candidates</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#data}}
+			<tr>
+				<td><a class="clr-blue city-link" data-city="{{ulbRegion}}">{{ulbRegion}}</a></td>
+				<td>{{male}}</td>
+				<td>{{female}}</td>
+				<td>{{Female Widow}}</td>
+				<td>{{Female Divorcee}}</td>
+				<td>{{Female Married}}</td>
+				<td>{{Female Unmarried}}</td>
+				<td>{{total}}</td>
+			</tr>
+		{{/data}}
+
+		{{^data}}
+			<tr>
+	    		<td>No Record Found</td>
+			</tr>
+		{{/data}}
+	</tbody>
+</table>

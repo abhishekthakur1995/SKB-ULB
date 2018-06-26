@@ -103,6 +103,7 @@
     $lang['dashboard_btn_9'] = 'डुप्लिकेट डेटा';
     $lang['dashboard_btn_10'] = 'भूतपूर्व सैनिक/दिव्यांग/खिलाड़ी का चयन करे';
     $lang['dashboard_btn_11'] = 'सभी वर्गों  के लिए आवेदकों का चयन करें';
+    $lang['dashboard_btn_12'] = 'यूएलबी लॉटरी सूची';
     $lang['total_enteries'] = 'कुल स्वीकृत आवेदक';
     $lang['detailed_table'] = 'विस्तृत आवेदक टेबल';
     $lang['reservation_chart'] = 'आरक्षण चार्ट';

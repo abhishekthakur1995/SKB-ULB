@@ -469,6 +469,23 @@ class Common {
         mysqli_stmt_close($stmt);
 	}
 
+	public static function getSelectedCandidateByGenderAndMaritialStatus() {
+		$sql = "SELECT ulbRegion, COUNT(*) AS total,
+		COUNT(CASE WHEN gender='m' THEN 1 END) AS male,
+		COUNT(CASE WHEN gender='f' THEN 1 END) AS female, 
+		COUNT(CASE WHEN gender='f' AND maritialStatus='WIDOW' THEN 1 END ) AS 'Female Widow',
+		COUNT(CASE WHEN gender='f' AND maritialStatus='DIVORCEE' THEN 1 END ) AS 'Female Divorcee',
+		COUNT(CASE WHEN gender='f' AND maritialStatus='MARRIED' THEN 1 END ) AS 'Female Married',
+		COUNT(CASE WHEN gender='f' AND maritialStatus='UNMARRIED' THEN 1 END ) AS 'Female Unmarried'
+		FROM selected_candidates GROUP BY ulbRegion ORDER BY ulbRegion DESC";
+
+		$result = mysqli_query($GLOBALS['link'], $sql);
+        $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        mysqli_free_result($result);
+        mysqli_close($GLOBALS['link']);
+        return $data;
+	}
+
 	public static function getDuplicateRecordsData() {
 		$sql = "SET @a:=0";
 		mysqli_query($GLOBALS['link'], $sql);
@@ -652,20 +669,22 @@ class Common {
 	}
 
 	public static function copySelectedCandidateData($row, $code, $seedNumber) {
-		$sql = "INSERT INTO selected_candidates (ulbRegion, name, receiptNumber, code, seedNumber) VALUES (?,?,?,?,?)";
+		$sql = "INSERT INTO selected_candidates (ulbRegion, name, category, gender, maritialStatus, specialPreference, receiptNumber, code, seedNumber) VALUES (?,?,?,?,?,?,?,?,?)";
 		if($stmt = mysqli_prepare($GLOBALS['link'], $sql)){
-			mysqli_stmt_bind_param($stmt, "sssss", $param_ulbRegion, $param_name, $param_receiptNumber, $param_code, $param_seedNumber);
+			mysqli_stmt_bind_param($stmt, "sssssssss", $param_ulbRegion, $param_name, $param_category, $param_gender, $param_maritialStatus, $param_specialPreference, $param_receiptNumber, $param_code, $param_seedNumber);
 
 			$param_ulbRegion = $row['ulbRegion'];
 			$param_name = $row['name'];
 			$param_receiptNumber = $row['receiptNumber'];
+			$param_category = $row['category'];
+			$param_gender = $row['gender'];
+			$param_maritialStatus = $row['maritialStatus'];
+			$param_specialPreference = $row['specialPreference'];
 			$param_code = $code;
 			$param_seedNumber = $seedNumber;
 
-			if(mysqli_stmt_execute($stmt)){
-				//
-            } else {
-            	echo "ERROR: Could not able to execute $sql. " . mysqli_error($GLOBALS['link']);
+			if(!mysqli_stmt_execute($stmt)){
+            	echo "ERROR: Could not able to execute $sql";
             }
 		}
 	}

@@ -27,8 +27,12 @@ CREATE TABLE selected_candidates (
     ulbRegion varchar(30) NOT NULL,
     name VARCHAR(50) NOT NULL,
     receiptNumber VARCHAR(20) NOT NULL UNIQUE,
+    category VARCHAR(20) NOT NULL,
+    gender VARCHAR(20) NOT NULL,
+    maritialStatus VARCHAR(20) NOT NULL,
+    specialPreference VARCHAR(50) DEFAULT NULL,
     code TINYINT(2) NOT NULL,
-    seedNumber varchar(10) NOT NULL, 
+    seedNumber varchar(10) NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 )
 

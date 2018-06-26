@@ -9,6 +9,9 @@ body {
     text-align: center;
     margin-top: 20px;
 }
+.grey {
+    background-color: #ccc;
+}
 .fleft {
     float: left;
 }
@@ -64,7 +67,7 @@ body {
     color:red; 
 }
 .clr-blue { 
-    color:blue; 
+    color:blue !important; 
 }
 .bold {
     font-weight: bold;
@@ -363,4 +366,7 @@ button.pure-button:hover, button.pure-button:focus {
 }
 .half-width {
     width: 50%;
+}
+.max-width-1200 {
+    max-width: 1200px !important;
 }
