@@ -231,7 +231,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $limit = Common::getCandidateSelectionLimit($criteria);
                 $data = Common::selectCandidatesForOthersCategory($criteria, $limit, $code, $seedNumber);
-                if($category === 'GENERAL' && $criteria != 'GENRAL_MALE') {
+                if(!in_array($criteria, Common::discardSeatsCriteria)) {
                     $carriedForwardSeats = $limit - sizeof($data);
                     if($carriedForwardSeats > 0) {
                         Common::carryForwardSeats($carriedForwardSeats, $criteria);

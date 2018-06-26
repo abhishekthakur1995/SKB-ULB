@@ -12,7 +12,7 @@ class Common {
 		'AAMET' => 24,
 		'AASIND'=>9,
 		'BEAWAR'=>161,
-		'KOTA'=>1821,
+		'KOTA'=>1285,
 		'JAIPUR'=>4961,
 		'KISHANGARH'=>161,
 		'KEKRI'=>113,
@@ -257,10 +257,26 @@ class Common {
 	];
 
 	const complementaryPairArr = [
+		'SC_FEMALE_DIVORCEE' => 'SC_FEMALE_WIDOW',
+		'SC_FEMALE_WIDOW' => 'SC_FEMALE_COMMON',
+		'SC_FEMALE_COMMON' => 'SC_MALE',
+		'ST_FEMALE_DIVORCEE' => 'ST_FEMALE_WIDOW',
+		'ST_FEMALE_WIDOW' => 'ST_FEMALE_COMMON',
+		'ST_FEMALE_COMMON' => 'ST_MALE',
+		'OBC_FEMALE_DIVORCEE' => 'OBC_FEMALE_WIDOW',
+		'OBC_FEMALE_WIDOW' => 'OBC_FEMALE_COMMON',
+		'OBC_FEMALE_COMMON' => 'OBC_MALE',
+		'OBC_MALE' => 'GENERAL_MALE',
+		'SPECIALOBC_FEMALE_DIVORCEE' => 'SPECIALOBC_FEMALE_WIDOW',
+		'SPECIALOBC_FEMALE_WIDOW' => 'SPECIALOBC_FEMALE_COMMON',
+		'SPECIALOBC_FEMALE_COMMON' => 'SPECIALOBC_MALE',
+		'SPECIALOBC_MALE' => 'GENERAL_MALE',
 		'GENERAL_FEMALE_DIVORCEE' => 'GENERAL_FEMALE_WIDOW',
 		'GENERAL_FEMALE_WIDOW' => 'GENERAL_FEMALE_COMMON',
 		'GENERAL_FEMALE_COMMON' => 'GENERAL_MALE'
 	];
+
+	const discardSeatsCriteria = ['GENERAL_MALE', 'SC_MALE', 'ST_MALE'];
 
 	public static function getTotalSeatsForExofficer($totalUlbSeats) {
 		return self::getPercentage(self::categoryResPercentage['EXOFFICER'], $totalUlbSeats);
@@ -729,6 +745,38 @@ class Common {
 		$res = mysqli_query($GLOBALS['link'], $sql);
         $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
         return $data;
+	}
+
+	public static function getUpdatedSeats() {
+		$sql = "SELECT TOTAL_GENERAL FROM reservation_chart WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
+		$result = mysqli_query($GLOBALS['link'], $sql);
+		$row = mysqli_fetch_array($result);
+		$totalGeneralSeats = $row['TOTAL_GENERAL'];
+
+		$val = array();
+		$val['TOTAL_FEMALE'] = self::getTotalSeatsByGender('F', $totalGeneralSeats);
+		$val['GENERAL_FEMALE_WIDOW'] = self::getTotalSeatsByMaritialStatus('WIDOW', $totalGeneralSeats);
+		$val['GENERAL_FEMALE_DIVORCEE'] = self::getTotalSeatsByMaritialStatus('DIVORCEE', $totalGeneralSeats);
+		$val['GENERAL_FEMALE_COMMON'] = $val['TOTAL_FEMALE'] - ($val['GENERAL_FEMALE_WIDOW'] + $val['GENERAL_FEMALE_DIVORCEE']);
+		$val['GENERAL_MALE'] = $totalGeneralSeats - $val['TOTAL_FEMALE'];
+		return $val;
+	}
+
+	public static function updateGeneralCandidatesSeat($count) {
+		$sql = "UPDATE reservation_chart SET TOTAL_GENERAL = TOTAL_GENERAL + ".$count." WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
+
+		if(mysqli_query($GLOBALS['link'], $sql)){
+			$updatedSeats = Common::getUpdatedSeats();
+			$sql = "UPDATE reservation_chart SET GENERAL_FEMALE_WIDOW = ".$updatedSeats['GENERAL_FEMALE_WIDOW'].", GENERAL_FEMALE_DIVORCEE = ".$updatedSeats['GENERAL_FEMALE_DIVORCEE'].", GENERAL_FEMALE_COMMON = ".$updatedSeats['GENERAL_FEMALE_COMMON'].", GENERAL_MALE = ".$updatedSeats['GENERAL_MALE']." WHERE ULB_REGION = '".$_SESSION['ulb_region']."'";
+			if(mysqli_query($GLOBALS['link'], $sql)){
+				// data updated
+			} else {
+				echo "ERROR: Could not able to execute $sql. " . mysqli_error($GLOBALS['link']);
+			}
+    	} else {
+        	echo "ERROR: Could not able to execute $sql. " . mysqli_error($GLOBALS['link']);
+    	}
+
 	}
 
 	public static function getErrorMessage($limit, $dataLength) {
