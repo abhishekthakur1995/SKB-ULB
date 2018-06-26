@@ -160,7 +160,7 @@ class Common {
 		'FATEHPUR'=>64,
 		'CHHABRA'=>41,
 		'GANGAPURCITY'=>41,
-		'HINDON'=>25,
+		'HINDAUNCITY'=>25,
 		'UDAIPUR'=>1174,
 		'FATEHNAGAR'=>24,
 		'BHINDAR'=>26,
@@ -186,12 +186,12 @@ class Common {
 		'TODABHIMA'=>16,
 		'BHARATPUR'=>352,
 		'WEIR'=>7,
-		'BHUSAWAL'=>21,
+		'BHUSAWAR'=>21,
 		'BAYANA'=>47,
 		'DEEG'=>56,
 		'KUMHER'=>7,
 		'NAGAR'=>9,
-		'KAMA'=>15,
+		'KAMAN'=>15,
 		'NADBAI'=>20,
 		'KESARISINGHPUR'=>9,
 	];
@@ -746,6 +746,9 @@ class Common {
 	}
 
 	public static function getErrorMessage($limit, $dataLength) {
+		if($limit == '') {
+			return $GLOBALS['lang']['lottery_err_msg_1'];
+		}
 		if($limit == 0) {
 			return $GLOBALS['lang']['lottery_err_msg_2'];
 		}

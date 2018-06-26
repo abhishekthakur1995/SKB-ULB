@@ -89,13 +89,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if(empty($seed_number_err) && empty($special_preference_err)) {
-        function selectCandidate($criteria, $code, $seedNumber, $mustache, $lang) {
+        function selectCandidate($criteria, $code, $seedNumber, $mustache, $lang, $print) {
             $limit = Common::getCandidateSelectionLimitForSpecialPreferences($criteria);
             $data = Common::selectCandidatesForSpecialPrefCategory($criteria, $limit, $code, $seedNumber);
-            $template = $mustache->loadTemplate('print_button');
-            echo $template->render();
-            $template = $mustache->loadTemplate('print_header');
-            echo $template->render(array('lang'=>$lang));
+            if($print) {
+                $template = $mustache->loadTemplate('print_button');
+                echo $template->render();
+                $template = $mustache->loadTemplate('print_header');
+                echo $template->render(array('lang'=>$lang));
+            }
             $template = $mustache->loadTemplate('table_body');
             echo $template->render(array(
                 'data'=>$data, 
@@ -116,14 +118,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $specialPreferenceArr = ['EXOFFICER', 'SPORTSPERSON', 'DISABLED'];
-        $template = $mustache->loadTemplate('print_button');
-        echo $template->render();
-        $template = $mustache->loadTemplate('print_header');
-        echo $template->render(array('lang'=>$lang));
+        $print = true;
         for($i=0; $i<sizeof($specialPreferenceArr); $i++) {
             $criteria = strtoupper($specialPreferenceArr[$i]);
             $code = Common::getCodeForSelectionCriteria($criteria);
             if(Common::codeAndSeedExistsInDB($code, $seedNumber)) {
+                $template = $mustache->loadTemplate('print_button');
+                echo $template->render();
+                $template = $mustache->loadTemplate('print_header');
+                echo $template->render(array('lang'=>$lang));
                 $data = Common::getDataFromDbByCodeAndSeed($code, $seedNumber);
                 $template = $mustache->loadTemplate('table_body');
                 echo $template->render(array(
@@ -134,7 +137,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     'totalSelected'=>sizeof($data),
                     'selectionFor'=>$criteria,
                     'seedNumber'=>$seedNumber,
-                    'errorMessage'=>Common::getErrorMessage($limit, sizeof($data)),
+                    'errorMessage'=>Common::getErrorMessage('', sizeof($data)),
                     'getReceiptNumber' => function($text, Mustache_LambdaHelper $helper) {
                         return substr($helper->render($text), strpos($helper->render($text), "_") + 1);
                     },
@@ -147,7 +150,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     Common::showAlert($lang['candidate_already_selected']);
                     exit();
                 } 
-                selectCandidate($criteria, $code, $seedNumber, $mustache, $lang);
+                selectCandidate($criteria, $code, $seedNumber, $mustache, $lang, $print);
+                $print = false;
             }
         }
         mysqli_close($link);

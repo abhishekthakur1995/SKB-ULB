@@ -30,6 +30,7 @@
     $lang['update_record'] = 'विवरण अपडेट करें';
     $lang['delete_record'] = 'आवेदक रिकॉर्ड हटाएं';
     $lang['receipt_number'] = 'आवेदक प्राप्ति क्रमांक';
+    $lang['select_option'] = 'चयन';
 
     $lang['data_saved'] = 'डेटा सफलतापूर्वक दर्ज किया गया';
     $lang['yes'] = 'स्वीकृत';
@@ -199,9 +200,10 @@
     $lang['lottery_msg_2'] = 'महत्वपूर्ण निर्देश पढ़ें|';
     $lang['lottery_msg_3'] = 'महत्वपूर्ण निर्देश';
     $lang['lottery_msg_4'] = 'आगे बढे';
-    $lang['lottery_msg_5'] = 'निकाली गई लॉटरी देखे';
+    $lang['lottery_msg_5'] = 'अब तक निकाली गई सभी लॉटरी के सीड नंबर और वर्ग देखे';
     $lang['lottery_msg_6'] = 'निकाली गई लॉटरी';
     $lang['lottery_msg_7'] = 'श्रेणीवार लाटरी निकालने के लिए यहाँ क्लिक करे';
+    $lang['lottery_msg_8'] = 'विशेष वरीयता आवेदकों की लाटरी निकालने के लिए यहाँ क्लिक करे';
     $lang['lottery_table_criteria'] = 'चयनित वर्ग / लिंग / वैवाहिक स्थिति';
 
     $lang['SC_FEMALE_WIDOW']  = 'अनुसूचित जाति / महिला / विधवा';

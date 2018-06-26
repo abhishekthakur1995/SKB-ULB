@@ -20,8 +20,8 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     }
 }
 
-$gender = $category = $maritialStatus = $seedNumber = "";
-$gender_err = $maritial_status_err = $seed_number_err = "";
+$category = $gender = $maritialStatus = $seedNumber = "";
+$gender_err = $category_err = $maritial_status_err = $seed_number_err = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     try {
@@ -42,7 +42,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     $trimCategory = trim($_POST["category"]); 
     if(empty($trimCategory)) {
-        $gender_err = "Please select a category.";
+        $category_err = "Please select a category.";
     } else {
         $category = htmlspecialchars($trimCategory);
     }
@@ -115,6 +115,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <strong class="text-decoration-underline clr-blue"><?php echo $lang['lottery_msg_2'];?></strong>
                 </a>
             </div>
+            <div class="col alert alert-info margin-5x text-align-center">
+                <a class="fs4" href="getSpecialPrefCandidates.php"><?php echo $lang['lottery_msg_8']; ?></a> 
+                </a>
+            </div>
         </div>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <input type="hidden" name="token" value="<?php echo $easyCSRF->generate('my_token'); ?>">
@@ -128,9 +132,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                     </div>
                     <div class="col-sm">
-                        <div class="form-group">
+                        <div class="form-group <?php echo (!empty($category_err)) ? 'has-error' : ''; ?>">
                             <label for="category" class="required"><?php echo $lang['category']; ?></label>
-                            <select class="form-control category" name="category">
+                            <select class="form-control category" name="category" required>
+                                <option value=""><?php echo $lang['select_option']; ?></option>
                                 <?php 
                                     $categoryListJson = file_get_contents(__DIR__ . '/data/category_list.json');
                                     $categoryListArr = json_decode($categoryListJson, true);
@@ -145,12 +150,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     }
                                 ?>
                             </select>
+                            <span class="invalid-feedback text-align-center"><?php echo $category_err; ?></span>
                         </div>
                     </div>
                     <div class="col-sm">
                         <div class="form-group <?php echo (!empty($gender_err)) ? 'has-error' : ''; ?>">
                             <label class="required"><?php echo $lang['gender']; ?></label>
-                            <select class="form-control gender" name="gender">
+                            <select class="form-control gender" name="gender" required>
+                                <option value=""><?php echo $lang['select_option']; ?></option>
                                 <option value="f"><?php echo $lang['female']; ?></option>
                                 <option value="m"><?php echo $lang['male']; ?></option>
                             </select>
@@ -160,7 +167,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="col-sm">
                         <div class="form-group">
                             <label for="maritialStatus" class="required"><?php echo $lang['maritial_status']; ?></label>
-                            <select class="form-control maritial_status" name="maritialStatus">
+                            <select class="form-control maritial_status" name="maritialStatus" required>
+                                <option value=""><?php echo $lang['select_option']; ?></option>
                                 <?php 
                                     $maritialStatusJson = file_get_contents(__DIR__ . '/data/maritial_status_reservation.json');
                                     $maritialStatusArr = json_decode($maritialStatusJson, true);
@@ -206,7 +214,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 'totalSelected'=>sizeof($data),
                 'selectionFor'=>$criteria,
                 'seedNumber'=>$seedNumber,
-                'errorMessage'=>Common::getErrorMessage($limit, sizeof($data)),
+                'errorMessage'=>Common::getErrorMessage('', sizeof($data)),
                 'getReceiptNumber' => function($text, Mustache_LambdaHelper $helper) {
                     return substr($helper->render($text), strpos($helper->render($text), "_") + 1);
                 },
@@ -256,6 +264,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <script type="text/javascript">
     $(document).ready(function() {
+
+        $(".maritial_status").val('<?php echo $maritialStatus; ?>');
+        $(".category").val('<?php echo $category; ?>');
+        $(".gender").val('<?php echo $gender; ?>');
+
+        if($('.gender').val() === 'm') {
+            $('.maritial_status').attr('disabled', true);
+        }
+
         $('.gender').change(function() {
             if($('.gender').val() !== '') {
                 $('.maritial_status').attr('disabled', true);
