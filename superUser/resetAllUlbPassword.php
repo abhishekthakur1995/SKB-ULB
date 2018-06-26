@@ -28,7 +28,7 @@ fputcsv($output, array('ULB NAME', 'PASSWORD'));
 ini_set('max_execution_time', 300);
 foreach ($ulbListArr as $key => $value) {
 	if($value['NAME'] != 'DLBSUPERADMIN') {
-		$customPassword = $value['CODE']."__".mt_rand(1000,9999);
+		$customPassword = $value['CODE']."@".mt_rand(1000,9999);
 		$passsword = password_hash($customPassword, PASSWORD_DEFAULT);
 		$sql = "UPDATE ulb_admins SET password = '".$passsword."' WHERE region = '".$value['CODE']."'";
 		if(mysqli_query($link, $sql)){
