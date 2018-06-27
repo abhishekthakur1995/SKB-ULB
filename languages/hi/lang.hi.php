@@ -50,6 +50,7 @@
     $lang['download'] = 'आवेदक सूची डाउनलोड करें';
     $lang['tbl1_heading'] = 'आरक्षण तालिका';
     $lang['tbl2_heading'] = 'आवेदक संख्या तालिका';
+    $lang['wrong_criteria_selected'] = 'लाटरी में गलत क्रम का चुनाव किया गया है| कृपया सही क्रम अनुसार चुनाव करे';
 
 
     //maritial_status

@@ -61,12 +61,6 @@ if (isset($_SESSION['message'])) {
                     <span class="fa fa-eye fs4"></span>
                     <?php echo $lang['dashboard_btn_8']; ?>
                 </a>
-                <a href="superUser/duplicateRecords.php" class="btn btn-primary btn-lg fs4 width450">
-                    <span class="fa fa-copy fs4"></span>
-                    <?php echo $lang['dashboard_btn_9']; ?>
-                </a>
-            </div>
-            <div class="fleft full-width text-align-center">
                 <a href="superUser/lotterySelectedCandidate.php" class="btn btn-primary btn-lg fs4 width450">
                     <span class="fa fa-list fs4"></span>
                     <?php echo $lang['dashboard_btn_12']; ?>
