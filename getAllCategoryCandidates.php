@@ -231,10 +231,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $limit = Common::getCandidateSelectionLimit($criteria);
                 $data = Common::selectCandidatesForOthersCategory($criteria, $limit, $code, $seedNumber);
-                if(!in_array($criteria, Common::discardSeatsCriteria)) {
-                    $carriedForwardSeats = $limit - sizeof($data);
-                    if($carriedForwardSeats > 0) {
+                $carriedForwardSeats = $limit - sizeof($data);
+                if($carriedForwardSeats > 0) {
+                    if(!in_array($criteria, Common::discardSeatsCriteria)) {
                         Common::carryForwardSeats($carriedForwardSeats, $criteria);
+                    } else {
+                        $obj = ['criteria'=>$criteria, 'discardedSeats'=>$carriedForwardSeats];
+                        $discardObj = serialize($obj);
+                        Common::saveDiscardedSeats($discardObj);
                     }
                 }
                 $template = $mustache->loadTemplate('print_button');
