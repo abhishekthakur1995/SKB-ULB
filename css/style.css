@@ -175,7 +175,10 @@ body {
 .has-error {
     border-color: red;
 }
-.margin-left-3x{
+.margin-left-2x {
+    margin-left: 10px;
+}
+.margin-left-3x {
     margin-left: 15px;
 }
 .margin-left-6x {

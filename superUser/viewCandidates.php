@@ -20,7 +20,7 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
 	header("location: ../error.php");
 }
 
-$ulb = $searchFrom = $ulb_err = $search_from_err = '';
+$ulb = $searchFrom = $ulb_err = $search_from_err = $getSelectedOnly = '';
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 	$trimUlb = trim($_POST['ulb']);
@@ -36,6 +36,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	} else {
 		$searchFrom = htmlspecialchars($trimSearchFrom);
 	}
+
+	$getSelectedOnly = isset($_POST['selectedOnlyChbx']) ? 1 : 0;
 }
 
 ?>
@@ -59,6 +61,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <option value="selected">Selected Candidates</option>
                             <option value="all">All Candidates</option>
                         </select>
+
+                        <div class="form-control display-none getSelectedOnly margin-left-2x" name="showSelectedOnly">
+				  			<label>
+				  				<input type="checkbox" name="selectedOnlyChbx" class="margin-right-1x selectedOnlyChbx" value="1">Get Selected Only
+			  				</label>
+						</div>
+
 		                <select class="form-control ulb margin-horiz-2x <?php echo (!empty($ulb_err)) ? 'is-invalid' : ''; ?>" name="ulb" required>
 		                	<option value="">Select ULB</option>
 		                    <?php 
@@ -81,7 +90,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <?php
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
 		if(empty($ulb_err) && empty($search_from_err)) {
-			$data = Common::getCandidatesByUlb($searchFrom, $ulb);
+			$data = Common::getCandidatesByUlb($searchFrom, $ulb, $getSelectedOnly);
 	        $template = $mustache->loadTemplate('selected_candidates');
 	        echo $template->render(array(
 	            'data'=>$data, 
@@ -104,5 +113,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $(document).ready(function() {
         $(".ulb").val('<?php echo $ulb; ?>');
         $(".searchFrom").val('<?php echo $searchFrom; ?>');
+        const getSelectedOnlyVal = '<?php echo $getSelectedOnly; ?>';
+        if(getSelectedOnlyVal == 1) {
+        	$('.selectedOnlyChbx').prop('checked', true);
+        }
+
+        if($('.searchFrom').val() == 'all') {
+        	$('.getSelectedOnly').removeClass('display-none');
+        }
+
+        $('.searchFrom').change(function() {
+        	if($(this).val() == 'all') {
+        		$('.getSelectedOnly').removeClass('display-none');
+        	} else {
+        		$('.getSelectedOnly').addClass('display-none');
+        	}
+        });
     });
 </script>

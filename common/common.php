@@ -485,11 +485,11 @@ class Common {
         return $data;
 	}
 
-	public static function getCandidatesByUlb($searchFrom, $ulb) {
+	public static function getCandidatesByUlb($searchFrom, $ulb, $getSelectedOnly) {
 		$sql = "SET @a:=0";
 		mysqli_query($GLOBALS['link'], $sql);
 		
-		$sql = self::getQueriesBasedOnSearchFromCriteria($searchFrom, $ulb);
+		$sql = self::getQueriesBasedOnSearchFromCriteria($searchFrom, $ulb, $getSelectedOnly);
 		$result = mysqli_query($GLOBALS['link'], $sql);
         $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
         mysqli_free_result($result);
@@ -497,9 +497,13 @@ class Common {
         return $data;
 	}
 
-	public static function getQueriesBasedOnSearchFromCriteria($searchFrom, $ulb) {
+	public static function getQueriesBasedOnSearchFromCriteria($searchFrom, $ulb, $getSelectedOnly) {
 		if($searchFrom == 'all') {
-			return "SELECT *, @a:=@a+1 AS serialNumber from candidate_list WHERE ulbRegion = '".$ulb."' ";
+			if($getSelectedOnly == 1) {
+				return "SELECT *, @a:=@a+1 AS serialNumber from candidate_list WHERE selected = 1 and ulbRegion = '".$ulb."' ";
+			} else {
+				return "SELECT *, @a:=@a+1 AS serialNumber from candidate_list WHERE ulbRegion = '".$ulb."' ";
+			}
 		} else {
 			return "SELECT *, @a:=@a+1 AS serialNumber from selected_candidates WHERE ulbRegion = '".$ulb."' ";
 		}
