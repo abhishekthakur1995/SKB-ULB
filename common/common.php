@@ -156,7 +156,7 @@ class Common {
 		'ANTA'=>10,
 		'KOTHPUTALI'=>24,
 		'DHAULPUR'=>99,
-		'RAMGARH'=>6,
+		'RAMGARHSHEKHAWATI'=>6,
 		'FATEHPUR'=>64,
 		'CHHABRA'=>41,
 		'GANGAPURCITY'=>41,
@@ -165,7 +165,7 @@ class Common {
 		'FATEHNAGAR'=>24,
 		'BHINDER'=>26,
 		'KANOD'=>39,
-		'SLUMBER'=>14,
+		'SALUMBER'=>14,
 		'BANSWARA'=>219,
 		'KSHULGARH'=>23,
 		'DUNGARPUR'=>33,
@@ -483,6 +483,26 @@ class Common {
         mysqli_free_result($result);
         mysqli_close($GLOBALS['link']);
         return $data;
+	}
+
+	public static function getCandidatesByUlb($searchFrom, $ulb) {
+		$sql = "SET @a:=0";
+		mysqli_query($GLOBALS['link'], $sql);
+		
+		$sql = self::getQueriesBasedOnSearchFromCriteria($searchFrom, $ulb);
+		$result = mysqli_query($GLOBALS['link'], $sql);
+        $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        mysqli_free_result($result);
+        mysqli_close($GLOBALS['link']);
+        return $data;
+	}
+
+	public static function getQueriesBasedOnSearchFromCriteria($searchFrom, $ulb) {
+		if($searchFrom == 'all') {
+			return "SELECT *, @a:=@a+1 AS serialNumber from candidate_list WHERE ulbRegion = '".$ulb."' ";
+		} else {
+			return "SELECT *, @a:=@a+1 AS serialNumber from selected_candidates WHERE ulbRegion = '".$ulb."' ";
+		}
 	}
 
 	public static function getDataFromDbByCodeAndSeed($code, $seedNumber) {
