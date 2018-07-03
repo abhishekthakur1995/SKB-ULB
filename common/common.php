@@ -509,6 +509,18 @@ class Common {
 		}
 	}
 
+	public static function getSelectedCandidates() {
+		$sql = "SET @a:=0";
+		mysqli_query($GLOBALS['link'], $sql);
+
+		$sql = "SELECT * from selected_candidates where ulbRegion = '".$_SESSION['ulb_region']."'";
+		$result = mysqli_query($GLOBALS['link'], $sql);
+		$data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+		mysqli_free_result($result);
+		mysqli_close($GLOBALS['link']);
+		return $data;
+	}
+
 	public static function getDataFromDbByCodeAndSeed($code, $seedNumber) {
 		$sql = "SET @a:=0";
 		mysqli_query($GLOBALS['link'], $sql);
