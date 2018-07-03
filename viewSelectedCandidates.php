@@ -31,10 +31,10 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                 <div class="row">
                     <div class="col-md-12">
                         <div class="page-header clearfix margin-bottom-4x">
-                            <h2 class="pull-left padding-top-4x">Duplicate Record</h2>
-                            <button onclick="Export()" class="btn btn-success pull-right fs4">
+                            <h2 class="pull-left padding-top-4x"><?php echo $lang['selected_candidates']; ?></h2>
+                            <button onclick="download()" class="btn btn-success pull-right fs4">
                                 <span class="fa fa-download fs4"></span>
-                                    Export to CSV File
+                                    <?php echo $lang['print_letter']; ?>
                             </button>
                         </div>
                         <?php
@@ -62,10 +62,10 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 </html>
 
 <script>
-    function Export() {
-        var conf = confirm("Export data to CSV?");
+    function download() {
+        var conf = confirm('<?php echo $lang['print_letter']; ?>?');
         if(conf == true) {
-            window.open("export.php?view=duplicateRecord", '_blank');
+            window.open("downloadAppointmentLetter.php", '_blank');
         }
     }
 </script>
