@@ -31,6 +31,7 @@
     $lang['delete_record'] = 'आवेदक रिकॉर्ड हटाएं';
     $lang['receipt_number'] = 'आवेदक प्राप्ति क्रमांक';
     $lang['select_option'] = 'चयन';
+    $lang['selected_candidates'] = 'चयनित आवेदक';
 
     $lang['data_saved'] = 'डेटा सफलतापूर्वक दर्ज किया गया';
     $lang['yes'] = 'स्वीकृत';
@@ -108,6 +109,7 @@
     $lang['dashboard_btn_11'] = 'सभी वर्गों  के लिए आवेदकों का चयन करें';
     $lang['dashboard_btn_12'] = 'यूएलबी लॉटरी सूची';
     $lang['dashboard_btn_13'] = 'आवेदक देखे';
+    $lang['dashboard_btn_14'] = 'चयनित आवेदक देखे';
     $lang['total_enteries'] = 'कुल स्वीकृत आवेदक';
     $lang['detailed_table'] = 'विस्तृत आवेदक टेबल';
     $lang['reservation_chart'] = 'आरक्षण चार्ट';
