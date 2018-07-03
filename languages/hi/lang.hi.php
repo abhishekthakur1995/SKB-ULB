@@ -32,6 +32,7 @@
     $lang['receipt_number'] = 'आवेदक प्राप्ति क्रमांक';
     $lang['select_option'] = 'चयन';
     $lang['selected_candidates'] = 'चयनित आवेदक';
+    $lang['print_letter'] = 'नियुक्ति पत्र डाउनलोड करे';
 
     $lang['data_saved'] = 'डेटा सफलतापूर्वक दर्ज किया गया';
     $lang['yes'] = 'स्वीकृत';
