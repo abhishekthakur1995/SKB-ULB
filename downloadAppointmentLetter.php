@@ -9,7 +9,10 @@ Mustache_Autoloader::register();
 $mustache = new Mustache_Engine(array(
     'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__).'/templates') 
 ));
-$mpdf = new mPDF();
+$stylesheet = file_get_contents('css/letter.css');
+$mpdf = new mPDF('utf-8', 'A4-C');
+$mpdf->text_input_as_HTML = TRUE;
+
 
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     header("location: index.php");
@@ -22,13 +25,12 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     }
 }
 
-header('Content-Type: application/pdf');
 for($i=0; $i<5; $i++) {
 	$template = $mustache->loadTemplate('letter');
 	$html = $template->render();
-	$mpdf->WriteHTML("नाम");
+    $mpdf->WriteHTML($stylesheet, 1);
+	$mpdf->WriteHTML($html);
 	$mpdf->AddPage();
 }
-header('Content-Type: application/pdf');
 $mpdf->Output();
 ?>

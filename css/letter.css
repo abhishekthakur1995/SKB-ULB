@@ -1,0 +1,37 @@
+body {
+    font-family: mangal;   
+	border: 1px solid black;
+    border-collapse: collapse;
+}
+.li {
+	margin-left: 23px;
+	font-size: 15px;
+}
+.heading {
+	text-align: center;
+	font-size: 25px;
+}
+.sign {
+	float: right !important;    
+	margin-top: 40px;
+    margin-right: 37px;
+}
+.text-align-center {
+	text-align: center !important;
+}
+.text-align-right {
+	text-align: right !important;
+}
+.text-align-left {
+	text-align: left !important;
+}
+.underline {
+	text-decoration: underline;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+table {
+	left: 30px !important;
+}
