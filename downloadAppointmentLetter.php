@@ -32,5 +32,5 @@ for($i=0; $i<5; $i++) {
 	$mpdf->WriteHTML($html);
 	$mpdf->AddPage();
 }
-$mpdf->Output();
+$mpdf->Output('letter.pdf', 'D');
 ?>
