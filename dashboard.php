@@ -87,7 +87,6 @@ if (isset($_SESSION['message'])) {
                     </a>
                 </div>    
             </div>
-            <?php/*
             <a href="exportUlbData.php" target="_blank" class="btn btn-primary btn-lg fs4 width450">
                 <span class="fa fa-download fs4"></span>
                 <?php echo $lang['download']; ?>
@@ -98,7 +97,6 @@ if (isset($_SESSION['message'])) {
             <a href="getAllCategoryCandidates.php" class="btn btn-primary btn-lg fs4 width450">
                 <span class="fa fa-users fs4 margin-right-1x"></span><?php echo $lang['dashboard_btn_11']; ;?>
             </a>
-            */?>
             <a href="viewSelectedCandidates.php" class="btn btn-primary btn-lg fs4 width450">
                 <span class="fa fa-users fs4 margin-right-1x"></span><?php echo $lang['dashboard_btn_14']; ;?>
             </a>
