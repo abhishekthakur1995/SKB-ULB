@@ -29,7 +29,6 @@ $data = Common::getSelectedCandidates();
 for($i=0; $i<sizeof($data); $i++) {
 	$template = $mustache->loadTemplate('letter');
 	$html = $template->render(array(
-            'currentDate'=>date("d/m/Y"),
             'name'=>$data[$i]['name'],
             'guardian'=>$data[$i]['guardian'],
             'permanentAddress'=>$data[$i]['permanentAddress'],
