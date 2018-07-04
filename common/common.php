@@ -513,7 +513,7 @@ class Common {
 		$sql = "SET @a:=0";
 		mysqli_query($GLOBALS['link'], $sql);
 
-		$sql = "SELECT *,@a:=@a+1 AS serialNumber from selected_candidates where ulbRegion = '".$_SESSION['ulb_region']."'";
+		$sql = "SELECT *, @a:=@a+1 AS serialNumber FROM selected_candidates INNER JOIN candidate_list ON selected_candidates.receiptNumber = candidate_list.receiptNumber WHERE selected_candidates.ulbRegion = '".$_SESSION['ulb_region']."'";
 		$result = mysqli_query($GLOBALS['link'], $sql);
 		$data = mysqli_fetch_all($result, MYSQLI_ASSOC);
 		mysqli_free_result($result);
