@@ -1,5 +1,6 @@
 {
     "require": {
-        "gilbitron/easycsrf": "~1.0"
+        "gilbitron/easycsrf": "~1.0",
+        "mpdf/mpdf": "^6.1"
     }
 }
