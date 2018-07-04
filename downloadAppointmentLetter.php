@@ -45,5 +45,5 @@ for($i=0; $i<sizeof($data); $i++) {
 	$mpdf->AddPage();
 }
 
-$mpdf->Output();
+$mpdf->Output('appoinment_letter.pdf', 'D');
 ?>
