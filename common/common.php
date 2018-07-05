@@ -505,7 +505,7 @@ class Common {
 				return "SELECT *, @a:=@a+1 AS serialNumber from candidate_list WHERE ulbRegion = '".$ulb."' ";
 			}
 		} else {
-			return "SELECT *, @a:=@a+1 AS serialNumber from selected_candidates WHERE ulbRegion = '".$ulb."' ";
+			return "SELECT *, @a:=@a+1 AS serialNumber FROM selected_candidates INNER JOIN candidate_list ON selected_candidates.receiptNumber = candidate_list.receiptNumber WHERE selected_candidates.ulbRegion = '".$ulb."'";
 		}
 	}
 

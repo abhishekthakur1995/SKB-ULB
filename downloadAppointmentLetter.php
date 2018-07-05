@@ -41,7 +41,9 @@ for($i=0; $i<sizeof($data); $i++) {
     );
     $mpdf->WriteHTML($stylesheet, 1);
 	$mpdf->WriteHTML($html);
-	$mpdf->AddPage();
+    if($i != sizeof($data)-1) {
+        $mpdf->AddPage();
+    }
 }
 
 $mpdf->Output('appoinment_letter.pdf', 'D');
