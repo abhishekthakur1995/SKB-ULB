@@ -241,4 +241,9 @@
 
     $lang['lottery_err_msg_1'] = 'कोई भी आवेदक नहीं मिला';
     $lang['lottery_err_msg_2'] = 'कोई भी सीट आरक्षित नहीं है';
+
+    $lang['JAIPUR'] = 'जयपुर';
+    $lang['SAGWARA'] = 'सागवाड़ा';
+    $lang['BAYANA'] = 'बयाना';
+
 ?>

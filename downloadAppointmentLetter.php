@@ -30,6 +30,7 @@ for($i=0; $i<sizeof($data); $i++) {
 	$template = $mustache->loadTemplate('letter');
 	$html = $template->render(array(
             'name'=>$data[$i]['name'],
+            'ulbName'=>Common::getTextInHindi($data[$i]['ulbRegion']),
             'guardian'=>$data[$i]['guardian'],
             'permanentAddress'=>$data[$i]['permanentAddress'],
             'dob'=>$data[$i]['dob'],
