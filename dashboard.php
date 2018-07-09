@@ -87,6 +87,16 @@ if (isset($_SESSION['message'])) {
                     </a>
                 </div>    
             </div>
+            <?php /*if(!in_array($_SESSION['ulbRegion'], Common::TEMP_ALLOWED)) { ?>
+            <a href="candidate_details.php" class="btn btn-primary btn-lg fs4 width450">
+                <span class="fa fa-plus-square fs4"></span>
+                <?php echo $lang['dashboard_btn_1']; ?>
+            </a>
+            <a href="candidates_details.php?page=1" class="btn btn-primary btn-lg fs4 width450">
+                <span class="fa fa-edit fs4"></span>
+                <?php echo $lang['dashboard_btn_2']; ?>
+            </a>
+            <?php }*/ ?>
 <!--             <a href="exportUlbData.php" target="_blank" class="btn btn-primary btn-lg fs4 width450">
                 <span class="fa fa-download fs4"></span>
                 <?php //echo $lang['download']; ?>
