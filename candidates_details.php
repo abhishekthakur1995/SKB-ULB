@@ -1,14 +1,14 @@
 <?php
 session_start();
 
+require('config.php');
+require('languages/hi/lang.hi.php');
+require('common/common.php');
+
 if(!in_array($_SESSION['ulb_region'], Common::TEMP_ALLOWED)) {
     header("location: error.php");
     die();
 }
-
-require('config.php');
-require('languages/hi/lang.hi.php');
-require('common/common.php');
 
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     header("location: index.php");
