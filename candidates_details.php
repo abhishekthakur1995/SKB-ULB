@@ -1,7 +1,11 @@
 <?php
 session_start();
-header("location: error.php");
-die();
+
+if(!in_array($_SESSION['ulbRegion'], Common::TEMP_ALLOWED)) {
+    header("location: error.php");
+    die();
+}
+
 require('config.php');
 require('languages/hi/lang.hi.php');
 require('common/common.php');
