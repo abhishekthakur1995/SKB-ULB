@@ -5,6 +5,7 @@ require_once(__ROOT__.'/languages/hi/lang.hi.php');
 
 class Common {
 
+	const TEMP_ALLOWED = ['NONE'];
 	const TSP_AREA = ['BANSWARA', 'DUNGARPUR', 'PRATAPGARH', 'SAGWARA', 'KSHULGARH'];
 	const TSP_AREA_EXCLUDE_CATEGORY = ['OBC', 'SPECIALOBC'];
 
