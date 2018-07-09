@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+require('config.php');
+require('languages/hi/lang.hi.php');
+require('common/common.php');
+require('vendor/autoload.php');
+
 if(!in_array($_SESSION['ulb_region'], Common::TEMP_ALLOWED)) {
     header("location: error.php");
     die();
@@ -14,10 +19,6 @@ if (isset($_SESSION['message'])) {
     unset($_SESSION['message']);
 }
 
-require('config.php');
-require('languages/hi/lang.hi.php');
-require('common/common.php');
-require('vendor/autoload.php');
 $sessionProvider = new EasyCSRF\NativeSessionProvider();
 $easyCSRF = new EasyCSRF\EasyCSRF($sessionProvider);
 
