@@ -87,7 +87,7 @@ if (isset($_SESSION['message'])) {
                     </a>
                 </div>    
             </div>
-            <?php /*if(!in_array($_SESSION['ulbRegion'], Common::TEMP_ALLOWED)) { ?>
+            <?php if(in_array($_SESSION['ulb_region'], Common::TEMP_ALLOWED)) { ?>
             <a href="candidate_details.php" class="btn btn-primary btn-lg fs4 width450">
                 <span class="fa fa-plus-square fs4"></span>
                 <?php echo $lang['dashboard_btn_1']; ?>
@@ -96,12 +96,12 @@ if (isset($_SESSION['message'])) {
                 <span class="fa fa-edit fs4"></span>
                 <?php echo $lang['dashboard_btn_2']; ?>
             </a>
-            <?php }*/ ?>
-<!--             <a href="exportUlbData.php" target="_blank" class="btn btn-primary btn-lg fs4 width450">
+            <a href="exportUlbData.php" target="_blank" class="btn btn-primary btn-lg fs4 width450">
                 <span class="fa fa-download fs4"></span>
-                <?php //echo $lang['download']; ?>
-            </a> -->
-<!--             <a href="getSpecialPrefCandidates.php" class="btn btn-primary btn-lg fs4 width450">
+                <?php echo $lang['download']; ?>
+            </a>
+            <?php } ?>
+            <!-- <a href="getSpecialPrefCandidates.php" class="btn btn-primary btn-lg fs4 width450">
                 <span class="fa fa-users fs4 margin-right-1x"></span><?php //echo $lang['dashboard_btn_10'];?>
             </a>
             <a href="getAllCategoryCandidates.php" class="btn btn-primary btn-lg fs4 width450">
