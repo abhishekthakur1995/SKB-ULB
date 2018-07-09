@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(!in_array($_SESSION['ulbRegion'], Common::TEMP_ALLOWED)) {
+if(!in_array($_SESSION['ulb_region'], Common::TEMP_ALLOWED)) {
     header("location: error.php");
     die();
 }
