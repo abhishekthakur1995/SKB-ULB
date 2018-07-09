@@ -1,7 +1,11 @@
 <?php
 session_start();
-header("location: error.php");
-die();
+
+if(!in_array($_SESSION['ulbRegion'], Common::TEMP_ALLOWED)) {
+    header("location: error.php");
+    die();
+}
+
 if (isset($_SESSION['message'])) {
     $msg = $_SESSION['message'];
     echo '<script language="javascript">';
