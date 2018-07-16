@@ -273,7 +273,7 @@
     $lang['BHINMAL'] ='भीनमाल';
     $lang['BHIWADI'] ='भिवाडी';
     $lang['BHUSAWAR'] ='भुसावर';
-    $lang['BIDASAR'] ='बीदासर';
+    $lang['Bidasar'] ='बीदासर';
     $lang['BIKANER'] ='बीकानेर';
     $lang['BILARA'] ='बिलाडा';
     $lang['BISSAU'] ='बिसाऊ';
@@ -357,7 +357,7 @@
     $lang['NATHDWARA'] ='नाथद्वारा';
     $lang['NAVALGARH'] ='नवलगढ़';
     $lang['NAWA'] ='नावां';
-    $lang['NEEMKATHANA'] ='नाथद्वारा';
+    $lang['NEEMKATHANA'] ='नीमकाथाना';
     $lang['NIMBAHERA'] ='निम्बाहेड़ा';
     $lang['NIWAI'] ='निवाई';
     $lang['NOHAR'] ='नोहर';
