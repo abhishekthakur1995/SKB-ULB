@@ -4,7 +4,7 @@ server with default setting (user 'root' with no password) */
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-define('DB_NAME', 'candidate_selection_portal');
+define('DB_NAME', 'abhishek_candidate_selection_portal');
 define('ULB_ADMIN_TABLE', 'ulb_admins');
 define('PASSWORD_REQUIRED_LENGTH', 6);
 define('IDLE_TIME', 900000);
