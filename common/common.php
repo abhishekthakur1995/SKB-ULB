@@ -523,6 +523,60 @@ class Common {
 		return $data;
 	}
 
+	public static function getCandidatesBasedOnSelectedCriteria($ulb, $gender, $category, $maritialStatus, $type) {
+		$sql = "SET @a:=0";
+		mysqli_query($GLOBALS['link'], $sql);
+		$sql = self::getQueryBasedOnSelectedCriteria($ulb, $gender, $category, $maritialStatus, $type);
+		$_SESSION['download_data_query'] = $sql;	
+		$result = mysqli_query($GLOBALS['link'], $sql);
+		$data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+		mysqli_free_result($result);
+		mysqli_close($GLOBALS['link']);
+		return $data;
+	}
+
+	public static function getQueryBasedOnSelectedCriteria($ulb, $gender, $category, $maritialStatus, $type) {
+		$genderCnd = $categoryCnd = $maritialStatusCnd = $typeCnd = '';
+
+		if($gender) {
+			$genderCnd = " AND gender = '".$gender."'";
+		}
+
+		if($category) {
+			$categoryCnd = "AND category = '".$category."'";
+		}
+
+		if($maritialStatus) {
+			$maritialStatusCnd = "AND maritialStatus = '".$maritialStatus."'";
+		}
+
+		if($ulb) {
+			$ulbCnd = "ulbRegion = '".$ulb."'";
+		}
+
+		switch($type) {
+			case 'selected':
+				$typeCnd = 'AND selected = 1';
+			break;
+
+			case 'notSelected':
+				$typeCnd = 'AND selected <> 1';
+			break;
+
+			case 'rejected':
+				$typeCnd = 'AND userFormValid = 0';
+			break;
+
+			case 'deleted':
+				$typeCnd = 'AND status = 1';
+			break;
+		}
+
+		$sql = "SELECT ulbRegion, name, guardian, permanentAddress, district, dob, gender, maritialStatus, category, receiptNumber,
+				specialPreference, userFormValid, remark, @a:=@a+1 AS serialNumber from candidate_list where ".$ulbCnd." ".$typeCnd." ".$categoryCnd." ".$genderCnd." ".$maritialStatusCnd." ";
+		return $sql;
+	}
+
 	public static function getDataFromDbByCodeAndSeed($code, $seedNumber) {
 		$sql = "SET @a:=0";
 		mysqli_query($GLOBALS['link'], $sql);

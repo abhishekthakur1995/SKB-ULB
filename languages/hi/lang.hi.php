@@ -34,6 +34,12 @@
     $lang['selected_candidates'] = 'चयनित आवेदक';
     $lang['print_letter'] = 'नियुक्ति पत्र डाउनलोड करे';
     $lang['view_ulb_table'] = 'तालिका देखें';
+    $lang['candidate_type'] = 'प्रकार';
+    $lang['candidate_type_selected'] = 'चयनित';
+    $lang['candidate_type_not_selected'] = 'नहीं चुने गए';
+    $lang['candidate_type_rejected'] = 'अस्वीकृत';
+    $lang['candidate_type_deleted'] = 'हटाए गए';
+    $lang['candidate_type_all'] = 'सभी आवेदक';
 
     $lang['data_saved'] = 'डेटा सफलतापूर्वक दर्ज किया गया';
     $lang['yes'] = 'स्वीकृत';
@@ -413,7 +419,7 @@
     $lang['SHRIVIJAYNAGAR'] ='श्रीविजयनगर';
     $lang['SIKAR'] ='सीकर';
     $lang['SIROHI'] ='सिरोही';
-    $lang['SLUMBER'] ='सलूम्बर';
+    $lang['SALUMBER'] ='सलूम्बर';
     $lang['SOJATCITY'] ='सोजतसिटी';
     $lang['SUJANGARH'] ='सुजानगढ़';
     $lang['SUMERPUR'] ='सुमेरपुर';
@@ -432,4 +438,5 @@
     $lang['VIJAYNAGAR'] ='विजयनगर';
     $lang['VIRATNAGAR'] ='विराटनगर';
     $lang['WEIR'] ='वैर';
+    $lang[''] ='';
 ?>

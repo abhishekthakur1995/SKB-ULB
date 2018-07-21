@@ -376,3 +376,6 @@ button.pure-button:hover, button.pure-button:focus {
 .max-width-1200 {
     max-width: 1200px !important;
 }
+.view-all-cand select{
+    width: 150px !important;
+}
