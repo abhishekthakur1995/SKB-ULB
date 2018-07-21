@@ -71,6 +71,10 @@ if (isset($_SESSION['message'])) {
                     <span class="fa fa-eye fs4"></span>
                     <?php echo $lang['dashboard_btn_13']; ?>
                 </a>
+                <a href="superUser/viewUlbTables.php" class="btn btn-primary btn-lg fs4 width450">
+                    <span class="fa fa-table fs4"></span>
+                    <?php echo $lang['dashboard_btn_15']; ?>
+                </a>
             </div>
         <?php } else { ?>
         <div class="fleft full-width text-align-center" >

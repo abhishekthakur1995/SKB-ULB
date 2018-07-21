@@ -33,6 +33,7 @@
     $lang['select_option'] = 'चयन';
     $lang['selected_candidates'] = 'चयनित आवेदक';
     $lang['print_letter'] = 'नियुक्ति पत्र डाउनलोड करे';
+    $lang['view_ulb_table'] = 'तालिका देखें';
 
     $lang['data_saved'] = 'डेटा सफलतापूर्वक दर्ज किया गया';
     $lang['yes'] = 'स्वीकृत';
@@ -53,7 +54,8 @@
     $lang['tbl1_heading'] = 'आरक्षण तालिका';
     $lang['tbl2_heading'] = 'आवेदक संख्या तालिका';
     $lang['wrong_criteria_selected'] = 'लाटरी में गलत क्रम का चुनाव किया गया है| कृपया सही क्रम अनुसार चुनाव करे';
-
+    $lang['table_type_select'] = 'तालिका का प्रकार चुनें';
+    $lang['both_table'] = 'दोनों तालिकाएं एक साथ देखे';
 
     //maritial_status
     $lang['Married'] = 'विवाहित';
@@ -111,6 +113,7 @@
     $lang['dashboard_btn_12'] = 'यूएलबी लॉटरी सूची';
     $lang['dashboard_btn_13'] = 'आवेदक देखे';
     $lang['dashboard_btn_14'] = 'चयनित आवेदक देखे';
+    $lang['dashboard_btn_15'] = 'निकाय क्षेत्र की तालिका देखें';
     $lang['total_enteries'] = 'कुल स्वीकृत आवेदक';
     $lang['detailed_table'] = 'विस्तृत आवेदक टेबल';
     $lang['reservation_chart'] = 'आरक्षण चार्ट';
@@ -248,7 +251,7 @@
     $lang['AJMER'] ='अजमेर';
     $lang['AKLERA'] ='अकलेरा';
     $lang['ALWAR'] ='अलवर';
-    $lang['AMET'] ='आमेट';
+    $lang['AAMET'] ='आमेट';
     $lang['ANOOPGARH'] ='अनूपगढ़';
     $lang['ANTA'] ='अन्ता';
     $lang['BADISADRI'] ='बडी सादडी';
@@ -274,6 +277,7 @@
     $lang['BHIWADI'] ='भिवाडी';
     $lang['BHUSAWAR'] ='भुसावर';
     $lang['Bidasar'] ='बीदासर';
+    $lang['BIDASAR'] ='बीदासर';
     $lang['BIKANER'] ='बीकानेर';
     $lang['BILARA'] ='बिलाडा';
     $lang['BISSAU'] ='बिसाऊ';
@@ -326,7 +330,7 @@
     $lang['KHERLI'] ='खेरली';
     $lang['KHERTHAL'] ='खैरथल';
     $lang['KHETRI'] ='खेतडी';
-    $lang['KHUDALAFALNA'] ='खुडलाफालना';
+    $lang['KHUDLAFALNA'] ='खुडलाफालना';
     $lang['KISHANGARH'] ='किशनगढ़';
     $lang['KISHANGARHRENWAL'] ='किशनगढ़रेनवाल';
     $lang['KOTA'] ='कोटा';
@@ -340,7 +344,8 @@
     $lang['LAKHERI'] ='लाखेरी';
     $lang['LALSOT'] ='लालसोट';
     $lang['LAXMANGARH'] ='लक्ष्मणगढ';
-    $lang['LOSAL'] ='लोसल';
+    $lang['LOSAL'] ='लोसल';    
+    $lang['MAHWA'] = 'महवा';
     $lang['MAKRANA'] ='मकराना';
     $lang['MALPURA'] ='मालपुरा';
     $lang['MANDALGARH'] ='मांडलगढ';
