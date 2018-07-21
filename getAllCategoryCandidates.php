@@ -6,6 +6,12 @@ require('config.php');
 require('languages/hi/lang.hi.php');
 require('common/common.php');
 require('vendor/autoload.php');
+
+if(!in_array($_SESSION['ulb_region'], Common::TEMP_LOTTERY_ENABLE)) {
+    header("location: error.php");
+    die();
+}
+
 $sessionProvider = new EasyCSRF\NativeSessionProvider();
 $easyCSRF = new EasyCSRF\EasyCSRF($sessionProvider);
 

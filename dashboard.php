@@ -87,29 +87,32 @@ if (isset($_SESSION['message'])) {
                     </a>
                 </div>    
             </div>
+
             <?php if(in_array($_SESSION['ulb_region'], Common::TEMP_ALLOWED)) { ?>
-            <a href="candidate_details.php" class="btn btn-primary btn-lg fs4 width450">
-                <span class="fa fa-plus-square fs4"></span>
-                <?php echo $lang['dashboard_btn_1']; ?>
-            </a>
-            <a href="candidates_details.php?page=1" class="btn btn-primary btn-lg fs4 width450">
-                <span class="fa fa-edit fs4"></span>
-                <?php echo $lang['dashboard_btn_2']; ?>
-            </a>
-            <a href="exportUlbData.php" target="_blank" class="btn btn-primary btn-lg fs4 width450">
-                <span class="fa fa-download fs4"></span>
-                <?php echo $lang['download']; ?>
-            </a>
+                <a href="candidate_details.php" class="btn btn-primary btn-lg fs4 width450">
+                    <span class="fa fa-plus-square fs4"></span>
+                    <?php echo $lang['dashboard_btn_1']; ?>
+                </a>
+                <a href="candidates_details.php?page=1" class="btn btn-primary btn-lg fs4 width450">
+                    <span class="fa fa-edit fs4"></span>
+                    <?php echo $lang['dashboard_btn_2']; ?>
+                </a>
+                <a href="exportUlbData.php" target="_blank" class="btn btn-primary btn-lg fs4 width450">
+                    <span class="fa fa-download fs4"></span>
+                    <?php echo $lang['download']; ?>
+                </a>
+            <?php } elseif(in_array($_SESSION['ulb_region'], Common::TEMP_LOTTERY_ENABLE)) { ?>
+                <a href="getSpecialPrefCandidates.php" class="btn btn-primary btn-lg fs4 width450">
+                    <span class="fa fa-users fs4 margin-right-1x"></span><?php echo $lang['dashboard_btn_10'];?>
+                </a>
+                <a href="getAllCategoryCandidates.php" class="btn btn-primary btn-lg fs4 width450">
+                    <span class="fa fa-users fs4 margin-right-1x"></span><?php echo $lang['dashboard_btn_11']; ;?>
+                </a>
+            <?php } else { ?>
+                <a href="viewSelectedCandidates.php" class="btn btn-primary btn-lg fs4 width450">
+                    <span class="fa fa-users fs4 margin-right-1x"></span><?php echo $lang['dashboard_btn_14']; ;?>
+                </a>
             <?php } ?>
-            <!-- <a href="getSpecialPrefCandidates.php" class="btn btn-primary btn-lg fs4 width450">
-                <span class="fa fa-users fs4 margin-right-1x"></span><?php //echo $lang['dashboard_btn_10'];?>
-            </a>
-            <a href="getAllCategoryCandidates.php" class="btn btn-primary btn-lg fs4 width450">
-                <span class="fa fa-users fs4 margin-right-1x"></span><?php //echo $lang['dashboard_btn_11']; ;?>
-            </a> -->
-            <a href="viewSelectedCandidates.php" class="btn btn-primary btn-lg fs4 width450">
-                <span class="fa fa-users fs4 margin-right-1x"></span><?php echo $lang['dashboard_btn_14']; ;?>
-            </a>
         </div>
     <?php } ?>
     </div>
