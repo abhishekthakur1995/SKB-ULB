@@ -54,7 +54,7 @@ class Common {
 		'LALSOT'=>14,
 		'BANDIKUI'=>16,
 		'BARI'=>11,
-		'RAJAKHEDA'=>113,
+		'RAJAKHEDA'=>50,
 		'ALWAR'=>456,
 		'KHERTHAL'=>14,
 		'TIJARA'=>20,
