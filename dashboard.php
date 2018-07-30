@@ -76,6 +76,12 @@ if (isset($_SESSION['message'])) {
                     <?php echo $lang['dashboard_btn_15']; ?>
                 </a>
             </div>
+            <div class="fleft full-width text-align-center">
+                <a href="superUser/downloadByAgeCriteria.php" class="btn btn-primary btn-lg fs4 width450">
+                    <span class="fa fa-download fs4"></span>
+                    <?php echo $lang['dashboard_btn_16']; ?>
+                </a>
+            </div>
         <?php } else { ?>
         <div class="fleft full-width text-align-center" >
             <div class="container width500">

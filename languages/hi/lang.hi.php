@@ -121,6 +121,7 @@
     $lang['dashboard_btn_13'] = 'आवेदक देखे';
     $lang['dashboard_btn_14'] = 'चयनित आवेदक देखे';
     $lang['dashboard_btn_15'] = 'निकाय क्षेत्र की तालिका देखें';
+    $lang['dashboard_btn_16'] = 'सामान्य वर्ग आवेदक जिनकी आयु ४० वर्ष से ज्यादा हो';
     $lang['total_enteries'] = 'कुल स्वीकृत आवेदक';
     $lang['detailed_table'] = 'विस्तृत आवेदक टेबल';
     $lang['reservation_chart'] = 'आरक्षण चार्ट';

@@ -536,27 +536,36 @@ class Common {
 	}
 
 	public static function getQueryBasedOnSelectedCriteria($ulb, $gender, $category, $maritialStatus, $type) {
-		$genderCnd = $categoryCnd = $maritialStatusCnd = $typeCnd = '';
+		$ulbCnd = $genderCnd = $categoryCnd = $maritialStatusCnd = $typeCnd = $allCnd = '';
+
+		$allCnd = "name is NOT NULL";
+		$allCndAll = "candidate_list.name is NOT NULL";
 
 		if($gender) {
 			$genderCnd = " AND gender = '".$gender."'";
+			$genderCndAll = " AND candidate_list.gender = '".$gender."'";
 		}
 
 		if($category) {
 			$categoryCnd = "AND category = '".$category."'";
+			$categoryCndAll = "AND candidate_list.category = '".$category."'";
 		}
 
 		if($maritialStatus) {
 			$maritialStatusCnd = "AND maritialStatus = '".$maritialStatus."'";
+			$maritialStatusCndAll = "AND candidate_list.maritialStatus = '".$maritialStatus."'";
 		}
 
 		if($ulb) {
-			$ulbCnd = "ulbRegion = '".$ulb."'";
+			$ulbCnd = "AND ulbRegion = '".$ulb."'";
+			$ulbCndAll = "AND candidate_list.ulbRegion = '".$ulb."'";
 		}
 
 		switch($type) {
 			case 'selected':
-				$typeCnd = 'AND selected = 1';
+				$typeCnd = 'AND candidate_list.selected = 1';
+				$sql = "SELECT *, @a:=@a+1 AS serialNumber FROM selected_candidates INNER JOIN candidate_list ON selected_candidates.receiptNumber = candidate_list.receiptNumber where ".$allCndAll." ".$ulbCndAll." ".$typeCnd." ".$categoryCndAll." ".$genderCndAll." ".$maritialStatusCndAll." ";
+				return $sql;
 			break;
 
 			case 'notSelected':
@@ -573,7 +582,7 @@ class Common {
 		}
 
 		$sql = "SELECT ulbRegion, name, guardian, permanentAddress, district, dob, gender, maritialStatus, category, receiptNumber,
-				specialPreference, userFormValid, remark, @a:=@a+1 AS serialNumber from candidate_list where ".$ulbCnd." ".$typeCnd." ".$categoryCnd." ".$genderCnd." ".$maritialStatusCnd." ";
+				specialPreference, userFormValid, remark, @a:=@a+1 AS serialNumber from candidate_list where ".$allCnd." ".$ulbCnd." ".$typeCnd." ".$categoryCnd." ".$genderCnd." ".$maritialStatusCnd." ";
 		return $sql;
 	}
 

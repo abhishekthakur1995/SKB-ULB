@@ -24,12 +24,9 @@ $ulb = $gender = $category = $maritial_status = $ulb_err = '';
 $candidate_type = 'all';
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-	$trimUlb = trim($_POST['ulb']);
-	if(empty($trimUlb)) {
-		$ulb_err = 'Please select a ulb to proceed further';
-	} else {
-		$ulb = htmlspecialchars($trimUlb);
-	}
+
+	$trimUlb = isset($_POST['ulb']) ? trim($_POST['ulb']) : '';
+	$ulb = htmlspecialchars($trimUlb);
 
 	$trimGender = isset($_POST['gender']) ? trim($_POST['gender']) : '';
 	$gender = htmlspecialchars($trimGender);
@@ -59,8 +56,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	        <form class="form-inline view-all-cand" role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 	            <div class="form-group full-width">
 	            	<div class="full-width text-align-center margin-top-4x">
-		                <select class="form-control ulb <?php echo (!empty($ulb_err)) ? 'is-invalid' : ''; ?>" name="ulb" required>
-		                	<option value=""><?php echo $lang['ulb_region']; ?></option>
+		                <select class="form-control ulb <?php echo (!empty($ulb_err)) ? 'is-invalid' : ''; ?>" name="ulb">
+		                	<option value="">All</option>
 		                    <?php 
 		                        $ulbListJson = file_get_contents(__DIR__ . '/../data/ulb_list.json');
 		                        $ulbListArr = json_decode($ulbListJson, true);
