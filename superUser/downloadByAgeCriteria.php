@@ -20,7 +20,7 @@ if($_SESSION['user_role'] == 'SUPERADMIN') {
 	header("location: ../error.php");
 }
 
-$sql = "SELECT * FROM selected_candidates INNER JOIN candidate_list ON selected_candidates.receiptNumber = candidate_list.receiptNumber WHERE selected_candidates.category = 'GENERAL' AND ((candidate_list.dob LIKE '%-%' AND STR_TO_DATE(candidate_list.dob, '%Y-%m-%d') < '1979-01-01') OR (candidate_list.dob LIKE '%/%' AND STR_TO_DATE(candidate_list.dob, '%d/%m/%Y') < '1979-01-01'))";
+$sql = "SELECT candidate_list.ulbRegion, candidate_list.name, candidate_list.guardian, candidate_list.permanentAddress, candidate_list.district, candidate_list.dob, candidate_list.gender, candidate_list.maritialStatus, candidate_list.category, candidate_list.receiptNumber, candidate_list.specialPreference, candidate_list.userFormValid, candidate_list.remark FROM selected_candidates INNER JOIN candidate_list ON selected_candidates.receiptNumber = candidate_list.receiptNumber WHERE selected_candidates.code IN (19, 20, 21, 22) AND ((candidate_list.dob LIKE '%-%' AND STR_TO_DATE(candidate_list.dob, '%Y-%m-%d') < '1979-01-01') OR (candidate_list.dob LIKE '%/%' AND STR_TO_DATE(candidate_list.dob, '%d/%m/%Y') < '1979-01-01'))";
 
 if (!$result = mysqli_query($link, $sql)) {
     exit("Error processing query");

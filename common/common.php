@@ -564,7 +564,7 @@ class Common {
 		switch($type) {
 			case 'selected':
 				$typeCnd = 'AND candidate_list.selected = 1';
-				$sql = "SELECT *, @a:=@a+1 AS serialNumber FROM selected_candidates INNER JOIN candidate_list ON selected_candidates.receiptNumber = candidate_list.receiptNumber where ".$allCndAll." ".$ulbCndAll." ".$typeCnd." ".$categoryCndAll." ".$genderCndAll." ".$maritialStatusCndAll." ";
+				$sql = "SELECT candidate_list.ulbRegion, candidate_list.name, candidate_list.guardian, candidate_list.permanentAddress, candidate_list.district, candidate_list.dob, candidate_list.gender, candidate_list.maritialStatus, candidate_list.category, candidate_list.receiptNumber, candidate_list.specialPreference, candidate_list.userFormValid, candidate_list.remark, @a:=@a+1 AS serialNumber FROM selected_candidates INNER JOIN candidate_list ON selected_candidates.receiptNumber = candidate_list.receiptNumber where ".$allCndAll." ".$ulbCndAll." ".$typeCnd." ".$categoryCndAll." ".$genderCndAll." ".$maritialStatusCndAll." ";
 				return $sql;
 			break;
 
