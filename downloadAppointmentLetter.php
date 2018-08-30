@@ -10,6 +10,7 @@ $mustache = new Mustache_Engine(array(
     'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__).'/templates') 
 ));
 $stylesheet = file_get_contents('css/letter.css');
+define('_MPDF_TTFONTDATAPATH', sys_get_temp_dir()."/");
 $mpdf = new mPDF('utf-8', 'A4-C');
 $mpdf->text_input_as_HTML = TRUE;
 
