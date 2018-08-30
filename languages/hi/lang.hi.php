@@ -342,6 +342,7 @@
     $lang['KISHANGARH'] ='किशनगढ़';
     $lang['KISHANGARHRENWAL'] ='किशनगढ़रेनवाल';
     $lang['KOTA'] ='कोटा';
+    $lang['Kota'] ='कोटा';
     $lang['KOTHPUTALI'] ='कोटपूतली';
     $lang['KPATAN'] ='केषवरायपाटन';
     $lang['KSHULGARH'] ='कुषलगढ';
