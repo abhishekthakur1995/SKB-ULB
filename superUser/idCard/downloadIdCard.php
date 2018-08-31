@@ -18,7 +18,7 @@
         $image->annotateImage($draw, 320, 740, 0, 'Jeetan Ram');
         $image->annotateImage($draw, 320, 840, 0, 'Ram Naresh');
         $image->annotateImage($draw, 320, 940, 0, 'SD 198 Shanti Nagar Hatwara Road');
-        $image->annotateImage($draw, 320, 1040, 0, 'Near ESI Hospital Jaipur');
+        $image->annotateImage($draw, 60, 1040, 0, 'Near ESI Hospital Jaipur');
         $image->annotateImage($draw, 320, 1140, 0, 'Jaipur');
 
         /* Give image a format */
@@ -28,7 +28,7 @@
 
         //mkdir('ulbName', 0777, true);
         //file_put_contents("ulbName/imagick_ouput_".$i.".png" , $image);
-        
+
         file_put_contents("imagick_ouput_".$i.".png" , $image);
         echo $image;
     }
@@ -45,5 +45,12 @@
     // header('Content-Disposition: attachment; filename=data.png');
 
     //$draw->setFont('Bookman-DemiItalic');
+
+    getAddressLine($address) {
+        $addressArr = [];
+        $addressArr['line1'] = ;
+        $addressArr['line2'] = ;
+        return $addressArr;
+    }
 ?>
 
