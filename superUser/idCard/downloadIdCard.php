@@ -25,6 +25,10 @@
         $image->setImageFormat('png');
         
         header('Content-type: image/png');
+
+        //mkdir('ulbName', 0777, true);
+        //file_put_contents("ulbName/imagick_ouput_".$i.".png" , $image);
+        
         file_put_contents("imagick_ouput_".$i.".png" , $image);
         echo $image;
     }
