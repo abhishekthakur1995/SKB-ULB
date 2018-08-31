@@ -1,4 +1,5 @@
 <?php
+ ini_set('max_execution_time', 10000); 
     session_start();
 
     require('../../config.php');
@@ -6,8 +7,8 @@
     require('../../common/common.php');
 
     $data = Common::getCandidatesForIdCard();
-
-    for($i=0; $i<sizeof($data); $i++) {
+    mkdir($data[0]['ulbRegion'], 0777, true);
+    for($i=1000; $i<1947; $i++) {
         $image = new Imagick("image/img.jpeg");
         $draw = new ImagickDraw();
 
@@ -17,22 +18,21 @@
         $draw->setTextEncoding('UTF-8');
 
         /* Create text */
+        $address = Common::getFormattedAddress($data[$i]['permanentAddress']);
+        $line1 = $address[0]." ".$address[1]." ".$address[2]." ".$address[3]." ".$address[4];
+        $line2 = $address[5]." ".$address[6]." ".$address[7]." ".$address[8]." ".$address[9];
         $image->annotateImage($draw, 320, 740, 0, $data[$i]['name']);
         $image->annotateImage($draw, 320, 840, 0, $data[$i]['guardian']);
-        $image->annotateImage($draw, 320, 940, 0, $data[$i]['ulbRegion']);
-        $image->annotateImage($draw, 60, 1040, 0, $data[$i]['ulbRegion']);
+        $image->annotateImage($draw, 320, 940, 0, $line1);
+        $image->annotateImage($draw, 60, 1040, 0, $line2);
         $image->annotateImage($draw, 320, 1140, 0, $data[$i]['ulbRegion']);
 
         /* Give image a format */
         $image->setImageFormat('png');
+        $image->minifyImage();
         
         header('Content-type: image/png');
-
-        //mkdir('ulbName', 0777, true);
-        file_put_contents("ulbName/imagick_ouput_".$i.".png" , $image);
-
-        //file_put_contents("imagick_ouput_".$i.".png" , $image);
-        echo $image;
+        file_put_contents($data[0]['ulbRegion']."/imagick_ouput_".$i.".png" , $image);
     }
 
 
@@ -47,12 +47,4 @@
     // header('Content-Disposition: attachment; filename=data.png');
 
     //$draw->setFont('Bookman-DemiItalic');
-
-    // getAddressLine($address) {
-    //     $addressArr = [];
-    //     $addressArr['line1'] = ;
-    //     $addressArr['line2'] = ;
-    //     return $addressArr;
-    // }
 ?>
-
