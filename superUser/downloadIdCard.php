@@ -1,10 +1,9 @@
 <?php
-    // $path = Yii::app()->basePath."/imagick.jpeg";
-    // $img = new Imagick($path);
-    // $img->resizeImage(80,80, imagick::FILTER_LANCZOS, 0.9, true);
-    // $img->cropImage (80,80,0,0);
-    // $img->writeImage(Yii::app()->basePath."/imagick1.jpeg");
-    // pr($img->getImageGeometry());
+    session_start();
+
+    require('config.php');
+    require('languages/hi/lang.hi.php');
+    require('common/common.php');
 
     $image = new Imagick("img.jpeg");
     $draw = new ImagickDraw();
@@ -23,7 +22,16 @@
     /* Give image a format */
     $image->setImageFormat('png');
     header('Content-type: image/png');
-    header('Content-Disposition: attachment; filename=data.png');
-    file_put_contents(basename(__DIR__) , $image);
+    // header('Content-Disposition: attachment; filename=data.png');
+    // file_put_contents(basename(__DIR__) , $image);
     echo $image;
+
+
+    // $path = Yii::app()->basePath."/imagick.jpeg";
+    // $img = new Imagick($path);
+    // $img->resizeImage(80,80, imagick::FILTER_LANCZOS, 0.9, true);
+    // $img->cropImage (80,80,0,0);
+    // $img->writeImage(Yii::app()->basePath."/imagick1.jpeg");
+    // pr($img->getImageGeometry());
 ?>
+
