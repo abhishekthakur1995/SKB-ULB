@@ -899,6 +899,18 @@ class Common {
 		}
 	}
 
+	public static function getCandidatesForIdCard() {
+		$sql = "SET @a:=0";
+		mysqli_query($GLOBALS['link'], $sql);
+
+		$sql = "SELECT * from candidate_list";
+		$result = mysqli_query($GLOBALS['link'], $sql);
+		$data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+		mysqli_free_result($result);
+		mysqli_close($GLOBALS['link']);
+		return $data;
+	}
+
 	public static function getIPAddress() {
 		$ip = $_SERVER['REMOTE_ADDR'] ? : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? : $_SERVER['HTTP_CLIENT_IP']);
 		return $ip;

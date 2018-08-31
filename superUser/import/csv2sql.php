@@ -70,8 +70,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             OPTIONALLY ENCLOSED BY \'"\'
             LINES TERMINATED BY \'\n\'
             IGNORE 1 LINES
-            (ulbRegion, name, guardian, permanentAddress, district, dob, gender, maritialStatus, category, receiptNumber, specialPreferences, userFormValid, remark)'
-        ) or die(mysqli_error());
+            (ulbRegion, name, guardian, permanentAddress, district, dob, gender, maritialStatus, category, receiptNumber, specialPreference, userFormValid, remark)'
+        ) or die(mysqli_error($link));
 
         $result2=mysqli_query($link,"select count(*) count from $table");
         $r2=mysqli_fetch_array($result2);
