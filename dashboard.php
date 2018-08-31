@@ -81,7 +81,7 @@ if (isset($_SESSION['message'])) {
                     <span class="fa fa-download fs4"></span>
                     <?php echo $lang['dashboard_btn_16']; ?>
                 </a>
-                <a href="superUser/downloadIdCard.php" class="btn btn-primary btn-lg fs4 width450">
+                <a href="superUser/idCard/downloadIdCard.php" class="btn btn-primary btn-lg fs4 width450">
                     <span class="fa fa-download fs4"></span>
                     <?php echo $lang['dashboard_btn_17']; ?>
                 </a>
