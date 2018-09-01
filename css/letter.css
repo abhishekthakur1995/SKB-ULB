@@ -6,6 +6,7 @@ body {
     font-family: mangal;   
 	border: 1px solid black;
     border-collapse: collapse;
+    font-size: 15pt; 
 }
 .li {
 	margin-left: 23px;
